@@ -1,0 +1,17 @@
+{
+    "name": "jBASE",
+    "package": "jBASE",
+    "index": "nav.xhtml",
+    "selectors": {
+        "h1.statement": "Method",
+        "h1.function": "Function",
+        "h1.builtin": "Builtin",
+        "h1.variable": "Variable",
+        "h1.exception": "Exception",
+        "h1.category": "Category",
+        "h1#toc-title": "Category"
+    },
+    "icon32x32": "jbase.png",
+    "allowJS": false,
+    "ExternalURL": ""
+}

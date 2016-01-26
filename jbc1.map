@@ -1,0 +1,358 @@
+@:function:Cursor and screen manipulation.
+ABORT:statement:Program termination.
+ABS:function:Returns absolute value.
+ADDS:function:Adds corresponding elements in two dynamic arrays.
+ALPHA:function:Returns Boolean result for alphabetic check.
+ASCII:function:EBCDIC to ASCII conversion function.
+ASSIGNED:function:Returns Boolean result for variable assignment.
+BITCHANGE:function:Toggles the state of the specified bit.
+BITCHECK:function:Returns the current value of the specified bit.
+BITLOAD:function:Assigns values in the local bit table.
+BITRESET:function:Resets the value of the specified bit.
+BITSET:function:Sets the value of the specified bit.
+BREAK:statement:Break key manipulation. Loop Termination.
+CALL:statement:Transfer of program execution to an external subroutine.
+CALLC:statement:Transfer of program to an external C function.
+CASE:statement:Conditional branching.
+CATS:function:Concatenates corresponding elements in two dynamic arrays.
+CHAIN:statement:Transfer of process control.
+CHANGE:statement:Sub-string replacement.
+CHANGE:function:Sub-string replacement.
+CHAR:function:Returns the ASCII equivalent of a numeric expression.
+CHARS:function:Returns the ASCII equivalents of the numeric expressions in a dynamic array.
+CHDIR:function:Changes the current directory.
+CHECKSUM:function:Returns numeric checksum for the supplied expression.
+CLEAR:statement:Initializes all variables to zero.
+CLEARCOMMON:statement:Initializes all unnamed common variables to a value
+CLEARDATA:statement:Clears data that has been stacked by the DATA statement.
+CLEARFILE:statement:Clears all the data from a file.
+CLEARSELECT:statement:Clears active select lists.
+CLOSE:statement:Closes a previously opened file.
+CLOSESEQ:statement:Closes a previously opened sequential file.
+COL1 and COL2:function:Position determination subsequent to use of the FIELD function.
+COLLECTDATA:statement:Retrieves data passed from the PASSDATA clause of an EXECUTE statement
+COMMON:statement:Declares a list of variables and matrices that can be shared among
+COMPARE:function:Compares two strings.
+CONTINUE:statement:Used to skip code in a loop.
+CONVERT:function:Converts a character string to another.
+CONVERT:statement:Converts a character string to another.
+COS:function:Returns the cosine of an angle.
+COUNT:function:Returns the number of times that one string occurs in another.
+CRT:statement:Outputs data to the terminal.
+DATA:statement:Stores data for stacked input.
+DATE:function:Returns the date in internal form.
+DCOUNT:function:Counts the number of elements in a string separated by a specified
+DEBUG:statement:Passes control to the jBC debugger.
+DECATALOG and DELETE-CATALOG:statement:
+DECRYPT:function:Decodes an encrypted string.
+DEFC:statement:Declares an external C function to the jBC compiler.
+DEFFUN:statement:Declares an external jBC function to the jBC compiler.
+DEL:statement:Removes a specified element from a dynamic array.
+DELETE:statement:Deletes a record from a file.
+DELETELIST:statement:Deletes a stored list.
+DELETESEQ:statement:Deletes a sequential file.
+DIMENSION:statement:Declares fixed length arrays to the compiler.
+DISPLAY:statement:Outputs data to the terminal.
+DIVS:function:Divides corresponding elements in two dynamic arrays.
+DOWNCASE:function:Converts all uppercase characters in an expression to lowercase.
+DQUOTE:function:Encloses a value in double quotation marks.
+DTX:function:Returns the hexadecimal representation of a decimal expression.
+EBCDIC:function:Converts a string value from ASCII to EBCDIC.
+ECHO:statement:Turns on or off the echoing of characters typed at the keyboard.
+ENCRYPT:function:Encrypts strings.
+END:statement:Designates the end of a program or subroutine.
+ENTER:statement:Unconditionally passes control to another executable program.
+EQUATE:statement:Declares a symbol equivalent to a literal, variable or simple expression.
+EXECUTE:statement:Allows execution of other programs and commands.
+EXIT:statement:Halts the execution of a program.
+EXP:function:Returns the mathematical constant e to the specified power.
+EXTRACT:function:Archaic method of extracting elements from a dynamic array.
+FADD:function:Performs addition on two floating point numbers.
+FDIV:function:Performs division on two floating point numbers.
+FIELD:function:Returns one or more delimited fields from a string.
+FIELDS:function:Returns a dynamic array of delimited fields from a dynamic array of strings.
+FILELOCK:statement:Attempts to lock an entire file for exclusive use by this program.
+FIND:statement:Finds the location of a specified string within a dynamic array.
+FINDSTR:statement:Finds the location of a specified string within a dynamic array.
+FMT:function:Formats a string to a specified pattern.
+FMUL:function:Performs multiplication on two floating point numbers.
+FOLD:function:Re-delimits a specified string with attribute marks.
+FOOTING:statement:Defines a footing to be included at the bottom of an output page.
+FORMLIST:statement:Creates an active select list from a dynamic array.
+FOR:statement:Defines the start of a fixed increment loop construct.
+FSUB:function:Performs subtraction on two floating point numbers.
+FUNCTION:statement:Declares a user-defined function.
+GET:statement:Gets input from an opened serial device.
+GETCWD:function:Returns the name of the current working directory.
+GETENV:function:Determines the value of the specified environment variable.
+GETLIST:statement:Retrieves a previously stored list.
+GOSUB:statement:Causes execution of a local subroutine.
+GOTO:statement:Causes program execution to jump to the code at a specified label.
+GROUP:function:Returns one or more delimited fields from a string.
+GROUPSTORE:statement:Replaces one group of characters in a string with another group of characters.
+HEADING:statement:Defines a heading to be included at the top of an output page.
+HEADINGE and HEADINGN:statement:Defines a heading to be included at the top of an output page.
+HUSH:statement:Turns on or off the echoing of characters typed at the keyboard.
+ICONV:function:Converts data in external format to internal format.
+IF:statement:Allows conditional execution of statements.
+IN:statement:Gets raw data from the input device.
+INCLUDE:statement:Includes code from other files.
+INDEX:function:Returns the position of a character or characters within another string.
+INDICES:function:Returns information about a file's secondary index.
+INMAT:function:Returns the number of dimensioned array elements.
+INPUT:statement:Gets data from the input device.
+INPUTCLEAR:statement:Clears the type-ahead buffer.
+INPUTNULL:statement:Allows null input to be seen by the INPUT statement.
+INS:statement:Allows the insertion of elements into a dynamic array.
+INSERT:function:Allows the insertion of elements into a dynamic array.
+INT:function:Truncates a numeric value to the nearest integer.
+IOCTL:function:Returns file information.
+LEFT:function:Extracts the first n characters from a string.
+LEN:function:Returns the character length of an expression.
+LN:function:Returns the value of the natural logarithm of a supplied expression.
+LOCATE:statement:Finds the position of an element in a specified dimension of a dynamic array.
+LOCK:statement:Sets an execution lock.
+LOOP:statement:Defines the start of a loop construct.
+LOWCASE:function:Converts all uppercase characters in an expression to lowercase.
+LOWER:function:Lowers delimiters in a string to their next lowest value.
+MAT:statement:Array element assignment.
+MATBUILD:statement:Creates a dynamic array from a dimensioned array.
+MATCHES:function:Allows pattern matching to be applied to an expression.
+MATPARSE:statement:Assigns the elements of a dynamic array to a dimensioned array.
+MATREAD:statement:Reads a record and maps the elements into a dimensioned array.
+MATREADU:statement:Reads and locks a record and maps the elements into a dimensioned array.
+MATWRITE:statement:Transfers the contents of a dimensioned array to a specified record on disc.
+MATWRITEU:statement:Transfers the contents of a dimensioned array to a specified record on disc and preserves locks.
+MOD:function:Returns the arithmetic modulo of two numeric expressions.             
+MSLEEP:statement:Pauses program execution for a specified number of milliseconds.
+MULS:function:Divides corresponding elements in two dynamic arrays.
+NEG:function:Returns the inverse of a value.
+NOT:function:Inverts the Boolean value of an expression.
+NULL:statement:Does nothing.
+NUM:function:Returns Boolean true if the supplied value is numeric.
+OBJEXCALLBACK:statement:Communicates with a calling OBjEX program.
+OCONV:function:Converts data in internal format to external format.
+ONGOSUB:statement:Transfers program execution to a label based upon a calculation.
+ONGOTO:statement:Transfers program execution to a label based upon a calculation.
+OPEN:statement:Opens a file or device to a descriptor variable.
+OPENDEV:statement:Opens a file or device for sequential reading and/or writing.
+OPENINDEX:statement:Opens a specific index definition for a file.
+OPENPATH:statement:Opens a file given an absolute or relative path.
+OPENSEQ:statement:Opens a file for sequential reading and/or writing.
+OPENSER:statement:Opens a device for serial IO.
+OSBREAD:statement:Reads an OS file from a file opened.
+OSBWRITE:statement:Writes an OS file to an file opened.
+OSCLOSE:statement:Closes a previously opened OS file.
+OSDELETE:statement:Deletes an OS file.
+OSOPEN:statement:Opens an OS file for processing.
+OSREAD:statement:Reads an OS file.
+OSWRITE:statement:Writes an OS file.
+OUT:statement:Sends raw characters to the current output device.
+PAGE:statement:Causes the current output device to page.
+PAUSE:statement:Allows processing to be suspended until an external event occurs.
+PERFORM:statement:Allows execution of other programs and commands.
+PRECISION:statement:Defines the number of digits of precision to be subsequently used.
+PRINT:statement:Sends data to the current output device.
+PRINTER:statement:Controls the destination of output from the PRINT statement.
+PRINTERR:statement:Prints standard jBASE error messages.
+PROCREAD:statement:Retrieves data passed from a jCL program to a jBC program.
+PROCWRITE:statement:Passes data back to the primary input buffer of a calling jCL program.
+PROGRAM:statement:Documents source code.
+PROMPT:statement:Defines the prompt characters used by INPUT.
+PUTENV:function:Sets environment variables for the current process.
+PWR:function:Raises a number to a specified power.
+QUOTE:function:Encloses a value in double quotation marks.
+RAISE:function:Raises delimiters in a string to their next highest value.
+READ:statement:Reads a record from an opened file into a variable.
+READL:statement:Reads a record and takes a read-only shared record lock.
+READLIST:statement:Retrieves a previously stored list.
+READNEXT:statement:Retrieves the next element in a list variable.
+READNEXT :statement:Moves forward through an index.
+READPREV:statement:Moves backward through an index.
+READSEQ:statement:Reads data from a file opened for sequential access.
+READT:statement:Reads tape devices.
+READU:statement:Reads a record from an opened file into a variable respecting locks.
+READV:statement:Reads a field from a record in an opened file into a variable.
+READVU:statement:Reads a field from a record in an opened file into a variable respecting
+RECORDLOCKED:function:Returns the status of a record lock.
+REGEXP:function:Pattern matching with regular expressions.
+RELEASE:statement:Releases record locks.
+REM:function:Returns the arithmetic modulo of two numeric expressions.
+REMOVE:function:Successively extracts delimited strings from a dynamic array.
+REPLACE:function:Archaic method of replacing elements in dynamic arrays.
+RETURN:statement:Transfers execution to the caller of a subroutine/function or to a specific label in a program.
+REWIND:statement:Issues a rewind command to attached device.
+RIGHT:function:Extracts the last n characters from a string.
+RND:function:Generates a random number.
+RQM:statement:Pauses execution.
+RTNDATA:statement:return specific data to the RTNDATA clause of another program's EXECUTE.
+SADD:function:Performs string addition.
+SDIV:function:Performs string division.
+SELECT:statement:Creates a select list of elements in a specified variable.
+SELECT:statement:Creates a select list of elements based on on a secondary index.
+SELECTINDEX:statement:Creates a dynamic array of keys based on a single selection of an index key.
+SEND:statement:Sends output to a device.
+SENTENCE:function:Returns the command used to invoke a program and the arguments it was given.
+SEQ:function:Returns the numeric ASCII value of a character.
+SIN:function:Returns the sine of an angle.
+SLEEP:statement:Pauses program execution for a specified number of seconds or until a specified time.
+SMUL:function:Performs string multiplication.
+SORT:function:Sorts a dynamic array.
+SOUNDEX:function:Converts strings to their phonetic equivalents.
+SPACE:function:Generates strings of spaces.
+SPOOLER:function:Returns spooler information.
+SQRT:function:Returns the square root of a number.
+SQUOTE:function:Encloses a value in single quotation marks.
+SSUB:function:Performs string subtraction.
+STOP:function:Program termination.
+STR:function:Performs string duplication.
+SUBROUTINE:statement:Declares an external subroutine.
+SUBS:function:Subtracts corresponding elements in two dynamic arrays.
+SUBSTRINGS:function:Returns sub-strings of elements from a dynamic array.
+SUM:function:Sums elements of a dynamic array.
+SYSTEM:function:Returns system information.
+SWAP:function:Sub-string replacement.
+TAN:function:Returns the tangent of an angle.
+TIME:function:Returns the current system time.
+TIMEDATE:function:Returns the current time and date.
+TRANS:function:Retrieves a field from a file.
+TRANSABORT:statement:Aborts and reverses the current transaction.
+TRANSQUERY:function:Used to determine if currently in a transaction.
+TRANSTART:statement:Marks the beginning of a transaction.
+TRANSEND:statement:Marks the end of a successfully completed transaction.
+TRIM:function:Removes characters from a string.
+TRIMB:function:Removes trailing blanks.
+TRIMF:function:Removes leading blanks.
+UNASSIGNED:function:Returns Boolean result for variable assignment.
+UNLOCK:statement:Releases a previously locked execution lock.
+UPCASE:function:Converts all lowercase characters in an expression to uppercase.
+WAKE:statement:Wakes a suspended process which has executed a pause statement.
+WEOF:statement:Writes an end of file mark on an attached tape device.
+WEOFSEQ:statement:Writes end of file mark on a file opened for sequential access.
+WRITE:statement:Writes a record to a previously opened file.
+WRITELIST:statement:Writes a list to the stored list file.
+WRITESEQ:statement:Writes data to a file opened for sequential access.             
+WRITET:statement:Writes data to a tape device.
+WRITEU:statement:Writes a record to a previously opened file preserving locks.
+WRITEV:statement:Writes a record field to a previously opened file.
+WRITEVU:statement:Writes a record field to a previously opened file preserving locks.
+XLATE:function:Retrieves a field from a file.
+XTD:function:Returns the decimal representation of a hexadecimal expression.
+@ (SCREENCODE):function:
+ABSS:function:
+ANDS:function:
+BITAND:function:
+BITNOT:function:
+BITOR:function:
+BITTEST:function:
+BITXOR:function:
+BREAK ON/OFF:statement:
+BYTELEN:function:
+CacheBucketList:function:
+CacheClear:function:
+CacheClearAll:function:
+CacheClearStats:function:
+CacheDelete:function:
+CacheExists:function:
+CacheGet:function:
+CacheGetOption:function:
+CacheKeyList:function:
+CachePut:function:
+CacheSetOption:function:
+CacheStats:function:
+CALLdotNET:statement:
+CALLJ:statement:
+CALLJEE:function:
+CALLONEXIT:function:
+CATALOG:statement
+CHANGETIMESTAMP:function:
+CLEARINPUT:statement:
+CONVERT (STATEMENT):statement:
+COUNTS:function:
+CREATE:statement:
+DEFCE:statement:
+DELETEU:statement:
+DIR:function:
+DIV:function:
+DROUND:function:
+DYNTOXML:function:
+EQS:function:
+EREPLACE:function:
+FILEINFO:function:
+FILEUNLOCK:statement:
+FLUSH:statement:
+FMTS:function:
+GES:function:
+GETUSERGROUP:function:
+GETX:statement:
+ICONVS:function:
+IFS:function:
+ISALPHA:function:
+ISALNUM:function:
+ISCNTRL:function:
+ISDIGIT:function:
+ISLOWER:function:
+ISPRINT:function:
+ISSPACE:function:
+ISUPPER:function:
+ITYPE:function:
+JBASECOREDUMP:function:
+JBASESubroutineExist:function:
+JBASETHREADCreate:function:
+JBASETHREADStatus:function:
+JQLCOMPILE:function:
+JQLEXECUTE:function:
+JQLFETCH:function:
+JQLGETPROPERTY:function:
+JQLPUTPROPERTY:function:
+KEYIN:function:
+LATIN1:function:
+LENDP:function:
+LENS:function:
+LES:function:
+LOCALDATE:function:
+LOCALTIME:function:
+Logger:function:
+MAKETIMESTAMP:function:
+MATCHFIELD:function:
+MAXIMUM:function:
+MINIMUM:function:
+MODS:function:
+NEGS:function:
+NES:function:
+NEXT:statement:
+NOBUF:statement:
+NOTS:function:
+NUMS:function:
+OCONVS:function:
+ORS:function:
+QUOTE / DQUOTE / SQUOTE:function:
+READBLK:statement:
+READSELECT:statement:
+READVL:statement:
+READXML:statement:
+SEEK:statement:
+SENDX:statement:
+SEQS:function:
+SPACES:function:
+SPLICE:function:
+SSELECT:statement:
+SSELECTN:statement:
+SSELECTV:statement:
+STATUS:function:
+STATUS statement:statement:
+STRS:function:
+System Functions:function:
+TIMEDIFF:function:
+TIMEOUT:statement:
+TIMESTAMP:function:
+TRIMBS:function:
+TRIMFS:function:
+UNIQUEKEY:function:
+UDTEXECUTE:statement:
+UTF8:function:
+WRITEBLK:statement:
+WRITESEQF:statement:
+WRITEXML:statement:
+XMLTODYN:function:
+XMLTOXML:function:
