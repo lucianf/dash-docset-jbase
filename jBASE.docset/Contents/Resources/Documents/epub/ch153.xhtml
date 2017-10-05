@@ -1,0 +1,44 @@
+<!--?xml version="1.0" encoding="UTF-8"?--><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+  <meta http-equiv="Content-Style-Type" content="text/css"/>
+  <meta name="generator" content="pandoc"/>
+  <title class="statement">FUNCTION</title>
+  <link rel="stylesheet" type="text/css" href="stylesheet.css"/>
+</head>
+<body>
+<div id="function-statement" class="section level1">
+<a class="dashingAutolink" name="autolink-152"></a><a class="dashAnchor" name="//apple_ref/cpp/Method/FUNCTION"></a><h1 class="statement">FUNCTION</h1>
+<p>Identifies a user-defined function, which can be invoked by other jBC programs, arguments to the function can optionally be declared.</p>
+<div id="command-syntax-114" class="section level2">
+<h2>COMMAND SYNTAX</h2>
+<pre><code>FUNCTION name({ MAT } variable, { MAT } variable...)</code></pre>
+</div>
+<div id="syntax-elements-74" class="section level2">
+<h2>SYNTAX ELEMENTS</h2>
+<p>Name is the name by which the function is invoked.</p>
+<p>Variable is an expression used to pass values between the calling program and the function.</p>
+</div>
+<div id="notes-73" class="section level2">
+<h2>NOTES</h2>
+<p>Use the FUNCTION statement to identify user-written source code functions. Each function must be coded in separate records and the record Id must match that of the Function Name, which in turn should match the reference in the calling program.</p>
+<p>The optional comma separated variable list can be a number of expressions that pass values between the calling programs and the function. To pass an array the variable name must be preceded by the MAT keyword. When a user-written function is called, the calling program must specify the same number of variables that are specified in the FUNCTION statement.</p>
+<p>An extra &#39;hidden&#39; variable is used to return a value from the user-written function. The value to be returned can be specified within the Function by the RETURN (value) statement. If using the RETURN statement without a value then by default it returns an empty string.</p>
+<p>The calling program must specify a DEFFUN or DEFB statement to describe the function to be called and the function source must be cataloged and locatable similar to subroutines.</p>
+</div>
+<div id="example-94" class="section level2">
+<h2>EXAMPLE</h2>
+<p>The function:</p>
+<pre><code>    FUNCTION ADD.FUNC(operand1, operand2)
+    result = operand1 + operand2
+    RETURN(result)
+END</code></pre>
+<p>The calling program:</p>
+<pre><code>   DEFFUN ADD.FUNC()
+   CRT ADD.FUNC(1, 2)           ;* 3
+   CRT ADD.FUNC(100, 200)       ;* 300</code></pre>
+</div>
+</div>
+
+
+
+</body></html>

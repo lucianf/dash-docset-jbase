@@ -1,0 +1,41 @@
+<!--?xml version="1.0" encoding="UTF-8"?--><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+  <meta http-equiv="Content-Style-Type" content="text/css"/>
+  <meta name="generator" content="pandoc"/>
+  <title class="function">Logger</title>
+  <link rel="stylesheet" type="text/css" href="stylesheet.css"/>
+</head>
+<body>
+<div id="logger-function" class="section level1">
+<a class="dashingAutolink" name="autolink-211"></a><a class="dashAnchor" name="//apple_ref/cpp/Function/Logger"></a><h1 class="function">Logger</h1>
+<p>The logger function allows you to log your message in a file or display to screen.</p>
+<div id="command-syntax-171" class="section level2">
+<h2>COMMAND SYNTAX</h2>
+<pre><code>Logger(Category, Severity, Message)</code></pre>
+</div>
+<div id="syntax-elements-120" class="section level2">
+<h2>SYNTAX ELEMENTS</h2>
+<p><strong>Category</strong> is any user defined category. Any meaningful name can be provided.</p>
+<p><strong>Severity</strong>: You can use predefined severity level for your logging information.</p>
+<p>TAFC_LOG_INFO</p>
+<p>TAFC_LOG_WARNING</p>
+<p>TAFC_LOG_ERROR</p>
+<p>TAFC_LOG_FATAL</p>
+<p><strong>Message</strong> is any user defined meaningful message for logging.</p>
+</div>
+<div id="notes-102" class="section level2">
+<h2>NOTES</h2>
+<p>You can control logging information from tafc.ini, please refer to the user guide for more details.</p>
+</div>
+<div id="example-126" class="section level2">
+<h2>EXAMPLE</h2>
+<pre><code>INCLUDE JBC.h
+Logger(&#39;ACC&#39;, TAFC_LOG_INFO, &#39;Message for ACC category at INFO level&#39;)
+Logger(&#39;ACC&#39;, TAFC_LOG_WARNING, &#39;Message for ACC category at WARNING level&#39;)
+Logger(&#39;ACC&#39;, TAFC_LOG_ERROR, &#39;Message for ACC category at ERROR level&#39;)</code></pre>
+</div>
+</div>
+
+
+
+</body></html>

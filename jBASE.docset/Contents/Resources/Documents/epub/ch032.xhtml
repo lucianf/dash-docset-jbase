@@ -1,0 +1,172 @@
+<!--?xml version="1.0" encoding="UTF-8"?--><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+  <meta http-equiv="Content-Style-Type" content="text/css"/>
+  <meta name="generator" content="pandoc"/>
+  <title class="variable">@USER.ROOT, @USER.THREAD and @USERSTATS</title>
+  <link rel="stylesheet" type="text/css" href="stylesheet.css"/>
+</head>
+<body>
+<div id="user.root-user.thread-and-userstats-variable" class="section level1">
+<a class="dashingAutolink" name="autolink-31"></a><a class="dashAnchor" name="//apple_ref/cpp/Variable/%40USER.ROOT%2C%20%40USER.THREAD%20and%20%40USERSTATS"></a><h1 class="variable">@USER.ROOT, @USER.THREAD and @USERSTATS</h1>
+<p>The use of the @USER.ROOT command allows a jBC program to store and retrieve a string of up to 63 bytes that is unique to that user. The intention is to really &#34;publish&#34; information that other programs can find.</p>
+<div id="for-example" class="section level2">
+<h2>For example:</h2>
+<pre><code>   @USER.ROOT = &#34;Temenos T24 Financials&#34;
+   .....
+   PRINT &#34;root user declaration is&#34; : @USER.ROOT</code></pre>
+<p>See attribute &lt;28&gt;, USER_PROC_USER_ROOT, in the section &#34;Layout of user record&#34;</p>
+<p>The @USER.THREAD is similar except a value exists for each PERFORM level. So one program can set/retrieve it but if the program does a PERFORM of a second program then the second program gets a different set of values.</p>
+<p>See attribute &lt;52&gt;, USER_PROC_USER_THREAD, in the section &#34;Layout of user record&#34;</p>
+<p>The @USERSTATS allows a program to retrieve all sorts of miscellanous information about itself. For example if a program wants to find out how many database I/O&#39;s it performed it could do this:</p>
+<pre><code>INCLUDE JBC.h
+   info1 = @USERSTATS
+   read1 = info1&lt;USER_PROC_STATS_READ&gt;
+   EXECUTE &#39;COUNT fb1 WITH *A1 EQ &#34;x&#34;&#39;
+   info2 = @USERSTATS
+   read2 = info2&lt;USER_PROC_STATS_READ&gt;
+   PRINT &#34;The COUNT command took &#34; : (read2-read1) : &#34; READs from the database&#34;</code></pre>
+<p>So a program can set a user-definable string to whatever value it likes, up to 63 bytes, and other programs can use various methods (see &#34;User Information Retrieval&#34; below) to access this data.</p>
+</div>
+<div id="user-information-retrieval" class="section level2">
+<h2>User Information Retrieval</h2>
+<p>There are 3 ways of finding information about one or more users on a TAFC system:</p>
+<ol style="list-style-type: decimal">
+<li><p>Using the @USER.ROOT, @USER.THREAD and @USERSTATS variables in your jBC code you can find information about yourself. You cannot find information about other users.</p></li>
+<li><p>The &#34;WHERE (V&#34; command can be used to display the @USER.ROOT and @USER.THREAD data for specified users.</p></li>
+<li><p>Using some jBC code you can find out lots of information about each user on the system. This is exactly the mechanism that the WHERE command uses. For example to display all users logged on you could write this.</p></li>
+</ol>
+</div>
+<div id="example-2" class="section level2">
+<h2>Example:</h2>
+<pre><code>INCLUDE JBC.h
+   * Open the special jEDI file to access the user information.
+   OPEN SYSTEM(1027) TO PROC ELSE STOP 201,SYSTEM(1027)
+   SELECT PROC
+   * For each user logged on read in their user information
+   LOOP WHILE READNEXT key DO
+       READ rec FROM PROC, key THEN
+          PRINT &#34;Port &#34; : rec&lt;USER_PROC_PORT_NUMBER&gt; :   \
+             &#34; is logged on by user &#34; : rec&lt;USER_PROC_ACCOUNT&gt;
+      END
+   REPEAT</code></pre>
+</div>
+<div id="layout-of-user-record" class="section level2">
+<h2>Layout of user record</h2>
+<p>The information retrieved by either the READ in the above example or the @USERSTATS is the same and is as follows.</p>
+<p>The first 40 attributes are data attributes that correlate to the entire user. Attributes 41 onwards are multi-valued and have one value per program being PERFORM&#39;ed by that user</p>
+<p>All the numbers below can be replaced by symbolic references in JBC.h, look for those that begin from &#34;USER_PROC_&#34;.</p>
+<p>&lt;1&gt; The port number</p>
+<p>&lt;2&gt; The number of programs running in this port.</p>
+<p>&lt;3&gt; Time the user started in Universal Co-ordinated Time or UTC (not a dyslexic mistake). This is raw UNIX time. You can convert this to TAFC internal time format using the U0FF0 conversion or to internal date format using the U0FF1 conversion.</p>
+<p>&lt;4&gt; The process ID</p>
+<p>&lt;5&gt; Account name</p>
+<p>&lt;6&gt; User name. Normally the operating system name.</p>
+<p>&lt;7&gt; Terminal name in TAFC format</p>
+<p>&lt;8&gt; Terminal name in Operating system format.</p>
+<p>&lt;9&gt; Database name</p>
+<p>&lt;10&gt; TTY device name</p>
+<p>&lt;11&gt; Language name.</p>
+<p>&lt;12&gt; Time in UTC the listening thread last found the thread alive.</p>
+<p>&lt;13&gt; Amount of heap space memory in free space chain on a process wide basis. Not real-time, only updated every 15 seconds.</p>
+<p>&lt;14&gt; Amount of heap space memory in use on a process wide basis. Not real-time , only updated every 15 seconds</p>
+<p>&lt;15&gt; Thread type as an internal integer.</p>
+<p>&lt;16&gt; Type of thread as a text string.</p>
+<p>&lt;17&gt; License counters</p>
+<p>&lt;18&gt; Number of OPENs performed.</p>
+<p>&lt;19&gt; Number of READs performed.</p>
+<p>&lt;20&gt; Number of WRITE&#39;s performed.</p>
+<p>&lt;21&gt; Number of DELETE&#39;s performed</p>
+<p>&lt;22&gt; Number of CLEARFILE&#39;s performed</p>
+<p>&lt;23&gt; Number of PERFORM/EXECUTE&#39;s performed.</p>
+<p>&lt;24&gt; Number of INPUT&#39;s performed.</p>
+<p>&lt;25&gt; Not used.</p>
+<p>&lt;26&gt; Number of jBASE files the application thinks it has open at the moment.</p>
+<p>&lt;27&gt; Number of jBASE files actually opened by the operating system at the moment.</p>
+<p>&lt;28&gt; Any data set by the application using @USER.ROOT</p>
+<p>&lt;29&gt; Process Identifier. A string created by the operating system to identify the process. It is O/S specific. Currenly on IBM i-series platform only.</p>
+<p>&lt;30&gt; to &lt;40&gt; Reserved.</p>
+<p>Attributes 41 onward are multi-valued, one value per perform level, and there are &lt;2&gt; perform levels active.</p>
+<p>&lt;41,n&gt; Program name and command line arguments.</p>
+<p>&lt;42,n&gt; The line number in jBC the program is currently executing.</p>
+<p>&lt;43,n&gt; The source name in jBC the program is currently executing.</p>
+<p>&lt;44,n&gt; Not used.</p>
+<p>&lt;45,n&gt; Not used.</p>
+<p>&lt;46,n&gt; Status of program execution as a readable text string.</p>
+<p>&lt;47,n&gt; Status of program execution as an internal integer.</p>
+<p>&lt;48,n&gt; User CPU time . Depending upon the hardware this will be either for the entire process or just the single thread.</p>
+<p>&lt;49,n&gt; System CPU time. Depending upon the hardware this will be either for the entire process or just the single thread.</p>
+<p>&lt;50,n&gt; User CPU time used by any external child processes it might have spawned.</p>
+<p>&lt;51,n&gt; System CPU time used by any external child processes it might have spawned.</p>
+<p class="function">&lt;52,n&gt; Any data set by the application using @USER.THREAD # @</p>
+<p>Use the @ function to position the cursor to a specific point on the terminal screen</p>
+</div>
+<div id="command-syntax" class="section level2">
+<h2>COMMAND SYNTAX</h2>
+<pre><code>@ (col{,row})</code></pre>
+</div>
+<div id="syntax-elements" class="section level2">
+<h2>SYNTAX ELEMENTS</h2>
+<p><strong>col</strong> and <strong>row</strong> can be any expression that evaluates to a numeric value.</p>
+<p><strong>col</strong> specifies, to which column on the screen the cursor should be moved.</p>
+<p><strong>row</strong> specifies which row (line) on the screen to position the cursor.</p>
+<p>Specifying col on its own will locate the cursor to the required column on whichever row it currently occupies.</p>
+</div>
+<div id="notes" class="section level2">
+<h2>NOTES</h2>
+<p>When specified values exceed either of the physical limits of the current terminal, then unpredictable results will occur.</p>
+<p>The terminal address starts at (0,0), that being the top left hand corner of the screen.</p>
+<p>Cursor addressing will not normally work when directed at a printer. If you wish to build printer independence into your programs, achieve this by accessing the terminfo database through the SYSTEM () function.</p>
+</div>
+<div id="example-3" class="section level2">
+<h2>EXAMPLE</h2>
+<pre><code>   FOR I = 1 TO 5
+      CRT @(5, I) : &#34;*&#34; :
+   NEXT I
+   Home = @(0,0) ;* Remember the cursor home position
+   CRT Home: &#34;Hi honey, I&#39;m HOME!&#34; :</code></pre>
+</div>
+<div id="example-2-1" class="section level2">
+<h2>EXAMPLE 2</h2>
+<p>Here the screen will be drawn, parts of it redrawn and then cleared:</p>
+<pre><code>   size_x = SYSTEM(2) - 5 ; size_y = SYSTEM(3) - 5
+   info_x = 1  ;  info_y = size_y + 1
+   DIM the_screen(size_x, size_y)
+   CRT @(-1)
+   MAT the_screen = &#39;*&#39;
+   left_offset = 1
+   GOSUB DRAW.SCREEN
+   MAT the_screen = &#39;#&#39;
+   left_offset = INT(size_x / 2)
+   GOSUB DRAW.SCREEN
+   hole_x = 5  ;  hole_y = 5  ;  hole_len = 5
+   GOSUB MAKE.HOLE
+   hole_x = left_offset - 5  ;  hole_y = 10  ;  hole_len = 20
+   GOSUB MAKE.HOLE
+   CRT @(info_x, info_y) : &#34;That&#39;s all folks!&#34; : @(-3)
+                  ;* -3 clears all to the end of line
+   *
+   STOP
+   *
+   DRAW.SCREEN:
+      CRT @(info_x, info_y) : &#39;Drawing &#39; : the_screen(1, 1) : &#34;&#39;s...&#34;
+      FOR i = left_offset TO size_x
+         FOR j = 1 TO size_y
+            CRT @(i, j) : the_screen(i, j):
+         NEXT j
+      MSLEEP(100) ;* 0.1 sec
+      NEXT i
+      MSLEEP(2000)
+      RETURN
+   *
+   MAKE.HOLE:
+      CRT @(info_x, info_y) : &#39;Making a hole at &#39; : hole_x : &#39;/&#39; : hole_y
+      CRT @(hole_x, hole_y) : STR(&#39; &#39;, hole_len)
+      MSLEEP(2000)
+      RETURN
+   END</code></pre>
+</div>
+</div>
+
+
+
+</body></html>

@@ -1,0 +1,87 @@
+<!--?xml version="1.0" encoding="UTF-8"?--><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+  <meta http-equiv="Content-Style-Type" content="text/css"/>
+  <meta name="generator" content="pandoc"/>
+  <title class="statement">FOOTING</title>
+  <link rel="stylesheet" type="text/css" href="stylesheet.css"/>
+</head>
+<body>
+<div id="footing-statement" class="section level1">
+<a class="dashingAutolink" name="autolink-149"></a><a class="dashAnchor" name="//apple_ref/cpp/Method/FOOTING"></a><h1 class="statement">FOOTING</h1>
+<p>The FOOTING statement halts all subsequent output to the terminal at the end of each output page. The statement allows the evaluation and display of an expression at the foot of each page. Output, which is current, and being sent to the terminal, the output is paused until the entry of a carriage return at the terminal (unless the N option is specified either in the current HEADING or in this FOOTING).</p>
+<div id="command-syntax-111" class="section level2">
+<h2>COMMAND SYNTAX</h2>
+<pre><code>FOOTING expression</code></pre>
+</div>
+<div id="syntax-elements-71" class="section level2">
+<h2>SYNTAX ELEMENTS</h2>
+<p>The expression should evaluate to a string, which is printed at the bottom of every page of output. The string could contain a number of interpreted special characters, replaced in the string before printing.</p>
+<p>The following characters have special meaning within the string:</p>
+<table>
+<thead>
+<tr class="header">
+<th align="left">Value</th>
+<th align="left">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">&#34;C{n}&#34;</td>
+<td align="left">Center the line. If n is specified the output line is</td>
+</tr>
+<tr class="even">
+<td align="left"></td>
+<td align="left">assumed to be n characters long.</td>
+</tr>
+<tr class="odd">
+<td align="left">&#34;D&#34; or \</td>
+<td align="left">Replace with the current date.</td>
+</tr>
+<tr class="even">
+<td align="left">&#34;L&#34; or ]</td>
+<td align="left">Replace with the newline sequence.</td>
+</tr>
+<tr class="odd">
+<td align="left">&#34;N&#34;</td>
+<td align="left">Terminal output does not pause at the end of each</td>
+</tr>
+<tr class="even">
+<td align="left"></td>
+<td align="left">page.</td>
+</tr>
+<tr class="odd">
+<td align="left">&#34;P&#34; or ^</td>
+<td align="left">Replace with the current page number.</td>
+</tr>
+<tr class="even">
+<td align="left">&#34;PP&#34; or ^^</td>
+<td align="left">Replace with the current page number in a field of 4</td>
+</tr>
+<tr class="odd">
+<td align="left"></td>
+<td align="left">characters. The field is right justified.</td>
+</tr>
+<tr class="even">
+<td align="left">&#34;T&#34; or &nbsp;</td>
+<td align="left">Replace with the current time and date.</td>
+</tr>
+<tr class="odd">
+<td align="left">&#34;</td>
+<td align="left">Replace with a single &#34; character.</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div id="notes-70" class="section level2">
+<h2>NOTES</h2>
+<p>If the output is to the printer a PRINTER ON statement is in force; output sent to the terminal with the CRT statement is not paged; if output is to the terminal then all output is paged.</p>
+</div>
+<div id="example-92" class="section level2">
+<h2>EXAMPLE</h2>
+<pre><code>FOOTING &#39;Programming staff by weight Page &#34;P&#34;&#39;</code></pre>
+</div>
+</div>
+
+
+
+</body></html>

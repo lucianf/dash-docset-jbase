@@ -1,0 +1,36 @@
+<!--?xml version="1.0" encoding="UTF-8"?--><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+  <meta http-equiv="Content-Style-Type" content="text/css"/>
+  <meta name="generator" content="pandoc"/>
+  <title class="statement">BREAK ON/OFF</title>
+  <link rel="stylesheet" type="text/css" href="stylesheet.css"/>
+</head>
+<body>
+<div id="break-onoff-statement" class="section level1">
+<a class="dashingAutolink" name="autolink-52"></a><a class="dashAnchor" name="//apple_ref/cpp/Method/BREAK%20ON%2FOFF"></a><h1 class="statement">BREAK ON/OFF</h1>
+<p>Enables or disables the BREAK key. In UNIX terms, the BREAK key is known more commonly as the interrupt sequence intr defined by the stty command.</p>
+<div id="command-syntax-19" class="section level2">
+<h2>COMMAND SYNTAX</h2>
+<pre><code>BREAK ON / BREAK OFF</code></pre>
+</div>
+<div id="example-21" class="section level2">
+<h2>EXAMPLE</h2>
+<pre><code>   BREAK OFF
+   CRT &#34;Next 5 seconds Ctrl-C makes no action&#34;
+   MSLEEP(5000)
+   BREAK ON
+   CRT &#34;And next 5 seconds Ctrl-C invokes debugger&#34;
+   MSLEEP(5000)</code></pre>
+<p>Output (user is to try to press Ctrl-C at both prompts):</p>
+<pre>    Next 5 seconds Ctrl-C makes no action
+    And next 5 seconds Ctrl-C invokes debugger
+    Interrupt signal
+    Source changed to .\test2.b
+    0009    MSLEEP(5000)
+    jBASE debugger-&gt;</pre>
+</div>
+</div>
+
+
+
+</body></html>

@@ -1,0 +1,70 @@
+<!--?xml version="1.0" encoding="UTF-8"?--><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+  <meta http-equiv="Content-Style-Type" content="text/css"/>
+  <meta name="generator" content="pandoc"/>
+  <title class="statement">OPENPATH</title>
+  <link rel="stylesheet" type="text/css" href="stylesheet.css"/>
+</head>
+<body>
+<div id="openpath-statement" class="section level1">
+<a class="dashingAutolink" name="autolink-246"></a><a class="dashAnchor" name="//apple_ref/cpp/Method/OPENPATH"></a><h1 class="statement">OPENPATH</h1>
+<p>OPENPATH statement is used to open a file (given an absolute or relative path) to a descriptor variable within jBC. See also: <a href="#OPEN">OPEN</a> statement.</p>
+<div id="command-syntax-205" class="section level2">
+<h2>COMMAND SYNTAX</h2>
+<pre><code>OPENPATH expression1 TO {variable} { SETTING setvar } THEN | ELSE statements</code></pre>
+</div>
+<div id="syntax-elements-146" class="section level2">
+<h2>SYNTAX ELEMENTS</h2>
+<p><strong>expression1</strong> should be an absolute or relative path to the file including the name of the file to be opened. If specified, variable will be used to hold the descriptor for the file. It should then be to access the file using READ and WRITE. If no file descriptor variable is supplied, then the file will be opened to the default file descriptor.</p>
+<p>If the <strong>OPENPATH</strong> statement fails it will execute any statements associated with an ELSE clause. If successful, the OPENPATH will execute any statements associated with a THEN clause. Note that the syntax requires either one or both of the THEN and ELSE clauses.</p>
+<p>If the <strong>SETTING</strong> clause is specified and the open fails, setvar will be set to one of the following values:</p>
+</div>
+<div id="incremental-file-errors-8" class="section level2">
+<h2>INCREMENTAL FILE ERRORS</h2>
+<table>
+<thead>
+<tr class="header">
+<th align="left">Code</th>
+<th align="left">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">128</td>
+<td align="left">No such file or directory</td>
+</tr>
+<tr class="even">
+<td align="left">4096</td>
+<td align="left">Network error</td>
+</tr>
+<tr class="odd">
+<td align="left">24576</td>
+<td align="left">Permission denied</td>
+</tr>
+<tr class="even">
+<td align="left">32768</td>
+<td align="left">Physical I/O error or unknown error</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div id="notes-125" class="section level2">
+<h2>NOTES</h2>
+<p>The path specified may be either a relative or an absolute path and must include the name of the jBASE file being opened.</p>
+<p>The file that is the subject of the OPENPATH statement can be of any type known to the jBASE system. Its type will be determined and correctly opened transparently to the application, which need not be aware of the file type.</p>
+<p>A jBC program can open an unlimited amount of files.</p>
+</div>
+<div id="examples-51" class="section level2">
+<h2>EXAMPLES</h2>
+<pre><code>OPENPATH &#34;C:\Home\CUSTOMERS&#34; TO F.Customers ELSE
+   ABORT 201, &#34;CUSTOMERS&#34;
+END</code></pre>
+<p>Opens the file CUSTOMERS (located in C:) to its own file descriptor F.Customers</p>
+<pre><code>OPEN &#34;F:\Users\data\CUSTOMERS&#34; ELSE ABORT 201, &#34;CUSTOMERS&#34;</code></pre>
+<p>Opens the CUSTOMERS file (located in F:) to the default file variable.</p>
+</div>
+</div>
+
+
+
+</body></html>

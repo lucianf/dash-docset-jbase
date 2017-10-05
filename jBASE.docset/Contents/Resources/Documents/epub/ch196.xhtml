@@ -1,0 +1,35 @@
+<!--?xml version="1.0" encoding="UTF-8"?--><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+  <meta http-equiv="Content-Style-Type" content="text/css"/>
+  <meta name="generator" content="pandoc"/>
+  <title class="function">JQLEXECUTE</title>
+  <link rel="stylesheet" type="text/css" href="stylesheet.css"/>
+</head>
+<body>
+<div id="jqlexecute-function" class="section level1">
+<a class="dashingAutolink" name="autolink-195"></a><a class="dashAnchor" name="//apple_ref/cpp/Function/JQLEXECUTE"></a><h1 class="function">JQLEXECUTE</h1>
+<p>JQLEXECUTE starts executing a compiled jQL statement.</p>
+<div id="command-syntax-155" class="section level2">
+<h2>COMMAND SYNTAX</h2>
+<pre><code>JQLEXECUTE(Statement, SelectVar)</code></pre>
+</div>
+<div id="syntax-elements-107" class="section level2">
+<h2>SYNTAX ELEMENTS</h2>
+<p><strong>Statement</strong> is the valid result of a call to a JQLCOMPILE (Statement, ...)</p>
+<p><strong>SelectVar</strong> is a valid select list used to limit the statement to a predefined set of items. For example - how it&#39;s used in jQL (note the &#34;&gt;&#34;) prompt:</p>
+<pre>    SELECT PROGRAMMERS WITH IQ_IN_PTS &gt; 250
+    &nbsp;
+    1 Item Selected
+    &nbsp;
+    &gt; LIST PROGRAMMERS NAME
+    &nbsp;
+    PROGRAMMERS...    NAME
+    &nbsp;
+    0123              COOPER, F B</pre>
+<p>This function returns -1 in the event of a problem, such as an incorrect statement variable. It will cause the statement to run against the database and produce a result set for use with JQLFETCH().</p>
+</div>
+</div>
+
+
+
+</body></html>

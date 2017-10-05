@@ -1,0 +1,47 @@
+<!--?xml version="1.0" encoding="UTF-8"?--><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+  <meta http-equiv="Content-Style-Type" content="text/css"/>
+  <meta name="generator" content="pandoc"/>
+  <title class="function">NEGS</title>
+  <link rel="stylesheet" type="text/css" href="stylesheet.css"/>
+</head>
+<body>
+<div id="negs-function" class="section level1">
+<a class="dashingAutolink" name="autolink-230"></a><a class="dashAnchor" name="//apple_ref/cpp/Function/NEGS"></a><h1 class="function">NEGS</h1>
+<p>NEGS function returns the negative values for all the elements in a dynamic array. NEG() function returns the negative value for a variable or an expression.</p>
+<div id="command-syntax-190" class="section level2">
+<h2>COMMAND SYNTAX</h2>
+<pre><code>NEGS(dynamic.array)</code></pre>
+<p>If the value of an element is negative, the returned value is positive. If dynamic.array evaluates to null, null is returned. If any element is null, null is returned for that element.</p>
+</div>
+<div id="example-133" class="section level2">
+<h2>EXAMPLE</h2>
+<pre><code>   dyn_array = 1 :@FM: 2 :@VM :3
+   GOSUB PROC.IT                              ;* -1^-2]-3
+   dyn_array = 1 :@FM: &#39;&#39; :@VM :3
+   GOSUB PROC.IT                              ;* -1^0]-3
+   dyn_array = -1 :@FM: -2 :@VM: -3
+   GOSUB PROC.IT                              ;*  1^2]3
+   dyn_array = 1 :@SM: -2 :@FM: 3
+   GOSUB PROC.IT                              ;*  -1\2^-3
+   dyn_array&lt;-1&gt; = &#39;A text&#39;
+   GOSUB PROC.IT                            ;* Non-numeric value -- ZERO USED
+                                            ;* -1\2^-3^0
+   CRT NEG(0)                               ;* 0
+   CRT NEG(100)                             ;* -100
+   CRT NEG(dyn_array&lt;1&gt; LT dyn_array&lt;2&gt;)    ;* -1 (negative of &#34;true&#34;)
+   CRT NEG(-1000)                           ;* 1000
+   CRT NEG(&#39;qwert&#39;)                         ;* Non-numeric value -- ZERO USED
+                                            ;* 0
+   STOP
+   &amp;nbsp;
+PROC.IT:
+   CRT FMT( NEGS(dyn_array), &#39;MCP&#39; )
+   RETURN
+END</code></pre>
+</div>
+</div>
+
+
+
+</body></html>

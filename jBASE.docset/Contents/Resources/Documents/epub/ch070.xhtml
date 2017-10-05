@@ -1,0 +1,274 @@
+<!--?xml version="1.0" encoding="UTF-8"?--><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+  <meta http-equiv="Content-Style-Type" content="text/css"/>
+  <meta name="generator" content="pandoc"/>
+  <title class="statement">CALLJ</title>
+  <link rel="stylesheet" type="text/css" href="stylesheet.css"/>
+</head>
+<body>
+<div id="callj-statement" class="section level1">
+<a class="dashingAutolink" name="autolink-69"></a><a class="dashAnchor" name="//apple_ref/cpp/Method/CALLJ"></a><h1 class="statement">CALLJ</h1>
+<p>The CALLJ command allows BASIC to call a Java method. CALLJ is useful when using third party applications offering a Java API (for example, publish and subscribe, messaging, etc.)</p>
+<div id="command-syntax-36" class="section level2">
+<h2>COMMAND SYNTAX</h2>
+<pre><code>CALLJ packageAndClassName, [$]methodName, param SETTING ret  \
+      [ON ERROR] errStatment</code></pre>
+<p>In order to use CALLJ, you need:</p>
+<ul>
+<li>A Java virtual machine</li>
+<li>CLASSPATH environment variable set to point on the class you want to invoke</li>
+</ul>
+</div>
+<div id="notes-23" class="section level2">
+<h2>NOTES</h2>
+<p>The Java virtual machine is loaded dynamically at runtime, so a compiled basic application has no dependencies on any Java virtual machine. By default, the program will search for:</p>
+<p>jvm.dll on Windows platforms</p>
+<p>libjvm.sl on HP UNIX</p>
+<p>libjvm.so for other platforms</p>
+<p>Although it is not usually necessary, it is possible to specify a Java library by setting the JBCJVMLIB environment variable:</p>
+<p>Windows: set JBCJVMLIB=jvm.dll AIX: export JBCJVMLIB=libjvm.so</p>
+</div>
+<div id="performance-considerations" class="section level2">
+<h2>PERFORMANCE CONSIDERATIONS</h2>
+<p>The first call to CALLJ carries the overhead of loading the Java Virtual Machine into memory. Subsequent calls do not have this overhead. Many additional threads will be created and used by the JVM.</p>
+<p>In addition, calls to non static methods carry the overhead of calling the constructor for the class. Wherever possible, static methods should be used.</p>
+</div>
+<div id="syntax-elements-15" class="section level2">
+<h2>SYNTAX ELEMENTS</h2>
+<p><strong>packageAndClassName</strong> The &#34;full&#34; class name (e.g., com.jbase.util.utilClass)</p>
+<p><strong>methodName</strong> The name of the Java method in this class (e.g., &#34;myMethod&#34;)</p>
+<p>NOTE: If the method is static, you must append a dollay symbol ( $ ) before the name. It will be removed from the method name before calling it.</p>
+<p><strong>Param</strong> Any parameter (eg DynArray)</p>
+</div>
+<div id="example-38" class="section level2">
+<h2>EXAMPLE</h2>
+<p>In Java:</p>
+<pre>    package mypackage;
+//
+    public class mytestclass {
+        static int i = 0;
+        private mytestclass() {
+        }
+//
+        public String mymethod(String s) {
+            return ( &#34;Java Received : &#34; + s ) ;
+        }
+//
+        public static String mystaticmethod(String s) {
+            i++;
+            return s + &#34; &#34;  + i;
+        }
+    }</pre>
+<p>To call these methods from jBC:</p>
+<pre><code>CALLJ &#39;mypackage.mytestclass&#39;, &#39;mymethod&#39;, p SETTING ret
+CRT ret
+CALLJ &#39;mypackage/mytestclass&#39;, &#39;$mystaticmethod&#39;, p SETTING ret
+CRT ret</code></pre>
+</div>
+<div id="on-error-1" class="section level2">
+<h2>ON ERROR</h2>
+<p>Use the SYSTEM(0) variable to manage any errors at the BASIC level, which occur during the call.</p>
+<p>This variable can have the following values:</p>
+<table>
+<thead>
+<tr class="header">
+<th align="left">Value</th>
+<th align="left">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">1</td>
+<td align="left">Fatal error creating thread</td>
+</tr>
+<tr class="even">
+<td align="left">2</td>
+<td align="left">Cannot create JVM</td>
+</tr>
+<tr class="odd">
+<td align="left">3</td>
+<td align="left">Cannot find class</td>
+</tr>
+<tr class="even">
+<td align="left">4</td>
+<td align="left">Unicode conversion error</td>
+</tr>
+<tr class="odd">
+<td align="left">5</td>
+<td align="left">Cannot find method</td>
+</tr>
+<tr class="even">
+<td align="left">6</td>
+<td align="left">Cannot find object constructor</td>
+</tr>
+<tr class="odd">
+<td align="left">7</td>
+<td align="left">Cannot instantiate object</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div id="example-39" class="section level2">
+<h2>EXAMPLE</h2>
+<p>jBC code using the ON ERROR will look like this:</p>
+<pre><code>PROGRAM testcallj
+     className = &#39;&#39;
+     methodName = &#39;&#39;
+     param = &#39;&#39;
+     CRT &#34;Please enter a Class Name &#34; :  ;   INPUT className
+     CRT &#34;Please enter a Method Name &#34; :  ;  INPUT methodName
+     CRT &#34;Please enter a Parameter : &#34;  ; INPUT param
+     CALLJ className,methodName, param SETTING ret ON ERROR GOTO errHandler
+     CRT &#34;Received batch from Java : &#34; : ret
+RETURN
+*
+errHandler:
+     err = SYSTEM(0)
+     IF err = 2 THEN
+          CRT &#34;Cannot find the JVM.dll !&#34;
+          RETURN
+     END
+     IF err = 3 THEN
+          CRT &#34;Class &#34; : className : &#34;doesn&#39;t exist !&#34;
+          RETURN
+     END
+*
+     IF err = 5 THEN
+          CRT &#34;Method &#34; : methodName : &#34;doesn&#39;t exist !&#34;
+          RETURN
+     END
+END</code></pre>
+<p>The CALLJ function provides access to a JavaVM from within the BASIC environment. For it to be able to start a JavaVM (JVM) the environment needs to know where the JVM is located. Specifically it needs to know where certain libraries are located.</p>
+<p><strong>WINDOWS</strong></p>
+<p>Windows: looking for &#39;jvm.dll&#39;</p>
+<p>Add &#34;c:1.6.0_33&#34; to the PATH environment variable.</p>
+<p class="JDKDIR">A generic format might be.</p>
+<p>UNIX</p>
+<p>For UNIX it is possible to configure generic symbolic links to make profiles portable.</p>
+<p>Location of JDK export JDKDIR=/opt/java6</p>
+<p>Symbolic link for JRE libs /opt/java6/jrelib</p>
+<p>Symbolic link for JVM library /opt/java6/jvmlib</p>
+<p>Linux</p>
+<pre><code> /opt/java6/jrelib   -&gt; /opt/java6/jre/lib/amd64
+
+ /opt/java6/jvmlib   -&gt; /opt/java6/jre/lib/amd64/server</code></pre>
+<p>.profile:</p>
+<p>Add &#34;/opt/java6/jrelib:/opt/java6/jvmlib&#34; to the LD_LIBRARY_PATH</p>
+<p>HP-UX</p>
+<pre><code> /opt/java6/jrelib   -&gt; /opt/java6/jre/lib/IA64W
+
+ /opt/java6/jvmlib   -&gt; /opt/java6/jre/lib/IA64W/server
+
+ .profile:</code></pre>
+<p>Add &#34;/opt/java6/jrelib:/opt/java6/jvmlib&#34; to the SHLIB_PATH</p>
+<p>AIX (IBM JDK)</p>
+<pre><code> /opt/java6/jrelib   -&gt; /opt/java6/jre/bin
+
+ /opt/java6/jvmlib   -&gt; /opt/java6/jre/bin/classic
+
+ .profile:</code></pre>
+<p>Add &#34;/opt/java6/jrelib:/opt/java6/jvmlib&#34; to the LIBPATH</p>
+<p>Solaris SPARC</p>
+<pre><code> /opt/java6/jrelib   -&gt; /opt/java6/jre/lib/sparc
+
+ /opt/java6/jvmlib   -&gt; /opt/java6/jre/lib/sparc/server
+
+ .profile:</code></pre>
+<p>Add &#34;opt/java6/jrelib:/opt/java6/jvmlib&#34; to the LD_LIBRARY_PATH</p>
+<p>Solaris AMD64</p>
+<pre><code> /opt/java6/jrelib   -&gt; /opt/java6/jre/lib/amd64
+
+ /opt/java6/jvmlib   -&gt; /opt/java6/jre/lib/amd64/server
+
+ .profile:</code></pre>
+<p>Add &#34;opt/java6/jrelib:/opt/java6/jvmlib&#34; to the LD_LIBRARY_PATH</p>
+</div>
+<div id="examples-using-jvm-without-symbolic-links-as-above" class="section level2">
+<h2>EXAMPLES using JVM WITHOUT symbolic links as above:</h2>
+<p>Linux: looking for &#39;libjvm.so&#39;</p>
+<pre>    Add 2 directories to LD_LIBRARY_PATH.
+    /opt/java6/jre/lib/amd64/server:/opt/java6/jre/lib/amd64</pre>
+<p>Solaris: looking for &#39;libjvm.so&#39;</p>
+<pre>    Add 2 directories to LD_LIBRARY_PATH.
+    /opt/java6/jre/lib/sparc/server:/opt/java6/jre/lib/sparc</pre>
+<p>HP-UX 11: looking for &#39;libjvm.sl&#39;</p>
+<pre>    Add 2 directories to SHLIB_PATH.
+   /opt/java6/jre/lib/IA64W/server:/opt/java6/jre/lib/IA64W</pre>
+</div>
+<div id="options" class="section level2">
+<h2>OPTIONS</h2>
+<p><strong>JBCJVMLIB</strong></p>
+<p>If the search for the library appears incorrect for your platform, then you can override it by setting the <strong>JBCJVMLIB</strong> environment variable.</p>
+<p>e.g. <code>export JBCJVMLIB=jvm.shared_lib</code></p>
+<p>and then CALLJ will try to locate the library &#39;jvm.shared_lib&#39; at runtime.</p>
+<p><strong>JBCJVMPOLICYFILE</strong></p>
+<p>You can specify a policy file for the JMV. The policy for a Java application environment (specifying which permissions are available for code from various sources) is represented by a Policy object. More specifically, it is represented by a Policy subclass providing an implementation of the abstract methods in the Policy class (which is in the java.security package). You can override it by setting the JBCJVMPOLICYFILE environment variable.</p>
+<p>The source location for the default policy information is:</p>
+<p><strong>WINDOWS</strong></p>
+<pre>    %TAFC_HOME%\config\policy.all</pre>
+<p><strong>UNIX</strong></p>
+<pre>    $TAFC_HOME/config/policy.all</pre>
+<p>e.g. &#34;export JBCJVMPOLICYFILE=/usr/jbase/mypolicy.all&#34;</p>
+<p><strong>JBCJVMENCODING</strong></p>
+<p>Internally, the Java virtual machine always operates with data in Unicode. However, as data transfers to or from the Java virtual machine, the Java virtual machine converts the data to other encodings. If the you want to change the default encoding of the JVM on your platform, then you can override it by setting the JBCJVMENCODING environment variable.</p>
+<p>e.g. &#34;export JBCJVMENCODING=Cp1257&#34;</p>
+<p><strong>JBCJVMNOOPTS</strong></p>
+<p>Internally, CALLJ is optimized to start the JVM with options (see the table below). If you do not want to pass these options for the JVM, then you can override it by setting the <strong>JBCJVMNOOPTS</strong> environment variable. In this case no more options will be passed to the JVM.</p>
+<p><strong>JBCIBMJDK</strong></p>
+<p>On Linux we assumed that the Sun Java JDK would be used and the JVM options reflect this. But as they are not compatible with the IBM JDK you can set the JBCIBMJDK option to allow the running of the IBM JDK for Linux.</p>
+</div>
+<div id="default-options" class="section level2">
+<h2>DEFAULT OPTIONS</h2>
+<table>
+<thead>
+<tr class="header">
+<th align="left">Platform</th>
+<th align="left">Parameter</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">Win32:</td>
+<td align="left">-Xrs</td>
+</tr>
+<tr class="even">
+<td align="left">Solaris:</td>
+<td align="left">-XX:+AllowUserSignalHandlers</td>
+</tr>
+<tr class="odd">
+<td align="left">Linux:</td>
+<td align="left">-Xrs -XX:+AllowUserSignalHandlers</td>
+</tr>
+<tr class="even">
+<td align="left">AIX 64 bits:</td>
+<td align="left">-Xrs -d64</td>
+</tr>
+<tr class="odd">
+<td align="left">HPUX 64 bits:</td>
+<td align="left">-Xrs -XX:+AllowUserSignalHandlers</td>
+</tr>
+</tbody>
+</table>
+<p><strong>JBCJVMOPT[1..5]</strong></p>
+<p>If the you want to pass some options for the JVM, then set the JBCJVMOPT[1..5] environment variable</p>
+<p>e.g. &#34;export JBCJVMOPT1=-Xrs&#34;</p>
+<p><strong>JBCJVMOPTS</strong></p>
+<p>Allows many options to be set within one variable. e.g. export JBCJVMOPTS=&#34;-Xrs -Xms256M -Xmx512M&#34;</p>
+</div>
+<div id="known-limitations" class="section level2">
+<h2>KNOWN LIMITATIONS</h2>
+<p><strong>HP-UX</strong></p>
+<p>There is a problem with HP-UX due to its dynamic loader. See man dlopen(3C) for detail of the TLS limitation.</p>
+<p>This means that the JVM library must be linked against the calling program, there are no known problems caused by this.</p>
+<p>&#39;ldd progname&#39; lists current external library references and we need to add libjvm.</p>
+<p>The symptom looks like this:</p>
+<pre>    JVM: dl_error [Can&#39;t dlopen a library containing Thread Local Storage: libjvm.sl]</pre>
+<p>If the program is built with the required link as below then it works.</p>
+<pre>    jbc -Jo callj.b -ljvm -L/opt/java6/jre/lib/IA64W/server</pre>
+<p>If the CALLJ statement is inside a subroutine, then the program that calls the subroutine must be built as above.</p>
+</div>
+</div>
+
+
+
+</body></html>

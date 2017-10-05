@@ -1,0 +1,43 @@
+<!--?xml version="1.0" encoding="UTF-8"?--><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+  <meta http-equiv="Content-Style-Type" content="text/css"/>
+  <meta name="generator" content="pandoc"/>
+  <title class="function">JBASETHREADStatus</title>
+  <link rel="stylesheet" type="text/css" href="stylesheet.css"/>
+</head>
+<body>
+<div id="jbasethreadstatus-function" class="section level1">
+<a class="dashingAutolink" name="autolink-193"></a><a class="dashAnchor" name="//apple_ref/cpp/Function/JBASETHREADStatus"></a><h1 class="function">JBASETHREADStatus</h1>
+<p>JBASETHREADStatus command shows the status of all running threads.</p>
+<div id="command-syntax-153" class="section level2">
+<h2>COMMAND SYNTAX</h2>
+<pre><code>JBASETHREADStatus(ThreadList)</code></pre>
+</div>
+<div id="syntax-elements-105" class="section level2">
+<h2>SYNTAX ELEMENTS</h2>
+<p><strong>ThreadList</strong> is a list of the threads active in this process, with one attribute per thread.</p>
+<p>The layout of the multi-values in each attribute is as follows:</p>
+<table>
+<thead>
+<tr class="header">
+<th align="left">Value</th>
+<th align="left">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">&lt; n,1 &gt;</td>
+<td align="left">port number</td>
+</tr>
+<tr class="even">
+<td align="left">&lt; n,2 &gt;</td>
+<td align="left">thread handle returned from JBASETHREADCreate</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+
+
+
+</body></html>

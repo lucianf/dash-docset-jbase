@@ -1,0 +1,41 @@
+<!--?xml version="1.0" encoding="UTF-8"?--><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+  <meta http-equiv="Content-Style-Type" content="text/css"/>
+  <meta name="generator" content="pandoc"/>
+  <title class="statement">READLIST</title>
+  <link rel="stylesheet" type="text/css" href="stylesheet.css"/>
+</head>
+<body>
+<div id="readlist-statement" class="section level1">
+<a class="dashingAutolink" name="autolink-276"></a><a class="dashAnchor" name="//apple_ref/cpp/Method/READLIST"></a><h1 class="statement">READLIST</h1>
+<p>READLIST allows the program to retrieve a previously stored list (perhaps created with the SAVE-LIST command), into a jBC variable.</p>
+<div id="command-syntax-234" class="section level2">
+<h2>COMMAND SYNTAX</h2>
+<pre><code>READLIST variable1 FROM expression { SETTING variable2 } THEN | ELSE statements</code></pre>
+</div>
+<div id="syntax-elements-171" class="section level2">
+<h2>SYNTAX ELEMENTS</h2>
+<p><strong>variable1</strong> is the variable into which the list will be read.</p>
+<p><strong>expression</strong> should evaluate to the name of a previously stored list to retrieve. If specified, <strong>variable2</strong> will be set to the number of elements in the list.</p>
+<p>If the statement succeeds in retrieving the list, then the statements associated with any THEN clause will be executed. If the statement fails to find the list, then the statements associated with any ELSE clause will be executed.</p>
+</div>
+<div id="notes-142" class="section level2">
+<h2>NOTES</h2>
+<p>READLIST statement is identical in function to the <a href="#GETLIST">GETLIST</a> statement.</p>
+<p>See also: <a href="#DELETELIST">DELETELIST</a>, <a href="#FORMLIST">FORMLIST</a>, <a href="#WRITELIST">WRITELIST</a></p>
+</div>
+<div id="examples-59" class="section level2">
+<h2>EXAMPLES</h2>
+<p>Find the list first</p>
+<pre><code>READLIST MyList FROM &#34;MyList&#34; ELSE STOP
+LOOP
+* Loop until there are no more elements
+WHILE READNEXT Key FROM MyList DO
+......
+REPEAT</code></pre>
+</div>
+</div>
+
+
+
+</body></html>

@@ -1,0 +1,65 @@
+<!--?xml version="1.0" encoding="UTF-8"?--><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+  <meta http-equiv="Content-Style-Type" content="text/css"/>
+  <meta name="generator" content="pandoc"/>
+  <title class="function">XMLTODYN</title>
+  <link rel="stylesheet" type="text/css" href="stylesheet.css"/>
+</head>
+<body>
+<div id="xmltodyn-function" class="section level1">
+<a class="dashingAutolink" name="autolink-368"></a><a class="dashAnchor" name="//apple_ref/cpp/Function/XMLTODYN"></a><h1 class="function">XMLTODYN</h1>
+<p>XMLTODYN converts the XML to a dynamic array using the optional XSL.</p>
+<div id="command-syntax-313" class="section level2">
+<h2>COMMAND SYNTAX</h2>
+<pre><code>XMLTODYN(XML, XSL, result)</code></pre>
+</div>
+<div id="syntax-elements-240" class="section level2">
+<h2>SYNTAX ELEMENTS</h2>
+<p>Array = XMLTODYN(XML,XSL,result)</p>
+<p>If result = 0 Array will contain a dynamic array built from the xml / xsl</p>
+<p>If result &lt;&gt; 0, Array will contain an error message</p>
+<p>There is no requirement for xsl if you are reconverting from generic xml to dynarray</p>
+<pre><code>a = &#34;Tom&#34; : @AM : &#34;Dick&#34; : @AM : &#34;Harry&#34;
+xml = DYNTOXML(a, &#39;&#39;, result)
+b = XMLTODYN(xml, &#39;&#39;, result
+CRT CHANGE(b, @AM, &#39; &#39;)</code></pre>
+<p>Screen output:</p>
+<pre>    Tom Dick Harry</pre>
+<p>If passing a stylesheet in the second parameter, it performs a transform to give a different format of the array.</p>
+<p><em>XML CONTENTS</em></p>
+<pre>    &lt;?xml version=&#34;1.0&#34; encoding=&#34;UTF-8&#34;?&gt;
+    &lt;mycustomer&gt;
+      &lt;firstname&gt;Tom&lt;/firstname&gt;
+      &lt;lastname&gt;Dick&lt;/lastname&gt;
+      &lt;address&gt;Harry&lt;/address&gt;
+    &lt;/mycustomer&gt;</pre>
+</div>
+<div id="example-208" class="section level2">
+<h2>EXAMPLE</h2>
+<pre><code>a = XMLTODYN(xml, xsl, rc)
+CRT CHANGE(a, @AM, &#39; &#39;)</code></pre>
+</div>
+<div id="xsl-contents" class="section level2">
+<h2>XSL CONTENTS</h2>
+<pre>    &lt;xsl:template match=&#34;mycustomer&#34;&gt;
+    &lt;array&gt;
+    &lt;xsl:apply-templates/&gt;
+    &lt;/array&gt;
+    &lt;/xsl:template&gt;
+    &lt;xsl:template match=&#34;firstname&#34;&gt;
+    &lt;data&gt;
+    &lt;xsl:attribute name=&#34;attribute&#34;&gt;1&lt;/xsl:attribute&gt;
+    &lt;xsl:attribute name=&#34;value&#34;&gt;
+      &lt;xsl:number level=&#34;single&#34;/&gt;
+    &lt;/xsl:attribute&gt;
+    &lt;xsl:attribute name=&#34;subvalue&#34;&gt;1&lt;/xsl:attribute&gt;
+    &lt;xsl:value-of select=&#34;.&#34;/&gt;
+    &lt;/data&gt;
+    &lt;/xsl:template&gt;
+    Etc</pre>
+</div>
+</div>
+
+
+
+</body></html>

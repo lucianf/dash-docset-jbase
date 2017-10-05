@@ -1,0 +1,36 @@
+<!--?xml version="1.0" encoding="UTF-8"?--><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+  <meta http-equiv="Content-Style-Type" content="text/css"/>
+  <meta name="generator" content="pandoc"/>
+  <title class="statement">UNLOCK</title>
+  <link rel="stylesheet" type="text/css" href="stylesheet.css"/>
+</head>
+<body>
+<div id="unlock-statement" class="section level1">
+<a class="dashingAutolink" name="autolink-350"></a><a class="dashAnchor" name="//apple_ref/cpp/Method/UNLOCK"></a><h1 class="statement">UNLOCK</h1>
+<p>UNLOCK statement releases a previously LOCKed execution lock.</p>
+<div id="command-syntax-297" class="section level2">
+<h2>COMMAND SYNTAX</h2>
+<pre><code>UNLOCK {expression}</code></pre>
+</div>
+<div id="syntax-elements-226" class="section level2">
+<h2>SYNTAX ELEMENTS</h2>
+<p><strong>expression</strong> should evaluate to the number of a held execution lock, for release.</p>
+<p>If omitting expression then it releases all execution locks held by the current program.</p>
+</div>
+<div id="notes-188" class="section level2">
+<h2>NOTES</h2>
+<p>There is no action if the program attempts to release an execution l ock that it had not taken.</p>
+<p>See also: <a href="#LOCK">LOCK</a></p>
+</div>
+<div id="example-195" class="section level2">
+<h2>EXAMPLE</h2>
+<pre><code>LOCK 23 ; LOCK 32
+......
+UNLOCK</code></pre>
+</div>
+</div>
+
+
+
+</body></html>

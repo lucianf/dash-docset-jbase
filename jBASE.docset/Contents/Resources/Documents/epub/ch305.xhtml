@@ -1,0 +1,47 @@
+<!--?xml version="1.0" encoding="UTF-8"?--><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+  <meta http-equiv="Content-Style-Type" content="text/css"/>
+  <meta name="generator" content="pandoc"/>
+  <title class="function">SENTENCE</title>
+  <link rel="stylesheet" type="text/css" href="stylesheet.css"/>
+</head>
+<body>
+<div id="sentence-function" class="section level1">
+<a class="dashingAutolink" name="autolink-304"></a><a class="dashAnchor" name="//apple_ref/cpp/Function/SENTENCE"></a><h1 class="function">SENTENCE</h1>
+<p>SENTENCE function allows a program to locate the command used to invoke it and the arguments it was given.</p>
+<div id="command-syntax-257" class="section level2">
+<h2>COMMAND SYNTAX</h2>
+<pre><code>SENTENCE({expression})</code></pre>
+</div>
+<div id="syntax-elements-194" class="section level2">
+<h2>SYNTAX ELEMENTS</h2>
+<p>If expression is specified it should evaluate to a positive integer value. A negative value will return a null string. A value of null will return the entire command line.</p>
+<p>An integer value of expression will return a specific element of the command line with the command itself being returned by SENTENCE (0), the first parameter being returned by SENTENCE(1) and so on.</p>
+</div>
+<div id="notes-165" class="section level2">
+<h2>NOTES</h2>
+<p>It is assumed the command line arguments are space separated and when returning the entire command line they are returned as such. The SYSTEM(1000) function will return the command line attribute mark delimited.</p>
+</div>
+<div id="examples-63" class="section level2">
+<h2>EXAMPLES</h2>
+<pre><code>   DIM Parm(4)
+   ProgName = SENTENCE(0) ;* program is?
+   FOR I = 1 TO 4
+      Parm(I) = SENTENCE(I) ;* get parameters
+   NEXT I
+
+   this_prog = SENTENCE(0)    ;* name of this program
+   phrase_part = &#39;to understand recursion &#39;
+   IF SENTENCE(1) EQ &#39;-2&#39; THEN              ;* first parameter
+      CRT TRIM( SENTENCE(2), &#39;&#34;&#39;, &#39;B&#39; ):    ;* 2nd parameter
+      CRT phrase_part
+   END ELSE
+      CRT phrase_part:
+      EXECUTE this_prog : &#39; -2 &#34;you firstly need &#34;&#39;
+   END</code></pre>
+</div>
+</div>
+
+
+
+</body></html>

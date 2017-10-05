@@ -1,0 +1,57 @@
+<!--?xml version="1.0" encoding="UTF-8"?--><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+  <meta http-equiv="Content-Style-Type" content="text/css"/>
+  <meta name="generator" content="pandoc"/>
+  <title class="function">DROUND</title>
+  <link rel="stylesheet" type="text/css" href="stylesheet.css"/>
+</head>
+<body>
+<div id="dround-function" class="section level1">
+<a class="dashingAutolink" name="autolink-121"></a><a class="dashAnchor" name="//apple_ref/cpp/Function/DROUND"></a><h1 class="function">DROUND</h1>
+<p>The DROUND function performs double-precision rounding on a value. Double-precision rounding uses two words to store a number, accommodating a larger number than in single-precision rounding, which stores each number in a single word.</p>
+<div id="command-syntax-84" class="section level2">
+<h2>COMMAND SYNTAX</h2>
+<pre><code>DROUND(val.expr [,precision.expr])</code></pre>
+<p>NOTE: DROUND affects the internal representation of the numeric value. It performs the rounding without conversion to and from string variables. This increases the speed of calculation.</p>
+</div>
+<div id="syntax-elements-49" class="section level2">
+<h2>SYNTAX ELEMENTS</h2>
+<p><strong>val.expr</strong> specifies the value to round.</p>
+<p><strong>precision.expr</strong> specifies the precision for the rounding. Default precision is four places.</p>
+</div>
+<div id="example-75" class="section level2">
+<h2>EXAMPLE</h2>
+<pre><code>   V.PI = 3.14159265358979323846
+   CRT &#39;Default:&#39;, DROUND(V.PI)
+   FOR V.I = 0 TO 20
+      CRT DROUND(V.PI, V.I)
+   NEXT V.I</code></pre>
+<p>Output:</p>
+<pre>    Default:    3.1416
+    3
+    3.1
+    3.14
+    3.142
+    3.1416
+    3.14159
+    3.141593
+    3.1415927
+    3.14159265
+    3.141592654
+    3.1415926536
+    3.14159265359
+    3.14159265359
+    3.1415926535898
+    3.14159265358979
+    3.141592653589793
+    3.1415926535897932
+    3.14159265358979324
+    3.141592653589793238
+    3.1415926535897932385
+    3.14159265358979323846</pre>
+</div>
+</div>
+
+
+
+</body></html>

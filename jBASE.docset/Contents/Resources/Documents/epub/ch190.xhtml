@@ -1,0 +1,81 @@
+<!--?xml version="1.0" encoding="UTF-8"?--><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+  <meta http-equiv="Content-Style-Type" content="text/css"/>
+  <meta name="generator" content="pandoc"/>
+  <title class="function">ITYPE</title>
+  <link rel="stylesheet" type="text/css" href="stylesheet.css"/>
+</head>
+<body>
+<div id="itype-function" class="section level1">
+<a class="dashingAutolink" name="autolink-189"></a><a class="dashAnchor" name="//apple_ref/cpp/Function/ITYPE"></a><h1 class="function">ITYPE</h1>
+<p>ITYPE function is used to return the value resulting from the evaluation of an I-type expression in a jBASE file dictionary.</p>
+<div id="command-syntax-149" class="section level2">
+<h2>COMMAND SYNTAX</h2>
+<pre><code>ITYPE(i.type)</code></pre>
+<p><strong>I.type</strong> is an expression evaluating to the contents of the compiled I-descriptor. You must compile the I-descriptor before the ITYPE function uses it; otherwise, you get a run-time error message.</p>
+<p>Using several methods set the I.type to the evaluated I-descriptor in several ways. One way is to read the I-descriptor from a file dictionary into a variable, then use the variable as the argument to the ITYPE function. If the I-descriptor references a record ID, the current value of the system variable <strong>@ID</strong> is used. If the I-descriptor, references field values in a data record, the data is taken from the current value of the system variable @RECORD.</p>
+<p>To assign field values to @RECORD, read a record from the data file into @RECORD before invoking the ITYPE function.</p>
+<p>If i.type evaluates to null, the ITYPE function fails and the program terminates with a run-time error message.</p>
+<p>NOTE: Set the @FILENAME to the name of the file before ITYPE execution.</p>
+</div>
+<div id="example-117" class="section level2">
+<h2>EXAMPLE</h2>
+<pre><code>* Data preparation
+*
+   V.FILE = &#39;F.TEMP&#39;
+   EXECUTE &#39;DELETE-FILE &#39; : V.FILE
+   EXECUTE &#39;CREATE-FILE &#39; : V.FILE : &#39; 1 101 TYPE=J4&#39;
+   OPEN V.FILE TO F.TEMP ELSE ABORT 201, &#39;F.TEMP&#39;
+   OPEN &#39;DICT&#39;, V.FILE TO F.TEMP.DICT ELSE ABORT 201, &#39;F.TEMP]D&#39;
+* Field 1 dictionary entry
+   R.DICT.D1 = &#39;&#39;
+   R.DICT.D1&lt;1&gt; = &#39;D&#39;
+   R.DICT.D1&lt;2&gt; = &#39;1&#39;
+   R.DICT.D1&lt;5&gt; = &#39;25L&#39;
+   R.DICT.D1&lt;6&gt; = &#39;S&#39;
+   WRITE R.DICT.D1 TO F.TEMP.DICT, &#39;FOOTWEAR&#39;
+*
+* I-descriptor
+   V.DESCR = &#39;SIZE&#39;
+   R.DICT.I = &#39;&#39;
+   R.DICT.I&lt;1&gt; = &#39;I&#39;
+   R.DICT.I&lt;2&gt; = &#39;FOOTWEAR[&#34;:&#34;, 2, 1]&#39;
+   R.DICT.I&lt;4&gt; = V.DESCR
+   R.DICT.I&lt;5&gt; = &#39;3R&#39;
+   R.DICT.I&lt;6&gt; = &#39;S&#39;
+   WRITE R.DICT.I TO F.TEMP.DICT, V.DESCR
+*
+* Data records
+   R.DATA = &#39;&#39;
+   R.DATA&lt;1&gt; = &#39;SLIPPERS:8&#39;
+   WRITE R.DATA TO F.TEMP, &#39;JIM&#39;
+   R.DATA = &#39;&#39;
+   R.DATA&lt;1&gt; = &#39;BOOTS:10&#39;
+   WRITE R.DATA TO F.TEMP, &#39;GREG&#39;
+   R.DATA = &#39;&#39;
+   R.DATA&lt;1&gt; = &#39;SLIPPERS:5&#39;
+   WRITE R.DATA TO F.TEMP, &#39;ALAN&#39;
+*
+* Data is prepared; now proceed it
+*
+   @FILENAME = V.FILE
+   READ V.ITYPE FROM F.TEMP.DICT, V.DESCR ELSE ABORT
+*
+   SSELECT F.TEMP TO V.PEOPLE.L
+   LOOP
+      READNEXT V.ID FROM V.PEOPLE.L ELSE BREAK
+      @ID = V.ID
+      READ @RECORD FROM F.TEMP, @ID ELSE ABORT
+      V.RET = ITYPE(V.ITYPE)
+      CRT @ID : &#34;&#39;S FOOTWEAR HAS SIZE &#34; : V.RET
+   REPEAT</code></pre>
+<p>The output of this program is:</p>
+<pre>    ALAN&#39;S FOOTWEAR HAS SIZE 5
+    GREG&#39;S FOOTWEAR HAS SIZE 10
+    JIM&#39;S FOOTWEAR HAS SIZE 8</pre>
+</div>
+</div>
+
+
+
+</body></html>

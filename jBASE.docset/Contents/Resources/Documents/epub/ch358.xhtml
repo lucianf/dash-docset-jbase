@@ -1,0 +1,73 @@
+<!--?xml version="1.0" encoding="UTF-8"?--><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+  <meta http-equiv="Content-Style-Type" content="text/css"/>
+  <meta name="generator" content="pandoc"/>
+  <title class="statement">WRITE</title>
+  <link rel="stylesheet" type="text/css" href="stylesheet.css"/>
+</head>
+<body>
+<div id="write-statement" class="section level1">
+<a class="dashingAutolink" name="autolink-357"></a><a class="dashAnchor" name="//apple_ref/cpp/Method/WRITE"></a><h1 class="statement">WRITE</h1>
+<p>WRITE statement allows a program to write a record into a previously opened file.</p>
+<div id="command-syntax-302" class="section level2">
+<h2>COMMAND SYNTAX</h2>
+<pre><code>WRITE variable1 ON | TO {variable2,} expression { SETTING setvar }  \
+      { ON ERROR statements }</code></pre>
+</div>
+<div id="syntax-elements-231" class="section level2">
+<h2>SYNTAX ELEMENTS</h2>
+<p><strong>variable1</strong> is the identifier containing the record to be written.</p>
+<p><strong>variable2</strong>, if specified, should be a previous opened jBC variable to a file using the OPEN statement. If not specifying variable2 then it assumes the default file.</p>
+<p>The expression should evaluate to a valid record key for the file.</p>
+<p>If specifying the SETTING clause and the write fails, it sets setvar to one of the following values:</p>
+</div>
+<div id="incremental-file-errors-15" class="section level2">
+<h2>INCREMENTAL FILE ERRORS</h2>
+<table>
+<thead>
+<tr class="header">
+<th align="left">Code</th>
+<th align="left">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">128</td>
+<td align="left">No such file or directory</td>
+</tr>
+<tr class="even">
+<td align="left">4096</td>
+<td align="left">Network error</td>
+</tr>
+<tr class="odd">
+<td align="left">24576</td>
+<td align="left">Permission denied</td>
+</tr>
+<tr class="even">
+<td align="left">32768</td>
+<td align="left">Physical I/O error or unknown error</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div id="notes-191" class="section level2">
+<h2>NOTES</h2>
+<p>If holding a lock on the record by this process, it is released by the WRITE. If you wish to retain a lock on a record, you should do so explicitly with the <a href="#WRITEU">WRITEU</a> statement.</p>
+</div>
+<div id="example-199" class="section level2">
+<h2>EXAMPLE</h2>
+<pre><code>   OPEN &#39;F.TEMP&#39; TO F.TEMP THEN
+      NULL
+   END ELSE
+      EXECUTE &#39;CREATE-FILE DATA F.TEMP 1 101 TYPE=J4&#39;
+      OPEN &#39;F.TEMP&#39; TO F.TEMP ELSE ABORT 201, &#39;F.TEMP&#39;
+   END
+   V.REC.INIT = &#39;LINE 1&#39; :@FM: &#39;LINE 2&#39; :@FM: &#39;LINE 3&#39;
+   WRITE V.REC.INIT TO F.TEMP, &#39;REC1&#39;
+   CLOSE F.TEMP</code></pre>
+</div>
+</div>
+
+
+
+</body></html>

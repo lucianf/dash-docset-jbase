@@ -1,0 +1,34 @@
+<!--?xml version="1.0" encoding="UTF-8"?--><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+  <meta http-equiv="Content-Style-Type" content="text/css"/>
+  <meta name="generator" content="pandoc"/>
+  <title class="statement">FILEUNLOCK</title>
+  <link rel="stylesheet" type="text/css" href="stylesheet.css"/>
+</head>
+<body>
+<div id="fileunlock-statement" class="section level1">
+<a class="dashingAutolink" name="autolink-141"></a><a class="dashAnchor" name="//apple_ref/cpp/Method/FILEUNLOCK"></a><h1 class="statement">FILEUNLOCK</h1>
+<p>Use the FILEUNLOCK statement to release a file lock set by the FILELOCK statement.</p>
+<div id="command-syntax-104" class="section level2">
+<h2>COMMAND SYNTAX</h2>
+<pre><code>FILEUNLOCK [file.variable] [ ON ERROR statements ]</code></pre>
+<p><strong>file.variable</strong> specifies a file previously locked with a FILELOCK statement. If file.variable is not specified, the default file with the FILELOCK statement is assumed .If file.variable is not a valid file variable then the FILEUNLOCK statement will enter the debugger.</p>
+<p><em>The ON ERROR Clause</em></p>
+<p>The ON ERROR clause is optional in the FILELOCK statement. The ON ERROR clause lets you specify an alternative for program termination when encountering a fatal error during processing of the FILELOCK statement. If a fatal error occurs, with no ON ERROR clause specified, the program enters the debugger.</p>
+<p>If the ON ERROR clause is used, the value returned by the STATUS function is the error number.</p>
+</div>
+<div id="example-86" class="section level2">
+<h2>EXAMPLE</h2>
+<p>In the following example, the first FILEUNLOCK statement unlocks the default file. The second FILEUNLOCK statement unlocks the file variable FILE.</p>
+<pre><code>OPEN &#39;&#39;, &#39;SLIPPERS&#39; ELSE STOP &#34;CAN&#39;T OPEN SLIPPERS&#34;
+FILELOCK
+FILEUNLOCK
+OPEN &#39;PIPE&#39; TO FILEVAR ELSE STOP
+FILELOCK FILEVAR
+FILEUNLOCK FILEVAR</code></pre>
+</div>
+</div>
+
+
+
+</body></html>

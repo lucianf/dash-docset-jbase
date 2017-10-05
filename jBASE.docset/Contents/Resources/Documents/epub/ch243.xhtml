@@ -1,0 +1,64 @@
+<!--?xml version="1.0" encoding="UTF-8"?--><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+  <meta http-equiv="Content-Style-Type" content="text/css"/>
+  <meta name="generator" content="pandoc"/>
+  <title class="statement">ONGOTO</title>
+  <link rel="stylesheet" type="text/css" href="stylesheet.css"/>
+</head>
+<body>
+<div id="ongoto-statement" class="section level1">
+<a class="dashingAutolink" name="autolink-242"></a><a class="dashAnchor" name="//apple_ref/cpp/Method/ONGOTO"></a><h1 class="statement">ONGOTO</h1>
+<p>The ON...GOSUB and ON...GOTO statements are used to transfer program execution to a label based upon a calculation.</p>
+<div id="command-syntax-201" class="section level2">
+<h2>COMMAND SYNTAX</h2>
+<pre><code>ON expression GOTO label{, label...}
+
+ON expression GOSUB label{, label...}</code></pre>
+</div>
+<div id="syntax-elements-142" class="section level2">
+<h2>SYNTAX ELEMENTS</h2>
+<p><strong>expression</strong> should evaluate to an integer numeric value. Labels should be defined somewhere in the current source file.</p>
+<p><strong>ON GOTO</strong> will transfer execution to the labeled source code line in the program.</p>
+<p><strong>ON GOSUB</strong> will transfer execution to the labeled subroutine within the source code.</p>
+</div>
+<div id="notes-122" class="section level2">
+<h2>NOTES</h2>
+<p>Use the value of expression as an index to the list of labels supplied. If the expression evaluates to 1 then the first label will jump to 2 then the second label will be used and so on.</p>
+<p>If the program was compiled when the emulation included the setting generic_pick = true, then no validations are performed on the index to see if it is valid. Therefore, if the index is out of range this instruction will take no action and report no error.</p>
+<p>If the program was compiled for other emulations then the index will be range checked. If found that the index is less than 1, it is assumed to be 1 and a warning message is issued. If the index is found to be too big, then the last label in the list will be used to transfer execution and a warning message will be issued.</p>
+</div>
+<div id="example-138" class="section level2">
+<h2>EXAMPLE</h2>
+<pre><code>   cntrl_var = 1
+*
+   ON cntrl_var GOSUB BIGGER
+   ON cntrl_var GOSUB EXCEPT, SMALLER
+   ON cntrl_var GOSUB SMALLER
+*
+   STOP
+*
+BIGGER:
+   cntrl_var ++
+   CRT cntrl_var
+   RETURN
+*
+SMALLER:
+   cntrl_var --
+   CRT cntrl_var
+   RETURN
+*
+EXCEPT:
+   CRT &#39;Error occured&#39;
+   RETURN
+*
+END</code></pre>
+<p>Output of this program:</p>
+<pre>    2
+    1
+    0</pre>
+</div>
+</div>
+
+
+
+</body></html>

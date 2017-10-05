@@ -1,0 +1,87 @@
+<!--?xml version="1.0" encoding="UTF-8"?--><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+  <meta http-equiv="Content-Style-Type" content="text/css"/>
+  <meta name="generator" content="pandoc"/>
+  <title class="statement">READV</title>
+  <link rel="stylesheet" type="text/css" href="stylesheet.css"/>
+</head>
+<body>
+<div id="readv-statement" class="section level1">
+<a class="dashingAutolink" name="autolink-283"></a><a class="dashAnchor" name="//apple_ref/cpp/Method/READV"></a><h1 class="statement">READV</h1>
+<p>READV statement allows a program to read a specific field from a record in a previously opened file into a variable.</p>
+<div id="command-syntax-239" class="section level2">
+<h2>COMMAND SYNTAX</h2>
+<pre><code>READV variable1 FROM { variable2,} expression1, expression2 { SETTING setvar }  \
+     { ON ERROR statements } THEN | ELSE statements</code></pre>
+</div>
+<div id="syntax-elements-176" class="section level2">
+<h2>SYNTAX ELEMENTS</h2>
+<p><strong>variable1</strong> is the identifier into which the record will be read.</p>
+<p><strong>variable2</strong> if specified, should be a jBC variable that has previously been opened to a file using the OPEN statement. If variable2 is not specified, the default file is assumed.</p>
+<p><strong>expression1</strong> should evaluate to a valid record key for the file.</p>
+<p><strong>expression2</strong> should evaluate to a positive integer. If the number is invalid or greater than the number of fields in the record, a NULL string will be assigned to variable1. If the number is 0, then the readv0 emulation setting controls the value returned in variable1. If a non-numeric argument is evaluated, a run time error will occur.</p>
+<p>If the SETTING clause is specified and the read fails, setvar will be set to one of the following values:</p>
+</div>
+<div id="incremental-file-errors-13" class="section level2">
+<h2>INCREMENTAL FILE ERRORS</h2>
+<table>
+<thead>
+<tr class="header">
+<th align="left">Code</th>
+<th align="left">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">128</td>
+<td align="left">No such file or directory</td>
+</tr>
+<tr class="even">
+<td align="left">4096</td>
+<td align="left">Network error</td>
+</tr>
+<tr class="odd">
+<td align="left">24576</td>
+<td align="left">Permission denied</td>
+</tr>
+<tr class="even">
+<td align="left">32768</td>
+<td align="left">Physical I/O error or unknown error</td>
+</tr>
+</tbody>
+</table>
+<p>If ON ERROR is specified, the statements following the ON ERROR clause will be executed for any of the above Incremental File Errors except error 128.</p>
+</div>
+<div id="notes-147" class="section level2">
+<h2>NOTES</h2>
+<p>If you wish to set a lock on a record, do so explicitly with the <a href="#READU">READU</a> or <a href="#READVU">READVU</a> statement. To read a field from a previously opened file into a variable and take a read-only shared lock on the field, use <a href="#READVL">READVL</a>.</p>
+</div>
+<div id="example-166" class="section level2">
+<h2>EXAMPLE</h2>
+<pre><code>   OPEN &#39;F.TEMP&#39; TO f_temp THEN
+      ret_error = &#39;&#39;
+      CLEARFILE f_temp SETTING ret_error
+      IF ret_error NE &#39;&#39; THEN
+         CRT &#39;ERROR &#39; : ret_error
+         STOP
+      END
+   END ELSE
+      EXECUTE &#39;CREATE-FILE DATA F.TEMP 1 101 TYPE=J4&#39;
+      OPEN &#39;F.TEMP&#39; TO f_temp ELSE ABORT 201, &#39;F.TEMP&#39;
+   END
+   *
+   out_record = &#39;Field 1&#39; :@FM: &#39;Field 2&#39; :@FM: &#39;Field 3&#39;
+   WRITE out_record TO f_temp, &#39;REC1&#39;
+   *
+   READV second_field FROM f_temp, &#39;REC1&#39;, 2 ELSE
+      CRT &#39;Read error&#39;
+      STOP
+   END
+   *
+   CRT second_field           ;*  Field 2</code></pre>
+</div>
+</div>
+
+
+
+</body></html>

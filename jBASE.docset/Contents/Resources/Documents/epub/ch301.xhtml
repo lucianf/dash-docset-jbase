@@ -1,0 +1,85 @@
+<!--?xml version="1.0" encoding="UTF-8"?--><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+  <meta http-equiv="Content-Style-Type" content="text/css"/>
+  <meta name="generator" content="pandoc"/>
+  <title class="statement">SEEK</title>
+  <link rel="stylesheet" type="text/css" href="stylesheet.css"/>
+</head>
+<body>
+<div id="seek-statement" class="section level1">
+<a class="dashingAutolink" name="autolink-300"></a><a class="dashAnchor" name="//apple_ref/cpp/Method/SEEK"></a><h1 class="statement">SEEK</h1>
+<p>SEEK statement is used to move the file pointer by an offset specified in bytes, relative to the current position, the beginning of the file, or the end of the file.</p>
+<div id="command-syntax-253" class="section level2">
+<h2>COMMAND SYNTAX</h2>
+<pre><code>SEEK file.variable [ , offset [ , relto] ] { THEN statements  \
+   [ ELSE statements ] | ELSE statements }</code></pre>
+</div>
+<div id="syntax-elements-190" class="section level2">
+<h2>SYNTAX ELEMENTS</h2>
+<p><strong>file.variable</strong> specifies a file previously opened for sequential access.</p>
+<p><strong>offset</strong> is the number of bytes before or after the reference position. A negative offset results in the pointer being moved before the position specified by relto. If offset is not specified, 0 is assumed.</p>
+<p>The permissible values of relto and their meanings follow:</p>
+<table>
+<thead>
+<tr class="header">
+<th align="left">Value</th>
+<th align="left">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">0</td>
+<td align="left">Relative to the beginning of the file</td>
+</tr>
+<tr class="even">
+<td align="left">1</td>
+<td align="left">Relative to the current position</td>
+</tr>
+<tr class="odd">
+<td align="left">2</td>
+<td align="left">Relative to the end of the file</td>
+</tr>
+</tbody>
+</table>
+<p>If relto is not specified, 0 is assumed.</p>
+<p>If the pointer is moved, the THEN statements are executed and the ELSE statements are ignored. If the THEN statements are not specified, program execution continues with the next statement.</p>
+<p>If the file cannot be accessed or does not exist the ELSE statements are executed; any THEN statements are ignored.</p>
+<p>If file.variable, offset, or relto evaluates to null, the SEEK statement fails and the program terminates with a run-time error message.</p>
+</div>
+<div id="notes-161" class="section level2">
+<h2>NOTES</h2>
+<p>In Windows-based systems, line endings in files are denoted by the character sequence RETURN + LINEFEED rather than the single LINEFEED used in UNIX files. The value of offset should take into account this extra byte on each line in Windows NT file systems.</p>
+<p>If you use the <a href="#OPENDEV">OPENDEV</a> statement to open a tape device for sequential processing, you can move the file pointer only to the beginning or the end of the data.</p>
+<p>Seeking beyond the end of the file and then writing creates a gap, or hole, in the file. This hole occupies no physical space, and reads from this part of the file return as ASCII CHAR 0 (neither the number nor the character 0).</p>
+<p>For more information about sequential file processing, See also: <a href="#OPENSEQ">OPENSEQ</a>, <a href="#READSEQ">READSEQ</a>, and <a href="#WRITESEQ">WRITESEQ</a> statements.</p>
+</div>
+<div id="example-177" class="section level2">
+<h2>EXAMPLE</h2>
+<pre><code>   V.DIR.OUT = &#39;.&#39;  ;   V.FILE.OUT = &#39;report.txt&#39;
+   OPENSEQ V.DIR.OUT, V.FILE.OUT TO F.FILE.OUT THEN
+      WEOFSEQ F.FILE.OUT
+   END ELSE
+      CREATE F.FILE.OUT ELSE CRT &#39;File create error&#39;  ;  STOP
+   END
+   WRITESEQ &#39;1234567890ABCDEF&#39; TO F.FILE.OUT ELSE
+      CRT &#39;Write error&#39;
+      STOP
+   END
+* go right after position 5 from the beginning
+   SEEK F.FILE.OUT, 5, 0 ELSE CRT &#39;Seek error&#39;  ;  STOP
+   READSEQ V.STRING FROM F.FILE.OUT ELSE CRT &#39;Read error&#39;  ;  STOP
+   CRT V.STRING                 ;* 67890ABCDEF
+* go beyond end of file and write something there
+   SEEK F.FILE.OUT, 3, 2 ELSE CRT &#39;Seek error&#39;  ;  STOP
+   WRITESEQ &#39;VWXYZ&#39; TO F.FILE.OUT ELSE CRT &#39;Write error&#39;  ;  STOP
+   CLOSESEQ F.FILE.OUT
+* read full file contents
+   OSREAD V.ALL FROM V.FILE.OUT ELSE CRT &#39;Read error&#39;  ;  STOP
+   CRT FMT( FMT( OCONV(V.ALL, &#39;MX&#39;), &#39;2L&#39;), &#39;MCP &#39;)
+* 31 32 33 34 35 36 37 38 39 30 41 42 43 44 45 46 FE 00 00 00 56 57 58 59 5A</code></pre>
+</div>
+</div>
+
+
+
+</body></html>

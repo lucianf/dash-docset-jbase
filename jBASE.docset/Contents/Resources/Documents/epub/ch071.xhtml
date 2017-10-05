@@ -1,0 +1,58 @@
+<!--?xml version="1.0" encoding="UTF-8"?--><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+  <meta http-equiv="Content-Style-Type" content="text/css"/>
+  <meta name="generator" content="pandoc"/>
+  <title class="function">CALLJEE</title>
+  <link rel="stylesheet" type="text/css" href="stylesheet.css"/>
+</head>
+<body>
+<div id="calljee-function" class="section level1">
+<a class="dashingAutolink" name="autolink-70"></a><a class="dashAnchor" name="//apple_ref/cpp/Function/CALLJEE"></a><h1 class="function">CALLJEE</h1>
+<p>The CALLJEE function will connect to the JRemote Inbound JCA (TOCF/EE) if not already connected, send the request, and receive the response. The first invocation of CALLJEE will attempt to open a connection to the application server. The following environment variables are used during the open connection phase of the first call:</p>
+<pre>    SET JREMOTE_INBOUND_HOST=127.0.0.1
+    SET JREMOTE_INBOUND_PORT=55006</pre>
+<p>Subsequent invocations of CALLJEE will use a connection previously opened by CALLJEE.</p>
+<div id="example-40" class="section level2">
+<h2>EXAMPLE</h2>
+<pre><code>INCLUDE JBC.h
+ACTIVATION = &#34;PRICE&#34;
+ADDINFO = &#34;PART.NUMBER=MC3815-3&#34;
+ERR.CODE = CALLJEE(ACTIVATION, ADDINFO)
+RESULT = ADDINFO</code></pre>
+<p>Error codes:</p>
+<table>
+<thead>
+<tr class="header">
+<th align="left">Code</th>
+<th align="left">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">0</td>
+<td align="left">Action completed successfully</td>
+</tr>
+<tr class="even">
+<td align="left">1</td>
+<td align="left">Communication error, this connection is no longer valid</td>
+</tr>
+<tr class="odd">
+<td align="left">2</td>
+<td align="left">Transaction error, the transaction is no longer valid</td>
+</tr>
+<tr class="even">
+<td align="left">101</td>
+<td align="left">Connect error, host not valid</td>
+</tr>
+<tr class="odd">
+<td align="left">102</td>
+<td align="left">Connect error, port not valid</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+
+
+
+</body></html>

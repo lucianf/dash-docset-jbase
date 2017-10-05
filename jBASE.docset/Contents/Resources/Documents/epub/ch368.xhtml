@@ -1,0 +1,86 @@
+<!--?xml version="1.0" encoding="UTF-8"?--><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+  <meta http-equiv="Content-Style-Type" content="text/css"/>
+  <meta name="generator" content="pandoc"/>
+  <title class="function">XLATE</title>
+  <link rel="stylesheet" type="text/css" href="stylesheet.css"/>
+</head>
+<body>
+<div id="xlate-function" class="section level1">
+<a class="dashingAutolink" name="autolink-367"></a><a class="dashAnchor" name="//apple_ref/cpp/Function/XLATE"></a><h1 class="function">XLATE</h1>
+<p>The XLATE function will return the data value of a field, given the name of the file, the record key, the field number, and an action code.</p>
+<div id="command-syntax-312" class="section level2">
+<h2>COMMAND SYNTAX</h2>
+<pre><code>XLATE([ DICT ] filename, key, field#, action.code)</code></pre>
+</div>
+<div id="syntax-elements-239" class="section level2">
+<h2>SYNTAX ELEMENTS</h2>
+<p>DICT is the literal string to be placed before the file name in the event it is desired to open the dictionary portion of the file, rather than the data portion.</p>
+<p>filename is a string containing the name of the file to be accessed. Note that it is the actual name of the file, and not a file unit variable. This function requires the file name, regardless of whether or not the file has been opened to a file unit variable.</p>
+<p>key is an expression that evaluates to the record key, or item ID, of the record from which data is to be accessed.</p>
+<p>field# is the field number to be retrieved from the record.</p>
+<p>action.code indicates the procedure if the field is null, or cannot find the if record. This is a literal. The valid codes are:</p>
+<table>
+<thead>
+<tr class="header">
+<th align="left">Code</th>
+<th align="left">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">X</td>
+<td align="left">Returns a null string. This is the default action.</td>
+</tr>
+<tr class="even">
+<td align="left">V</td>
+<td align="left">Prints an error message.</td>
+</tr>
+<tr class="odd">
+<td align="left">C</td>
+<td align="left">Returns the value of key.</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div id="notes-197" class="section level2">
+<h2>NOTES</h2>
+<p>If the field being accessed is a dynamic array, XLATE will return the array with the delimiter characters lowered by 1. For example, multivalue marks (ASCII-253) are returned as subvalue marks (ASCII-252), and subvalue marks are returned as text marks (ASCII-251). If you supply -1 for field#, it returns the entire record. The XLATE function is the same as the <a href="#TRANS">TRANS</a> function.</p>
+</div>
+<div id="example-207" class="section level2">
+<h2>EXAMPLE</h2>
+<p>Retrieval of a simple field: Given a file called &#34;VENDORS&#34; containing a record with the record key of &#34;12345&#34; and which contains the value of &#34;ABC Company&#34; in field 1,</p>
+<pre><code>VENDOR.ID = &#34;12345&#34;
+VENDOR.NAME = XLATE(&#39;VENDORS&#39;, VENDOR.ID, 1, &#39;X&#39;)
+CRT VENDOR.NAME</code></pre>
+<p>will display: ABC Company</p>
+<p>Retrieval of an array: Suppose field 6 of the VENDORS file contains a multivalued list of purchase order numbers, such as</p>
+<pre>    10011]10062]10079</pre>
+<p>use the XLATE function to retrieve it:</p>
+<pre><code>PO.LIST = XLATE(&#39;VENDORS&#39;, VENDOR.ID, 6, &#39;X&#39;)
+CRT PO.LIST</code></pre>
+<p>will display: 1001100620079</p>
+<p>Notice that the backslashes () were substituted for brackets (]), indicating that the delimiter is now CHAR(252).</p>
+<p>Retrieval of an entire dictionary item: Given a dictionary item called &#34;VENDOR.NAME&#34; with the following content:</p>
+<pre>    001 A
+    002 1
+    003 Vendor Name
+    004
+    005
+    006
+    007
+    008
+    009 L
+    010 30</pre>
+<p>these statements</p>
+<pre><code>DICT.ID = &#34;VENDOR.NAME&#34;
+DICT.REC = XLATE(&#39;DICT VENDORS&#39;, VENDOR.ID, -1, &#39;C&#39;)
+PRINT DICT.REC</code></pre>
+<p>will display</p>
+<pre>    A]1]Vendor Name]]]]]L]30</pre>
+</div>
+</div>
+
+
+
+</body></html>

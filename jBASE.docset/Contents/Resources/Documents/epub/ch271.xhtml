@@ -1,0 +1,43 @@
+<!--?xml version="1.0" encoding="UTF-8"?--><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+  <meta http-equiv="Content-Style-Type" content="text/css"/>
+  <meta name="generator" content="pandoc"/>
+  <title class="function">PWR</title>
+  <link rel="stylesheet" type="text/css" href="stylesheet.css"/>
+</head>
+<body>
+<div id="pwr-function" class="section level1">
+<a class="dashingAutolink" name="autolink-270"></a><a class="dashAnchor" name="//apple_ref/cpp/Function/PWR"></a><h1 class="function">PWR</h1>
+<p>PWR function raises a number to the n&#39;th power.</p>
+<div id="command-syntax-228" class="section level2">
+<h2>COMMAND SYNTAX</h2>
+<pre><code>PWR(expression1, expression2)</code></pre>
+<p>or</p>
+<pre><code>expression1 ^ expression2</code></pre>
+</div>
+<div id="syntax-elements-166" class="section level2">
+<h2>SYNTAX ELEMENTS</h2>
+<p>Both <strong>expression1</strong> and <strong>expression2</strong> should evaluate to numeric arguments. The function will return the value of expression1 raised to the value of expression2.</p>
+</div>
+<div id="note-17" class="section level2">
+<h2>NOTE</h2>
+<p>If expression1 is negative and expression2 is not an integer then a maths library error is displayed and the function returns the value 0. The resulting output is &#34;0.0nan&#34;.</p>
+<p>All calculations are performed at the maximum precision supported on the host machine and truncated to the compiled precision on completion.</p>
+</div>
+<div id="example-156" class="section level2">
+<h2>EXAMPLE</h2>
+<pre><code>      A = 2
+      B = 31
+      CRT &#34;2 GB is &#34; : A ^ B                   ;* 2 GB is 2147483648
+      CRT &#34;2 GB is definitely &#34; : PWR(A, B)    ;* 2 GB is definitely 2147483648
+      CRT &#34;-2 GB is &#34; : NEG(A)^B               ;* -2 GB is -2147483648
+      CRT &#34;2 to the power of 31.5 is &#34; : PWR(A, B+0.5)
+                                   ;* 2 to the power of 31.5 is 3037000499.9761
+      CRT &#34;-2 to the power of 31.5 is &#34; : PWR( NEG(A), B+0.5)
+                                   ;* -2 to the power of 31.5 is 0.0nan</code></pre>
+</div>
+</div>
+
+
+
+</body></html>

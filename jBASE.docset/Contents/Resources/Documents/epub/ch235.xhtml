@@ -1,0 +1,37 @@
+<!--?xml version="1.0" encoding="UTF-8"?--><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+  <meta http-equiv="Content-Style-Type" content="text/css"/>
+  <meta name="generator" content="pandoc"/>
+  <title class="function">NOT</title>
+  <link rel="stylesheet" type="text/css" href="stylesheet.css"/>
+</head>
+<body>
+<div id="not-function" class="section level1">
+<a class="dashingAutolink" name="autolink-234"></a><a class="dashAnchor" name="//apple_ref/cpp/Function/NOT"></a><h1 class="function">NOT</h1>
+<p>NOT function is used to invert the Boolean value of an expression. It is useful for explicitly testing for a false condition.</p>
+<div id="command-syntax-193" class="section level2">
+<h2>COMMAND SYNTAX</h2>
+<pre><code>NOT(expression)</code></pre>
+</div>
+<div id="syntax-elements-137" class="section level2">
+<h2>SYNTAX ELEMENTS</h2>
+<p><strong>expression</strong> may evaluate to any Boolean result.</p>
+</div>
+<div id="notes-117" class="section level2">
+<h2>NOTES</h2>
+<p>The NOT function will return Boolean TRUE if the expression returns a Boolean FALSE. It will return Boolean FALSE if the expression returns a Boolean TRUE.</p>
+<p>The NOT function is useful for explicitly testing for the false condition of some test and can clarify the logic of such a test.</p>
+</div>
+<div id="example-135" class="section level2">
+<h2>EXAMPLE</h2>
+<pre><code>EQU Sunday TO NOT( MOD( DATE(), 7))
+IF Sunday THEN
+   CRT &#34;It is Sunday!&#34;
+END</code></pre>
+<p>In this example, the expression MOD (DATE(),7) will return 0 (FALSE) if the day is Sunday and 1 to 6 (TRUE) for the other days. To explicitly test for the day Sunday we need to invert the result of the expression. By using the NOT function we return 1 (TRUE) if the day is Sunday and 0 (FALSE) for all other values of the expression.</p>
+</div>
+</div>
+
+
+
+</body></html>

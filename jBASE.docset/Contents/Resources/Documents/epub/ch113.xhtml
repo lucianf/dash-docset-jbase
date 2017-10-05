@@ -1,0 +1,84 @@
+<!--?xml version="1.0" encoding="UTF-8"?--><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+  <meta http-equiv="Content-Style-Type" content="text/css"/>
+  <meta name="generator" content="pandoc"/>
+  <title class="statement">DELETE</title>
+  <link rel="stylesheet" type="text/css" href="stylesheet.css"/>
+</head>
+<body>
+<div id="delete-statement" class="section level1">
+<a class="dashingAutolink" name="autolink-112"></a><a class="dashAnchor" name="//apple_ref/cpp/Method/DELETE"></a><h1 class="statement">DELETE</h1>
+<p>Use the DELETE statement to delete a record from a jBASE file.</p>
+<div id="command-syntax-76" class="section level2">
+<h2>COMMAND SYNTAX</h2>
+<pre><code>DELETE {variable,} expression { SETTING setvar } { ON ERROR statements }</code></pre>
+</div>
+<div id="syntax-elements-44" class="section level2">
+<h2>SYNTAX ELEMENTS</h2>
+<p>If specified, variable should have been the subject of a previous OPEN statement. If variable is omitted then it assumes the default file variable.</p>
+<p>The expression should evaluate to the name of a record stored in the open file.</p>
+<p>If the SETTING clause is specified and the delete fails, it sets setvar to one of the following values:</p>
+</div>
+<div id="incremental-file-errors-1" class="section level2">
+<h2>INCREMENTAL FILE ERRORS</h2>
+<table>
+<thead>
+<tr class="header">
+<th align="left">Code</th>
+<th align="left">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">128</td>
+<td align="left">No such file or directory</td>
+</tr>
+<tr class="even">
+<td align="left">4096</td>
+<td align="left">Network error</td>
+</tr>
+<tr class="odd">
+<td align="left">24576</td>
+<td align="left">Permission denied</td>
+</tr>
+<tr class="even">
+<td align="left">32768</td>
+<td align="left">Physical I/O error or unknown error</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div id="notes-49" class="section level2">
+<h2>NOTES</h2>
+<p>The statement will have no effect if the record name does not exist within the file.</p>
+<p>If the program against the file record was holding a lock, it will release the lock.</p>
+</div>
+<div id="example-69" class="section level2">
+<h2>EXAMPLE</h2>
+<pre><code>   EXECUTE &#39;DELETE-FILE DATA F.TEMP&#39;
+   EXECUTE &#39;CREATE-FILE DATA F.TEMP 1 101 TYPE=J4&#39;
+   OPEN &#39;F.TEMP&#39; TO F.TEMP ELSE ABORT 201, &#39;F.TEMP&#39;
+   V.REC.INIT = &#39;LINE 1&#39; :@FM: &#39;LINE 2&#39; :@FM: &#39;LINE 3&#39;
+   WRITE V.REC.INIT TO F.TEMP, &#39;REC1&#39;
+   WRITE V.REC.INIT TO F.TEMP, &#39;REC2&#39;
+   WRITE V.REC.INIT TO F.TEMP, &#39;REC3&#39;
+   DELETE F.TEMP, &#39;REC2&#39; ON ERROR
+      CRT &#39;DELETE ERROR&#39;
+      STOP
+   END
+* &#34;ON ERROR&#34; part isn&#39;t triggered if a record doesn&#39;t exist
+   DELETE F.TEMP, &#39;REC5&#39; SETTING V.RET.CODE ON ERROR
+      CRT &#39;REC5 - DELETE ERROR&#39;
+   END
+   CLOSE F.TEMP
+   EXECUTE &#39;LIST ONLY F.TEMP&#39;</code></pre>
+<p>Output:</p>
+<pre>    REC1
+    REC3
+     2 Records Listed</pre>
+</div>
+</div>
+
+
+
+</body></html>

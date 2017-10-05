@@ -1,0 +1,50 @@
+<!--?xml version="1.0" encoding="UTF-8"?--><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+  <meta http-equiv="Content-Style-Type" content="text/css"/>
+  <meta name="generator" content="pandoc"/>
+  <title class="function">FOLD</title>
+  <link rel="stylesheet" type="text/css" href="stylesheet.css"/>
+</head>
+<body>
+<div id="fold-function" class="section level1">
+<a class="dashingAutolink" name="autolink-148"></a><a class="dashAnchor" name="//apple_ref/cpp/Function/FOLD"></a><h1 class="function">FOLD</h1>
+<p>The FOLD function re-delimits a string by replacing spaces with attribute marks at positions defined by a length parameter.</p>
+<div id="command-syntax-110" class="section level2">
+<h2>COMMAND SYNTAX</h2>
+<pre><code>FOLD(expression1, expression2)</code></pre>
+</div>
+<div id="syntax-elements-70" class="section level2">
+<h2>SYNTAX ELEMENTS</h2>
+<p><strong>expression1</strong> evaluates a string to be re-delimited.</p>
+<p><strong>expression2</strong> evaluates to a positive integer that represents the maximum number of characters between delimiters in the resultant string.</p>
+</div>
+<div id="notes-69" class="section level2">
+<h2>NOTES</h2>
+<p>The FOLD function creates a number of sub-strings such that the length of each sub-string does not exceed the length value in expression2. It converts spaces to attribute marks except when enclosed in sub-strings and removes extraneous spaces.</p>
+</div>
+<div id="examples-24" class="section level2">
+<h2>EXAMPLES</h2>
+<p>The following examples show how the FOLD function delimits text based on the length parameter. The underscores represent attribute marks.</p>
+<pre><code>q = &#34;Smoking is one of the leading causes of statistics&#34;
+CRT OCONV( FOLD(q, 7), &#39;MCP&#39; )</code></pre>
+Output:
+<pre>    Smoking^is one^of the^leading^causes^of^statist^ics</pre>
+<pre><code>q = &#34;Hello world&#34;
+CRT OCONV( FOLD(q, 5), &#39;MCP&#39; )</code></pre>
+Output:
+<pre>    Hello^world</pre>
+<pre><code>q = &#34;Let this be a reminder to you all&#34; \
+    : &#34; that this organization will not tolerate failure.&#34;
+CRT OCONV( FOLD(q, 30), &#39;MCP&#39;)</code></pre>
+<p>Output:</p>
+<pre>Let this be a reminder to you^all that this organization^will not tolerate failure.</pre>
+<pre><code>q = &#34;the end&#34;
+CRT OCONV( FOLD(q, 0), &#39;MCP&#39; )</code></pre>
+Output:
+<pre>    t^h^e^e^n^d</pre>
+</div>
+</div>
+
+
+
+</body></html>

@@ -1,0 +1,43 @@
+<!--?xml version="1.0" encoding="UTF-8"?--><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+  <meta http-equiv="Content-Style-Type" content="text/css"/>
+  <meta name="generator" content="pandoc"/>
+  <title class="statement">ECHO</title>
+  <link rel="stylesheet" type="text/css" href="stylesheet.css"/>
+</head>
+<body>
+<div id="echo-statement" class="section level1">
+<a class="dashingAutolink" name="autolink-125"></a><a class="dashAnchor" name="//apple_ref/cpp/Method/ECHO"></a><h1 class="statement">ECHO</h1>
+<p>The ECHO statement will turn on or off the echoing of characters typed at the keyboard.</p>
+<div id="command-syntax-88" class="section level2">
+<h2>COMMAND SYNTAX</h2>
+<pre><code>ECHO ON
+
+ECHO OFF
+
+ECHO expression</code></pre>
+</div>
+<div id="syntax-elements-53" class="section level2">
+<h2>SYNTAX ELEMENTS</h2>
+<p>Use the statement with the keywords ON and OFF to specify echoing or not. If used with an expression, then the expression should evaluate to a Boolean TRUE or FALSE result.</p>
+<p>TRUE: echoing on</p>
+<p>FALSE: echoing off.</p>
+</div>
+<div id="notes-54" class="section level2">
+<h2>NOTES</h2>
+<p>Use the SYSTEM function to determine the current state of character echoing. SYSTEM(24) returns Boolean TRUE if enabled and returns Boolean FALSE if disabled.</p>
+</div>
+<div id="examples-14" class="section level2">
+<h2>EXAMPLES</h2>
+<pre><code>ECHO OFF
+CRT &#34;Enter your password &#34; :
+INPUT Password
+ECHO ON
+.....</code></pre>
+<p>This will disable the character input echoing while typing in a password.</p>
+</div>
+</div>
+
+
+
+</body></html>

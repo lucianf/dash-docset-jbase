@@ -1,0 +1,41 @@
+<!--?xml version="1.0" encoding="UTF-8"?--><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+  <meta http-equiv="Content-Style-Type" content="text/css"/>
+  <meta name="generator" content="pandoc"/>
+  <title class="statement">ENTER</title>
+  <link rel="stylesheet" type="text/css" href="stylesheet.css"/>
+</head>
+<body>
+<div id="enter-statement" class="section level1">
+<a class="dashingAutolink" name="autolink-127"></a><a class="dashAnchor" name="//apple_ref/cpp/Method/ENTER"></a><h1 class="statement">ENTER</h1>
+<p>The ENTER statement unconditionally passes control to another executable program.</p>
+<div id="command-syntax-90" class="section level2">
+<h2>COMMAND SYNTAX</h2>
+<pre><code>ENTER program_name
+
+ENTER @variable_name</code></pre>
+</div>
+<div id="syntax-elements-55" class="section level2">
+<h2>SYNTAX ELEMENTS</h2>
+<p><strong>program_name</strong> is the name of the program for execution. The use of single or double quotes to surround program_name is optional.</p>
+<p>@ specifies that the program name is contained in a named variable.</p>
+<p><strong>variable_name</strong> is the name of the variable, which contains the program name.</p>
+</div>
+<div id="notes-57" class="section level2">
+<h2>NOTES</h2>
+<p>The jBC COMMON data area can be passed to another jBC program by specifying the option &#34;I&#34; after the program name. Pass the COMMON data area only to another jBC program.</p>
+<p>Use ENTER to execute any type of program.</p>
+<p>If the program which contains the ENTER command (the current program) was called from a JCL program, and the program for execution (the target program) is another jBC program, control will return to the original JCL program when the target program terminates. If the target program is a JCL program, control will return to the command shell when the JCL program terminates.</p>
+</div>
+<div id="examples-16" class="section level2">
+<h2>EXAMPLES</h2>
+<pre><code>ENTER &#34;menu&#34;
+
+ProgName = &#34;UPDATE&#34;
+ENTER @ProgName</code></pre>
+</div>
+</div>
+
+
+
+</body></html>

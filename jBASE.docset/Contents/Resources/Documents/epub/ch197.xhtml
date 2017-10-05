@@ -1,0 +1,38 @@
+<!--?xml version="1.0" encoding="UTF-8"?--><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+  <meta http-equiv="Content-Style-Type" content="text/css"/>
+  <meta name="generator" content="pandoc"/>
+  <title class="function">JQLFETCH</title>
+  <link rel="stylesheet" type="text/css" href="stylesheet.css"/>
+</head>
+<body>
+<div id="jqlfetch-function" class="section level1">
+<a class="dashingAutolink" name="autolink-196"></a><a class="dashAnchor" name="//apple_ref/cpp/Function/JQLFETCH"></a><h1 class="function">JQLFETCH</h1>
+<p>JQLFETCH is used to fetch the next result in a compiled jQL statement.</p>
+<div id="command-syntax-156" class="section level2">
+<h2>COMMAND SYNTAX</h2>
+<pre><code>JQLFETCH(Statement, ControlVar, DataVar)</code></pre>
+</div>
+<div id="syntax-elements-108" class="section level2">
+<h2>SYNTAX ELEMENTS</h2>
+<p><strong>Statement</strong> is the result of a valid call to JQLCOMPILE(), followed by a valid call to JQLEXECUTE().</p>
+<p><strong>ControlVar</strong> will receive the &#39;control break&#39; elements of any query. For example, if there are BREAK values in the statement, described here is the the format of ControlVar is:</p>
+<pre>    Attr 1  Level: 0 means detail line 1 - 25 for the control breaks, the same as the
+            A correlative NB.
+    Attr 2  Item ID
+    Attr 3  Break control Value is 1 if a blank line should be output first.
+    Attr 4  Pre-break value for &#39;B&#39; option in header
+    Attr 5  Post-break value for &#39;B&#39; option in header</pre>
+<p><strong>DataVar</strong> will receive the actual screen data on a LIST statement for instance. The format is one attribute per column.</p>
+<p>Applies Attribute 7 Conversions (or attribute 3 in Prime-style DICTS) to the data.</p>
+<p>If the property STMT_PROPERTY_FORMAT is set then each attribute is also formatted according to the width and justification of the attribute definition and any override caused by the use of FMT, of DISPLAY. LIKE on the command line.</p>
+</div>
+<div id="notes-92" class="section level2">
+<h2>NOTES</h2>
+<p>Column headers may also affect the formatting for that column. This function is called until there is no more output (multiple).</p>
+</div>
+</div>
+
+
+
+</body></html>

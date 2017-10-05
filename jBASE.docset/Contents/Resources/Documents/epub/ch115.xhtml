@@ -1,0 +1,49 @@
+<!--?xml version="1.0" encoding="UTF-8"?--><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+  <meta http-equiv="Content-Style-Type" content="text/css"/>
+  <meta name="generator" content="pandoc"/>
+  <title class="statement">DELETESEQ</title>
+  <link rel="stylesheet" type="text/css" href="stylesheet.css"/>
+</head>
+<body>
+<div id="deleteseq-statement" class="section level1">
+<a class="dashingAutolink" name="autolink-114"></a><a class="dashAnchor" name="//apple_ref/cpp/Method/DELETESEQ"></a><h1 class="statement">DELETESEQ</h1>
+<p>DELETESEQ deletes a sequential file.</p>
+<div id="command-syntax-78" class="section level2">
+<h2>COMMAND SYNTAX</h2>
+<pre><code>DELETESEQ Expression, Filename { SETTING setvar } { ON ERROR statements } \
+{ LOCKED statements } THEN | ELSE statements</code></pre>
+</div>
+<div id="syntax-elements-46" class="section level2">
+<h2>SYNTAX ELEMENTS</h2>
+<p><strong>Expression</strong> specifies the location of sequential file.</p>
+<p><strong>Filename</strong> specifies the sequential file name.</p>
+<p><strong>Statements</strong> conditional jBC statements</p>
+</div>
+<div id="example-71" class="section level2">
+<h2>EXAMPLE</h2>
+<p>Has to be put into file <em>test.b</em>.</p>
+<pre><code>   EXECUTE &#39;COPY FROM . test.b,temp.txt OVERWRITING&#39;
+   *
+   OPENSEQ &#39;.&#39;, &#39;temp.txt&#39; TO temp_file ELSE
+      CRT &#39;Failed to open temporary file&#39;
+      STOP
+   END
+   *
+   READSEQ first_line FROM temp_file ELSE
+      CRT &#39;Failed to read temporary file&#39;
+      STOP
+   END
+   *
+   CRT first_line        ;* EXECUTE &#39;COPY FROM . test.b,temp.txt OVERWRITING&#39;
+   CLOSESEQ temp_file
+   CRT DIR(&#39;temp.txt&#39;)&lt;1&gt;           ;* e.g. 540 - size of file
+   *
+   DELETESEQ &#39;.&#39;, &#39;temp.txt&#39; ELSE NULL
+   CRT &#39;&lt;&#39; : DIR(&#39;temp.txt&#39;)&lt;1&gt; : &#39;&gt;&#39;          ;* &lt;&gt;</code></pre>
+</div>
+</div>
+
+
+
+</body></html>

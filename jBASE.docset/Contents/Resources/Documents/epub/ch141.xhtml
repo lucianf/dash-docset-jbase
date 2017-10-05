@@ -1,0 +1,45 @@
+<!--?xml version="1.0" encoding="UTF-8"?--><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+  <meta http-equiv="Content-Style-Type" content="text/css"/>
+  <meta name="generator" content="pandoc"/>
+  <title class="statement">FILELOCK</title>
+  <link rel="stylesheet" type="text/css" href="stylesheet.css"/>
+</head>
+<body>
+<div id="filelock-statement" class="section level1">
+<a class="dashingAutolink" name="autolink-140"></a><a class="dashAnchor" name="//apple_ref/cpp/Method/FILELOCK"></a><h1 class="statement">FILELOCK</h1>
+<p>Use the FILELOCK statement to acquire a lock on an entire file. This prevents other users from updating the file until the program releases it. A FILELOCK statement that does not specify lock.type is equivalent to obtaining an update record lock on every record of the file. An open file is specified by file.variable. If no file.variable is specified, the default file is assumed; if the file is neither accessible nor open, the program enters the debugger.</p>
+<div id="command-syntax-103" class="section level2">
+<h2>COMMAND SYNTAX</h2>
+<pre><code>FILELOCK filevar { LOCKED statements } { ON ERROR statements }
+
+FILEUNLOCK filevar { ON ERROR statements }</code></pre>
+</div>
+<div id="description-4" class="section level2">
+<h2>DESCRIPTION</h2>
+<p>When the FILELOCK statement is executed, it will attempt to take an exclusive lock on the entire file. If there are any locks currently outstanding on the file, then the statement will block until there are no more locks on the file. The use of the LOCKED clause allows the application to perform an unblocked operation.</p>
+<p>When the FILELOCK statement is blocked waiting for a lock, other processes may continue to perform database operations on that file, including the removal of record locks and the taking of record locks. Once the FILELOCK is taken, it will block ALL database accesses to the file whether or not the access involves record locks. i.e. a READ will block once it has been executed, as will, CLEARFILE etc,. The lock continues until the file is closed, the program terminates, or a FILEUNLOCK statement is executed.</p>
+<p>NOTE: The FILELOCK statement might differ to those found on other vendors systems. You should also not that the use of these statements for other than administration work, for example, within batch jobs, is not recommended. The replacement of such with more judicious use of item locks is advised.</p>
+<p><strong>IMPLEMENTATION NOTES</strong></p>
+<p>The FILELOCK command is implemented using the native locking mechanism of the operating system and is entirely at its mercy. Because of this, you may see some slight implementation differences between operating systems. These comments on native locking do not apply to the NT platform as TAFC uses the NT locking mechanism.</p>
+<p>The uses of the native (UNIX) locking mechanism means the file in question MUST NOT use the jBASE locking mechanism. You can set a file to use the native locking mechanism by using the jchmod command:</p>
+<p>jchmod +N filename {filename ...}</p>
+<p>Alternatively, like this when the file is originally created:</p>
+<pre>    CREATE-FILE filename 1,1 23,1 NETWORK=TRUE</pre>
+<p>If the file continues to use the jBASE record locking, then the ON ERROR clause will be taken and the SYSTEM(0) and <a href="#STATUS">STATUS</a> functions will set to 22 to indicate the error.</p>
+</div>
+<div id="examples-22" class="section level2">
+<h2>EXAMPLES</h2>
+<pre><code>OPEN &#39;&#39;,&#39;SLIPPERS&#39; TO FILEVAR ELSE STOP &#34;CAN&#39;T OPEN FILE&#34;
+FILELOCK FILEVAR LOCKED STOP &#39;FILE IS ALREADY LOCKED&#39;
+FILEUNLOCK DATA
+OPEN &#39;&#39;,&#39;SLIPPERS&#39; ELSE STOP &#34;CAN&#39;T OPEN FILE&#34;
+FILELOCK LOCKED STOP &#39;FILE IS ALREADY LOCKED&#39;
+PRINT &#34;The file is locked.&#34;
+FILEUNLOCK</code></pre>
+</div>
+</div>
+
+
+
+</body></html>

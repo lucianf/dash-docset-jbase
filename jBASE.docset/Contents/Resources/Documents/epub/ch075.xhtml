@@ -1,0 +1,46 @@
+<!--?xml version="1.0" encoding="UTF-8"?--><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+  <meta http-equiv="Content-Style-Type" content="text/css"/>
+  <meta name="generator" content="pandoc"/>
+  <title class="function">CATS</title>
+  <link rel="stylesheet" type="text/css" href="stylesheet.css"/>
+</head>
+<body>
+<div id="cats-function" class="section level1">
+<a class="dashingAutolink" name="autolink-74"></a><a class="dashAnchor" name="//apple_ref/cpp/Function/CATS"></a><h1 class="function">CATS</h1>
+<p>The CATS function concatenates the corresponding elements in two dynamic arrays.</p>
+<div id="command-syntax-39" class="section level2">
+<h2>COMMAND SYNTAX</h2>
+<pre><code>CATS(DynArr1, DynArr2)</code></pre>
+</div>
+<div id="syntax-elements-17" class="section level2">
+<h2>SYNTAX ELEMENTS</h2>
+<p>DynArr1 and DynArr2 represent dynamic arrays.</p>
+</div>
+<div id="notes-25" class="section level2">
+<h2>NOTES</h2>
+<p>If one dynamic array supplied to the CATS function is null then the result of the CATS function is the non-null dynamic array.</p>
+</div>
+<div id="examples-3" class="section level2">
+<h2>EXAMPLES</h2>
+<!--jBC-->
+<pre><code>* Same array structure -------------
+   an_array =   &#34;a&#34; : @VM : &#34;b&#34; : @VM : &#34;c&#34;
+   another_array = 1 : @VM : 2 : @VM : 3
+   GOSUB DO.PROCEED                                     ;*   a1]b2]c3
+* Different array structure -------------
+   an_array =      &#34;a&#34; : @SM : &#34;b&#34; : @VM : &#34;c&#34; : @VM : &#34;d&#34;
+   another_array = &#34;x&#34; : @VM : &#34;y&#34; : @SM : &#34;z&#34;
+   GOSUB DO.PROCEED                                     ;*   ax\b]cy\z]d
+   STOP
+*-------------
+DO.PROCEED:
+   the_result = CATS(an_array, another_array)
+   CRT OCONV(the_result, &#39;MCP&#39;)
+   RETURN</code></pre>
+</div>
+</div>
+
+
+
+</body></html>

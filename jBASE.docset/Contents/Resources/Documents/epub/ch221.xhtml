@@ -1,0 +1,86 @@
+<!--?xml version="1.0" encoding="UTF-8"?--><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+  <meta http-equiv="Content-Style-Type" content="text/css"/>
+  <meta name="generator" content="pandoc"/>
+  <title class="statement">MATREAD</title>
+  <link rel="stylesheet" type="text/css" href="stylesheet.css"/>
+</head>
+<body>
+<div id="matread-statement" class="section level1">
+<a class="dashingAutolink" name="autolink-220"></a><a class="dashAnchor" name="//apple_ref/cpp/Method/MATREAD"></a><h1 class="statement">MATREAD</h1>
+<p>The MATREAD statement allows a record stored in a jBASE file to be read and mapped directly into a dimensioned array.</p>
+<div id="command-syntax-180" class="section level2">
+<h2>COMMAND SYNTAX</h2>
+<pre><code>MATREAD array FROM {variable1,} expression { SETTING setvar } \
+        { ON ERROR statements } \
+        { LOCKED statements} { THEN | ELSE statements}</code></pre>
+</div>
+<div id="syntax-elements-129" class="section level2">
+<h2>SYNTAX ELEMENTS</h2>
+<p><strong>array</strong> should be a previously dimensioned array, which will be used to store the record to be read. If specified,</p>
+<p><strong>variable1</strong> should be a jBC variable that has previously been opened to a file using the OPEN statement. If variable1 is not specified then the default file is assumed. The expression should evaluate to a valid record key for the file.</p>
+<p>If no record is found and the record could be read from the file then it is mapped into the array and executes the THEN statements (if any). If the record cannot be read from the file then array is unchanged and executes the ELSE statements (if any).</p>
+<p>If the record could not be read because another process already had a lock on the record then any one of the two actions is taken. If the LOCKED clause was specified in the statement then the statements dependent on it are executed. If no LOCKED clause was specified then the statement blocks (hangs) until the other process releases the lock. If a LOCKED clause is used and the read is successful, a lock will be set.</p>
+<p>If the SETTING clause is specified, setvar will be set to the number of fields in the record on a successful read. If the read fails, setvar will be set to one of the following values:</p>
+</div>
+<div id="incremental-file-errors-2" class="section level2">
+<h2>INCREMENTAL FILE ERRORS</h2>
+<table>
+<thead>
+<tr class="header">
+<th align="left">Code</th>
+<th align="left">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">128</td>
+<td align="left">No such file or directory</td>
+</tr>
+<tr class="even">
+<td align="left">4096</td>
+<td align="left">Network error</td>
+</tr>
+<tr class="odd">
+<td align="left">24576</td>
+<td align="left">Permission denied</td>
+</tr>
+<tr class="even">
+<td align="left">32768</td>
+<td align="left">Physical I/O error or unknown error</td>
+</tr>
+</tbody>
+</table>
+<p>If ON ERROR is specified, it executes the statements following the ON ERROR clause for any of the above Incremental File Errors except error 128.</p>
+</div>
+<div id="notes-109" class="section level2">
+<h2>NOTES</h2>
+<p>The record is mapped into the array using a predefined algorithm. The record is expected to consist of a number of field separated records, which are then assigned one at a time to each successive element of the matrix.</p>
+<p>See the NOTES on matrix organization earlier in this section for details of multi dimensional arrays.</p>
+<p>If there are more fields in the record than elements in the array, then the final element of the array will be assigned all remaining fields. If there were fewer fields in the record than elements in the array then the remaining array elements will be assigned a null value.</p>
+<p>If multi-values are read into an array element they will then be referenced individually as:</p>
+<pre><code>  Array(n)&lt;1,m&gt;</code></pre>
+<p>not</p>
+<pre><code>  Array(n)&lt;m&gt;</code></pre>
+</div>
+<div id="examples-39" class="section level2">
+<h2>EXAMPLES</h2>
+<pre><code>MATREAD Xref FROM CFile, &#34;XREF&#34; ELSE MAT Xref = &#39;&#39;
+
+MATREAD Ind FROM IFile, &#34;INDEX&#34; ELSE MAT Ind = 0
+
+MATREAD record FROM filevar, id SETTING val ON ERROR
+PRINT &#34;Error number &#34; :val: &#34; occurred which prevented record from being read.&#34;
+   STOP
+END THEN
+   PRINT &#39;Record read successfully&#39;
+END ELSE
+   PRINT &#39;Record not on file&#39;
+END
+PRINT &#34;Number of attributes in record = &#34; : val</code></pre>
+</div>
+</div>
+
+
+
+</body></html>

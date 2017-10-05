@@ -1,0 +1,74 @@
+<!--?xml version="1.0" encoding="UTF-8"?--><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+  <meta http-equiv="Content-Style-Type" content="text/css"/>
+  <meta name="generator" content="pandoc"/>
+  <title class="statement">OPENSEQ</title>
+  <link rel="stylesheet" type="text/css" href="stylesheet.css"/>
+</head>
+<body>
+<div id="openseq-statement" class="section level1">
+<a class="dashingAutolink" name="autolink-247"></a><a class="dashAnchor" name="//apple_ref/cpp/Method/OPENSEQ"></a><h1 class="statement">OPENSEQ</h1>
+<p>OPENSEQ is used to open a file for sequential writing and/or reading.</p>
+<div id="command-syntax-206" class="section level2">
+<h2>COMMAND SYNTAX</h2>
+<pre><code>OPENSEQ Path{,File} {READONLY} TO FileVar { LOCKED statements }  \
+        THEN | ELSE statements</code></pre>
+</div>
+<div id="syntax-elements-147" class="section level2">
+<h2>SYNTAX ELEMENTS</h2>
+<p><strong>Path</strong> specifies the relative or absolute path of the target directory or file.</p>
+<p><strong>File</strong> specifies additional path information of the target file.</p>
+<p><strong>FileVar</strong> contains the file descriptor of the file when the open was successful.</p>
+<p><strong>Statements</strong> are conditional jBC statements.</p>
+</div>
+<div id="notes-126" class="section level2">
+<h2>NOTES</h2>
+<p>If the file does not exist or cannot be opened it then executes the ELSE clause. However, if JBASICEMULATE is set for Sequoia (use value &#34;seq&#34;) emulation then OPENSEQ will create the file if it does not exist. This behavior can also be achieved by specifying &#34;openseq_creates = true&#34; in Config_EMULATE for the emulation being used. Once open a lock is taken on the file. If the lock cannot be taken then the LOCKED clause is executed if it exists otherwise the ELSE clause is executed. If specified the READONLY process takes a read lock on the file, otherwise it takes a write lock. The specified file can be a regular, pipe or special device file. Locks are only taken on regular file types. Once open the file pointer is set to the first line of sequential data.</p>
+</div>
+<div id="example-1-6" class="section level2">
+<h2>EXAMPLE 1</h2>
+<p>Create a flat file and write to it. If file already exists - append data to it:</p>
+<pre><code>   V.DIR.OUT = &#39;.&#39;
+   V.FILE.OUT = &#39;report.txt&#39;
+   OPENSEQ V.DIR.OUT, V.FILE.OUT TO F.FILE.OUT THEN
+      SEEK F.FILE.OUT, 0, 2 ELSE  ;* go to the end
+         CRT &#39;Seek error&#39;
+         STOP
+      END
+      WRITESEQ &#39;One more line&#39; TO F.FILE.OUT ELSE
+         CRT &#39;Write error&#39;
+         STOP
+      END
+   END ELSE
+      WRITESEQ &#39;Line 1&#39; TO F.FILE.OUT ELSE
+         CRT &#39;Write error&#39;
+         STOP
+      END
+   END</code></pre>
+</div>
+<div id="example-2-10" class="section level2">
+<h2>EXAMPLE 2</h2>
+<p>Run the previous example several times, then - this one (flat file will be read and proceeded line-by-line):</p>
+<pre><code>   V.DIR.IN = &#39;.&#39;
+   V.FILE.IN = &#39;report.txt&#39;
+   OPENSEQ V.DIR.IN, V.FILE.IN TO F.FILE.IN ELSE
+      CRT &#39;Failed to open&#39;, V.FILE.IN
+      STOP
+   END
+   V.LINE.NO = 0
+   LOOP
+      READSEQ V.LINE FROM F.FILE.IN ELSE BREAK
+      V.LINE.NO ++
+      CRT &#39;[&#39; : V.LINE.NO : &#39;]&#39; : V.LINE
+   REPEAT</code></pre>
+<p>Output will look like:</p>
+<pre>    [1]Line 1
+    [2]One more line
+    [3]One more line
+    ...</pre>
+</div>
+</div>
+
+
+
+</body></html>

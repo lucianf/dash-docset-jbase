@@ -1,0 +1,37 @@
+<!--?xml version="1.0" encoding="UTF-8"?--><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+  <meta http-equiv="Content-Style-Type" content="text/css"/>
+  <meta name="generator" content="pandoc"/>
+  <title class="statement">LOCK</title>
+  <link rel="stylesheet" type="text/css" href="stylesheet.css"/>
+</head>
+<body>
+<div id="lock-statement" class="section level1">
+<a class="dashingAutolink" name="autolink-210"></a><a class="dashAnchor" name="//apple_ref/cpp/Method/LOCK"></a><h1 class="statement">LOCK</h1>
+<p>LOCK statement is used to set an execution lock thus preventing any other jBC program to wait until this program has released it.</p>
+<div id="command-syntax-170" class="section level2">
+<h2>COMMAND SYNTAX</h2>
+<pre><code>LOCK expression { THEN | ELSE statements}</code></pre>
+</div>
+<div id="syntax-elements-119" class="section level2">
+<h2>SYNTAX ELEMENTS</h2>
+<p>The expression should evaluate to a numeric value between 0 and 255 (63 in R83 import mode).</p>
+<p>The statement will execute the THEN clause (if defined) providing the lock could be taken. If another program holds the LOCK and an ELSE clause is provided then the statements defined by the ELSE clause are executed. If no ELSE clause was provided with the statement then it will block (hang) until the other program has released the lock.</p>
+</div>
+<div id="notes-101" class="section level2">
+<h2>NOTES</h2>
+<p>See also: <a href="#UNLOCK">UNLOCK</a></p>
+<p>If you use the environment variable JBCEMULATE set to r83, to compile the program the number of execution locks is limited to 64. If an execution lock greater than this number is specified, then the actual lock taken is the specified number modulo 64.</p>
+</div>
+<div id="examples-35" class="section level2">
+<h2>EXAMPLES</h2>
+<pre><code>LOCK 32 ELSE
+    CRT &#34;This program is already executing!&#34;
+STOP
+END</code></pre>
+</div>
+</div>
+
+
+
+</body></html>

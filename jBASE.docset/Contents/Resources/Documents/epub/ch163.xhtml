@@ -1,0 +1,38 @@
+<!--?xml version="1.0" encoding="UTF-8"?--><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+  <meta http-equiv="Content-Style-Type" content="text/css"/>
+  <meta name="generator" content="pandoc"/>
+  <title class="function">GROUP</title>
+  <link rel="stylesheet" type="text/css" href="stylesheet.css"/>
+</head>
+<body>
+<div id="group-function" class="section level1">
+<a class="dashingAutolink" name="autolink-162"></a><a class="dashAnchor" name="//apple_ref/cpp/Function/GROUP"></a><h1 class="function">GROUP</h1>
+<p>The GROUP function is equivalent to the FIELD function.</p>
+<div id="command-syntax-124" class="section level2">
+<h2>COMMAND SYNTAX</h2>
+<pre><code>GROUP(Expression1, Expression2, Expression3, Expression4)</code></pre>
+</div>
+<div id="syntax-elements-83" class="section level2">
+<h2>SYNTAX ELEMENTS</h2>
+<p><strong>Expression1</strong> evaluates to the string containing fields to be extracted.</p>
+<p><strong>Expression2</strong> evaluates to the character(s) delimiting each field within Expression1.</p>
+<p><strong>Expression3</strong> should evaluate to a numeric value specifying the number of the first field to extract from Expression1.</p>
+<p><strong>Expression4</strong> evaluates to a numeric value specifying the number of fields to extract as a group.</p>
+</div>
+<div id="notes-79" class="section level2">
+<h2>NOTES</h2>
+<p>Expression2 may evaluate to more than a single character allowing fields to be delimited with complex expressions.</p>
+</div>
+<div id="examples-28" class="section level2">
+<h2>EXAMPLES</h2>
+<pre><code>A = &#34;123:-456:-789:-987:-&#34;
+CRT GROUP(A, &#39;:-&#39;, 2, 2)</code></pre>
+<p>This example displays the following on the terminal (being the second and third fields and their delimiter within variable A):</p>
+<pre>    456:-789</pre>
+</div>
+</div>
+
+
+
+</body></html>

@@ -1,0 +1,41 @@
+<!--?xml version="1.0" encoding="UTF-8"?--><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+  <meta http-equiv="Content-Style-Type" content="text/css"/>
+  <meta name="generator" content="pandoc"/>
+  <title class="statement">MATBUILD</title>
+  <link rel="stylesheet" type="text/css" href="stylesheet.css"/>
+</head>
+<body>
+<div id="matbuild-statement" class="section level1">
+<a class="dashingAutolink" name="autolink-216"></a><a class="dashAnchor" name="//apple_ref/cpp/Method/MATBUILD"></a><h1 class="statement">MATBUILD</h1>
+<p>This statement is used to create a dynamic array out of a dimensioned array.</p>
+<div id="command-syntax-176" class="section level2">
+<h2>COMMAND SYNTAX</h2>
+<pre><code>MATBUILD variable FROM array{, expression1{, expression2}} { USING expression3}</code></pre>
+</div>
+<div id="syntax-elements-125" class="section level2">
+<h2>SYNTAX ELEMENTS</h2>
+<p><strong>variable</strong> is the jBC variable into which the created dynamic array will be stored. Array is a previously dimensioned and assigned matrix from which the dynamic array will be created.</p>
+<p><strong>expression1</strong> and <strong>expression2</strong> should evaluate to numeric integers. expression1 specifies the array element from which the extraction starts; expression2 specifies the array element on which the extraction ends (inclusive).</p>
+<p>By default, each array element is separated in the dynamic array by a field mark. By specifying <strong>expression3</strong>, the separator character can be changed. If expression3 evaluates to more than a single character, only the first character of the string is used.</p>
+</div>
+<div id="notes-105" class="section level2">
+<h2>NOTES</h2>
+<p>When specifying extraction starting and ending positions with multi-dimensional arrays, it is necessary to expand the matrix into its total number of variables for calculating the correct element number. See the information about dimensioned arrays earlier in this chapter for detailed instructions on calculating element numbers.</p>
+</div>
+<div id="example-131" class="section level2">
+<h2>EXAMPLE</h2>
+<pre><code>   DIM A(40)
+   MAT A = &#39;VALUE &#39;
+   FOR V.I = 1 TO 40
+       A(V.I) := V.I
+   NEXT V.I
+   MATBUILD Dynamic FROM A, 3, 7 USING &#34;:&#34;
+   CRT Dynamic               ;* VALUE 3:VALUE 4:VALUE 5:VALUE 6:VALUE 7</code></pre>
+<p>Builds a 5 element string separated by &#34;:&#34; character. &#34;MATBUILD Dynamic FROM A&#34; builds a field mark separated dynamic array from every element contained in the matrix A.</p>
+</div>
+</div>
+
+
+
+</body></html>

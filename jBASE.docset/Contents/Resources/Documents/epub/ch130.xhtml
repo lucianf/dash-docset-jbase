@@ -1,0 +1,46 @@
+<!--?xml version="1.0" encoding="UTF-8"?--><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+  <meta http-equiv="Content-Style-Type" content="text/css"/>
+  <meta name="generator" content="pandoc"/>
+  <title class="statement">EQUATE</title>
+  <link rel="stylesheet" type="text/css" href="stylesheet.css"/>
+</head>
+<body>
+<div id="equate-statement" class="section level1">
+<a class="dashingAutolink" name="autolink-129"></a><a class="dashAnchor" name="//apple_ref/cpp/Method/EQUATE"></a><h1 class="statement">EQUATE</h1>
+<p>Use EQUATE to declare a symbol equivalent to a literal, variable or simple expression.</p>
+<div id="command-syntax-92" class="section level2">
+<h2>COMMAND SYNTAX</h2>
+<pre><code>EQU{ATE} symbol TO expression</code></pre>
+</div>
+<div id="syntax-elements-56" class="section level2">
+<h2>SYNTAX ELEMENTS</h2>
+<p><strong>symbol</strong> is the name of the symbol to use; can be any name that would be valid for a variable.</p>
+<p><strong>expression</strong> can be a literal, a variable or a simple expression.</p>
+</div>
+<div id="notes-58" class="section level2">
+<h2>NOTES</h2>
+<p>Sensible use of EQUATEd symbols can make your program easier to maintain, easier to read, and more efficient.</p>
+<p>Efficiency can be enhanced because the address of an EQUATEd value is computed during compilation and is substituted for each occurrence of the symbol name. Unlike the address of a variable, which must be computed for each access during run time, the address of a symbol is always known. This significantly reduces the processing overhead involved in accessing a particular value. See also: the example for a more detailed explanation of the other benefits.</p>
+<p>Enhance Readability by referring to say, QTY rather than INV_LINE(4). You would simply &#34;EQUATE QTY TO INV_LINE(4)&#34; at an early stage in the program. This can also help with maintenance of the program, particularly in situations where record layouts might change. For example, if the quantity field moves to INV_LINE(6), you only have to change one line in your program.</p>
+</div>
+<div id="example-80" class="section level2">
+<h2>EXAMPLE</h2>
+<pre><code>   DIM NV_LINE(10)
+   MAT NV_LINE = 100
+   COMMON FLAG
+   EQUATE NO_CHARGE TO FLAG
+   EQUATE CR TO CHAR (13), TRUE TO 1, FALSE TO 0
+   EQUATE PRICE TO NV_LINE(7), TAX TO 0.175
+   EQUATE DASHES TO &#34;-------&#34;
+   IF NO_CHARGE = TRUE THEN PRICE = 0
+   CRT &#34;Tax = &#34;:PRICE * TAX:CR:DASHES</code></pre>
+<p>Output:</p>
+<pre>    Tax = 17.5
+    -------</pre>
+</div>
+</div>
+
+
+
+</body></html>

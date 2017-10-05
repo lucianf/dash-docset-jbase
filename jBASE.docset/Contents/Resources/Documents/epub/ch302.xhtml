@@ -1,0 +1,87 @@
+<!--?xml version="1.0" encoding="UTF-8"?--><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+  <meta http-equiv="Content-Style-Type" content="text/css"/>
+  <meta name="generator" content="pandoc"/>
+  <title class="statement">SELECT</title>
+  <link rel="stylesheet" type="text/css" href="stylesheet.css"/>
+</head>
+<body>
+<div id="select-statement" class="section level1">
+<a class="dashingAutolink" name="autolink-301"></a><a class="dashAnchor" name="//apple_ref/cpp/Method/SELECT"></a><h1 class="statement">SELECT</h1>
+<p>SELECT statement creates a select list of elements in a specified variable.</p>
+<div id="command-syntax-254" class="section level2">
+<h2>COMMAND SYNTAX</h2>
+<pre><code>SELECT {variable1} { TO variable2 | listnum } { SETTING setvar }</code></pre>
+</div>
+<div id="syntax-elements-191" class="section level2">
+<h2>SYNTAX ELEMENTS</h2>
+<p><strong>variable1</strong> can be an OPENed file descriptor, in which case the record keys in the specified file will be selected, or an ordinary variable in which case each field in the variable will become a list element. variable1 may also be an existing list in which case the elements in the list will be selected.</p>
+<p>If <strong>variable1</strong> is not specified in the statement then it assumes the default file variable.</p>
+<p>If <strong>variable2</strong> is specified then the newly created list will be placed in the variable. Alternatively, specify a select list number in the range 0 to 10 with listnum. If neither variable2 nor listnum is specified then it assumes the default list variable.</p>
+<p>If specifying the SETTING clause and the select fails, it sets setvar to one of the following values:</p>
+<table>
+<thead>
+<tr class="header">
+<th align="left">Code</th>
+<th align="left">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">128</td>
+<td align="left">No such file or directory</td>
+</tr>
+<tr class="even">
+<td align="left">4096</td>
+<td align="left">Network error</td>
+</tr>
+<tr class="odd">
+<td align="left">24576</td>
+<td align="left">Permission denied</td>
+</tr>
+<tr class="even">
+<td align="left">32768</td>
+<td align="left">Physical I/O error or unknown error</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div id="notes-162" class="section level2">
+<h2>NOTES</h2>
+<p>When constructing a list from record keys in a file, it does so by extracting only the first few keys, which when removed from the list obtains the next few keys and so on. Therefore, the creation of the list is not immediate. This means that the list could contain records, written to the file after starting the SELECT command.</p>
+<p>Consider the situation where you open a file, SELECT it and then, because of the keys obtained, write new records to the same file. It would be easy to assume that these new keys would not show up in the list because you created the list before the new records existed. This is not the case. Any records written beyond the current position in the file will eventually show up in the list. In situations where this might cause a problem, or to ensure that you obtain a complete, qualified list of keys, you should use a slower external command like jQL SELECT or <a href="#SSELECT">SSELECT</a> and then <a href="#READNEXT">READNEXT</a> to parse the file.</p>
+<p>If using a variable to hold the select list, then it should be unassigned or null before the SELECT. If it contains a number in the range 0 to 10 then it will use the corresponding select list number to hold the list, although you can still reference the list with the variable name. This &#34;feature&#34; is for compatibility with older platforms. See also example 3.</p>
+<p>Lists can be selected as many times as required.</p>
+<p>See also: the extensions for secondary indexes.</p>
+</div>
+<div id="example-1-7" class="section level2">
+<h2>EXAMPLE 1</h2>
+<pre><code>OPEN &#34;Customers&#34; ELSE ABORT 201, &#34;Customers&#34;
+SELECT TO CustList1
+SELECT TO CustList2</code></pre>
+</div>
+<div id="example-2-13" class="section level2">
+<h2>EXAMPLE 2</h2>
+<pre><code>OPEN &#34;Customers&#34; TO CustFvar ELSE ABORT 201, &#34;Customers&#34;
+SELECT CustFvar TO 2
+Done = 0
+LOOP
+   READNEXT CustId FROM 2 ELSE Done = 1
+UNTIL Done DO
+   GOSUB ProcessCust
+REPEAT</code></pre>
+</div>
+<div id="example-3-3" class="section level2">
+<h2>EXAMPLE 3</h2>
+<pre><code>CLEAR
+OPEN &#34;Customers&#34; TO CustFvar ELSE ABORT 201, &#34;Customers&#34;
+OPEN &#34;Products&#34; TO ProdFvar ELSE ABORT 201, &#34;Products&#34;
+SELECT CustFvar TO Listvar1
+SELECT ProdFvar TO Listvar2</code></pre>
+<p>This example demonstrates a coding error. The CLEAR statement is used to initialize all variables to zero. Since Listvar1 has the value 0, select list number 0 is used to hold the list. However, the CLEAR statement also initializes Listvar2 to zero, so the second SELECT overwrites the first list.</p>
+</div>
+</div>
+
+
+
+</body></html>

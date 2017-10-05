@@ -1,0 +1,32 @@
+<!--?xml version="1.0" encoding="UTF-8"?--><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+  <meta http-equiv="Content-Style-Type" content="text/css"/>
+  <meta name="generator" content="pandoc"/>
+  <title class="function">JQLGETPROPERTY</title>
+  <link rel="stylesheet" type="text/css" href="stylesheet.css"/>
+</head>
+<body>
+<div id="jqlgetproperty-function" class="section level1">
+<a class="dashingAutolink" name="autolink-197"></a><a class="dashAnchor" name="//apple_ref/cpp/Function/JQLGETPROPERTY"></a><h1 class="function">JQLGETPROPERTY</h1>
+<p>JQLGETPROPERTY is used to get the property of a compiled jQL statement</p>
+<div id="command-syntax-157" class="section level2">
+<h2>COMMAND SYNTAX</h2>
+<pre><code>JQLGETPROPERTY(PropertyValue, Statement, Column, PropertyName)</code></pre>
+</div>
+<div id="syntax-elements-109" class="section level2">
+<h2>SYNTAX ELEMENTS</h2>
+<p><strong>PropertyValue</strong> receives the requested property value from the system or &#34;&#34; if the property is not set.</p>
+<p><strong>Statement</strong> is the result of a valid JQLCOMPILE(Statement).</p>
+<p><strong>Column</strong> specifies the column number for which the property value was requested (otherwise 0 for the whole statement).</p>
+<p><strong>PropertyName</strong> are EQUATED values defined by INCLUDEing the file JQLINTERFACE.h.</p>
+<p>This function returns -1 if there is a problem with the parameters or the programmer. These properties answer questions such as &#34;Was LPTR mode asked for&#34; and &#34;How many columns are there?&#34;</p>
+</div>
+<div id="notes-93" class="section level2">
+<h2>NOTES</h2>
+<p>Properties are valid after the compile; this is the main reason for separating the compile and execute into two functions. After compiling, it is possible to examine the properties and to set the properties before executing.</p>
+</div>
+</div>
+
+
+
+</body></html>

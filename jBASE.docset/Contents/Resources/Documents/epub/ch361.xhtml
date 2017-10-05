@@ -1,0 +1,80 @@
+<!--?xml version="1.0" encoding="UTF-8"?--><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+  <meta http-equiv="Content-Style-Type" content="text/css"/>
+  <meta name="generator" content="pandoc"/>
+  <title class="statement">WRITESEQ</title>
+  <link rel="stylesheet" type="text/css" href="stylesheet.css"/>
+</head>
+<body>
+<div id="writeseq-statement" class="section level1">
+<a class="dashingAutolink" name="autolink-360"></a><a class="dashAnchor" name="//apple_ref/cpp/Method/WRITESEQ"></a><h1 class="statement">WRITESEQ</h1>
+<p>WRITESEQ writes data to a file opened for sequential access.</p>
+<div id="command-syntax-305" class="section level2">
+<h2>COMMAND SYNTAX</h2>
+<pre><code>WRITESEQ Expression { APPEND } ON | TO FileVar THEN | ELSE statements</code></pre>
+</div>
+<div id="syntax-elements-234" class="section level2">
+<h2>SYNTAX ELEMENTS</h2>
+<p><strong>Variable</strong> specifies the variable to contain next record from sequential file.</p>
+<p><strong>FileVar</strong> specifies the file descriptor of the file opened for sequential access.</p>
+<p><strong>Statements</strong> are conditional jBC statements</p>
+</div>
+<div id="notes-192" class="section level2">
+<h2>NOTES</h2>
+<p>Each WRITESEQ writes the data on a line of the sequentially opened file. Each data is suffixed with a new line character. After each WRITESEQ, the file pointer moves forward to the end of line. The WRITESEQF statement forces each data line to be flushed to the file when it is written. The APPEND option forces each WRITESEQ to advance to the end of the file before writing the next data line.</p>
+</div>
+<div id="examples-79" class="section level2">
+<h2>EXAMPLES</h2>
+<p>Create a file and write to it (overwriting contents each time):</p>
+<pre><code>   V.ID = &#39;report.txt&#39;
+   OPENSEQ &#39;.&#39;, V.ID TO F.FILE.OUT THEN
+      WEOFSEQ F.FILE.OUT  ;* truncate the file
+   END
+   WRITESEQ &#39;LINE 1&#39; TO F.FILE.OUT ELSE
+      CRT &#39;WRITE ERROR&#39;
+      STOP
+   END
+   CRT &#39;File &#39; : V.ID :  &#39; written&#39;
+   CLOSESEQ F.FILE.OUT</code></pre>
+<p>Append data to file:</p>
+<pre><code>   V.DIR.OUT = &#39;.&#39;
+   V.FILE.OUT = &#39;time.log&#39;
+   OPENSEQ V.DIR.OUT, V.FILE.OUT TO F.FILE.OUT THEN NULL
+   WRITESEQ TIMEDATE() APPEND TO F.FILE.OUT ELSE
+      CRT &#39;Write error&#39;
+      STOP
+   END</code></pre>
+<p>If file was opened in read only mode, WRITESEQ will fail and statements defined after ELSE clause will be processed:</p>
+<pre><code>   IF NOT( GETENV(&#39;TAFC_HOME&#39;, tafc_home) ) THEN
+      CRT &#39;TAFC_HOME not defined&#39;
+      STOP
+   END
+   //
+   log_dir = tafc_home : &#39;/tmp&#39;
+   log_file = &#39;jbase_error_trace&#39;
+   //
+   OPENSEQ log_dir, log_file READONLY TO f_log THEN
+   //
+      FOR i = 1 TO 3   ;* read the first message
+         READSEQ the_line FROM f_log ELSE BREAK
+         CRT the_line
+      NEXT i
+   //
+      WRITESEQ &#39;One more line&#39; APPEND TO f_log ELSE
+         CRT &#39;Write error&#39;
+         STOP
+      END
+   END ELSE
+      CRT &#39;jbase_error_trace not found&#39;
+   END</code></pre>
+<p>Sample output:</p>
+<pre>    &nbsp;
+    Trace message from pid 3588 port 237 at &#39;Mon May 28 14:02:41 2012&#39;
+        Port 1 (Pid 6184) has been inactive for 34317875 seconds, Port cleared
+    Write error</pre>
+</div>
+</div>
+
+
+
+</body></html>

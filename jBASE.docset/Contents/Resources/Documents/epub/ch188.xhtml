@@ -1,0 +1,45 @@
+<!--?xml version="1.0" encoding="UTF-8"?--><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+  <meta http-equiv="Content-Style-Type" content="text/css"/>
+  <meta name="generator" content="pandoc"/>
+  <title class="function">ISSPACE</title>
+  <link rel="stylesheet" type="text/css" href="stylesheet.css"/>
+</head>
+<body>
+<div id="isspace-function" class="section level1">
+<a class="dashingAutolink" name="autolink-187"></a><a class="dashAnchor" name="//apple_ref/cpp/Function/ISSPACE"></a><h1 class="function">ISSPACE</h1>
+<p>The ISSPACE function will check that the expression consists of entirely space type characters.</p>
+<div id="command-syntax-147" class="section level2">
+<h2>COMMAND SYNTAX</h2>
+<pre><code>ISSPACE(expression)</code></pre>
+</div>
+<div id="syntax-elements-101" class="section level2">
+<h2>SYNTAX ELEMENTS</h2>
+<p>The expression can return a result of any type. The ISSPACE function will then return TRUE (1) if the expression consists of entirely spacing type characters. The function will return FALSE (0) if the expression contains any characters, which are not space characters.</p>
+</div>
+<div id="international-mode-10" class="section level2">
+<h2>INTERNATIONAL MODE</h2>
+<p>When the ISSPACE function is used in International Mode the properties of each character is determined according to the Unicode Standard.</p>
+</div>
+<div id="example-116" class="section level2">
+<h2>EXAMPLE</h2>
+<pre><code>   a_string = &#39;&#39;             ;  GOSUB CHK.IT    ;*  0
+   a_string := &#39; &#39;           ;  GOSUB CHK.IT    ;*  1
+   a_string := CHAR(9)       ;  GOSUB CHK.IT    ;*  1 (TAB)
+   a_string := CHAR(10)      ;  GOSUB CHK.IT    ;*  1 (CR)
+   a_string := CHAR(11)      ;  GOSUB CHK.IT    ;*  1 (Vertical Tab)
+   a_string := CHAR(12)      ;  GOSUB CHK.IT    ;*  1 (Form feed)
+   a_string := CHAR(13)      ;  GOSUB CHK.IT    ;*  1 (LF)
+*
+   STOP
+*
+CHK.IT:
+   CRT ISSPACE(a_string)
+   RETURN
+END</code></pre>
+</div>
+</div>
+
+
+
+</body></html>

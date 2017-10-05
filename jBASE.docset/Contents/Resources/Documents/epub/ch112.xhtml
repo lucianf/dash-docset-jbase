@@ -1,0 +1,44 @@
+<!--?xml version="1.0" encoding="UTF-8"?--><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+  <meta http-equiv="Content-Style-Type" content="text/css"/>
+  <meta name="generator" content="pandoc"/>
+  <title class="statement">DEL</title>
+  <link rel="stylesheet" type="text/css" href="stylesheet.css"/>
+</head>
+<body>
+<div id="del-statement" class="section level1">
+<a class="dashingAutolink" name="autolink-111"></a><a class="dashAnchor" name="//apple_ref/cpp/Method/DEL"></a><h1 class="statement">DEL</h1>
+<p>Use the DEL statement to remove a specified element of a dynamic array.</p>
+<div id="command-syntax-75" class="section level2">
+<h2>COMMAND SYNTAX</h2>
+<pre><code>DEL variable&lt;expression1{, expression2{, expression3}}&gt;</code></pre>
+</div>
+<div id="syntax-elements-43" class="section level2">
+<h2>SYNTAX ELEMENTS</h2>
+<p>The variable can be any previously assigned variable or matrix element. The expressions must evaluate to a numeric value or a runtime error will occur.</p>
+<p><strong>expression1</strong> specifies the field in the array to operate upon and must be present.</p>
+<p><strong>expression2</strong> specifies the multivalue within the field to operate upon and is an optional parameter.</p>
+<p><strong>expression3</strong> is optionally present when expression2 has been included. It specifies which subvalue to delete within the specified multivalue.</p>
+</div>
+<div id="notes-48" class="section level2">
+<h2>NOTES</h2>
+<p>Truncates non-integer values for any of the expressions to integers</p>
+<p>Ignores invalid numeric values for the expressions without warning</p>
+<p>The command operates within the scope specified, i.e. if specifying only a field then it deletes the entire field (including its multivalues and subvalues). If specifying a subvalue, then it deletes only the subvalue leaving its parent multivalue and field intact.</p>
+</div>
+<div id="example-68" class="section level2">
+<h2>EXAMPLE</h2>
+<pre><code>   Numbers = &#39;&#39;
+   FOR I = 1 TO 20
+      Numbers&lt;I&gt; = I   ;*generate numbers
+   NEXT I
+   FOR I = 19 TO 1 STEP -2
+      DEL Numbers&lt;I&gt;   ;* remove odd numbers
+   NEXT I
+   CRT CHANGE(Numbers, @FM, &#39;&gt;&#39;)  ;* 2&gt;4&gt;6&gt;8&gt;10&gt;12&gt;14&gt;16&gt;18&gt;20</code></pre>
+</div>
+</div>
+
+
+
+</body></html>

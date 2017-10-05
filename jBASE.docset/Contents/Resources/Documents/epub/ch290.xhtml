@@ -1,0 +1,50 @@
+<!--?xml version="1.0" encoding="UTF-8"?--><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+  <meta http-equiv="Content-Style-Type" content="text/css"/>
+  <meta name="generator" content="pandoc"/>
+  <title class="statement">RELEASE</title>
+  <link rel="stylesheet" type="text/css" href="stylesheet.css"/>
+</head>
+<body>
+<div id="release-statement" class="section level1">
+<a class="dashingAutolink" name="autolink-289"></a><a class="dashAnchor" name="//apple_ref/cpp/Method/RELEASE"></a><h1 class="statement">RELEASE</h1>
+<p>RELEASE statement enables a program to explicitly release record locks without updating the records using <a href="#WRITE">WRITE</a>.</p>
+<div id="command-syntax-243" class="section level2">
+<h2>COMMAND SYNTAX</h2>
+<pre><code>RELEASE {{variable,} expression}</code></pre>
+</div>
+<div id="syntax-elements-180" class="section level2">
+<h2>SYNTAX ELEMENTS</h2>
+<p>If variable is specified it should be a valid file descriptor variable (i.e. It should have been the subject of an <a href="#OPEN">OPEN</a> statement)</p>
+<p>If an expression is supplied it should evaluate to the record key of a record whose lock the program wishes to free. If variable was specified the record lock in the file described by it is released. If variable was not specified the record lock in it releases the file described by the default file variable</p>
+<p>If RELEASE is issued without arguments then all record locks in all files that were set by the current program will be released.</p>
+</div>
+<div id="notes-151" class="section level2">
+<h2>NOTES</h2>
+<p>Where possible the program should avoid the use of RELEASE without arguments; this is less efficient and can be dangerous - especially in subroutines.</p>
+</div>
+<div id="example-170" class="section level2">
+<h2>EXAMPLE</h2>
+<p>This program optionally creates file F.TEMP and writes to it a record REC1, on the following runs it updates that record - puts a new field in it, but only if theres less than 7 fields:</p>
+<pre><code>   OPEN &#39;F.TEMP&#39; TO F.TEMP ELSE
+      EXECUTE &#39;CREATE-FILE DATA F.TEMP 1 101 TYPE=J4&#39;
+      OPEN &#39;F.TEMP&#39; TO F.TEMP ELSE
+         CRT &#39;OPEN FAILED&#39;
+         STOP
+      END
+   END
+   READU V.REC FROM F.TEMP, &#39;REC1&#39; LOCKED
+      CRT &#39;Record locked (&#39; : RECORDLOCKED(F.TEMP, &#39;REC1&#39;) : &#39;)&#39;
+      STOP
+   END ELSE NULL
+   IF DCOUNT(V.REC, @FM) GT 5 THEN RELEASE F.TEMP, &#39;REC1&#39;
+   ELSE
+      V.REC&lt;-1&gt; = &#39;A field&#39;
+      WRITE V.REC TO F.TEMP, &#39;REC1&#39;
+   END</code></pre>
+</div>
+</div>
+
+
+
+</body></html>

@@ -1,0 +1,135 @@
+<!--?xml version="1.0" encoding="UTF-8"?--><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+  <meta http-equiv="Content-Style-Type" content="text/css"/>
+  <meta name="generator" content="pandoc"/>
+  <title class="function">DECRYPT</title>
+  <link rel="stylesheet" type="text/css" href="stylesheet.css"/>
+</head>
+<body>
+<div id="decrypt-function" class="section level1">
+<a class="dashingAutolink" name="autolink-107"></a><a class="dashAnchor" name="//apple_ref/cpp/Function/DECRYPT"></a><h1 class="function">DECRYPT</h1>
+<p>The DECRYPT function decrypts strings.</p>
+<div id="command-syntax-72" class="section level2">
+<h2>COMMAND SYNTAX</h2>
+<pre><code>DECRYPT(string, key, method)</code></pre>
+</div>
+<div id="syntax-elements-40" class="section level2">
+<h2>SYNTAX ELEMENTS</h2>
+<p><strong>string</strong> specifies the string to be decrypted.</p>
+<p><strong>Key</strong> is the value used to decrypt the string. Its use depends on method.</p>
+<p><strong>method</strong> is a value, which indicates the encryption mechanism to use (see below).</p>
+<p>The <a href="#ENCRYPT">ENCRYPT</a> and DECRYPT functions that are part of jBC now support the following cipher methods (Defined in JBC.h)</p>
+<table>
+<thead>
+<tr class="header">
+<th align="left">Value</th>
+<th align="left">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">JBASE_CRYPT_GENERAL</td>
+<td align="left">General-purpose encryption scheme</td>
+</tr>
+<tr class="even">
+<td align="left">JBASE_CRYPT_ROT13</td>
+<td align="left">Simple ROT13 algorithm. (Key not used)</td>
+</tr>
+<tr class="odd">
+<td align="left">JBASE_CRYPT_XOR11</td>
+<td align="left">XOR MOD11 algorithm. Uses the first</td>
+</tr>
+<tr class="even">
+<td align="left"></td>
+<td align="left">character of a key as a seed value</td>
+</tr>
+<tr class="odd">
+<td align="left">JBASE_CRYPT_RC2</td>
+<td align="left">RC2 algorithm</td>
+</tr>
+<tr class="even">
+<td align="left">JBASE_CRYPT_DES</td>
+<td align="left">DES algorithm</td>
+</tr>
+<tr class="odd">
+<td align="left">JBASE_CRYPT_3DES</td>
+<td align="left">Three Key, Triple DES algorithm</td>
+</tr>
+<tr class="even">
+<td align="left">JBASE_CRYPT_BLOWFISH</td>
+<td align="left">Blowfish algorithm</td>
+</tr>
+<tr class="odd">
+<td align="left">JBASE_CRYPT_AES</td>
+<td align="left">AES algorithm</td>
+</tr>
+<tr class="even">
+<td align="left">JBASE_CRYPT_BASE64</td>
+<td align="left">(See below)</td>
+</tr>
+</tbody>
+</table>
+<p>BASE64 is not really an encryption method, but more of an encoding. The reason for this is that the output of an encryption often results in a binary string. It allows binary data to be represented as a character string. BASE64 operation is not required but is performed in addition to the primary algorithm. e.g. JBASE_CRYPT_RC2_BASE64</p>
+<p>ENCRYPT with this method is the same as a DECRYPT with method JBASE_CRYPT_RC2 followed by DECRYPT with method JBASE_CRYPT_BASE64.</p>
+<p>DECRYPT with this method is the same as a DECRYPT with method JBASE_CRYPT_BASE64 followed by DECRYPT with method JBASE_CRYPT_RC2.</p>
+<table>
+<thead>
+<tr class="header">
+<th align="left">Value</th>
+<th align="left">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">JBASE_CRYPT_RC2_BASE64</td>
+<td align="left">RC2 algorithm</td>
+</tr>
+<tr class="even">
+<td align="left">JBASE_CRYPT_DES_BASE64</td>
+<td align="left">DES algorithm</td>
+</tr>
+<tr class="odd">
+<td align="left">JBASE_CRYPT_3DES_BASE64</td>
+<td align="left">Triple DES algorithm</td>
+</tr>
+<tr class="even">
+<td align="left">JBASE_CRYPT_BLOWFISH_BASE64</td>
+<td align="left">Blowfish algorithm</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div id="notes-45" class="section level2">
+<h2>NOTES</h2>
+<p>See also: <a href="#ENCRYPT">ENCRYPT</a></p>
+</div>
+<div id="examples-11" class="section level2">
+<h2>EXAMPLES</h2>
+<pre><code>INCLUDE JBC.h
+//
+IF DECRYPT(&#39;rknzcyr&#39;, &#39;&#39;, JBASE_CRYPT_ROT13) = &#34;example&#34; THEN
+  CRT &#34;ROT13 ok&#34;
+END
+//
+IF ENCRYPT(&#39;g{ehvkm&#39;, &#39;9&#39;, JBASE_CRYPT_XOR11) = &#34;example&#34; THEN
+  CRT &#34;XOR.MOD11 ok&#34;
+END
+//
+cipher = JBASE_CRYPT_BLOWFISH_BASE64
+key    = &#34;Our Very Secret Key&#34;
+str    = &#34;String to encrypt&#34;
+enc = ENCRYPT( str, key, cipher )
+CRT &#34;Encrypted: &#34; : enc
+dec = DECRYPT( enc, key, cipher )
+CRT &#34;Decrypted: &#34; : dec</code></pre>
+<p>Displays as output:</p>
+<pre>    ROT13 ok
+    XOR.MOD11 ok
+    Encrypted: xuy6DXxUkD32spyfsKEvUtXrsjP7mC+R
+    Decrypted: String to encrypt</pre>
+</div>
+</div>
+
+
+
+</body></html>

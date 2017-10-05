@@ -1,0 +1,44 @@
+<!--?xml version="1.0" encoding="UTF-8"?--><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+  <meta http-equiv="Content-Style-Type" content="text/css"/>
+  <meta name="generator" content="pandoc"/>
+  <title class="statement">DEFFUN</title>
+  <link rel="stylesheet" type="text/css" href="stylesheet.css"/>
+</head>
+<body>
+<div id="deffun-statement" class="section level1">
+<a class="dashingAutolink" name="autolink-110"></a><a class="dashAnchor" name="//apple_ref/cpp/Method/DEFFUN"></a><h1 class="statement">DEFFUN</h1>
+<p>Use the DEFFUN statement to declare an external jBC function to the jBC compiler and optionally define its arguments. Use DEFFUN in the program that calls the function.</p>
+<div id="command-syntax-74" class="section level2">
+<h2>COMMAND SYNTAX</h2>
+<pre><code>DEFFUN FuncName ({ { MAT } Argument1, { MAT } Argument2...})</code></pre>
+</div>
+<div id="syntax-elements-42" class="section level2">
+<h2>SYNTAX ELEMENTS</h2>
+<p><strong>FuncName</strong> is the name used to define the function. It must be the same as the source file name.</p>
+<p><strong>Argument</strong> specifies a value passed to the function by the calling program. To pass an array, the keyword you must use the MAT before the argument name. These parameters are optional (as indicated in the command syntax) but can be specified for clarity. Note that if the arguments are not initialized somewhere in the program you will receive a compiler warning.</p>
+</div>
+<div id="notes-47" class="section level2">
+<h2>NOTES</h2>
+<p>The DEFFUN statement identifies a user-written function to the jBC compiler, which must be present in each program that calls the function, before the function is called. A hidden argument is passed to the function so that a value can be returned to the calling program. The return value is set in the function using the RETURN (value) statement. If the RETURN statement specifies no value then the function returns an empty string.</p>
+</div>
+<div id="example-1-3" class="section level2">
+<h2>EXAMPLE 1</h2>
+<pre><code>DEFFUN Add()
+A = 10
+B = 20
+sum = Add(A, B)
+PRINT sum
+X = RND(42)
+Y = RND(24)
+PRINT Add(X, Y)
+
+FUNCTION Add(operand1, operand2)
+result = operand1 + operand2
+RETURN(result)</code></pre>
+</div>
+</div>
+
+
+
+</body></html>

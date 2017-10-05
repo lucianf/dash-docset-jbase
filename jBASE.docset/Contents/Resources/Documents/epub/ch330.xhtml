@@ -1,0 +1,41 @@
+<!--?xml version="1.0" encoding="UTF-8"?--><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+  <meta http-equiv="Content-Style-Type" content="text/css"/>
+  <meta name="generator" content="pandoc"/>
+  <title class="function">SUM</title>
+  <link rel="stylesheet" type="text/css" href="stylesheet.css"/>
+</head>
+<body>
+<div id="sum-function" class="section level1">
+<a class="dashingAutolink" name="autolink-329"></a><a class="dashAnchor" name="//apple_ref/cpp/Function/SUM"></a><h1 class="function">SUM</h1>
+<p>SUM function sums numeric elements in a dynamic array.</p>
+<div id="command-syntax-279" class="section level2">
+<h2>COMMAND SYNTAX</h2>
+<pre><code>SUM(expr)</code></pre>
+</div>
+<div id="syntax-elements-213" class="section level2">
+<h2>SYNTAX ELEMENTS</h2>
+<p>expr is a dynamic array.</p>
+</div>
+<div id="notes-176" class="section level2">
+<h2>NOTES</h2>
+<p>Non-numeric sub-values, values and attributes are ignored.</p>
+</div>
+<div id="examples-71" class="section level2">
+<h2>EXAMPLES</h2>
+<pre><code>   V.ARRAY = 1 :@FM: 2 :@FM: 3.1
+   CRT FMT( SUM(V.ARRAY), &#39;MCP&#39; )         ;*  6.1
+   V.ARRAY&lt;4&gt; = 6
+   CRT FMT( SUM(V.ARRAY), &#39;MCP&#39; )         ;*  12.1
+   V.ARRAY&lt;4,2&gt; = 7
+   CRT FMT( SUM(V.ARRAY), &#39;MCP&#39; )         ;*  1^2^3.1^13
+   V.ARRAY&lt;4,3&gt; = &#39;QWERTY&#39;
+   CRT FMT( SUM(V.ARRAY), &#39;MCP&#39; )         ;*  still 1^2^3.1^13
+   V.ARRAY&lt;4,3,2&gt; = 8
+   CRT FMT( SUM(V.ARRAY), &#39;MCP&#39; )         ;*  1^2^3.1^6]7]8</code></pre>
+</div>
+</div>
+
+
+
+</body></html>

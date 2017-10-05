@@ -1,0 +1,38 @@
+<!--?xml version="1.0" encoding="UTF-8"?--><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+  <meta http-equiv="Content-Style-Type" content="text/css"/>
+  <meta name="generator" content="pandoc"/>
+  <title class="function">ALPHA</title>
+  <link rel="stylesheet" type="text/css" href="stylesheet.css"/>
+</head>
+<body>
+<div id="alpha-function" class="section level1">
+<a class="dashingAutolink" name="autolink-37"></a><a class="dashAnchor" name="//apple_ref/cpp/Function/ALPHA"></a><h1 class="function">ALPHA</h1>
+<p>The ALPHA function is used to check if the expression consists entirely of alphabetic characters.</p>
+<div id="command-syntax-6" class="section level2">
+<h2>COMMAND SYNTAX</h2>
+<pre><code>ALPHA(expression)</code></pre>
+</div>
+<div id="syntax-elements-4" class="section level2">
+<h2>SYNTAX ELEMENTS</h2>
+<p>Returns 1 if the expression consists entirely of alphabetic characters, else returns 0.</p>
+</div>
+<div id="international-mode" class="section level2">
+<h2>INTERNATIONAL MODE</h2>
+<p>When using the ALPHA function in International Mode it determines the properties of each character in the expression according to the Unicode Standard, which in turn describes whether the character is alphabetic or not.</p>
+</div>
+<div id="example-8" class="section level2">
+<h2>EXAMPLE</h2>
+<pre><code>   V.STRING = &#39;AWERC&#39;
+* check if there are only alphabetic characters
+   CRT ALPHA(V.STRING)        ;* 1
+* add number to the end
+   V.STRING := 1   ; CRT V.STRING    ;* AWERC1
+* check again if there are only alphabetic characters
+   CRT ALPHA(V.STRING)        ;* 0</code></pre>
+</div>
+</div>
+
+
+
+</body></html>

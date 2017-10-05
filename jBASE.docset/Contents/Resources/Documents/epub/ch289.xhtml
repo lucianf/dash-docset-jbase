@@ -1,0 +1,52 @@
+<!--?xml version="1.0" encoding="UTF-8"?--><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+  <meta http-equiv="Content-Style-Type" content="text/css"/>
+  <meta name="generator" content="pandoc"/>
+  <title class="function">REGEXP</title>
+  <link rel="stylesheet" type="text/css" href="stylesheet.css"/>
+</head>
+<body>
+<div id="regexp-function" class="section level1">
+<a class="dashingAutolink" name="autolink-288"></a><a class="dashAnchor" name="//apple_ref/cpp/Function/REGEXP"></a><h1 class="function">REGEXP</h1>
+<p>REGEXP function is a powerful function that allows pattern matching using UNIX regular expressions. REGEXP is not supported on Windows.</p>
+<div id="command-syntax-242" class="section level2">
+<h2>COMMAND SYNTAX</h2>
+<pre><code>REGEXP(variable, expression)</code></pre>
+</div>
+<div id="syntax-elements-179" class="section level2">
+<h2>SYNTAX ELEMENTS</h2>
+<p><strong>variable</strong> can be any type of jBC variable and is the variable upon which pattern matching will be performed.</p>
+<p><strong>expression</strong> should evaluate to a standard UNIX regular expression as defined in the UNIX documentation.</p>
+</div>
+<div id="notes-150" class="section level2">
+<h2>NOTES</h2>
+<p>The function returns a numeric integer value being the first character in variable that matches the specified regular expression. If a match is not found then the function returns 0. If the regular expression was invalid then the function returns -1.</p>
+</div>
+<div id="examples-60" class="section level2">
+<h2>EXAMPLES</h2>
+<pre><code>   String = &#34;jBASE Software Inc.&#34;    ;* 4 (position of matching pattern -
+   CRT REGEXP(String, &#39;S[^t]*&#39;)      ;*   &#34;S&#34; followed by &#34;t&#34; later on)
+* find an exact value in a list
+   CRT REGEXP(&#39;051&#39;, &#39;^(050|5001|051|053|265|4007|5007|037|060|098)$&#39;)   ;* 1
+   CRT REGEXP(&#39;05123&#39;, &#39;^(050|5001|051|053|265|4007|5007|037|060|098)$&#39;) ;* 0
+* everything in range &#34;000&#34; - &#34;999&#34; except &#34;037&#34;
+   CRT REGEXP(&#39;036&#39;, &#39;(0[0-24-9][0-9]|0[0-9][0-68-9]|[1-9][0-9][0-9])&#39;)  ;* 1
+   CRT REGEXP(&#39;037&#39;, &#39;(0[0-24-9][0-9]|0[0-9][0-68-9]|[1-9][0-9][0-9])&#39;)  ;* 0
+   CRT REGEXP(&#39;137&#39;, &#39;(0[0-24-9][0-9]|0[0-9][0-68-9]|[1-9][0-9][0-9])&#39;)  ;* 1
+* everything in range &#34;000&#34; - &#34;999&#34; except &#34;037&#34; and &#34;057&#34;
+   CRT REGEXP(&#39;036&#39;, &#39;(0[0-246-9][0-9]|0[0-9][0-68-9]|[1-9][0-9][0-9])&#39;) ;* 1
+   CRT REGEXP(&#39;037&#39;, &#39;(0[0-246-9][0-9]|0[0-9][0-68-9]|[1-9][0-9][0-9])&#39;) ;* 0
+   CRT REGEXP(&#39;057&#39;, &#39;(0[0-246-9][0-9]|0[0-9][0-68-9]|[1-9][0-9][0-9])&#39;) ;* 0
+   CRT REGEXP(&#39;957&#39;, &#39;(0[0-246-9][0-9]|0[0-9][0-68-9]|[1-9][0-9][0-9])&#39;) ;* 1
+* all 2-character country codes except &#34;RS&#34;
+   CRT REGEXP(&#39;RS&#39;, &#39;([A-QS-Z][A-Z]|[R][A-RT-Z])&#39;)                       ;* 0
+   CRT REGEXP(&#39;AE&#39;, &#39;([A-QS-Z][A-Z]|[R][A-RT-Z])&#39;)                       ;* 1
+   CRT REGEXP(&#39;RU&#39;, &#39;([A-QS-Z][A-Z]|[R][A-RT-Z])&#39;)                       ;* 1
+* negative lookahead assertion isn&#39;t supported (&#34;all not containing &#39;bar&#39;&#34;)
+   CRT REGEXP(&#39;bar&#39;, &#39;&#34;^(?!.*?bar).*&#34;&#39;)                                 ;* -1</code></pre>
+</div>
+</div>
+
+
+
+</body></html>

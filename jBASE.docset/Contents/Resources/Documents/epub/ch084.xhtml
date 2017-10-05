@@ -1,0 +1,32 @@
+<!--?xml version="1.0" encoding="UTF-8"?--><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+  <meta http-equiv="Content-Style-Type" content="text/css"/>
+  <meta name="generator" content="pandoc"/>
+  <title class="statement">CLEARCOMMON</title>
+  <link rel="stylesheet" type="text/css" href="stylesheet.css"/>
+</head>
+<body>
+<div id="clearcommon-statement" class="section level1">
+<a class="dashingAutolink" name="autolink-83"></a><a class="dashAnchor" name="//apple_ref/cpp/Method/CLEARCOMMON"></a><h1 class="statement">CLEARCOMMON</h1>
+<p>The CLEARCOMMON statement initializes all unnamed common variables to a value of zero.</p>
+<div id="command-syntax-48" class="section level2">
+<h2>COMMAND SYNTAX</h2>
+<pre><code>CLEARCOMMON</code></pre>
+</div>
+<div id="example-49" class="section level2">
+<h2>EXAMPLE</h2>
+<!--jBC-->
+<pre><code>   COMMON /MY.COMM/ global_var
+   COMMON gl_unnamed
+   global_var = 1000
+   gl_unnamed = 1001
+   CLEARCOMMON
+* only unnamed common will be cleared
+   CRT global_var                           ;* 1000
+   CRT gl_unnamed                           ;* 0</code></pre>
+</div>
+</div>
+
+
+
+</body></html>

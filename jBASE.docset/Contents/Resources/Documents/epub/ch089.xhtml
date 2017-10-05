@@ -1,0 +1,40 @@
+<!--?xml version="1.0" encoding="UTF-8"?--><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+  <meta http-equiv="Content-Style-Type" content="text/css"/>
+  <meta name="generator" content="pandoc"/>
+  <title class="statement">CLOSE</title>
+  <link rel="stylesheet" type="text/css" href="stylesheet.css"/>
+</head>
+<body>
+<div id="close-statement" class="section level1">
+<a class="dashingAutolink" name="autolink-88"></a><a class="dashAnchor" name="//apple_ref/cpp/Method/CLOSE"></a><h1 class="statement">CLOSE</h1>
+<p>Use the CLOSE statement to CLOSE an opened file, which is no longer required.</p>
+<div id="command-syntax-53" class="section level2">
+<h2>COMMAND SYNTAX</h2>
+<pre><code>CLOSE variable {, variable ... }</code></pre>
+</div>
+<div id="syntax-elements-28" class="section level2">
+<h2>SYNTAX ELEMENTS</h2>
+<p>The variable list should contain a list of previously opened file variables that are no longer needed. The variables will be cleared and may be reused as ordinary variables.</p>
+</div>
+<div id="notes-32" class="section level2">
+<h2>NOTES</h2>
+<p>You can open an unlimited amount of files within jBC; however leaving them open consumes valuable system resources.</p>
+<p>Use good practice to hold open only those file descriptors to which you have constant access.</p>
+</div>
+<div id="example-54" class="section level2">
+<h2>EXAMPLE</h2>
+<pre><code>   EXECUTE &#39;DELETE-FILE DATA F.TEMP&#39;
+   EXECUTE &#39;CREATE-FILE DATA F.TEMP 1 101 TYPE=J4&#39;
+   OPEN &#39;F.TEMP&#39; TO F.TEMP ELSE ABORT 201, &#39;F.TEMP&#39;
+   CRT ASSIGNED(F.TEMP)        ;* 1
+   V.REC.INIT = &#39;LINE 1&#39; :@FM: &#39;LINE 2&#39; :@FM: &#39;LINE 3&#39;
+   WRITE V.REC.INIT TO F.TEMP, &#39;REC1&#39;
+   CLOSE F.TEMP
+   CRT ASSIGNED(F.TEMP)        ;* 0</code></pre>
+</div>
+</div>
+
+
+
+</body></html>

@@ -1,0 +1,70 @@
+<!--?xml version="1.0" encoding="UTF-8"?--><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+  <meta http-equiv="Content-Style-Type" content="text/css"/>
+  <meta name="generator" content="pandoc"/>
+  <title class="function">SOUNDEX</title>
+  <link rel="stylesheet" type="text/css" href="stylesheet.css"/>
+</head>
+<body>
+<div id="soundex-function" class="section level1">
+<a class="dashingAutolink" name="autolink-311"></a><a class="dashAnchor" name="//apple_ref/cpp/Function/SOUNDEX"></a><h1 class="function">SOUNDEX</h1>
+<p>SOUNDEX function allows phonetic conversions of strings.</p>
+<div id="command-syntax-264" class="section level2">
+<h2>COMMAND SYNTAX</h2>
+<pre><code>SOUNDEX(expression)</code></pre>
+</div>
+<div id="syntax-elements-201" class="section level2">
+<h2>SYNTAX ELEMENTS</h2>
+<p><strong>expression</strong> may evaluate to any data type but the function will only give meaningful results for English words.</p>
+</div>
+<div id="notes-170" class="section level2">
+<h2>NOTES</h2>
+<p>The phonetic equivalent of a string is calculated as the first alphabetic character in the string followed by a 1 to 3-digit representation of the rest of the word. The digit string is calculated from the following table:</p>
+<table>
+<thead>
+<tr class="header">
+<th align="left">Characters</th>
+<th align="left">Value code</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">B F P V</td>
+<td align="left">1</td>
+</tr>
+<tr class="even">
+<td align="left">C G J K Q S X Z</td>
+<td align="left">2</td>
+</tr>
+<tr class="odd">
+<td align="left">D T</td>
+<td align="left">3</td>
+</tr>
+<tr class="even">
+<td align="left">L</td>
+<td align="left">4</td>
+</tr>
+<tr class="odd">
+<td align="left">M N</td>
+<td align="left">5</td>
+</tr>
+<tr class="even">
+<td align="left">R</td>
+<td align="left">6</td>
+</tr>
+</tbody>
+</table>
+<p>All characters not contained in the above table are ignored. The function is case insensitive and identical sequences of a character are interpreted as a single instance of the character.</p>
+<p>The idea is to provide a crude method of identifying words such as last names even if they are not spelt correctly. The function is not foolproof should not be the sole method of identifying a word.</p>
+</div>
+<div id="example-181" class="section level2">
+<h2>EXAMPLE</h2>
+<pre><code>INPUT Lastname
+Lastname = SOUNDEX(Lastname)
+*search the databases</code></pre>
+</div>
+</div>
+
+
+
+</body></html>

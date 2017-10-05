@@ -1,0 +1,32 @@
+<!--?xml version="1.0" encoding="UTF-8"?--><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+  <meta http-equiv="Content-Style-Type" content="text/css"/>
+  <meta name="generator" content="pandoc"/>
+  <title class="function">TRIMBS</title>
+  <link rel="stylesheet" type="text/css" href="stylesheet.css"/>
+</head>
+<body>
+<div id="trimbs-function" class="section level1">
+<a class="dashingAutolink" name="autolink-345"></a><a class="dashAnchor" name="//apple_ref/cpp/Function/TRIMBS"></a><h1 class="function">TRIMBS</h1>
+<p>TRIMBS function is used to remove all trailing spaces from each element of dynamic.array.</p>
+<div id="command-syntax-293" class="section level2">
+<h2>COMMAND SYNTAX</h2>
+<pre><code>TRIMBS(dynamic.array)</code></pre>
+<p>If dynamic.array evaluates to null (i.e. an empty string), null is returned. If any element of dynamic.array is null, null is returned for that value.</p>
+</div>
+<div id="example-192" class="section level2">
+<h2>EXAMPLE</h2>
+<pre><code>   dyn_array = &#39; Use    &#39; :@FM: &#39; the   &#39; :@VM: &#39;&#39; :@FM: &#39;source Luke   !  &#39;
+   CRT DQUOTE( OCONV( TRIMBS(dyn_array), &#39;MCP&#39;) )</code></pre>
+<p>Output:</p>
+<pre>    &#34; Use^ the]^source Luke   !&#34;</pre>
+</div>
+<div id="note-20" class="section level2">
+<h2>NOTE</h2>
+<p>Leading and redundant spaces are not removed.</p>
+</div>
+</div>
+
+
+
+</body></html>

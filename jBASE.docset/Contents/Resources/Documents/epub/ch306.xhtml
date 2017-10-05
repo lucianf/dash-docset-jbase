@@ -1,0 +1,46 @@
+<!--?xml version="1.0" encoding="UTF-8"?--><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+  <meta http-equiv="Content-Style-Type" content="text/css"/>
+  <meta name="generator" content="pandoc"/>
+  <title class="function">SEQ</title>
+  <link rel="stylesheet" type="text/css" href="stylesheet.css"/>
+</head>
+<body>
+<div id="seq-function" class="section level1">
+<a class="dashingAutolink" name="autolink-305"></a><a class="dashAnchor" name="//apple_ref/cpp/Function/SEQ"></a><h1 class="function">SEQ</h1>
+<p>SEQ function returns numeric ASCII value of a character.</p>
+<div id="command-syntax-258" class="section level2">
+<h2>COMMAND SYNTAX</h2>
+<pre><code>SEQ(expression)</code></pre>
+</div>
+<div id="syntax-elements-195" class="section level2">
+<h2>SYNTAX ELEMENTS</h2>
+<p><strong>expression</strong> may evaluate to any data type. However, the SEQ function will convert the expression to a string and operate on the first character of that string.</p>
+</div>
+<div id="international-mode-21" class="section level2">
+<h2>INTERNATIONAL MODE</h2>
+<p>The SEQ function will return numeric values beyond 255 for UTF-8 byte sequences representing any Unicode values above 0x000000ff.</p>
+</div>
+<div id="example-178" class="section level2">
+<h2>EXAMPLE</h2>
+<pre><code>EQU ENQ TO 5
+* Get next comms code
+* Time-out after 20 seconds
+INPUT A, 1 FOR 200 ELSE BREAK
+IF SEQ(A) = ENQ THEN
+* Respond to ENQ char</code></pre>
+</div>
+<div id="example-2-14" class="section level2">
+<h2>EXAMPLE 2</h2>
+<pre><code>* C5A1: Unicode Character &#39;LATIN SMALL LETTER S WITH CARON&#39;
+   CRT SEQ( ICONV(&#39;C5A1&#39;, &#39;MX&#39;) )
+   CRT ICONV(&#39;C5A1&#39;, &#39;MX&#39;)</code></pre>
+<p>Output:</p>
+<pre>    353
+    &scaron;</pre>
+</div>
+</div>
+
+
+
+</body></html>

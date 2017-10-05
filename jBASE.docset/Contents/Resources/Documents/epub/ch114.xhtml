@@ -1,0 +1,35 @@
+<!--?xml version="1.0" encoding="UTF-8"?--><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+  <meta http-equiv="Content-Style-Type" content="text/css"/>
+  <meta name="generator" content="pandoc"/>
+  <title class="statement">DELETELIST</title>
+  <link rel="stylesheet" type="text/css" href="stylesheet.css"/>
+</head>
+<body>
+<div id="deletelist-statement" class="section level1">
+<a class="dashingAutolink" name="autolink-113"></a><a class="dashAnchor" name="//apple_ref/cpp/Method/DELETELIST"></a><h1 class="statement">DELETELIST</h1>
+<p>The DELETELIST statement will delete the previously stored list named by expression.</p>
+<div id="command-syntax-77" class="section level2">
+<h2>COMMAND SYNTAX</h2>
+<pre><code>DELETELIST expression</code></pre>
+</div>
+<div id="syntax-elements-45" class="section level2">
+<h2>SYNTAX ELEMENTS</h2>
+<p>The expression should evaluate to the name of a list that has been stored with either the WRITELIST statement or the SAVE-LIST command from the shell.</p>
+</div>
+<div id="notes-50" class="section level2">
+<h2>NOTES</h2>
+<p>If POINTER-FILE is accessible then it saves lists within else are saved in the jBASE work file.</p>
+</div>
+<div id="example-70" class="section level2">
+<h2>EXAMPLE</h2>
+<pre><code>   EXECUTE &#39;SELECT .&#39; :@FM: &#39;SAVE-LIST FILES-LIST&#39;
+   EXECUTE &#39;LIST &amp;SAVEDLISTS&amp; LIKE FILES-...&#39;    ;*  FILES-LIST is here
+   DELETELIST &#39;FILES-LIST&#39;
+   EXECUTE &#39;LIST &amp;SAVEDLISTS&amp; LIKE FILES-...&#39;    ;* and now it&#39;s not</code></pre>
+</div>
+</div>
+
+
+
+</body></html>

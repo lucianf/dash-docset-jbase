@@ -1,0 +1,59 @@
+<!--?xml version="1.0" encoding="UTF-8"?--><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+  <meta http-equiv="Content-Style-Type" content="text/css"/>
+  <meta name="generator" content="pandoc"/>
+  <title class="function">BITSET</title>
+  <link rel="stylesheet" type="text/css" href="stylesheet.css"/>
+</head>
+<body>
+<div id="bitset-function" class="section level1">
+<a class="dashingAutolink" name="autolink-48"></a><a class="dashAnchor" name="//apple_ref/cpp/Function/BITSET"></a><h1 class="function">BITSET</h1>
+<p>BITSET sets the value of a specified bit in the bit table to one and returns the value of the bit before it was changed.</p>
+<div id="command-syntax-16" class="section level2">
+<h2>COMMAND SYNTAX</h2>
+<pre><code>BITSET(table_no)</code></pre>
+</div>
+<div id="syntax-elements-11" class="section level2">
+<h2>SYNTAX ELEMENTS</h2>
+<p>table_no specifies the bit to be SET. If table_no evaluates to zero, it sets all elements in the table to one and the returned value is one.</p>
+</div>
+<div id="notes-8" class="section level2">
+<h2>NOTES</h2>
+<p>For each purpose, it maintains a unique table of 128 bits (numbered 1 to 128) and treats each bit in the table as a two-state flag - the value returned will always be zero or one.</p>
+<p>BITSET returns the previous value of the bit - you can check and set a flag in one step.</p>
+<p>BITSET also provides some special functions if you use one of the following table_no values:</p>
+<table>
+<thead>
+<tr class="header">
+<th align="left">Code</th>
+<th align="left">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">-1</td>
+<td align="left">sets the BREAK key Inhibit bit</td>
+</tr>
+<tr class="even">
+<td align="left">-2</td>
+<td align="left">sets the Command Level Restart feature</td>
+</tr>
+<tr class="odd">
+<td align="left">-3</td>
+<td align="left">sets the Break/End Restart feature</td>
+</tr>
+</tbody>
+</table>
+<p>See also: <a href="#BITRESET">BITRESET</a></p>
+</div>
+<div id="example-17" class="section level2">
+<h2>EXAMPLE</h2>
+<pre><code>    OLD.VALUE = BITSET(112)
+    PRINT OLD.VALUE</code></pre>
+<p>If table entry 112 is zero, returns a value of zero, sets bit 112 to one, and prints zero. If table entry 112 is one, returns a value of one, and prints one.</p>
+</div>
+</div>
+
+
+
+</body></html>

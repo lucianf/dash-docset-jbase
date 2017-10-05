@@ -1,0 +1,38 @@
+<!--?xml version="1.0" encoding="UTF-8"?--><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+  <meta http-equiv="Content-Style-Type" content="text/css"/>
+  <meta name="generator" content="pandoc"/>
+  <title class="function">SMUL</title>
+  <link rel="stylesheet" type="text/css" href="stylesheet.css"/>
+</head>
+<body>
+<div id="smul-function" class="section level1">
+<a class="dashingAutolink" name="autolink-309"></a><a class="dashAnchor" name="//apple_ref/cpp/Function/SMUL"></a><h1 class="function">SMUL</h1>
+<p>SMUL function performs string multiplication of two base 10-string numbers.</p>
+<div id="command-syntax-262" class="section level2">
+<h2>COMMAND SYNTAX</h2>
+<pre><code>SMUL(expr1, expr2)</code></pre>
+</div>
+<div id="syntax-elements-199" class="section level2">
+<h2>SYNTAX ELEMENTS</h2>
+<p><strong>expr1</strong> and <strong>expr2</strong> are strings consisting of numeric characters, with either optionally including a decimal part.</p>
+</div>
+<div id="notes-168" class="section level2">
+<h2>NOTES</h2>
+<p>Use the SMUL function with numbers that may exceed a valid range with standard arithmetic operators.</p>
+<p>The PRECISION declaration does not affect the value returned by SMUL.</p>
+</div>
+<div id="examples-65" class="section level2">
+<h2>EXAMPLES</h2>
+<pre><code>A = 243603310027840922
+B = 3760
+CRT SMUL(A,B)</code></pre>
+<p>Displays 915948445704681866720 to the screen</p>
+<pre><code>CRT SMUL(0.0000000000000475,3.61)</code></pre>
+<p>Displays 0.0000000000001714 to the screen</p>
+</div>
+</div>
+
+
+
+</body></html>

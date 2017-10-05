@@ -1,0 +1,38 @@
+<!--?xml version="1.0" encoding="UTF-8"?--><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+  <meta http-equiv="Content-Style-Type" content="text/css"/>
+  <meta name="generator" content="pandoc"/>
+  <title class="statement">INPUTCLEAR</title>
+  <link rel="stylesheet" type="text/css" href="stylesheet.css"/>
+</head>
+<body>
+<div id="inputclear-statement" class="section level1">
+<a class="dashingAutolink" name="autolink-175"></a><a class="dashAnchor" name="//apple_ref/cpp/Method/INPUTCLEAR"></a><h1 class="statement">INPUTCLEAR</h1>
+<p>The INPUTCLEAR statement clears the type-ahead buffer.</p>
+<div id="command-syntax-136" class="section level2">
+<h2>COMMAND SYNTAX</h2>
+<pre><code>INPUTCLEAR</code></pre>
+</div>
+<div id="syntax-elements-91" class="section level2">
+<h2>SYNTAX ELEMENTS</h2>
+<p>None</p>
+</div>
+<div id="notes-87" class="section level2">
+<h2>NOTES</h2>
+<p>INPUTCLEAR only clears the type-ahead buffer. It does not clear data stacked with the DATA statement.</p>
+<p>The INPUTCLEAR statement is synonymous with <a href="#CLEARINPUT">CLEARINPUT</a>.</p>
+</div>
+<div id="example-105" class="section level2">
+<h2>EXAMPLE</h2>
+<pre><code>CRT &#34;Start year end processing (Yes/No) :&#34;
+INPUTCLEAR
+INPUT ans
+IF ans # &#34;Yes&#34; THEN
+CRT &#34;year end processing not started&#34;
+END</code></pre>
+</div>
+</div>
+
+
+
+</body></html>

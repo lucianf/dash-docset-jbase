@@ -1,0 +1,41 @@
+<!--?xml version="1.0" encoding="UTF-8"?--><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+  <meta http-equiv="Content-Style-Type" content="text/css"/>
+  <meta name="generator" content="pandoc"/>
+  <title class="function">ISALNUM</title>
+  <link rel="stylesheet" type="text/css" href="stylesheet.css"/>
+</head>
+<body>
+<div id="isalnum-function" class="section level1">
+<a class="dashingAutolink" name="autolink-182"></a><a class="dashAnchor" name="//apple_ref/cpp/Function/ISALNUM"></a><h1 class="function">ISALNUM</h1>
+<p>The ISALNUM function will check that the expression consists of entirely alphanumeric characters.</p>
+<div id="command-syntax-142" class="section level2">
+<h2>COMMAND SYNTAX</h2>
+<pre><code>ISALNUM(expression)</code></pre>
+</div>
+<div id="syntax-elements-96" class="section level2">
+<h2>SYNTAX ELEMENTS</h2>
+<p>The expression can return a result of any type. The ISALNUM function will then return TRUE (1) if the expression consists of entirely alphanumeric characters. The function will return FALSE (0) if the expression contains any characters, which are not alphanumeric.</p>
+</div>
+<div id="international-mode-5" class="section level2">
+<h2>INTERNATIONAL MODE</h2>
+<p>When the ISALNUM function is used in International Mode the properties of each character is determined according to the Unicode Standard.</p>
+</div>
+<div id="example-113" class="section level2">
+<h2>EXAMPLE</h2>
+<p>Extending the example for <a href="#ALPHA">ALPHA</a>:</p>
+<pre><code>   V.STRING = &#39;AWERC&#39;
+* check if there are only alphabetic characters
+   CRT ISALPHA(V.STRING)             ;* 1
+* add number to the end
+   V.STRING := 1   ; CRT V.STRING    ;* AWERC1
+* check again if there are only alphabetic characters
+   CRT ISALPHA(V.STRING)             ;* 0
+* check if there are only alphanumeric characters
+   CRT ISALNUM(V.STRING)             ;* 1</code></pre>
+</div>
+</div>
+
+
+
+</body></html>

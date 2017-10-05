@@ -1,0 +1,39 @@
+<!--?xml version="1.0" encoding="UTF-8"?--><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+  <meta http-equiv="Content-Style-Type" content="text/css"/>
+  <meta name="generator" content="pandoc"/>
+  <title class="function">MINIMUM</title>
+  <link rel="stylesheet" type="text/css" href="stylesheet.css"/>
+</head>
+<body>
+<div id="minimum-function" class="section level1">
+<a class="dashingAutolink" name="autolink-225"></a><a class="dashAnchor" name="//apple_ref/cpp/Function/MINIMUM"></a><h1 class="function">MINIMUM</h1>
+<p>MINIMUM function is used to return the element of a dynamic array with the lowest numerical value.</p>
+<div id="command-syntax-185" class="section level2">
+<h2>COMMAND SYNTAX</h2>
+<pre><code>MINIMUM(DynArr)</code></pre>
+</div>
+<div id="syntax-elements-134" class="section level2">
+<h2>SYNTAX ELEMENTS</h2>
+<p><strong>DynArr</strong> should evaluate to a dynamic array.</p>
+</div>
+<div id="notes-114" class="section level2">
+<h2>NOTES</h2>
+<p>Null dynamic array elements are treat as zero.</p>
+<p>Non-numeric dynamic array elements are ignored.</p>
+<p>See also: <a href="#MAXIMUM">MAXIMUM</a>.</p>
+</div>
+<div id="examples-44" class="section level2">
+<h2>EXAMPLES</h2>
+<p>If EResults is a variable containing the dynamic array:</p>
+<pre><code>1.45032:@AM:-3.60851:@VM:4.29445:@AM:2.07042:@SM:-3.90258</code></pre>
+<p>the code:</p>
+<pre><code>PRECISION 3
+CRT MINIMUM(EResults)</code></pre>
+<p>displays -3.903</p>
+</div>
+</div>
+
+
+
+</body></html>

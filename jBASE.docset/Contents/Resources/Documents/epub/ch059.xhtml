@@ -1,0 +1,36 @@
+<!--?xml version="1.0" encoding="UTF-8"?--><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+  <meta http-equiv="Content-Style-Type" content="text/css"/>
+  <meta name="generator" content="pandoc"/>
+  <title class="function">CacheDelete</title>
+  <link rel="stylesheet" type="text/css" href="stylesheet.css"/>
+</head>
+<body>
+<div id="cachedelete-function" class="section level1">
+<a class="dashingAutolink" name="autolink-58"></a><a class="dashAnchor" name="//apple_ref/cpp/Function/CacheDelete"></a><h1 class="function">CacheDelete</h1>
+<p>The CacheBucketList function will delete an item from a bucket in the cache.</p>
+<div id="command-syntax-25" class="section level2">
+<h2>COMMAND SYNTAX</h2>
+<pre><code>CacheDelete(bucket, item)</code></pre>
+</div>
+<div id="example-27" class="section level2">
+<h2>EXAMPLE</h2>
+<pre><code>INCLUDE JBC.h
+CacheDelete(&#39;bucket1&#39;, &#39;item1&#39;)
+CachePut(&#39;bucket2&#39;, &#39;item1&#39;, &#39;value1&#39;)
+buckets = CacheBucketList(@AM)
+CRT &#34;First bucket: &#34; : buckets&lt;1&gt;
+CRT &#34;Second bucket: &#34; : buckets&lt;2&gt;</code></pre>
+<p>The output is:</p>
+<pre>    First bucket: bucket1
+    Second bucket: bucket2</pre>
+</div>
+<div id="notes-14" class="section level2">
+<h2>NOTES</h2>
+<p>This function does not affect statistics of the bucket.</p>
+</div>
+</div>
+
+
+
+</body></html>

@@ -1,0 +1,62 @@
+<!--?xml version="1.0" encoding="UTF-8"?--><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+  <meta http-equiv="Content-Style-Type" content="text/css"/>
+  <meta name="generator" content="pandoc"/>
+  <title class="statement">LOOP</title>
+  <link rel="stylesheet" type="text/css" href="stylesheet.css"/>
+</head>
+<body>
+<div id="loop-statement" class="section level1">
+<a class="dashingAutolink" name="autolink-212"></a><a class="dashAnchor" name="//apple_ref/cpp/Method/LOOP"></a><h1 class="statement">LOOP</h1>
+<p>LOOP allows the programmer to specify loops with multiple exit conditions.</p>
+<div id="command-syntax-172" class="section level2">
+<h2>COMMAND SYNTAX</h2>
+<pre><code>LOOP statements1 WHILE | UNTIL expression DO statements2 REPEAT</code></pre>
+</div>
+<div id="syntax-elements-121" class="section level2">
+<h2>SYNTAX ELEMENTS</h2>
+<p><strong>statements1</strong> and <strong>statements2</strong> consist of any number of standard statements include the LOOP statement itself, thus allowing nested loops.</p>
+<p><strong>statements1</strong> will always be executed at least once, after which the WHILE or UNTIL clause is evaluated.</p>
+<p><strong>expression</strong> is tested for Boolean TRUE/FALSE by either the WHILE clause or the UNTIL clause. When tested by the WHILE clause statements2 will only be executed if expression is Boolean TRUE. When tested by the UNTIL clause, statements2 will only be executed if the expression evaluates to Boolean FALSE.</p>
+<p><strong>REPEAT</strong> causes the loop to start again with the first statement following the LOOP statement.</p>
+</div>
+<div id="notes-103" class="section level2">
+<h2>NOTES</h2>
+<p>See also: <a href="#BREAK">BREAK</a>, <a href="#CONTINUE">CONTINUE</a></p>
+</div>
+<div id="example-127" class="section level2">
+<h2>EXAMPLE</h2>
+<pre><code>  IF NOT( GETENV(&#39;TAFC_HOME&#39;, V.HOME) ) THEN
+      CRT &#39;TAFC_HOME not defined&#39;
+      STOP
+   END
+  EXECUTE &#39;SELECT &#39; : V.HOME : &#39;/jbcmessages SAMPLE 10&#39; RTNLIST V.MSG.L
+* Retrieve @IDs one by one
+   LOOP
+      REMOVE V.ID FROM V.MSG.L SETTING V.STATUS
+      CRT V.ID
+      IF V.STATUS EQ 0 THEN BREAK   ;* end of list reached
+   REPEAT</code></pre>
+<p>Output looks like:</p>
+<pre>    INV_FILE_TYPE
+    DEVICE_QUIT
+    RTN_NOGOSUB
+    ARRAY_ILLEGAL_SIZE
+    DIFF_COMMON
+    QLNOVERB
+    QLPARAMERR
+    SP-HoldCount
+    603
+    1134</pre>
+<p>The loop used in this example can also be defined this way:</p>
+<pre><code>   LOOP
+      REMOVE V.ID FROM V.MSG.L SETTING V.STATUS
+      CRT V.ID
+   UNTIL V.STATUS EQ 0
+   REPEAT</code></pre>
+</div>
+</div>
+
+
+
+</body></html>

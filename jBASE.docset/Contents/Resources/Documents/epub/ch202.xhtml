@@ -1,0 +1,41 @@
+<!--?xml version="1.0" encoding="UTF-8"?--><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+  <meta http-equiv="Content-Style-Type" content="text/css"/>
+  <meta name="generator" content="pandoc"/>
+  <title class="function">LEFT</title>
+  <link rel="stylesheet" type="text/css" href="stylesheet.css"/>
+</head>
+<body>
+<div id="left-function" class="section level1">
+<a class="dashingAutolink" name="autolink-201"></a><a class="dashAnchor" name="//apple_ref/cpp/Function/LEFT"></a><h1 class="function">LEFT</h1>
+<p>The LEFT function extracts a sub-string of a specified length from the beginning of a string.</p>
+<div id="command-syntax-161" class="section level2">
+<h2>COMMAND SYNTAX</h2>
+<pre><code>LEFT(expression, length)</code></pre>
+</div>
+<div id="syntax-elements-112" class="section level2">
+<h2>SYNTAX ELEMENTS</h2>
+<p><strong>expression</strong> evaluates to the string from which the sub string is extracted.</p>
+<p><strong>length</strong> specifies the number of the extracted characters. If the length is less than 1, then LEFT() returns null.</p>
+</div>
+<div id="notes-95" class="section level2">
+<h2>NOTES</h2>
+<p>The LEFT() function is equivalent to sub-string extraction starting from the first character position, i.e. expression[1,length]</p>
+<p>See also: <a href="#RIGHT">RIGHT</a></p>
+</div>
+<div id="examples-34" class="section level2">
+<h2>EXAMPLES</h2>
+<pre><code>S = &#34;The world is my lobster&#34;
+CRT DQUOTE( LEFT(S,9) )
+CRT DQUOTE( LEFT(S,999) )
+CRT DQUOTE( LEFT(S,0) )</code></pre>
+<p>This code displays:</p>
+<pre>    &#34;The world&#34;
+    &#34;The world is my lobster&#34;
+    &#34;&#34;</pre>
+</div>
+</div>
+
+
+
+</body></html>

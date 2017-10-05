@@ -1,0 +1,43 @@
+<!--?xml version="1.0" encoding="UTF-8"?--><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+  <meta http-equiv="Content-Style-Type" content="text/css"/>
+  <meta name="generator" content="pandoc"/>
+  <title class="function">MAXIMUM</title>
+  <link rel="stylesheet" type="text/css" href="stylesheet.css"/>
+</head>
+<body>
+<div id="maximum-function" class="section level1">
+<a class="dashingAutolink" name="autolink-224"></a><a class="dashAnchor" name="//apple_ref/cpp/Function/MAXIMUM"></a><h1 class="function">MAXIMUM</h1>
+<p>MAXIMUM function is used to return the element of a dynamic array with the highest numerical value.</p>
+<div id="command-syntax-184" class="section level2">
+<h2>COMMAND SYNTAX</h2>
+<pre><code>MAXIMUM(DynArr)</code></pre>
+</div>
+<div id="syntax-elements-133" class="section level2">
+<h2>SYNTAX ELEMENTS</h2>
+<p><strong>DynArr</strong> should evaluate to a dynamic array.</p>
+</div>
+<div id="notes-113" class="section level2">
+<h2>NOTES</h2>
+<p>Null dynamic array elements are treat as zero.</p>
+<p>Non-numeric dynamic array elements are ignored.</p>
+<p>See also: <a href="#MINIMUM">MINIMUM</a></p>
+</div>
+<div id="examples-43" class="section level2">
+<h2>EXAMPLES</h2>
+<pre><code>   PRECISION 5
+   dyn_array = 4.29442 :@AM: -3.60441 :@VM :4.29445 :@AM: 2.00042   \
+         :@SM: -33.90228
+   CRT MAXIMUM(dyn_array)           ;* 4.29445
+* non-numeric elements are ignored
+   dyn_array&lt;2,1&gt; = &#39;9000,00&#39;
+   CRT MAXIMUM(dyn_array)           ;* still 4.29445
+* PRECISION matters
+   PRECISION 2
+   CRT MAXIMUM(dyn_array)           ;* now 4.29442</code></pre>
+</div>
+</div>
+
+
+
+</body></html>

@@ -1,0 +1,46 @@
+<!--?xml version="1.0" encoding="UTF-8"?--><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+  <meta http-equiv="Content-Style-Type" content="text/css"/>
+  <meta name="generator" content="pandoc"/>
+  <title class="function">NUM</title>
+  <link rel="stylesheet" type="text/css" href="stylesheet.css"/>
+</head>
+<body>
+<div id="num-function" class="section level1">
+<a class="dashingAutolink" name="autolink-237"></a><a class="dashAnchor" name="//apple_ref/cpp/Function/NUM"></a><h1 class="function">NUM</h1>
+<p>NUM function is used to test arguments for numeric values.</p>
+<div id="command-syntax-196" class="section level2">
+<h2>COMMAND SYNTAX</h2>
+<pre><code>NUM(expression)</code></pre>
+</div>
+<div id="syntax-elements-139" class="section level2">
+<h2>SYNTAX ELEMENTS</h2>
+<p><strong>expression</strong> may evaluate to any data type.</p>
+</div>
+<div id="notes-118" class="section level2">
+<h2>NOTES</h2>
+<p>Not exactly it checks that every character in expression is a numeric - rather if an expression can be considered as a number.</p>
+<p>To execute user code migration from older systems correctly, the NUM function will accept both a null string and the single characters &#34;.&#34;, &#34;+&#34;, and &#34;-&#34; as being numeric.</p>
+<p>If running jBC in ros emulation the &#34;.&#34; , &#34;+&#34; and &#34;-&#34; characters would not be considered numeric.</p>
+</div>
+<div id="examples-prime-emulation" class="section level2">
+<h2>EXAMPLES (prime emulation)</h2>
+<pre><code>   CRT NUM(&#39;&#39;)                     ;* 1
+   CRT NUM(&#39;123334440.12&#39;)         ;* 1
+   CRT NUM(&#39;1233344.40.12&#39;)        ;* 0
+   CRT NUM(&#39;1,233,344.40&#39;)         ;* 0 - thousand delimiters don&#39;t do
+   CRT NUM(&#39;1 233 344.40&#39;)         ;* 0 - neither do spaces
+   CRT NUM(&#39;00012&#39;)                ;* 1 - leading zeroes are ok
+   CRT NUM(&#39;-123334440.12&#39;)        ;* 1 - minus is ok...
+   CRT NUM(&#39;123334440.12-&#39;)        ;* 0 - ...but not everywhere
+   CRT NUM(&#39;+123334440.12&#39;)        ;* 1
+   CRT NUM(&#39;6.02e23&#39;)              ;* 0 - E notation doesn&#39;t work
+   CRT NUM(&#39;1233Q34440.12&#39;)        ;* 0 - of course it&#39;s not
+   CRT NUM(&#39;2+2&#39;)                  ;* 0 - expression isn&#39;t evaluated
+   CRT NUM(&#39;.00&#39;)                  ;* 1</code></pre>
+</div>
+</div>
+
+
+
+</body></html>

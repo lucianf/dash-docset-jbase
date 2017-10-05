@@ -1,0 +1,48 @@
+<!--?xml version="1.0" encoding="UTF-8"?--><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+  <meta http-equiv="Content-Style-Type" content="text/css"/>
+  <meta name="generator" content="pandoc"/>
+  <title class="function">CHAR</title>
+  <link rel="stylesheet" type="text/css" href="stylesheet.css"/>
+</head>
+<body>
+<div id="char-function" class="section level1">
+<a class="dashingAutolink" name="autolink-78"></a><a class="dashAnchor" name="//apple_ref/cpp/Function/CHAR"></a><h1 class="function">CHAR</h1>
+<p>The CHAR function returns the ASCII character specified by the expression.</p>
+<div id="command-syntax-43" class="section level2">
+<h2>COMMAND SYNTAX</h2>
+<pre><code>CHAR(expression)</code></pre>
+</div>
+<div id="syntax-elements-21" class="section level2">
+<h2>SYNTAX ELEMENTS</h2>
+<p>The expression must evaluate to a numeric argument in the range 0-255, which is the entire ASCII character set.</p>
+</div>
+<div id="international-mode-1" class="section level2">
+<h2>INTERNATIONAL MODE</h2>
+<p>The CHAR function will return Unicode values encoded as UTF-8 byte sequences as follows:</p>
+<p>Expression values 0 - 127 return UTF-8 single byte characters equivalent to ASCII.</p>
+<p>Expression values 127 - 248 return UTF-8 double byte character sequences.</p>
+<p>Expression values 249 - 255 return system delimiters 0xf8 - 0xff</p>
+<p>Expression values &gt; 255 return UTF-8 multi byte character sequences</p>
+<p>When system delimiter values are not specifically required, generate UTF-8 byte sequences using the UTF8 function. i.e. X = UTF8(@AM) will generate a UTF-8 byte sequence in variable X for the system delimiter equating to Unicode value 0x000000fe.</p>
+</div>
+<div id="notes-28" class="section level2">
+<h2>NOTES</h2>
+<p>jBC variables can contain any of the ASCII characters 0-255, thus there are no restrictions on this function.</p>
+<p>See also: <a href="#CHARS">CHARS</a></p>
+</div>
+<div id="example-44" class="section level2">
+<h2>EXAMPLE</h2>
+<pre><code>   EQUATE VM TO CHAR(253)         ;* value Mark
+   FOR V.I = 1 TO 6
+      CRT CHAR(64 + V.I):         ;* ABCDEF
+   NEXT V.I
+   CRT &#39;&#39;                         ;* starts a new line
+   CRT OCONV( CHAR(353), &#39;MX&#39; )   ;* C5A1
+   CRT CHAR(7)                    ;* rings a bell</code></pre>
+</div>
+</div>
+
+
+
+</body></html>

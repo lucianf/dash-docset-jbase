@@ -1,0 +1,31 @@
+<!--?xml version="1.0" encoding="UTF-8"?--><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+  <meta http-equiv="Content-Style-Type" content="text/css"/>
+  <meta name="generator" content="pandoc"/>
+  <title class="function">DIV</title>
+  <link rel="stylesheet" type="text/css" href="stylesheet.css"/>
+</head>
+<body>
+<div id="div-function" class="section level1">
+<a class="dashingAutolink" name="autolink-118"></a><a class="dashAnchor" name="//apple_ref/cpp/Function/DIV"></a><h1 class="function">DIV</h1>
+<p>Use the DIV function to calculate the value of the quotient after division of the dividend by the divisor.</p>
+<div id="command-syntax-81" class="section level2">
+<h2>COMMAND SYNTAX</h2>
+<pre><code>DIV(dividend, divisor)</code></pre>
+<p>The dividend and divisor expressions can evaluate to any numeric value. The only exception is that the divisor cannot be zero. If either dividend or divisor evaluates to null, it returns null. DIV is PRECISION-dependent.</p>
+</div>
+<div id="example-73" class="section level2">
+<h2>EXAMPLE</h2>
+<pre><code>   CRT DIV(400, 200)                     ;* 2
+   CRT DIV(200, 400)                     ;* 0.5
+   CRT DIV(200, -400)                    ;* -0.5
+   PRECISION 9
+   CRT DIV(1, 10000000000)               ;* 0
+   PRECISION 17
+   CRT DIV(1, 10000000000)               ;* 0.0000000001</code></pre>
+</div>
+</div>
+
+
+
+</body></html>

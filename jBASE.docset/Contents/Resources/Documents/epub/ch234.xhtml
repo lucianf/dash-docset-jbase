@@ -1,0 +1,31 @@
+<!--?xml version="1.0" encoding="UTF-8"?--><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+  <meta http-equiv="Content-Style-Type" content="text/css"/>
+  <meta name="generator" content="pandoc"/>
+  <title class="statement">NOBUF</title>
+  <link rel="stylesheet" type="text/css" href="stylesheet.css"/>
+</head>
+<body>
+<div id="nobuf-statement" class="section level1">
+<a class="dashingAutolink" name="autolink-233"></a><a class="dashAnchor" name="//apple_ref/cpp/Method/NOBUF"></a><h1 class="statement">NOBUF</h1>
+<p>NOBUF statement turns off buffering for a file previously opened for sequential processing.</p>
+<div id="command-syntax-192" class="section level2">
+<h2>COMMAND SYNTAX</h2>
+<pre><code>NOBUF file.variable { THEN statements [ ELSE statements ] | ELSE statements }</code></pre>
+</div>
+<div id="description-5" class="section level2">
+<h2>DESCRIPTION</h2>
+<p>jBASE can buffer for sequential input and output operations. The NOBUF statement turns off this behavior and causes all writes to the file to be performed immediately. The NOBUF statement should be used in conjunction with a successful OPENSEQ statement and before any input or output is performed on the record.</p>
+<p>If the NOBUF operation is successful, it executes the THEN statements otherwise, executes the ELSE statements. If file.variable is not a valid file descriptor then NOBUF statement fails and the program enters the debugger.</p>
+</div>
+<div id="example-134" class="section level2">
+<h2>EXAMPLE</h2>
+<p>In the following example, if RECORD in DIRFILE can be opened, output buffering is turned off:</p>
+<pre><code>OPENSEQ &#39;DIRFILE&#39;, &#39;RECORD&#39; TO FILE THEN NOBUF FILE
+ELSE ABORT</code></pre>
+</div>
+</div>
+
+
+
+</body></html>

@@ -1,0 +1,49 @@
+<!--?xml version="1.0" encoding="UTF-8"?--><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+  <meta http-equiv="Content-Style-Type" content="text/css"/>
+  <meta name="generator" content="pandoc"/>
+  <title class="function">CacheStats</title>
+  <link rel="stylesheet" type="text/css" href="stylesheet.css"/>
+</head>
+<body>
+<div id="cachestats-function" class="section level1">
+<a class="dashingAutolink" name="autolink-65"></a><a class="dashAnchor" name="//apple_ref/cpp/Function/CacheStats"></a><h1 class="function">CacheStats</h1>
+<p>The CacheStats function will return a statistics counter of the specified bucket in the cache.</p>
+<div id="command-syntax-32" class="section level2">
+<h2>COMMAND SYNTAX</h2>
+<pre><code>CacheStats(bucket, counter_id)</code></pre>
+</div>
+<div id="example-34" class="section level2">
+<h2>EXAMPLE</h2>
+<pre><code>INCLUDE JBC.h
+CachePut(&#39;bucket1&#39;, &#39;item1&#39;, &#39;value1&#39;)
+CachePut(&#39;bucket1&#39;, &#39;item2&#39;, &#39;value2&#39;)
+CacheGet(&#39;bucket1&#39;, &#39;item1&#39;)
+CacheGet(&#39;bucket1&#39;, &#39;item3&#39;)
+CRT &#34;CACHE_HITS: &#34; : CacheStats(&#39;bucket1&#39;, CACHE_HITS)
+CRT &#34;CACHE_GETS: &#34; : CacheStats(&#39;bucket1&#39;, CACHE_GETS)
+CRT &#34;CACHE_PUTS: &#34; : CacheStats(&#39;bucket1&#39;, CACHE_PUTS)
+CRT &#34;CACHE_SIZE: &#34; : CacheStats(&#39;bucket1&#39;, CACHE_SIZE)
+CRT &#34;CACHE_NB_ITEMS: &#34; : CacheStats(&#39;bucket1&#39;, CACHE_NB_ITEMS)</code></pre>
+<p>The output is:</p>
+<pre>    CACHE_HITS: 1
+    CACHE_GETS: 2
+    CACHE_PUTS: 2
+    CACHE_SIZE: 12
+    CACHE_NB_ITEMS: 2</pre>
+</div>
+<div id="notes-21" class="section level2">
+<h2>NOTES</h2>
+<p>The &#34;counter_id&#34; parameter may have following values:</p>
+<p><strong>CACHE_HITS</strong>: Number of successful hits to the bucket. This counter is incremented by CacheGet function if a requested item exists in the bucket.</p>
+<p><strong>CACHE_GETS</strong>: Number of reads from the bucket. This counter is incremented by CacheGet on every call.</p>
+<p><strong>CACHE_PUTS</strong>: Number of writes to the bucket. This counter is incremented by CachePut on every call.</p>
+<p><strong>CACHE_SIZE</strong>: Total size of the bucket in bytes. This parameter is calculated by adding the lengths of all items of the bucket which have a String.</p>
+<p><strong>CACHE_NB_ITEMS</strong>: Number of items in the bucket.</p>
+<p>This function does not affect statistics of the bucket.</p>
+</div>
+</div>
+
+
+
+</body></html>

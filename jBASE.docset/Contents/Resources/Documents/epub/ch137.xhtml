@@ -1,0 +1,36 @@
+<!--?xml version="1.0" encoding="UTF-8"?--><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+  <meta http-equiv="Content-Style-Type" content="text/css"/>
+  <meta name="generator" content="pandoc"/>
+  <title class="function">FDIV</title>
+  <link rel="stylesheet" type="text/css" href="stylesheet.css"/>
+</head>
+<body>
+<div id="fdiv-function" class="section level1">
+<a class="dashingAutolink" name="autolink-136"></a><a class="dashAnchor" name="//apple_ref/cpp/Function/FDIV"></a><h1 class="function">FDIV</h1>
+<p>The FDIV function performs floating point division on two numeric values. (Similarly, FMUL does the multiplication.)</p>
+<div id="command-syntax-99" class="section level2">
+<h2>COMMAND SYNTAX</h2>
+<pre><code>FDIV(expression1, expression2)
+FMUL(expression1, expression2)</code></pre>
+</div>
+<div id="syntax-elements-63" class="section level2">
+<h2>SYNTAX ELEMENTS</h2>
+<p>Both expression1 and expression 2 must evaluate to non-null numeric values.</p>
+</div>
+<div id="notes-63" class="section level2">
+<h2>NOTES</h2>
+<p>If either of the arguments evaluates to null then a run time &#34;non-numeric&#34; error will occur.</p>
+<p>If the second argument evaluates to zero then a run time &#34;divide by zero&#34; error will occur.</p>
+<p>The calculation is not subject to the PRECISION setting.</p>
+</div>
+<div id="example-85" class="section level2">
+<h2>EXAMPLE</h2>
+<pre><code>    CRT FDIV(1, 7)                   ;* 0.1428571429
+    CRT FMUL(2.54, 5.703358)         ;* 14.48652932</code></pre>
+</div>
+</div>
+
+
+
+</body></html>

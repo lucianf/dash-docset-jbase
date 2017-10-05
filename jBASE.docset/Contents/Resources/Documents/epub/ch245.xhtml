@@ -1,0 +1,36 @@
+<!--?xml version="1.0" encoding="UTF-8"?--><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+  <meta http-equiv="Content-Style-Type" content="text/css"/>
+  <meta name="generator" content="pandoc"/>
+  <title class="statement">OPENDEV</title>
+  <link rel="stylesheet" type="text/css" href="stylesheet.css"/>
+</head>
+<body>
+<div id="opendev-statement" class="section level1">
+<a class="dashingAutolink" name="autolink-244"></a><a class="dashAnchor" name="//apple_ref/cpp/Method/OPENDEV"></a><h1 class="statement">OPENDEV</h1>
+<p>OPENDEV statement is used to open a device (or file) for sequential writing and/or reading.</p>
+<div id="command-syntax-203" class="section level2">
+<h2>COMMAND SYNTAX</h2>
+<pre><code>OPENDEV Device TO FileVar { LOCKED statements } THEN | ELSE statements</code></pre>
+</div>
+<div id="syntax-elements-144" class="section level2">
+<h2>SYNTAX ELEMENTS</h2>
+<p><strong>Device</strong> specifies the target device or file.</p>
+<p><strong>FileVar</strong> contains the file descriptor of the file when the open was successful.</p>
+<p><strong>Statements</strong> are conditional jBC statements.</p>
+</div>
+<div id="notes-124" class="section level2">
+<h2>NOTES</h2>
+<p>If the device does not exist or cannot be opened it executes the ELSE clause. Once open it takes a lock on the device. If the lock cannot be taken then the LOCKED clause is executed if it exists otherwise the ELSE clause is executed. The specified device can be a regular file, pipe or special device file. Regular file types only take locks. Once open the file pointer is set to the first line of sequential data.</p>
+</div>
+<div id="example-140" class="section level2">
+<h2>EXAMPLE</h2>
+<pre><code>OPENDEV &#34;\\.\TAPE0&#34; TO tape.drive ELSE STOP</code></pre>
+<p>Opens the Windows default tape drive and prepares it for sequential processing.</p>
+<p>For more information on sequential processing, see <a href="#READSEQ">READSEQ</a>, <a href="#WRITESEQ">WRITESEQ</a> the sequential processing example.</p>
+</div>
+</div>
+
+
+
+</body></html>

@@ -1,0 +1,294 @@
+<!--?xml version="1.0" encoding="UTF-8"?--><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+  <meta http-equiv="Content-Style-Type" content="text/css"/>
+  <meta name="generator" content="pandoc"/>
+  <title class="function">SPOOLER</title>
+  <link rel="stylesheet" type="text/css" href="stylesheet.css"/>
+</head>
+<body>
+<div id="spooler-function" class="section level1">
+<a class="dashingAutolink" name="autolink-315"></a><a class="dashAnchor" name="//apple_ref/cpp/Function/SPOOLER"></a><h1 class="function">SPOOLER</h1>
+<p>SPOOLER function returns information from the jBASE spooler.</p>
+<div id="command-syntax-268" class="section level2">
+<h2>COMMAND SYNTAX</h2>
+<pre><code>SPOOLER(n{, Port | User})</code></pre>
+</div>
+<div id="syntax-elements-205" class="section level2">
+<h2>SYNTAX ELEMENTS</h2>
+<p>Are as follows:</p>
+<table>
+<thead>
+<tr class="header">
+<th align="left">n</th>
+<th align="left">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">1</td>
+<td align="left">returns formqueue information</td>
+</tr>
+<tr class="even">
+<td align="left">2</td>
+<td align="left">returns job information</td>
+</tr>
+<tr class="odd">
+<td align="left">3</td>
+<td align="left">forms queue assignment</td>
+</tr>
+<tr class="even">
+<td align="left">4</td>
+<td align="left">returns status information</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Port</strong> limits the information returned to the specified port.</p>
+<p><strong>User</strong> limits the information returned to the specified user.</p>
+</div>
+<div id="notes-172" class="section level2">
+<h2>NOTES</h2>
+<p>SPOOLER(1) returns information about formqueues. The information is returned in a dynamic array, which contains an attribute for each formqueue. Each formqueue is structured as follows:</p>
+<table>
+<thead>
+<tr class="header">
+<th align="left">Multivalue</th>
+<th align="left">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">1</td>
+<td align="left">Formqueue name</td>
+</tr>
+<tr class="even">
+<td align="left">2</td>
+<td align="left">Form type</td>
+</tr>
+<tr class="odd">
+<td align="left">3</td>
+<td align="left">Device</td>
+</tr>
+<tr class="even">
+<td align="left">4</td>
+<td align="left">Device type</td>
+</tr>
+<tr class="odd">
+<td align="left">5</td>
+<td align="left">Status</td>
+</tr>
+<tr class="even">
+<td align="left">6</td>
+<td align="left">Number of jobs on the formqueue</td>
+</tr>
+<tr class="odd">
+<td align="left">7</td>
+<td align="left">Page skip</td>
+</tr>
+</tbody>
+</table>
+<p>SPOOLER(2) returns information about print jobs. The information is returned in a dynamic array, which contains an attribute for each print job.</p>
+<table>
+<thead>
+<tr class="header">
+<th align="left">Multivalue</th>
+<th align="left">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">1</td>
+<td align="left">Formqueue name</td>
+</tr>
+<tr class="even">
+<td align="left">2</td>
+<td align="left">Print job number</td>
+</tr>
+<tr class="odd">
+<td align="left">3</td>
+<td align="left">Effective user id</td>
+</tr>
+<tr class="even">
+<td align="left">4</td>
+<td align="left">Port number job generated on</td>
+</tr>
+<tr class="odd">
+<td align="left">5</td>
+<td align="left">Creation date in internal format</td>
+</tr>
+<tr class="even">
+<td align="left">6</td>
+<td align="left">Creation time in internal format</td>
+</tr>
+<tr class="odd">
+<td align="left">7</td>
+<td align="left">Job Status</td>
+</tr>
+<tr class="even">
+<td align="left">8</td>
+<td align="left">Options</td>
+</tr>
+<tr class="odd">
+<td align="left">9</td>
+<td align="left">Print job size (pages)</td>
+</tr>
+<tr class="even">
+<td align="left">10</td>
+<td align="left">Copies</td>
+</tr>
+<tr class="odd">
+<td align="left">11</td>
+<td align="left">Reserved</td>
+</tr>
+<tr class="even">
+<td align="left">12</td>
+<td align="left">Reserved</td>
+</tr>
+<tr class="odd">
+<td align="left">13</td>
+<td align="left">Reserved</td>
+</tr>
+<tr class="even">
+<td align="left">14</td>
+<td align="left">Effective user id</td>
+</tr>
+<tr class="odd">
+<td align="left">15</td>
+<td align="left">Real user id</td>
+</tr>
+<tr class="even">
+<td align="left">16</td>
+<td align="left">Application id as set by</td>
+</tr>
+<tr class="odd">
+<td align="left"></td>
+<td align="left">@APPLICATION.ID</td>
+</tr>
+<tr class="even">
+<td align="left">17</td>
+<td align="left">JBASICLOGNAME id</td>
+</tr>
+</tbody>
+</table>
+<p>SPOOLER(3) returns information about current formqueue assignments. The information is returned in a dynamic array, which contains an attribute for each assignment. Each attribute is structured as follows:</p>
+<table>
+<thead>
+<tr class="header">
+<th align="left">Multivalue</th>
+<th align="left">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">1</td>
+<td align="left">Report (channel) number</td>
+</tr>
+<tr class="even">
+<td align="left">2</td>
+<td align="left">Formqueue name</td>
+</tr>
+<tr class="odd">
+<td align="left">3</td>
+<td align="left">Options</td>
+</tr>
+<tr class="even">
+<td align="left">4</td>
+<td align="left">Copies</td>
+</tr>
+</tbody>
+</table>
+<p>SPOOLER(4) returns information about current print jobs. The information is returned in a dynamic array, which contains an attribute for each job being generated. Each attribute is structured as follows:</p>
+<table>
+<thead>
+<tr class="header">
+<th align="left">Multivalue</th>
+<th align="left">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">1</td>
+<td align="left">Report (channel) number</td>
+</tr>
+<tr class="even">
+<td align="left">2</td>
+<td align="left">Print job number</td>
+</tr>
+<tr class="odd">
+<td align="left">3</td>
+<td align="left">Print job size (pages)</td>
+</tr>
+<tr class="even">
+<td align="left">4</td>
+<td align="left">Creation date in internal format</td>
+</tr>
+<tr class="odd">
+<td align="left">5</td>
+<td align="left">Creation date in internal format</td>
+</tr>
+<tr class="even">
+<td align="left">6</td>
+<td align="left">Job Status</td>
+</tr>
+<tr class="odd">
+<td align="left">7</td>
+<td align="left">Effective User id</td>
+</tr>
+<tr class="even">
+<td align="left">8</td>
+<td align="left">Real user id</td>
+</tr>
+<tr class="odd">
+<td align="left">9</td>
+<td align="left">JBASICLOGNAME id</td>
+</tr>
+<tr class="even">
+<td align="left">10</td>
+<td align="left">Banner test from SETPTR BANNER</td>
+</tr>
+<tr class="odd">
+<td align="left"></td>
+<td align="left">text command</td>
+</tr>
+</tbody>
+</table>
+<p>The values for Job Status are:</p>
+<table>
+<thead>
+<tr class="header">
+<th align="left">Status</th>
+<th align="left">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">1</td>
+<td align="left">Queued</td>
+</tr>
+<tr class="even">
+<td align="left">2</td>
+<td align="left">Printing</td>
+</tr>
+<tr class="odd">
+<td align="left">3</td>
+<td align="left">Finished</td>
+</tr>
+<tr class="even">
+<td align="left">4</td>
+<td align="left">Open</td>
+</tr>
+<tr class="odd">
+<td align="left">5</td>
+<td align="left">Hold</td>
+</tr>
+<tr class="even">
+<td align="left">6</td>
+<td align="left">Edited</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+
+
+
+</body></html>

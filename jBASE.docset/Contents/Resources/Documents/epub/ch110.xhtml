@@ -1,0 +1,39 @@
+<!--?xml version="1.0" encoding="UTF-8"?--><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+  <meta http-equiv="Content-Style-Type" content="text/css"/>
+  <meta name="generator" content="pandoc"/>
+  <title class="statement">DEFCE</title>
+  <link rel="stylesheet" type="text/css" href="stylesheet.css"/>
+</head>
+<body>
+<div id="defce-statement" class="section level1">
+<a class="dashingAutolink" name="autolink-109"></a><a class="dashAnchor" name="//apple_ref/cpp/Method/DEFCE"></a><h1 class="statement">DEFCE</h1>
+<p>With TAFC the DEFCE statement should be used, rather than the <a href="#DEFC">DEFC</a> statement, for calling external C programs, which are pure &#39;C&#39; code and do not use the TAFC library macro&#39;s and functions.</p>
+<div id="example-1-2" class="section level2">
+<h2>EXAMPLE 1</h2>
+<p>For C functions that do not require TAFC functions use the DEFCE statement, however the passing arguments can only be of type INT, FLOAT and STRING.</p>
+<pre>    DEFCE INT MYFUNC3(INT)
+    INT32 MYFUNC3(INT32 Count)
+    {
+      INT32 Result;
+        ...
+        return Result;
+    }</pre>
+</div>
+<div id="example-2-3" class="section level2">
+<h2>EXAMPLE 2</h2>
+<pre><code>DEFCE INT cfunc( INT, FLOAT, VAR )
+Var1 = cfunc( A, 45, B )
+cfunc( 34, C, J )</code></pre>
+<p>You can call standard UNIX functions directly by declaring them with the DEFC statement according to their parameter requirements. You can only call them directly providing they return one of the type int or float/double or that the return type may be ignored.</p>
+</div>
+<div id="example-3-1" class="section level2">
+<h2>EXAMPLE 3</h2>
+<pre><code>DEFCE INT getpid()
+CRT &#34;Process id =&#34; : getpid()</code></pre>
+</div>
+</div>
+
+
+
+</body></html>

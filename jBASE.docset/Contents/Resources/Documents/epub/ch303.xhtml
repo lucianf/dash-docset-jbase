@@ -1,0 +1,35 @@
+<!--?xml version="1.0" encoding="UTF-8"?--><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+  <meta http-equiv="Content-Style-Type" content="text/css"/>
+  <meta name="generator" content="pandoc"/>
+  <title class="statement">SEND</title>
+  <link rel="stylesheet" type="text/css" href="stylesheet.css"/>
+</head>
+<body>
+<div id="send-statement" class="section level1">
+<a class="dashingAutolink" name="autolink-302"></a><a class="dashAnchor" name="//apple_ref/cpp/Method/SEND"></a><h1 class="statement">SEND</h1>
+<p>SEND statement sends a block of data directly to a device.</p>
+<div id="command-syntax-255" class="section level2">
+<h2>COMMAND SYNTAX</h2>
+<pre><code>SEND output {:} TO FileVar THEN | ELSE statements</code></pre>
+</div>
+<div id="syntax-elements-192" class="section level2">
+<h2>SYNTAX ELEMENTS</h2>
+<p>The output is an expression evaluating to a string that will be sent to the output device (specified by FileVar). It is expected that the device has already been opened with <a href="#OPENSER">OPENSER</a> or <a href="#OPENSEQ">OPENSEQ</a>.</p>
+<p>The SEND statement will append a newline sequence to the final output expression unless it is terminated with a colon &#34;:&#34; character.</p>
+</div>
+<div id="notes-163" class="section level2">
+<h2>NOTES</h2>
+<p>As the expression can be any valid expression, it may have output formatting applied to it.</p>
+<p>The SEND syntax requires you specify either a THEN or ELSE clause, or both. It executes the THEN clause if the data is without error. Else executes, the ELSE clause if the data cannot be sent.</p>
+<p>See also: <a href="#SENDX">SENDX</a></p>
+</div>
+<div id="examples-61" class="section level2">
+<h2>EXAMPLES</h2>
+<p>See also: Sequential File Processing.</p>
+</div>
+</div>
+
+
+
+</body></html>

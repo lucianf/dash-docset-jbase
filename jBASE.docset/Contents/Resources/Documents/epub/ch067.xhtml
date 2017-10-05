@@ -1,0 +1,80 @@
+<!--?xml version="1.0" encoding="UTF-8"?--><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+  <meta http-equiv="Content-Style-Type" content="text/css"/>
+  <meta name="generator" content="pandoc"/>
+  <title class="statement">CALL</title>
+  <link rel="stylesheet" type="text/css" href="stylesheet.css"/>
+</head>
+<body>
+<div id="call-statement" class="section level1">
+<a class="dashingAutolink" name="autolink-66"></a><a class="dashAnchor" name="//apple_ref/cpp/Method/CALL"></a><h1 class="statement">CALL</h1>
+<p>The CALL statement transfers program execution to an external subroutine.</p>
+<div id="command-syntax-33" class="section level2">
+<h2>COMMAND SYNTAX</h2>
+<pre><code>CALL {@} subroutine.name {(argument{, argument ... })}</code></pre>
+</div>
+<div id="syntax-elements-13" class="section level2">
+<h2>SYNTAX ELEMENTS</h2>
+<p>The CALL statement transfers program execution to the subroutine called subroutine.name, which can be any valid string either quoted or unquoted.</p>
+<p>The CALL @ variant of this statement assumes that subroutine.name is a variable that contains the name of the subroutine to call.</p>
+<p>The CALL statement may optionally pass a number of parameters to the target subroutine. These parameters can consist of any valid expression or variable name. If a variable name is used then the called program may return a value to the variable by changing the value of the equivalent variable in its own parameter list.</p>
+</div>
+<div id="notes-22" class="section level2">
+<h2>NOTES</h2>
+<p>When using an expression to pass a parameter to the subroutine, you cannot use the built-in functions of jBC (such as COUNT), within the expression.</p>
+<p>An unlimited number of parameters can be passed to an external subroutine. The number of parameters in the CALL statement must match exactly the number expected in the SUBROUTINE statement declaring the external subroutine, otherwise runtime error is raised.</p>
+<p>It is not required that the calling program and the external subroutine be compiled with the same PRECISION. However, any changes to precision in a subroutine will not persist when control returns to the calling program.</p>
+<p>Variables passed as parameters to the subroutine may not reside in any COMMON areas declared in the program.</p>
+</div>
+<div id="example-35" class="section level2">
+<h2>EXAMPLE</h2>
+<p>A subroutine:</p>
+<pre><code>   SUBROUTINE NUM.INCR(P.NUMBER)
+* increase the parameter
+   P.NUMBER ++
+   RETURN
+END</code></pre>
+<p>A calling program:</p>
+<pre><code>   V.ARRAY = 1 :@FM: 2 :@FM: 3 :@FM: 4
+   CRT FMT(V.ARRAY, &#39;MCP&#39;)   ;* 1^2^3^4
+   V.ARRAY&lt;2&gt; += 1
+   CRT FMT(V.ARRAY, &#39;MCP&#39;)  ;* 1^3^3^4 - array element can be processed directly
+   CALL NUM.INCR(V.ARRAY&lt;2&gt;)
+   CRT FMT(V.ARRAY, &#39;MCP&#39;)   ;* still 1^3^3^4 - passing to a subr doesn&#39;t work
+   V.VAR = V.ARRAY&lt;2&gt;
+   CALL NUM.INCR(V.VAR)
+   V.ARRAY&lt;2&gt; = V.VAR
+   CRT FMT(V.ARRAY, &#39;MCP&#39;)   ;* now 1^4^3^4 - should use a variable
+   V.SUBR = &#39;NUM.INCR&#39;
+   CALL @V.SUBR(V.VAR)       ;* can call a subroutine this way
+   CRT V.VAR                 ;* 5
+* Dimensioned array is ok as well
+   DIM V.DIM.ARR(3)
+   V.DIM.ARR(2) = &#39;NUM.INCR&#39;
+   V.I = 2
+   CALL @V.DIM.ARR(V.I) (V.VAR)
+   CRT V.VAR        ;* 6
+* Pass by value rather than by reference - variable keeps its value:
+   CALL NUM.INCR((V.VAR))
+   CRT V.VAR        ;* 6
+* Wrong CALL:
+   CALL NUM.INCR(V.VAR, 1)</code></pre>
+<p>Output:</p>
+<pre>    1^2^3^4
+    1^3^3^4
+    1^3^3^4
+    1^4^3^4
+    5
+    6
+    6
+     &lowast;&lowast; Error [ SUBROUTINE_PARM_ERROR ] &lowast;&lowast;
+    &#39;SUBROUTINE NUM.INCR&#39; called with incorrect arguments , Line 1 , Source test2.b
+    Trap from an error message, error message name = SUBROUTINE_PARM_ERROR
+    Source changed to .\test2.b
+    jBASE debugger-&gt;</pre>
+</div>
+</div>
+
+
+
+</body></html>

@@ -1,0 +1,38 @@
+<!--?xml version="1.0" encoding="UTF-8"?--><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+  <meta http-equiv="Content-Style-Type" content="text/css"/>
+  <meta name="generator" content="pandoc"/>
+  <title class="function">COS</title>
+  <link rel="stylesheet" type="text/css" href="stylesheet.css"/>
+</head>
+<body>
+<div id="cos-function" class="section level1">
+<a class="dashingAutolink" name="autolink-97"></a><a class="dashAnchor" name="//apple_ref/cpp/Function/COS"></a><h1 class="function">COS</h1>
+<p>The COS function calculates the cosine of any angle using floating point arithmetic, then rounds to the precision implied by the jBC program, which makes it very accurate.</p>
+<div id="command-syntax-62" class="section level2">
+<h2>COMMAND SYNTAX</h2>
+<pre><code>COS(expression)</code></pre>
+<p>This function calculates the cosine of an expression.</p>
+</div>
+<div id="syntax-elements-35" class="section level2">
+<h2>SYNTAX ELEMENTS</h2>
+<p>The expression must evaluate to a numeric result or a runtime error will occur.</p>
+</div>
+<div id="notes-38" class="section level2">
+<h2>NOTES</h2>
+<p>Assumes the value returned by expression is in degrees.</p>
+</div>
+<div id="examples-5" class="section level2">
+<h2>EXAMPLES</h2>
+<pre><code>   * print cos i for 1 to 360 degrees
+   FOR I = 1 TO 360
+      cos_i = COS(I)
+      CRT cos_i
+      IF ABS(cos_i) GT 1 THEN CRT &#34;It&#39;s wartime&#34;
+   NEXT I</code></pre>
+</div>
+</div>
+
+
+
+</body></html>

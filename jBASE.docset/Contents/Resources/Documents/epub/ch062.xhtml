@@ -1,0 +1,42 @@
+<!--?xml version="1.0" encoding="UTF-8"?--><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+  <meta http-equiv="Content-Style-Type" content="text/css"/>
+  <meta name="generator" content="pandoc"/>
+  <title class="function">CacheGetOption</title>
+  <link rel="stylesheet" type="text/css" href="stylesheet.css"/>
+</head>
+<body>
+<div id="cachegetoption-function" class="section level1">
+<a class="dashingAutolink" name="autolink-61"></a><a class="dashAnchor" name="//apple_ref/cpp/Function/CacheGetOption"></a><h1 class="function">CacheGetOption</h1>
+<p>The CacheGetOption function will return an option of the bucket.</p>
+<div id="command-syntax-28" class="section level2">
+<h2>COMMAND SYNTAX</h2>
+<pre><code>CacheGetOption(bucket,  option)</code></pre>
+</div>
+<div id="example-30" class="section level2">
+<h2>EXAMPLE</h2>
+<pre><code>INCLUDE JBC.h
+CRT &#39;CACHE_MAX_SIZE: &#39;: CacheGetOption(&#39;bucket1&#39;, CACHE_MAX_SIZE)
+CRT &#39;CACHE_PURGE_THRESHOLD: &#39;: CacheGetOption(&#39;bucket1&#39;, CACHE_PURGE_THRESHOLD)
+CachePut(&#39;bucket1&#39;, &#39;item1&#39;, &#39;value1&#39;)
+CRT &#39;CACHE_MAX_SIZE: &#39;: CacheGetOption(&#39;bucket1&#39;, CACHE_MAX_SIZE)
+CRT &#39;CACHE_PURGE_THRESHOLD: &#39;: CacheGetOption(&#39;bucket1&#39;, CACHE_PURGE_THRESHOLD)</code></pre>
+<p>The output is:</p>
+<pre>    CACHE_MAX_SIZE: 0
+    CACHE_PURGE_THRESHOLD: 0
+    CACHE_MAX_SIZE: 1048576
+    CACHE_PURGE_THRESHOLD: 90</pre>
+</div>
+<div id="notes-17" class="section level2">
+<h2>NOTES</h2>
+<p>The bucket should exists otherwise this function returns zeros.</p>
+<p>The &#34;option&#34; parameter may have following values:</p>
+<p><strong>CACHE_MAX_SIZE</strong>: Bucket maximum size in bytes. By default, the bucket size is 1048576. If the size reaches this value, the most outdated data will be purged from the bucket to reduce its size.</p>
+<p><strong>CACHE_PURGE_THRESHOLD</strong>: Percentage (from 1 to 100) of a bucket size exceeding of which leads to the bucket purging. By default, it&#39;s value is 90. When a bucket size exceeds the (CACHE_MAX_SIZE * CACHE_PURGE_THRESHOLD / 100) value the most outdated data will be purged from the bucket to reduce its size.</p>
+<p>This function does not affect statistics of the bucket.</p>
+</div>
+</div>
+
+
+
+</body></html>

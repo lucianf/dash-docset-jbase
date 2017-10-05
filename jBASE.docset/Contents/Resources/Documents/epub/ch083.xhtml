@@ -1,0 +1,36 @@
+<!--?xml version="1.0" encoding="UTF-8"?--><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+  <meta http-equiv="Content-Style-Type" content="text/css"/>
+  <meta name="generator" content="pandoc"/>
+  <title class="statement">CLEAR</title>
+  <link rel="stylesheet" type="text/css" href="stylesheet.css"/>
+</head>
+<body>
+<div id="clear-statement" class="section level1">
+<a class="dashingAutolink" name="autolink-82"></a><a class="dashAnchor" name="//apple_ref/cpp/Method/CLEAR"></a><h1 class="statement">CLEAR</h1>
+<p>The CLEAR statement will initialize all local variables to numeric 0.</p>
+<div id="command-syntax-47" class="section level2">
+<h2>COMMAND SYNTAX</h2>
+<pre><code>CLEAR</code></pre>
+</div>
+<div id="notes-30" class="section level2">
+<h2>NOTES</h2>
+<p>Use CLEAR at any time during the execution of the program.</p>
+</div>
+<div id="example-48" class="section level2">
+<h2>EXAMPLE</h2>
+<!--jBC-->
+<pre><code>   COMMON /MY.COMM/ global_var
+   global_var = 1000
+   var = 5            ;   CRT var           ;* 5
+   var ++             ;   CRT var           ;* 6
+   CLEAR
+* only regular variables will be cleared
+   CRT var                                  ;* 0
+   CRT global_var                           ;* 1000</code></pre>
+</div>
+</div>
+
+
+
+</body></html>

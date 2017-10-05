@@ -1,0 +1,38 @@
+<!--?xml version="1.0" encoding="UTF-8"?--><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+  <meta http-equiv="Content-Style-Type" content="text/css"/>
+  <meta name="generator" content="pandoc"/>
+  <title class="function">COL1 and COL2</title>
+  <link rel="stylesheet" type="text/css" href="stylesheet.css"/>
+</head>
+<body>
+<div id="col1-and-col2-function" class="section level1">
+<a class="dashingAutolink" name="autolink-90"></a><a class="dashAnchor" name="//apple_ref/cpp/Function/COL1%20and%20COL2"></a><h1 class="function">COL1 and COL2</h1>
+<p>Use these functions in conjunction with the FIELD function to determine the character positions 1 position before and 1 position after the location of the last field.</p>
+<div id="command-syntax-55" class="section level2">
+<h2>COMMAND SYNTAX</h2>
+<pre><code>COL1() / COL2()</code></pre>
+</div>
+<div id="notes-33" class="section level2">
+<h2>NOTES</h2>
+<p>When a field has been located in a string, it is sometimes useful to know its exact position within the string to manipulate either it, or the rest of the string. COL1() will return the position of the character immediately before the last field located. COL2() will return the position of the character immediately after the end of the last field located. Use them to manipulate the string.</p>
+</div>
+<div id="example-55" class="section level2">
+<h2>EXAMPLE</h2>
+<pre><code>  V.STRING = &#39;ABC/DEF/QWE/XYZ&#39;
+* One field
+   CRT FIELD(V.STRING, &#39;/&#39;, 2)         ;* DEF
+   CRT COL1()                          ;* 4 - position right before &#34;DEF&#34;
+   CRT COL2()                          ;* 8 - position right after it
+* Alternate way
+   CRT V.STRING[&#39;/&#39;, 2, 1]   ;* DEF
+* More than one field
+   CRT FIELD(V.STRING, &#39;/&#39;, 2, 2)      ;* DEF/QWE
+   CRT COL1()                          ;* 4
+   CRT COL2()                          ;* 12</code></pre>
+</div>
+</div>
+
+
+
+</body></html>

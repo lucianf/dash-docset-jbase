@@ -1,0 +1,36 @@
+<!--?xml version="1.0" encoding="UTF-8"?--><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+  <meta http-equiv="Content-Style-Type" content="text/css"/>
+  <meta name="generator" content="pandoc"/>
+  <title class="statement">PROCREAD</title>
+  <link rel="stylesheet" type="text/css" href="stylesheet.css"/>
+</head>
+<body>
+<div id="procread-statement" class="section level1">
+<a class="dashingAutolink" name="autolink-265"></a><a class="dashAnchor" name="//apple_ref/cpp/Method/PROCREAD"></a><h1 class="statement">PROCREAD</h1>
+<p>PROCREAD statement is used to retrieve data passed to programs from a jCL program.</p>
+<div id="command-syntax-223" class="section level2">
+<h2>COMMAND SYNTAX</h2>
+<pre><code>PROCREAD variable THEN | ELSE statements</code></pre>
+</div>
+<div id="syntax-elements-161" class="section level2">
+<h2>SYNTAX ELEMENTS</h2>
+<p><strong>variable</strong> is a valid jBC identifier, which will be used to store the contents of the primary input buffer of the last jCL program called.</p>
+<p>If a jCL program does not initiate the program the PROCREAD will fail and execute any statements associated with an ELSE clause. If the program was initiated by a jCL program then the PROCREAD will succeed, the jCL primary input buffer will be assigned to variable and any statements associated with a THEN clause will be executed.</p>
+</div>
+<div id="notes-135" class="section level2">
+<h2>NOTES</h2>
+<p>It is recommended that the use of jCL and therefore the PROCREAD statement should be not be expanded within your application and gradually replaced with more sophisticated methods such as UNIX scripts or jBC programs.</p>
+</div>
+<div id="example-151" class="section level2">
+<h2>EXAMPLE</h2>
+<pre><code>PROCREAD Primary ELSE
+  CRT &#34;Unable to read the jCL buffer&#34;
+  STOP
+END</code></pre>
+</div>
+</div>
+
+
+
+</body></html>

@@ -1,0 +1,51 @@
+<!--?xml version="1.0" encoding="UTF-8"?--><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+  <meta http-equiv="Content-Style-Type" content="text/css"/>
+  <meta name="generator" content="pandoc"/>
+  <title class="statement">FLUSH</title>
+  <link rel="stylesheet" type="text/css" href="stylesheet.css"/>
+</head>
+<body>
+<div id="flush-statement" class="section level1">
+<a class="dashingAutolink" name="autolink-145"></a><a class="dashAnchor" name="//apple_ref/cpp/Method/FLUSH"></a><h1 class="statement">FLUSH</h1>
+<p>Writes all the buffers for a sequential I/O file immediately. Normally, sequential I/O uses buffering for input/output operations, and writes are not immediately flushed.</p>
+<div id="command-syntax-108" class="section level2">
+<h2>COMMAND SYNTAX</h2>
+<pre><code>FLUSH file.variable { THEN statements [ ELSE statements ] | ELSE statements }</code></pre>
+<p><strong>file.variable</strong> specifies a file previously opened for sequential processing. If file.variable evaluates to null, the FLUSH statement fails and the program enters the debugger. After the buffer is written to the file, it executes the THEN statements, ignoring the ELSE statements.</p>
+<p>If none of the above can be completed, it executes the ELSE statements.</p>
+</div>
+<div id="example-90" class="section level2">
+<h2>EXAMPLE</h2>
+<pre><code>   dir_name = &#39;.&#39;
+   file_name = &#39;report.txt&#39;
+   DELETESEQ dir_name, file_name ELSE NULL
+   *
+   OPENSEQ dir_name, file_name TO f_report ELSE NULL
+   WRITESEQ &#39;New data&#39; TO f_report ELSE NULL
+   *
+   FLUSH f_report ELSE NULL
+   CRT &#39;&lt;&#39; : DIR(file_name)&lt;1&gt; : &#39;&gt;&#39;     ;* 9</code></pre>
+</div>
+<div id="note-12" class="section level2">
+<h2>NOTE</h2>
+<p>For <strong>prime</strong> emulation FLUSH in this example will fail if there were still no WRITESEQs since file isn&#39;t created immediately on OPENSEQ:</p>
+<pre><code>   dir_name = &#39;.&#39;
+   file_name = &#39;report.txt&#39;
+   DELETESEQ dir_name, file_name ELSE NULL
+   *
+   OPENSEQ dir_name, file_name TO f_report ELSE NULL
+   *
+   FLUSH f_report ELSE NULL
+   CRT &#39;&lt;&#39; : DIR(file_name)&lt;1&gt; : &#39;&gt;&#39;     ;* 0</code></pre>
+<p>This program will crash with the following message:</p>
+<pre>    &lowast;&lowast; Error [ NOT_FILE_VAR ] &lowast;&lowast;
+    Variable is not an opened file descriptor , Line     7 , Source test.b
+    Trap from an error message, error message name = NOT_FILE_VAR</pre>
+<p>Under <strong>seq</strong> emulation program will not crash.</p>
+</div>
+</div>
+
+
+
+</body></html>

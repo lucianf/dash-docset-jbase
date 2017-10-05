@@ -1,0 +1,78 @@
+<!--?xml version="1.0" encoding="UTF-8"?--><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+  <meta http-equiv="Content-Style-Type" content="text/css"/>
+  <meta name="generator" content="pandoc"/>
+  <title class="statement">WRITEVU</title>
+  <link rel="stylesheet" type="text/css" href="stylesheet.css"/>
+</head>
+<body>
+<div id="writevu-statement" class="section level1">
+<a class="dashingAutolink" name="autolink-365"></a><a class="dashAnchor" name="//apple_ref/cpp/Method/WRITEVU"></a><h1 class="statement">WRITEVU</h1>
+<p>WRITEVU statement allows a program to write a specific field on a record in a previously opened file. An existing record lock will be preserved.</p>
+<div id="command-syntax-310" class="section level2">
+<h2>COMMAND SYNTAX</h2>
+<pre><code>WRITEVU variable1 ON | TO {variable2,} expression1, expression2  \
+      { SETTING setvar } { ON ERROR statements }</code></pre>
+</div>
+<div id="syntax-elements-238" class="section level2">
+<h2>SYNTAX ELEMENTS</h2>
+<p><strong>variable1</strong> is the identifier holding the record to be written.</p>
+<p><strong>variable2</strong>, if specified, should be a jBC variable that has previously been opened to a file using the OPEN statement. If variable2 is not specified then the default file is assumed.</p>
+<p><strong>expression1</strong> should evaluate to a valid record key for the file.</p>
+<p><strong>expression2</strong> should evaluate to a positive integer number; if the number is greater than the number of fields in the record, null fields will be added to variable1. If expression2 evaluates to a non-numeric argument, a run time error will be generated.</p>
+<p>If the SETTING clause is specified and the write fails, it sets setvar to one of the following values:</p>
+</div>
+<div id="incremental-file-errors-19" class="section level2">
+<h2>INCREMENTAL FILE ERRORS</h2>
+<table>
+<thead>
+<tr class="header">
+<th align="left">Code</th>
+<th align="left">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">128</td>
+<td align="left">No such file or directory</td>
+</tr>
+<tr class="even">
+<td align="left">4096</td>
+<td align="left">Network error</td>
+</tr>
+<tr class="odd">
+<td align="left">24576</td>
+<td align="left">Permission denied</td>
+</tr>
+<tr class="even">
+<td align="left">32768</td>
+<td align="left">Physical I/O error or unknown error</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div id="notes-196" class="section level2">
+<h2>NOTES</h2>
+<p>If the statement fails to write the record, it executes any statements associated with the ON ERROR clause.</p>
+<p>Any of the following events will release the lock taken by the <a href="#WRITEVU">WRITEVU</a> statement:</p>
+<p>The same program with <a href="#WRITE">WRITE</a>, <a href="#WRITEV">WRITEV</a> or <a href="#MATWRITE">MATWRITE</a> statements writes to the record.</p>
+<p>By explicitly using the <a href="#RELEASE">RELEASE</a> statement, it releases the record lock.</p>
+<p>The program stops normally or abnormally.</p>
+<p>See also: <a href="#MATWRITEU">MATWRITEU</a>, <a href="#RELEASE">RELEASE</a>, <a href="#WRITE">WRITE</a>, <a href="#WRITEU">WRITEU</a>.</p>
+</div>
+<div id="example-205" class="section level2">
+<h2>EXAMPLE</h2>
+<pre><code>OPEN &#34;Customers&#34; ELSE ABORT 201, &#34;Customers&#34;
+OPEN &#34;DICT Customers&#34; TO DCusts ELSE
+   ABORT 201, &#34;DICT Customers&#34;
+END
+WRITEVU Rec ON DCusts, &#39;Xref&#39;, 1 SETTING Err ON ERROR
+   CRT &#34;I/O Error[&#34; :Err: &#34;]&#34;
+   ABORT
+END</code></pre>
+</div>
+</div>
+
+
+
+</body></html>

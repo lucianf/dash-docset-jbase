@@ -1,0 +1,36 @@
+<!--?xml version="1.0" encoding="UTF-8"?--><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+  <meta http-equiv="Content-Style-Type" content="text/css"/>
+  <meta name="generator" content="pandoc"/>
+  <title class="function">GETCWD</title>
+  <link rel="stylesheet" type="text/css" href="stylesheet.css"/>
+</head>
+<body>
+<div id="getcwd-function" class="section level1">
+<a class="dashingAutolink" name="autolink-155"></a><a class="dashAnchor" name="//apple_ref/cpp/Function/GETCWD"></a><h1 class="function">GETCWD</h1>
+<p>The GETCWD function allows a jBC program to determine the current working directory of the program, which is normally be the directory in which execution of the program occurred but possibly changed using the CHDIR() function.</p>
+<div id="command-syntax-117" class="section level2">
+<h2>COMMAND SYNTAX</h2>
+<pre><code>GETCWD(Var)</code></pre>
+</div>
+<div id="syntax-elements-77" class="section level2">
+<h2>SYNTAX ELEMENTS</h2>
+<p>When executed the Var will be set to the name of the current working directory; the function itself returns a Boolean TRUE or FALSE value to indicate whether the command was successful or not.</p>
+</div>
+<div id="notes-75" class="section level2">
+<h2>NOTES</h2>
+<p>Refer to your UNIX or Windows documentation for more information on the concept of the current working directory.</p>
+</div>
+<div id="examples-26" class="section level2">
+<h2>EXAMPLES</h2>
+<pre><code>IF GETCWD(Cwd) THEN
+   CRT &#34;Current Working Directory = &#34; : Cwd
+END ELSE
+   CRT &#34;Could not determine CWD!&#34;
+END</code></pre>
+</div>
+</div>
+
+
+
+</body></html>

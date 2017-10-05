@@ -1,0 +1,66 @@
+<!--?xml version="1.0" encoding="UTF-8"?--><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+  <meta http-equiv="Content-Style-Type" content="text/css"/>
+  <meta name="generator" content="pandoc"/>
+  <title class="function">BITCHANGE</title>
+  <link rel="stylesheet" type="text/css" href="stylesheet.css"/>
+</head>
+<body>
+<div id="bitchange-function" class="section level1">
+<a class="dashingAutolink" name="autolink-42"></a><a class="dashAnchor" name="//apple_ref/cpp/Function/BITCHANGE"></a><h1 class="function">BITCHANGE</h1>
+<p>BITCHANGE toggles the state of a specified bit in the local bit table, and returns the original value of the bit.</p>
+<div id="command-syntax-10" class="section level2">
+<h2>COMMAND SYNTAX</h2>
+<pre><code>BITCHANGE(table_no)</code></pre>
+</div>
+<div id="syntax-elements-7" class="section level2">
+<h2>SYNTAX ELEMENTS</h2>
+<p>table_no specifies the position in the table of the bit to be changed.</p>
+</div>
+<div id="notes-4" class="section level2">
+<h2>NOTES</h2>
+<p>For each process, it maintains a unique table of 128 bits (numbered 1 to 128) and treats each bit in the table as a two-state flag - the value returned will always be zero or one.</p>
+<p>BITCHANGE returns the value of the bit before it was changed. You can therefore check and set (or reset) a flag in one step.</p>
+<p>BITCHANGE also provides some special functions if you use one of the following table_no values:</p>
+<table>
+<thead>
+<tr class="header">
+<th align="left">Code</th>
+<th align="left">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">-1</td>
+<td align="left">toggles (enables/disables) the BREAK key Inhibit bit.</td>
+</tr>
+<tr class="even">
+<td align="left">-2</td>
+<td align="left">toggles (enables/disables) the Command Level Restart</td>
+</tr>
+<tr class="odd">
+<td align="left"></td>
+<td align="left">feature.</td>
+</tr>
+<tr class="even">
+<td align="left">-3</td>
+<td align="left">toggles (enables/disables) the Break/End Restart</td>
+</tr>
+<tr class="odd">
+<td align="left"></td>
+<td align="left">feature.</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div id="example-13" class="section level2">
+<h2>EXAMPLE</h2>
+<pre><code>    OLD.VAL = BITCHANGE(100)
+    CRT OLD.VAL</code></pre>
+<p>If bit 100 in the table is zero, it sets to one and displays zero; the reverse will apply if set to one.</p>
+</div>
+</div>
+
+
+
+</body></html>

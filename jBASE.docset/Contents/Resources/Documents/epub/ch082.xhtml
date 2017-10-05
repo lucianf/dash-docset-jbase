@@ -1,0 +1,31 @@
+<!--?xml version="1.0" encoding="UTF-8"?--><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+  <meta http-equiv="Content-Style-Type" content="text/css"/>
+  <meta name="generator" content="pandoc"/>
+  <title class="function">CHECKSUM</title>
+  <link rel="stylesheet" type="text/css" href="stylesheet.css"/>
+</head>
+<body>
+<div id="checksum-function" class="section level1">
+<a class="dashingAutolink" name="autolink-81"></a><a class="dashAnchor" name="//apple_ref/cpp/Function/CHECKSUM"></a><h1 class="function">CHECKSUM</h1>
+<p>The CHECKSUM function returns a simple numeric checksum of a character string.</p>
+<div id="command-syntax-46" class="section level2">
+<h2>COMMAND SYNTAX</h2>
+<pre><code>CHECKSUM(expression)</code></pre>
+</div>
+<div id="syntax-elements-24" class="section level2">
+<h2>SYNTAX ELEMENTS</h2>
+<p>The expression may evaluate to any result but will usually be a string. The function then scans every character in the string and sums up the multiplication of character position by its ASCII value. This algorithm doesn&#39;t really supply reliable result - see the example below.</p>
+</div>
+<div id="example-47" class="section level2">
+<h2>EXAMPLE</h2>
+<pre><code>   CRT CHECKSUM(&#39;A&#39;)                ;* 65
+   CRT CHECKSUM(&#39;AA&#39;)               ;* 65*1 + 65*2 = 195
+   CRT CHECKSUM(&#39;B&#39;)                ;* 66
+   CRT CHECKSUM( CHAR(0): &#39;!&#39; )     ;* 0*1 + 33*2 = 66</code></pre>
+</div>
+</div>
+
+
+
+</body></html>

@@ -1,0 +1,36 @@
+<!--?xml version="1.0" encoding="UTF-8"?--><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+  <meta http-equiv="Content-Style-Type" content="text/css"/>
+  <meta name="generator" content="pandoc"/>
+  <title class="function">RND</title>
+  <link rel="stylesheet" type="text/css" href="stylesheet.css"/>
+</head>
+<body>
+<div id="rnd-function" class="section level1">
+<a class="dashingAutolink" name="autolink-295"></a><a class="dashAnchor" name="//apple_ref/cpp/Function/RND"></a><h1 class="function">RND</h1>
+<p>RND function allows the generation of random numbers by a program.</p>
+<div id="command-syntax-249" class="section level2">
+<h2>COMMAND SYNTAX</h2>
+<pre><code>RND(expression)</code></pre>
+</div>
+<div id="syntax-elements-186" class="section level2">
+<h2>SYNTAX ELEMENTS</h2>
+<p><strong>expression</strong> should evaluate to a numeric integer value or a runtime error will occur. The absolute value of expression is used by the function. The highest number expression can be on Windows is PWR(2,15) - 1. The highest number on UNIX is PWR(2,31) - 1.</p>
+</div>
+<div id="notes-157" class="section level2">
+<h2>NOTES</h2>
+<p>The function will return a random integer number between 0 and the value of expression-1.</p>
+<p>See also: <a href="#ABS">ABS</a></p>
+</div>
+<div id="example-174" class="section level2">
+<h2>EXAMPLE</h2>
+<pre><code>FOR I=1 TO 20
+   CRT RND(100) : &#34;, &#34; :
+NEXT I</code></pre>
+<p>prints 20 random numbers in the inclusive range 0 to 99.</p>
+</div>
+</div>
+
+
+
+</body></html>

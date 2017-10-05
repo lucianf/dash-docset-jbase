@@ -1,0 +1,79 @@
+<!--?xml version="1.0" encoding="UTF-8"?--><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+  <meta http-equiv="Content-Style-Type" content="text/css"/>
+  <meta name="generator" content="pandoc"/>
+  <title class="statement">READNEXT</title>
+  <link rel="stylesheet" type="text/css" href="stylesheet.css"/>
+</head>
+<body>
+<div id="readnext-statement" class="section level1">
+<a class="dashingAutolink" name="autolink-277"></a><a class="dashAnchor" name="//apple_ref/cpp/Method/READNEXT"></a><h1 class="statement">READNEXT</h1>
+<p>READNEXT retrieves the next element in a list variable.</p>
+<div id="command-syntax-235" class="section level2">
+<h2>COMMAND SYNTAX</h2>
+<pre><code>READNEXT variable1, variable2 { FROM variable3 } { SETTING setvar }  \
+         { THEN | ELSE statements }</code></pre>
+</div>
+<div id="syntax-elements-172" class="section level2">
+<h2>SYNTAX ELEMENTS</h2>
+<p><strong>variable1</strong> is the variable into which the next element of the list will be read.</p>
+<p><strong>variable2</strong> is used when the list has been retrieved externally from a <a href="#SSELECT">SSELECT</a> or similar TAFC command that has used an exploding sort directive. When specified, this variable will be set to the multi-value reference of the current element. For example, if the SSELECT used a BY-EXP directive on field 3 of the records in a file, the list will contain each record key in the file as many times as there are multi-values in the field. Each READNEXT instance will set variable2 to the multi-value in field 3 to which the element refers. This allows the multi-values in field 3 to be retrieved in sorted order.</p>
+<p>If variable3 is specified with the FROM clause, the READNEXT operates on the list contained in variable3. If variable3 is not specified, the default select list variable will be assumed.</p>
+<p>If the SETTING clause is specified and the read (to build the next portion of the list) fails, setvar will be set to one of the following values:</p>
+</div>
+<div id="incremental-file-errors-11" class="section level2">
+<h2>INCREMENTAL FILE ERRORS</h2>
+<table>
+<thead>
+<tr class="header">
+<th align="left">Code</th>
+<th align="left">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">128</td>
+<td align="left">No such file or directory</td>
+</tr>
+<tr class="even">
+<td align="left">4096</td>
+<td align="left">Network error</td>
+</tr>
+<tr class="odd">
+<td align="left">24576</td>
+<td align="left">Permission denied</td>
+</tr>
+<tr class="even">
+<td align="left">32768</td>
+<td align="left">Physical I/O error or unknown error</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div id="notes-143" class="section level2">
+<h2>NOTES</h2>
+<p>READNEXT can be used as an expression returning a Boolean TRUE or FALSE value. If an element is successfully read from the list, TRUE is returned. If the list was empty, FALSE is returned.</p>
+<p>See also: <a href="#SELECT">SELECT</a>, extensions for secondary indexes.</p>
+</div>
+<div id="example-161" class="section level2">
+<h2>EXAMPLE</h2>
+<pre><code>   EXECUTE &#39;DELETE-FILE DATA F.TEMP&#39;
+   EXECUTE &#39;CREATE-FILE DATA F.TEMP 1 101 TYPE=J4&#39;
+   OPEN &#39;F.TEMP&#39; TO F.TEMP ELSE ABORT 201, &#39;F.TEMP&#39;
+   V.REC.INIT = &#39;LINE 1&#39; :@FM: &#39;LINE 2&#39; :@FM: &#39;LINE 3&#39;
+   WRITE V.REC.INIT TO F.TEMP, &#39;REC1&#39;
+   WRITE V.REC.INIT TO F.TEMP, &#39;REC2&#39;
+   WRITE V.REC.INIT TO F.TEMP, &#39;REC3&#39;
+   CLOSE F.TEMP
+   V.SEL = &#39;SSELECT F.TEMP TO 9&#39;
+   EXECUTE V.SEL
+   READNEXT V.ID FROM 9 ELSE CRT &#39;READNEXT 1 FAILED&#39;
+   CRT &#39;NEXT:&#39; : V.ID                                   ;* NEXT:REC1
+   READNEXT V.ID FROM 9 ELSE CRT &#39;READNEXT 2 FAILED&#39;
+   CRT &#39;NEXT:&#39; : V.ID                                   ;* NEXT:REC2</code></pre>
+</div>
+</div>
+
+
+
+</body></html>

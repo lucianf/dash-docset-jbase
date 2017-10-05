@@ -1,0 +1,36 @@
+<!--?xml version="1.0" encoding="UTF-8"?--><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+  <meta http-equiv="Content-Style-Type" content="text/css"/>
+  <meta name="generator" content="pandoc"/>
+  <title class="function">CacheBucketList</title>
+  <link rel="stylesheet" type="text/css" href="stylesheet.css"/>
+</head>
+<body>
+<div id="cachebucketlist-function" class="section level1">
+<a class="dashingAutolink" name="autolink-54"></a><a class="dashAnchor" name="//apple_ref/cpp/Function/CacheBucketList"></a><h1 class="function">CacheBucketList</h1>
+<p>The CacheBucketList function will return a list of all buckets in the cache. The list is represented as a string containg the bucket names joined together via a given delimiter.</p>
+<div id="command-syntax-21" class="section level2">
+<h2>COMMAND SYNTAX</h2>
+<pre><code>CacheBucketList(delimiter)</code></pre>
+</div>
+<div id="example-23" class="section level2">
+<h2>EXAMPLE</h2>
+<pre><code>INCLUDE JBC.h
+CachePut(&#39;bucket1&#39;, &#39;item1&#39;, &#39;value1&#39;)
+CachePut(&#39;bucket2&#39;, &#39;item1&#39;, &#39;value1&#39;)
+buckets = CacheBucketList(@AM)
+CRT &#34;First bucket: &#34; : buckets&lt;1&gt;
+CRT &#34;Second bucket: &#34; : buckets&lt;2&gt;</code></pre>
+<p>The output is:</p>
+<pre>    First bucket: bucket1
+    Second bucket: bucket2</pre>
+</div>
+<div id="notes-10" class="section level2">
+<h2>NOTES</h2>
+<p>This function does not affect the bucket statistics.</p>
+</div>
+</div>
+
+
+
+</body></html>

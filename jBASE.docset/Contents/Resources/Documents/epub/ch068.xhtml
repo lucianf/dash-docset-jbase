@@ -1,0 +1,45 @@
+<!--?xml version="1.0" encoding="UTF-8"?--><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+  <meta http-equiv="Content-Style-Type" content="text/css"/>
+  <meta name="generator" content="pandoc"/>
+  <title class="statement">CALLC</title>
+  <link rel="stylesheet" type="text/css" href="stylesheet.css"/>
+</head>
+<body>
+<div id="callc-statement" class="section level1">
+<a class="dashingAutolink" name="autolink-67"></a><a class="dashAnchor" name="//apple_ref/cpp/Method/CALLC"></a><h1 class="statement">CALLC</h1>
+<p>The CALLC command transfers program control to an external function (c.sub.name). The second form of the syntax calls a function whose name is stored in a jBC variable (@var). The program could pass back return values in variables. CALLC arguments can be simple variables or complex expressions, but not arrays. Use CALLC as a command or function.</p>
+<div id="command-syntax-34" class="section level2">
+<h2>COMMAND SYNTAX</h2>
+<pre><code>CALLC c.sub.name [(argument1[,argument2]...)]
+
+CALLC @var [(argument1[,argument2]...)]</code></pre>
+<p><strong>Calling a C Program in TAFC</strong></p>
+<p>You must link the C program to TAFC before calling it from a BASIC program. Perform the following procedure to prepare TAFC for CALLC:</p>
+<ul>
+<li>Write and compile the C program.</li>
+<li>Define the C program call interface</li>
+<li>Build the runtime version of TAFC (containing the linked C program).</li>
+<li>Write, compile, and execute the Basic program</li>
+</ul>
+<p><strong>Calling a Function in Windows NT</strong></p>
+<p>The CALLC implementation in TAFC for Windows NT or Windows 2000 uses the Microsoft Windows Dynamic Link Library (DLL) facility. This facility allows separate pieces of code to call one another without permanently binding together. Linking between the separate pieces occurs at runtime (rather than compile time) through a DLL interface.</p>
+<p>For CALLC, developers create a DLL and then call that DLL from TAFC.</p>
+</div>
+<div id="examples-1" class="section level2">
+<h2>EXAMPLES</h2>
+<p>In the following example, the called subroutine draws a circle with its center at the twelfth row and twelfth column and a radius of 3:</p>
+<pre><code>RADIUS = 3
+CENTER = &#34;12,12&#34;
+CALLC DRAW.CIRCLE(RADIUS,CENTER)</code></pre>
+<p>In the next example, the subroutine name is stored in the variable SUB.NAME, and is indirectly called:</p>
+<pre><code>SUB.NAME = DRAW.CIRCLE
+CALLC @SUB.NAME(RADIUS,CENTER)</code></pre>
+<p>The next example uses, CALLC as a function, assigning the return value of the subroutine PROG.STATUS in the variable RESULT:</p>
+<pre><code>RESULT = CALLC PROG.STATUS</code></pre>
+</div>
+</div>
+
+
+
+</body></html>

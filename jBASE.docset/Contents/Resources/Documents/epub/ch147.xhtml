@@ -1,0 +1,309 @@
+<!--?xml version="1.0" encoding="UTF-8"?--><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+  <meta http-equiv="Content-Style-Type" content="text/css"/>
+  <meta name="generator" content="pandoc"/>
+  <title class="function">FMT</title>
+  <link rel="stylesheet" type="text/css" href="stylesheet.css"/>
+</head>
+<body>
+<div id="fmt-function" class="section level1">
+<a class="dashingAutolink" name="autolink-146"></a><a class="dashAnchor" name="//apple_ref/cpp/Function/FMT"></a><h1 class="function">FMT</h1>
+<p>Format data according to mask definition.</p>
+<div id="international-mode-4" class="section level2">
+<h2>INTERNATIONAL MODE</h2>
+<p>When using the FMT function in International Mode the &#34;Width&#34; fields refer to character display widths, such that a character may take up more than a single display position. This is typical of the Japanese, Chinese, and characters whereby the character display requires possibly two display positions.</p>
+<p>Additional date formatting codes have been provided for use in Internationalized programs.</p>
+<p>See also: <a href="#OCONV">OCONV</a> for date/time/numeric masks and <a href="#FMTS">FMTS</a>.</p>
+<table>
+<thead>
+<tr class="header">
+<th align="left">Mask Code</th>
+<th align="left">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">j</td>
+<td align="left">Justification</td>
+</tr>
+<tr class="even">
+<td align="left"></td>
+<td align="left"></td>
+</tr>
+<tr class="odd">
+<td align="left"></td>
+<td align="left">R: Right Justified</td>
+</tr>
+<tr class="even">
+<td align="left"></td>
+<td align="left">L: Left Justified</td>
+</tr>
+<tr class="odd">
+<td align="left"></td>
+<td align="left">U: Left Justified, Break on space. Note: This justification</td>
+</tr>
+<tr class="even">
+<td align="left"></td>
+<td align="left">will format the output into blocks of data in the</td>
+</tr>
+<tr class="odd">
+<td align="left"></td>
+<td align="left">variable and it is up to the programmer to actually</td>
+</tr>
+<tr class="even">
+<td align="left"></td>
+<td align="left">separate the blocks.</td>
+</tr>
+<tr class="odd">
+<td align="left"></td>
+<td align="left">D: Date (OCONV)</td>
+</tr>
+<tr class="even">
+<td align="left"></td>
+<td align="left">M: Time (OCONV)</td>
+</tr>
+<tr class="odd">
+<td align="left"></td>
+<td align="left"></td>
+</tr>
+<tr class="even">
+<td align="left">n</td>
+<td align="left">Decimal Precision: A number from 0 to 9 that defines the</td>
+</tr>
+<tr class="odd">
+<td align="left"></td>
+<td align="left">decimal precision. It specifies the number of digits for</td>
+</tr>
+<tr class="even">
+<td align="left"></td>
+<td align="left">output following the decimal point. The processor inserts</td>
+</tr>
+<tr class="odd">
+<td align="left"></td>
+<td align="left">trailing zeros if necessary. If n is omitted or is 0, a decimal</td>
+</tr>
+<tr class="even">
+<td align="left"></td>
+<td align="left">point will not be output.</td>
+</tr>
+<tr class="odd">
+<td align="left"></td>
+<td align="left"></td>
+</tr>
+<tr class="even">
+<td align="left">m</td>
+<td align="left">Scaling Factor: A number that defines the scaling factor. The</td>
+</tr>
+<tr class="odd">
+<td align="left"></td>
+<td align="left">source value is descaled (divided) by that power of 10. For</td>
+</tr>
+<tr class="even">
+<td align="left"></td>
+<td align="left">example, if m=1, the value is divided by 10; if m=2, the value</td>
+</tr>
+<tr class="odd">
+<td align="left"></td>
+<td align="left">is divided by 100, and so on. If m is omitted, it is assumed</td>
+</tr>
+<tr class="even">
+<td align="left"></td>
+<td align="left">equal to n (the decimal precision).</td>
+</tr>
+<tr class="odd">
+<td align="left"></td>
+<td align="left"></td>
+</tr>
+<tr class="even">
+<td align="left">Z</td>
+<td align="left">Suppress leading zeros. NOTE: fractional values, which have no</td>
+</tr>
+<tr class="odd">
+<td align="left"></td>
+<td align="left">integer, will have a zero before the decimal point. If the</td>
+</tr>
+<tr class="even">
+<td align="left"></td>
+<td align="left">value is zero, a null will be output.</td>
+</tr>
+<tr class="odd">
+<td align="left"></td>
+<td align="left"></td>
+</tr>
+<tr class="even">
+<td align="left">,</td>
+<td align="left">The thousands separator symbol. It specifies insertion of</td>
+</tr>
+<tr class="odd">
+<td align="left"></td>
+<td align="left">thousands separators every three digits to the left of the</td>
+</tr>
+<tr class="even">
+<td align="left"></td>
+<td align="left">decimal point. You can change the display separator symbol by</td>
+</tr>
+<tr class="odd">
+<td align="left"></td>
+<td align="left">invoking the SET-THOU command. Use the SET-DEC command to</td>
+</tr>
+<tr class="even">
+<td align="left"></td>
+<td align="left">specify the decimal separator.</td>
+</tr>
+<tr class="odd">
+<td align="left"></td>
+<td align="left"></td>
+</tr>
+<tr class="even">
+<td align="left">c</td>
+<td align="left">Credit Indicator. NOTE: If a value is negative and you have not</td>
+</tr>
+<tr class="odd">
+<td align="left"></td>
+<td align="left">specified one of these indicators, the value will be displayed</td>
+</tr>
+<tr class="even">
+<td align="left"></td>
+<td align="left">with a leading minus sign. If you specify a credit indicator,</td>
+</tr>
+<tr class="odd">
+<td align="left"></td>
+<td align="left">the data will be output with either the credit characters or an</td>
+</tr>
+<tr class="even">
+<td align="left"></td>
+<td align="left">equivalent number of spaces, depending on its value.</td>
+</tr>
+<tr class="odd">
+<td align="left"></td>
+<td align="left"></td>
+</tr>
+<tr class="even">
+<td align="left"></td>
+<td align="left">C: Prints the literal CR after negative values.</td>
+</tr>
+<tr class="odd">
+<td align="left"></td>
+<td align="left">D: Prints the literal DB after positive values.</td>
+</tr>
+<tr class="even">
+<td align="left"></td>
+<td align="left">E: Encloses negative values in angle brackets &lt; &gt;</td>
+</tr>
+<tr class="odd">
+<td align="left"></td>
+<td align="left">M: Prints a minus sign after negative values.</td>
+</tr>
+<tr class="even">
+<td align="left"></td>
+<td align="left">N: Suppresses embedded minus sign.</td>
+</tr>
+<tr class="odd">
+<td align="left"></td>
+<td align="left"></td>
+</tr>
+<tr class="even">
+<td align="left">$</td>
+<td align="left">Appends a Dollar sign to value.</td>
+</tr>
+<tr class="odd">
+<td align="left"></td>
+<td align="left"></td>
+</tr>
+<tr class="even">
+<td align="left"></td>
+<td align="left">Fill Character and Length</td>
+</tr>
+<tr class="odd">
+<td align="left"></td>
+<td align="left"></td>
+</tr>
+<tr class="even">
+<td align="left"></td>
+<td align="left">#n: Spaces. Repeat space n times. Output value is overlaid</td>
+</tr>
+<tr class="odd">
+<td align="left"></td>
+<td align="left">on the spaces created.</td>
+</tr>
+<tr class="even">
+<td align="left"></td>
+<td align="left">n: Asterisk. Repeat asterisk n times. Output value is</td>
+</tr>
+<tr class="odd">
+<td align="left"></td>
+<td align="left">overlaid on the asterisks created.</td>
+</tr>
+<tr class="even">
+<td align="left"></td>
+<td align="left">%n: Zero. Repeat zeros n times. Output value is overlaid on</td>
+</tr>
+<tr class="odd">
+<td align="left"></td>
+<td align="left">the zeros created.</td>
+</tr>
+<tr class="even">
+<td align="left"></td>
+<td align="left">&amp;x: Format. x can be any of the above format codes, a</td>
+</tr>
+<tr class="odd">
+<td align="left"></td>
+<td align="left">currency symbol, a space, or literal text. The first</td>
+</tr>
+<tr class="even">
+<td align="left"></td>
+<td align="left">character following &amp; is used as the default fill</td>
+</tr>
+<tr class="odd">
+<td align="left"></td>
+<td align="left">character to replace #n fields without data. Format</td>
+</tr>
+<tr class="even">
+<td align="left"></td>
+<td align="left">strings are enclosed in parentheses &#34;()&#34;.</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div id="examples-23" class="section level2">
+<h2>EXAMPLES</h2>
+<pre><code>   X = 1234.56
+   CRT DQUOTE( FMT(X, &#39;R2#10&#39;) )           ;*  &#34;   1234.56&#34;
+   CRT FMT(X, &#39;L2%10&#39;)                     ;*  1234.56000
+   CRT FMT(X, &#39;R2%10&#39;)                     ;*  0001234.56
+   CRT FMT(X, &#39;L2*10&#39;)                     ;*  1234.56***
+   CRT FMT(X, &#39;R2*10&#39;)                     ;*  ***1234.56
+   X = 123456.78
+   CRT DQUOTE( FMT(X, &#39;R2,$#15&#39;) )         ;*  &#34;    $123,456.78&#34;
+   CRT DQUOTE( FMT(X, &#39;R2,&amp;$#15&#39;) )        ;*  &#34;     123,456.78&#34;
+   CRT DQUOTE( FMT(X, &#39;R2,&amp; $#15&#39;) )       ;*  &#34;    $123,456.78&#34;
+   X = -123456.78
+   CRT DQUOTE( FMT(X, &#39;R2,C&amp;*$#15&#39;) )      ;*  &#34;  $123,456.78CR&#34;
+   X = 1234567890
+   CRT FMT(X, &#39;R((###) ###-###)&#39;)          ;*  (234) 567-890
+   CRT FMT(X, &#39;R((#3) #2-#4)&#39;)             ;*  (234) 56-7890
+   X = 16376
+   CRT FMT(X, &#39;D4/&#39;)                       ;*  10/31/2012
+   CRT FMT(X, &#39;DY&#39;)                        ;*  2012
+   CRT FMT(X, &#39;DY2&#39;)                       ;*  12
+   CRT FMT(X, &#39;D2&#39;)                        ;*  31 OCT 12
+   CRT FMT(X, &#39;DQ&#39;)                        ;*  4 (quarter)
+   CRT FMT(X, &#39;DD&#39;)                        ;*  31
+   CRT FMT(X, &#39;DM&#39;)                        ;*  10
+   CRT FMT(X, &#39;DMA&#39;)                       ;*  OCTOBER
+   CRT FMT(X, &#39;DJ&#39;)                        ;* 305 - number of a day in the year
+   CRT FMT(X, &#39;DW&#39;)                        ;* 3 - number of a day in the week
+   CRT FMT(X, &#39;DWA&#39;)                       ;* WEDNESDAY
+   CRT FMT(TIME(), &#39;MT&#39;)                   ;* e.g. 21:25
+   CRT FMT(TIME(), &#39;MTS&#39;)                  ;* e.g. 21:25:30
+   X = &#39;A LONG STRING TO BE SPLIT&#39;
+   CRT FMT(X, &#39;10L&#39;)                       ;* A LONG STR.ING TO BE .SPLIT
+   X = &#39;ABCDEF&#39;
+   CRT FMT(X, &#39;MX&#39;)                        ;* 414243444546
+   CRT FMT(@FM, &#39;MX&#39;)                      ;* FE</code></pre>
+</div>
+</div>
+
+
+
+</body></html>

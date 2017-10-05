@@ -1,0 +1,38 @@
+<!--?xml version="1.0" encoding="UTF-8"?--><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+  <meta http-equiv="Content-Style-Type" content="text/css"/>
+  <meta name="generator" content="pandoc"/>
+  <title class="function">SDIV</title>
+  <link rel="stylesheet" type="text/css" href="stylesheet.css"/>
+</head>
+<body>
+<div id="sdiv-function" class="section level1">
+<a class="dashingAutolink" name="autolink-299"></a><a class="dashAnchor" name="//apple_ref/cpp/Function/SDIV"></a><h1 class="function">SDIV</h1>
+<p>SDIV function performs a string division of two base 10-string numbers and rounds the result to 14 decimal places.</p>
+<div id="command-syntax-252" class="section level2">
+<h2>COMMAND SYNTAX</h2>
+<pre><code>SDIV(expr1, expr2)</code></pre>
+</div>
+<div id="syntax-elements-189" class="section level2">
+<h2>SYNTAX ELEMENTS</h2>
+<p><strong>expr1</strong> and <strong>expr2</strong> are strings consisting of numeric characters, with either optionally including a decimal part.</p>
+</div>
+<div id="notes-160" class="section level2">
+<h2>NOTES</h2>
+<p>Use the SDIV function with numbers that may exceed a valid range with standard arithmetic operators.</p>
+<p>The <a href="#PRECISION">PRECISION</a> declaration has no effect on the value returned by SDIV.</p>
+</div>
+<div id="example-176" class="section level2">
+<h2>EXAMPLE</h2>
+<pre><code>A = 2
+B = 3
+CRT SDIV(A,B)</code></pre>
+<p>Displays 0.66666666666666 to the screen</p>
+<pre><code>CRT SDIV(355,113)</code></pre>
+<p>Displays 3.14159292035398 to the screen</p>
+</div>
+</div>
+
+
+
+</body></html>

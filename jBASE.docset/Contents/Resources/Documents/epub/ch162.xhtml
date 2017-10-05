@@ -1,0 +1,38 @@
+<!--?xml version="1.0" encoding="UTF-8"?--><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+  <meta http-equiv="Content-Style-Type" content="text/css"/>
+  <meta name="generator" content="pandoc"/>
+  <title class="statement">GOTO</title>
+  <link rel="stylesheet" type="text/css" href="stylesheet.css"/>
+</head>
+<body>
+<div id="goto-statement" class="section level1">
+<a class="dashingAutolink" name="autolink-161"></a><a class="dashAnchor" name="//apple_ref/cpp/Method/GOTO"></a><h1 class="statement">GOTO</h1>
+<p>The GOTO statement causes program execution to jump to the code at a specified label.</p>
+<div id="command-syntax-123" class="section level2">
+<h2>COMMAND SYNTAX</h2>
+<pre><code>GO{TO} Label</code></pre>
+</div>
+<div id="syntax-elements-82" class="section level2">
+<h2>SYNTAX ELEMENTS</h2>
+<p>The label should refer to an existing label within the current source code.</p>
+</div>
+<div id="notes-78" class="section level2">
+<h2>NOTES</h2>
+<p>Warning: using the GOTO command obscures the readability of the code and is a hindrance to maintainability. All programs written using the GOTO construct can be written using structured statements such as LOOP and FOR. There are various opinions on this issue but the consensus is, avoid GOTO.</p>
+<p>One possibly acceptable use of the GOTO statement is to transfer execution to an error handler upon detection of a fatal error that will cause the program to terminate.</p>
+</div>
+<div id="example-98" class="section level2">
+<h2>EXAMPLE</h2>
+<pre><code>GOTO Exception ;* jump to the exception handler
+.....
+* exception handler
+Exception:
+....
+STOP</code></pre>
+</div>
+</div>
+
+
+
+</body></html>

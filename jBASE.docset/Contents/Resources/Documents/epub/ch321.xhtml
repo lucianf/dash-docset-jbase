@@ -1,0 +1,35 @@
+<!--?xml version="1.0" encoding="UTF-8"?--><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+  <meta http-equiv="Content-Style-Type" content="text/css"/>
+  <meta name="generator" content="pandoc"/>
+  <title class="function">SSUB</title>
+  <link rel="stylesheet" type="text/css" href="stylesheet.css"/>
+</head>
+<body>
+<div id="ssub-function" class="section level1">
+<a class="dashingAutolink" name="autolink-320"></a><a class="dashAnchor" name="//apple_ref/cpp/Function/SSUB"></a><h1 class="function">SSUB</h1>
+<p>SSUB function performs string subtraction of two base 10-string numbers.</p>
+<div id="command-syntax-271" class="section level2">
+<h2>COMMAND SYNTAX</h2>
+<pre><code>SSUB(expr1, expr2)</code></pre>
+</div>
+<div id="syntax-elements-207" class="section level2">
+<h2>SYNTAX ELEMENTS</h2>
+<p><strong>expr1</strong> and <strong>expr2</strong> are strings consisting of numeric characters, optionally including a decimal part.</p>
+</div>
+<div id="notes-173" class="section level2">
+<h2>NOTES</h2>
+<p>Use the SSUB function with numbers that may exceed a valid range with standard arithmetic operators. The [PRECISION])(#PRECISION) declaration has no effect on the value returned by SSUB.</p>
+</div>
+<div id="examples-67" class="section level2">
+<h2>EXAMPLES</h2>
+<pre><code>A = 2.3000000123456789
+B = 5.0000000000000001
+CRT SSUB(A,B)</code></pre>
+<p>Displays -2.69999998765432 to the screen.</p>
+</div>
+</div>
+
+
+
+</body></html>

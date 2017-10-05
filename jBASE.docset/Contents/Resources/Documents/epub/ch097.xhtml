@@ -1,0 +1,41 @@
+<!--?xml version="1.0" encoding="UTF-8"?--><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+  <meta http-equiv="Content-Style-Type" content="text/css"/>
+  <meta name="generator" content="pandoc"/>
+  <title class="statement">CONVERT (STATEMENT)</title>
+  <link rel="stylesheet" type="text/css" href="stylesheet.css"/>
+</head>
+<body>
+<div id="convert-statement-statement" class="section level1">
+<a class="dashingAutolink" name="autolink-96"></a><a class="dashAnchor" name="//apple_ref/cpp/Method/CONVERT%20%28STATEMENT%29"></a><h1 class="statement">CONVERT (STATEMENT)</h1>
+<p>The CONVERT statement converts one or more characters in a string to their corresponding replacement characters.</p>
+<div id="command-syntax-61" class="section level2">
+<h2>COMMAND SYNTAX</h2>
+<pre><code>CONVERT expression1 TO expression2 IN expression3</code></pre>
+</div>
+<div id="syntax-elements-34" class="section level2">
+<h2>SYNTAX ELEMENTS</h2>
+<p><strong>expression1</strong> is the list of all characters to translate in expression3</p>
+<p><strong>expression2</strong> is the list of characters that will be converted to.</p>
+<p><strong>expression3</strong> is the string to which the conversion will apply.</p>
+</div>
+<div id="notes-37" class="section level2">
+<h2>NOTES</h2>
+<p>There is a one to one correspondence between the characters in expression1 and expression2. That is, conversion of character 1 in expression1 to character 1 in expression2, etc.</p>
+<p>See also: <a href="#CONVERT">CONVERT</a></p>
+</div>
+<div id="example-63" class="section level2">
+<h2>EXAMPLE</h2>
+<pre><code>Value = &#39;ABCDEFGHIJ&#39;
+CRT &#39;Original:   &#39;:Value
+CONVERT &#39;BJE&#39; TO &#39;^+!&#39; IN Value
+CRT &#39;Converted: &#39;:Value</code></pre>
+<p>Output:</p>
+<pre>    Original:   ABCDEFGHIJ
+    Converted: A^CD!FGHI+</pre>
+</div>
+</div>
+
+
+
+</body></html>

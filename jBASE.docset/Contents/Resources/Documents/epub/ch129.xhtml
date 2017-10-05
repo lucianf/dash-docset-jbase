@@ -1,0 +1,28 @@
+<!--?xml version="1.0" encoding="UTF-8"?--><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+  <meta http-equiv="Content-Style-Type" content="text/css"/>
+  <meta name="generator" content="pandoc"/>
+  <title class="function">EQS</title>
+  <link rel="stylesheet" type="text/css" href="stylesheet.css"/>
+</head>
+<body>
+<div id="eqs-function" class="section level1">
+<a class="dashingAutolink" name="autolink-128"></a><a class="dashAnchor" name="//apple_ref/cpp/Function/EQS"></a><h1 class="function">EQS</h1>
+<p>Use the EQS function to test if elements of one dynamic array are equal to the elements of another dynamic array.</p>
+<div id="command-syntax-91" class="section level2">
+<h2>COMMAND SYNTAX</h2>
+<pre><code>EQS(array1, array2)</code></pre>
+<p>EQS compares each element of array1 with the corresponding element of array2 and returns, a one if the two elements are equal in the corresponding element of a dynamic array. It returns a zero if the two elements are not equal. It returns zero if an element of one dynamic array has no corresponding element in the other dynamic array. If either element of a corresponding pair is null, it returns null for that element.</p>
+</div>
+<div id="example-79" class="section level2">
+<h2>EXAMPLE</h2>
+<pre><code>A=1:@VM:45:@SM:3:@VM:&#39;one&#39;
+B=0:@VM:45:@VM:1
+PRINT EQS(A,B)</code></pre>
+<p>The output of this program is: 0]1]0</p>
+</div>
+</div>
+
+
+
+</body></html>

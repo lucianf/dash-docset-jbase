@@ -1,0 +1,74 @@
+<!--?xml version="1.0" encoding="UTF-8"?--><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+  <meta http-equiv="Content-Style-Type" content="text/css"/>
+  <meta name="generator" content="pandoc"/>
+  <title class="statement">CLEARFILE</title>
+  <link rel="stylesheet" type="text/css" href="stylesheet.css"/>
+</head>
+<body>
+<div id="clearfile-statement" class="section level1">
+<a class="dashingAutolink" name="autolink-85"></a><a class="dashAnchor" name="//apple_ref/cpp/Method/CLEARFILE"></a><h1 class="statement">CLEARFILE</h1>
+<p>Use the CLEARFILE statement to clear all the data from a file previously opened with the OPEN statement.</p>
+<div id="command-syntax-50" class="section level2">
+<h2>COMMAND SYNTAX</h2>
+<pre><code>CLEARFILE { variable } { SETTING setvar } { ON ERROR statements }</code></pre>
+</div>
+<div id="syntax-elements-26" class="section level2">
+<h2>SYNTAX ELEMENTS</h2>
+<p>The variable should be the subject of an OPEN statement before the execution of CLEARFILE upon it. If the variable is omitted from the CLEARFILE statement, it assumes the default file variable as per the OPEN statement.</p>
+</div>
+<div id="notes-31" class="section level2">
+<h2>NOTES</h2>
+<p>The CLEARFILE statement will remove every database record on the file against which it is executed, therefore, use with caution.</p>
+<p>If the variable argument does not describe a previously opened file, the program will enter the debugger with an appropriate message.</p>
+<p>If the SETTING clause is specified and the CLEARFILE fails, it sets setvar to one of the following values:</p>
+</div>
+<div id="incremental-file-errors" class="section level2">
+<h2>INCREMENTAL FILE ERRORS</h2>
+<table>
+<thead>
+<tr class="header">
+<th align="left">Code</th>
+<th align="left">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">128</td>
+<td align="left">No such file or directory</td>
+</tr>
+<tr class="even">
+<td align="left">4096</td>
+<td align="left">Network error</td>
+</tr>
+<tr class="odd">
+<td align="left">24576</td>
+<td align="left">Permission denied</td>
+</tr>
+<tr class="even">
+<td align="left">32768</td>
+<td align="left">Physical I/O error or unknown error</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div id="example-51" class="section level2">
+<h2>EXAMPLE</h2>
+<pre><code>   OPEN &#39;F.TEMP&#39; TO F.TEMP THEN
+      V.ERR = &#39;&#39;
+      CLEARFILE F.TEMP SETTING V.ERR
+      IF V.ERR NE &#39;&#39; THEN
+         CRT &#39;ERROR &#39; : V.ERR
+         STOP
+      END
+      CRT &#39;FILE CLEARED&#39;
+   END ELSE
+      EXECUTE &#39;CREATE-FILE DATA F.TEMP 1 101 TYPE=J4&#39;
+      OPEN &#39;F.TEMP&#39; TO F.TEMP ELSE ABORT 201, &#39;F.TEMP&#39;
+   END</code></pre>
+</div>
+</div>
+
+
+
+</body></html>

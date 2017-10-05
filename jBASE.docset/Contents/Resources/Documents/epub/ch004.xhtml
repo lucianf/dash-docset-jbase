@@ -1,0 +1,121 @@
+<!--?xml version="1.0" encoding="UTF-8"?--><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+  <meta http-equiv="Content-Style-Type" content="text/css"/>
+  <meta name="generator" content="pandoc"/>
+  <title class="category">Environment Variables</title>
+  <link rel="stylesheet" type="text/css" href="stylesheet.css"/>
+</head>
+<body>
+<div id="environment-variables-category" class="section level1">
+<a class="dashingAutolink" name="autolink-3"></a><a class="dashAnchor" name="//apple_ref/cpp/Category/Environment%20Variables"></a><h1 class="category">Environment Variables</h1>
+<div id="minimum-set-of-variables-necessary-to-start-development" class="section level2">
+<h2>Minimum set of variables necessary to start development</h2>
+<p>Windows:</p>
+<pre>    set TAFC_HOME=[path to installed TAFC]
+    set JBCGLOBALDIR=%TAFC_HOME%
+    set PATH=%TAFC_HOME%\bin;[path to C Compiler]\bin;%PATH%
+    set JBCEMULATE=[your emulation; for T24 should be prime]
+    set INCLUDE=[path to C Compiler]\include;%INCLUDE%
+    set LIB=[path to C Compiler]\lib;%LIB%
+    set JBCBASETMP=tmp_workfile</pre>
+<p>Unix/Linux:</p>
+<pre>    export TAFC_HOME=[path to installed TAFC]
+    export JBCGLOBALDIR=$TAFC_HOME
+    export PATH=$TAFC_HOME/bin:$PATH
+    export JBCEMULATE=[your emulation; for T24 should be prime]
+    TTYNO=`tty | cut  -f4 -d\/`
+    export JBCBASETMP=$HOME/jBASEWORK/tmp_$TTYNO
+    export LD_LIBRARY_PATH=$TAFC_HOME/lib:/usr/ccs/lib:/usr/lib:/lib
+    (Linux)
+    export LIBPATH=$TAFC_HOME/lib:/usr/ccs/lib:/usr/lib
+    (AIX)
+    export SHLIB_PATH=$TAFC_HOME/lib:${SHLIB_PATH:-/usr/lib:/lib}
+    (HP-UX)</pre>
+</div>
+<div id="customize-work-folders-and-files-location" class="section level2">
+<h2>Customize work folders and files location</h2>
+<p>Main dictionary location (usually points to VOC file):</p>
+<pre>    JEDIFILENAME_MD</pre>
+<p>Path to SYSTEM file (normally located in [path to installed TAFC]/src):</p>
+<pre>    JEDIFILENAME_SYSTEM</pre>
+<p>Default path to jBASE data files:</p>
+<pre>    JEDIFILEPATH</pre>
+<p>Location where programs will be put after compilation:</p>
+<pre>    JBCDEV_BIN</pre>
+<p>The folder where shared libraries for compiled subroutines are located:</p>
+<pre>    JBCDEV_LIB</pre>
+<p>Path to jBASE spooler folder:</p>
+<pre>    JBCSPOOLERDIR</pre>
+<p>The folder where saved lists are placed:</p>
+<pre>    JBCLISTFILE</pre>
+<p>Where to look for libraries containing compiled subroutines:</p>
+<pre>    JBCOBJECTLIST</pre>
+<p>Could be several entries, e.g.:</p>
+<p>Windows:</p>
+<pre>    set JBCOBJECTLIST=%HOME%\lib;%HOME%\t24lib</pre>
+<p>Unix/Linux:</p>
+<pre>    export JBCOBJECTLIST=$HOME/lib:$HOME/t24lib</pre>
+<p>If a subroutine presents in more than one location (which can be caused by changing JBCDEV_LIB environment variable or accidental duplication of a subroutine name) then the earlier location has the preference. See jshow output:</p>
+<pre>    jshow -c ACCOUNT
+    Subroutine:          C:\r11\bnk\bnk.run\lib\lib2.dll
+                         jBC ACCOUNT version 11.0 Thu Sep 06 22:09:46 2012
+                         jBC ACCOUNT source file ETC.BP
+    Subroutine (DUP!!):  C:\r11\bnk\bnk.run\t24lib\acm_accountopening\lib0.dll
+                         jBC ACCOUNT version 11.0 Fri Apr 29 14:43:35 2011
+                         jBC ACCOUNT source file source/R11.000/win32_TAFCR11GA</pre>
+<p>In situation like that DECATALOG is to be used:</p>
+<pre>    DECATALOG ETC.BP ACCOUNT
+    Object ACCOUNT decataloged successfully
+    Library C:\r11\bnk\bnk.run\lib\lib2.dll rebuild okay</pre>
+<pre>    jshow -c ACCOUNT
+    Subroutine:          C:\r11\bnk\bnk.run\t24lib\acm_accountopening\lib0.dll
+                         jBC ACCOUNT version 11.0 Fri Apr 29 14:43:35 2011
+                         jBC ACCOUNT source file source/R11.000/win32_TAFCR11GA</pre>
+</div>
+<div id="runtime-errors-handling" class="section level2">
+<h2>Runtime errors handling</h2>
+<p>This variable allows to suppress error messages and/or a program entering the debugger when divide by zero is encountered:</p>
+<pre>    JBASE_ERRMSG_DIVIDE_BY_ZERO</pre>
+<p>This variable allows to suppress error messages and/or a program entering the debugger when non-numeric variable is used in an equation:</p>
+<pre>    JBASE_ERRMSG_NON_NUMERIC</pre>
+<p>This variable allows to suppress error messages and/or a program entering the debugger when uninitialized variable is used in an equation:</p>
+<pre>    JBASE_ERRMSG_ZERO_USED</pre>
+</div>
+<div id="regional-settings" class="section level2">
+<h2>Regional settings</h2>
+<p>Locale setting:</p>
+<pre>    JBASE_LOCALE</pre>
+<p>In which codepage data is displayed (e.g. utf8, windows-1251 etc; doesn&#39;t apply to how data is stored):</p>
+<pre>    JBASE_CODEPAGE</pre>
+<p>Time zone:</p>
+<pre>    JBASE_TIMEZONE
+    E.g. Europe/London.</pre>
+<p>Setting this variable to 1 means utf-8 environment (requires data files conversion when changed):</p>
+<pre>    JBASE_I18N</pre>
+</div>
+<div id="diagnostics-and-tracing" class="section level2">
+<h2>Diagnostics and tracing</h2>
+<p>Being set to 1 redirects stderr to stdout (useful to catch errors to COMO output):</p>
+<pre>    JBC_STDERR</pre>
+<p>Being set to 1 stipulates creation of a core dump when the session crashes:</p>
+<pre>    JBC_CORE_DUMP</pre>
+<p>jBASE tracing options:</p>
+<pre>    JDIAG</pre>
+<p>E.g.:</p>
+<pre>    set JDIAG=trace=JVM,CALLJ
+    set JDIAG=TRACE=INDEX</pre>
+</div>
+<div id="other" class="section level2">
+<h2>Other</h2>
+<p>Being set to 1 improves performance when distributed files are used:</p>
+<pre>    JBASE_DISTRIB_FASTSCAN</pre>
+<p>Being set to 1 prevents all parts of a distributed file to be opened as soon as the stub had been:</p>
+<pre>    JEDI_DISTRIB_DEFOPEN</pre>
+<p>Terminal type (e.g. ntcon, vt220 etc):</p>
+<pre>    TERM</pre>
+</div>
+</div>
+
+
+
+</body></html>

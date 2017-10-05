@@ -1,0 +1,64 @@
+<!--?xml version="1.0" encoding="UTF-8"?--><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+  <meta http-equiv="Content-Style-Type" content="text/css"/>
+  <meta name="generator" content="pandoc"/>
+  <title class="statement">WRITEBLK</title>
+  <link rel="stylesheet" type="text/css" href="stylesheet.css"/>
+</head>
+<body>
+<div id="writeblk-statement" class="section level1">
+<a class="dashingAutolink" name="autolink-358"></a><a class="dashAnchor" name="//apple_ref/cpp/Method/WRITEBLK"></a><h1 class="statement">WRITEBLK</h1>
+<p>WRITEBLK statement writes a block of data to a file opened for sequential processing.</p>
+<div id="command-syntax-303" class="section level2">
+<h2>COMMAND SYNTAX</h2>
+<pre><code>WRITEBLK expression ON | TO file.variable { THEN statements [ ELSE statements ] \
+       | ELSE statements}</code></pre>
+</div>
+<div id="syntax-elements-232" class="section level2">
+<h2>SYNTAX ELEMENTS</h2>
+<p>Each WRITEBLK statement writes the value of expression starting at the current position in the file. The current position is incremented to beyond the last byte written. WRITEBLK does not add a new line at the end of the data.</p>
+<p><strong>file.variable</strong> specifies a file opened for sequential processing.</p>
+<p>The value of expression is written to the file, and the THEN statements are executed. If no THEN statements are specified, program execution continues with the next statement. If the file is neither accessible or does not exist, it executes the ELSE statements; and ignores any THEN statements.</p>
+<p>If either expression or file.variable evaluates to null, the WRITEBLK statement fails and the program enters the debugger with a run-time error message.</p>
+</div>
+<div id="international-mode-26" class="section level2">
+<h2>INTERNATIONAL MODE</h2>
+<p>When using the WRITEBLK statement in International Mode, care must be taken to ensure that the write variable is handled properly before the WRITEBLK statement. The WRITEBLK statement expects the output variable to be in &#34;bytes&#34;, however when manipulating variables in International Mode character length rather than byte lengths are usually used and hence possible confusion or program malfunction can occur. If requiring byte count data the output variable can be converted from the UTF-8 byte sequence to &#39;binary/latin1&#39; via the LATIN1 function.</p>
+<p>It is not recommended that you use the <a href="#READBLK">READBLK</a>/ <a href="#WRITEBLK">WRITEBLK</a> statements when executing in International Mode. You can obtain similar functionality via the <a href="#READSEQ">READSEQ</a>/ <a href="#WRITESEQ">WRITESEQ</a> statement, which can be used to read/write, characters a line at a time from a file.</p>
+</div>
+<div id="note-22" class="section level2">
+<h2>NOTE</h2>
+<p>We have to explicitly create the output file if it doesnt exist (we didnt have to with WRITESEQ, for example, under <em>prime</em> emulation).</p>
+</div>
+<div id="example-200" class="section level2">
+<h2>EXAMPLE</h2>
+<pre><code>* Create a file with random name and write to it
+   V.ID = &#39;&#39;
+   FOR V.J = 1 TO 8
+      V.RND = RND(26) + 65
+      V.ID := CHAR(V.RND)        ;* A...Z
+   NEXT V.J
+   V.ID := &#39;.txt&#39;
+   OPENSEQ &#39;.&#39;, V.ID TO  F.FILE.OUT THEN
+      WEOFSEQ F.FILE.OUT  ;* truncate the file
+   END ELSE  ;* will have to create - WRITEBLK wouldn&#39;t do that
+      CREATE F.FILE.OUT ELSE
+         CRT &#39;FILE CREATION FAILURE&#39;
+         STOP
+      END
+   END
+   V.BUFFER = &#39;LINE 1&#39; : CHAR(10) : &#39;LINE 2&#39; : CHAR(10) : &#39;LINE 3&#39;
+   WRITEBLK V.BUFFER TO F.FILE.OUT ELSE
+      CRT &#39;WRITE ERROR&#39;
+      STOP
+   END
+   CRT &#39;File &#39; : V.ID :  &#39; created&#39;
+   CLOSESEQ F.FILE.OUT
+   STOP
+END</code></pre>
+</div>
+</div>
+
+
+
+</body></html>

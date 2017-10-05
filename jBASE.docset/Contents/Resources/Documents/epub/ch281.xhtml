@@ -1,0 +1,133 @@
+<!--?xml version="1.0" encoding="UTF-8"?--><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+  <meta http-equiv="Content-Style-Type" content="text/css"/>
+  <meta name="generator" content="pandoc"/>
+  <title class="statement">READSEQ</title>
+  <link rel="stylesheet" type="text/css" href="stylesheet.css"/>
+</head>
+<body>
+<div id="readseq-statement" class="section level1">
+<a class="dashingAutolink" name="autolink-280"></a><a class="dashAnchor" name="//apple_ref/cpp/Method/READSEQ"></a><h1 class="statement">READSEQ</h1>
+<p>READSEQ reads data from a file opened for sequential access.</p>
+<div id="command-syntax-236" class="section level2">
+<h2>COMMAND SYNTAX</h2>
+<pre><code>READSEQ Variable FROM FileVar THEN | ELSE statements</code></pre>
+</div>
+<div id="syntax-elements-173" class="section level2">
+<h2>SYNTAX ELEMENTS</h2>
+<p><strong>Variable</strong> specifies the variable to contain next record from sequential file.</p>
+<p><strong>FileVar</strong> specifies the file descriptor of the file opened for sequential access.</p>
+<p><strong>Statements</strong> are Conditional jBC statements.</p>
+</div>
+<div id="notes-144" class="section level2">
+<h2>NOTES</h2>
+<p>Each READSEQ reads a line of data from the sequentially opened file. After each READSEQ, the file pointer moves forward to the next line of data. The variable contains the line of data less the new line character from the sequential file.</p>
+<p>The default buffer size for a READSEQ is 1024 bytes. This can be changed using the IOCTL () function with the JIOCTL_COMMAND_SEQ_CHANGE_RECORDSIZE Sequential File Extensions.</p>
+</div>
+<div id="example-163" class="section level2">
+<h2>EXAMPLE</h2>
+</div>
+<div id="step-1.-create-a-text-file-with-long-lines-1100-bytes-each" class="section level2">
+<h2>Step 1. Create a text file with long lines (1100 bytes each):</h2>
+<pre><code>   OPENSEQ &#39;.&#39;, &#39;test.txt&#39; TO F.OUT.FILE THEN
+      WEOFSEQ F.OUT.FILE
+   END ELSE
+      CREATE F.OUT.FILE ELSE
+         CRT &#39;FILE CREATION ERROR&#39;
+         STOP
+      END
+   END
+* Create a ruler-like output
+   V.LINE = &#39;&#39;
+   FOR V.I = 1 TO 1100 STEP 10
+      V.J = V.I + 9
+      V.LINE := STR(&#39;-&#39;, 10 - LEN(V.J)) : V.J
+   NEXT V.I
+* Now write it
+   FOR V.I = 1 TO 10
+      WRITESEQ V.LINE TO F.OUT.FILE ELSE
+         CRT &#39;FILE WRITE ERROR&#39;
+         STOP
+      END
+   NEXT V.I</code></pre>
+<p>Line ends in this file are shown here (JED, Ctrl-E to go to line end):</p>
+<pre>    0001 ------1050------1060------1070------1080------1090------1100
+    0002 ------1050------1060------1070------1080------1090------1100
+    0003 ------1050------1060------1070------1080------1090------1100
+    0004 ------1050------1060------1070------1080------1090------1100
+    0005 ------1050------1060------1070------1080------1090------1100
+    0006 ------1050------1060------1070------1080------1090------1100
+    0007 ------1050------1060------1070------1080------1090------1100
+    0008 ------1050------1060------1070------1080------1090------1100
+    0009 ------1050------1060------1070------1080------1090------1100
+    0010 ------1050------1060------1070------1080------1090------1100
+    -------------------------------- End Of Record --------------------------------</pre>
+</div>
+<div id="step-2.-read-a-line-from-this-text-file-using-plain-readseq" class="section level2">
+<h2>Step 2. Read a line from this text file using plain READSEQ:</h2>
+<pre><code>   OPENSEQ &#39;.&#39;, &#39;test.txt&#39; TO F.IN.FILE THEN
+      NULL
+   END ELSE
+      CRT &#39;ERROR OPENING FILE&#39;
+      STOP
+   END
+   READSEQ V.LINE FROM F.IN.FILE ELSE
+      CRT &#39;ERROR READING FILE&#39;
+      STOP
+   END
+   CRT LEN(V.LINE)                      ;*  1024
+   CRT V.LINE[-20,20]                   ;*  --1010------1020----</code></pre>
+</div>
+<div id="step-3.-read-a-line-from-this-text-file-using-ioctl-first" class="section level2">
+<h2>Step 3. Read a line from this text file using IOCTL() first:</h2>
+<pre><code>INCLUDE JBC.h
+   OPENSEQ &#39;.&#39;, &#39;test.txt&#39; TO F.IN.FILE THEN
+      NULL
+   END ELSE
+      CRT &#39;ERROR OPENING FILE&#39;
+      STOP
+   END
+   IF IOCTL(F.IN.FILE, JIOCTL_COMMAND_SEQ_CHANGE_RECORDSIZE, 2048) THEN
+      NULL
+   END ELSE
+      CRT &#39;IOCTL FAILED !!!&#39;
+      STOP
+   END
+   READSEQ V.LINE FROM F.IN.FILE ELSE
+      CRT &#39;ERROR READING FILE&#39;
+      STOP
+   END
+   CRT LEN(V.LINE)                      ;*  1100
+   CRT V.LINE[-20,20]                   ;*  ------1090------1100</code></pre>
+</div>
+<div id="step-3-alternate.-use-subsequent-readseqs-to-read-that-file" class="section level2">
+<h2>Step 3 (alternate). Use subsequent READSEQs to read that file:</h2>
+<pre><code>   OPENSEQ &#39;.&#39;, &#39;test.txt&#39; TO F.IN.FILE THEN
+      NULL
+   END ELSE
+      CRT &#39;ERROR OPENING FILE&#39;
+      STOP
+   END
+   V.EOF = &#39;&#39;
+   LOOP
+      V.LINE = &#39;&#39;
+      LOOP
+         READSEQ V.CHUNK FROM F.IN.FILE ELSE
+            V.EOF = 1
+            BREAK
+         END
+         V.LEN = BYTELEN(V.CHUNK)
+         V.LINE := V.CHUNK
+         IF V.LEN LT 1024 THEN BREAK
+      REPEAT
+* Line processing goes here
+      IF V.EOF THEN BREAK
+      CRT LEN(V.LINE)                      ;*  1100
+      CRT V.LINE[-20,20]                   ;*  ------1090------1100
+   REPEAT</code></pre>
+</div>
+</div>
+
+
+
+</body></html>

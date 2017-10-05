@@ -1,0 +1,49 @@
+<!--?xml version="1.0" encoding="UTF-8"?--><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+  <meta http-equiv="Content-Style-Type" content="text/css"/>
+  <meta name="generator" content="pandoc"/>
+  <title class="statement">DIMENSION</title>
+  <link rel="stylesheet" type="text/css" href="stylesheet.css"/>
+</head>
+<body>
+<div id="dimension-statement" class="section level1">
+<a class="dashingAutolink" name="autolink-116"></a><a class="dashAnchor" name="//apple_ref/cpp/Method/DIMENSION"></a><h1 class="statement">DIMENSION</h1>
+<p>Use the DIM statement to declare arrays to the compiler before referencing.</p>
+<div id="command-syntax-79" class="section level2">
+<h2>COMMAND SYNTAX</h2>
+<pre><code>DIM{ENSION} variable(number{, number... }){, variable(number {,number...}) ...}</code></pre>
+</div>
+<div id="syntax-elements-47" class="section level2">
+<h2>SYNTAX ELEMENTS</h2>
+<p>The <strong>variable</strong> may be any valid variable name neither declared nor previously used. The numbers define the size of each dimension and must be either constants or the subject of an EQUATE statement. A single DIM statement may declare a number of arrays by separating their declarations with a comma.</p>
+</div>
+<div id="notes-51" class="section level2">
+<h2>NOTES</h2>
+<p>Declare the array before it is referenced in the program source (compilation as opposed to execution). If using a variable as an undeclared dimensioned array the compiler will display an error message.</p>
+<p>Do not use the array variable as a normal variable or dynamic array before dimensioning, as the compiler will detect this as an error.</p>
+<p>A dimension size may not be specified as one as this has no logical meaning. The compiler will detect this as a warning.</p>
+<p>When arrays are referenced directly as in A = Array(7), the compiler will optimize the reference as if it was a single undimensioned variable.</p>
+<p>See also: <a href="#COMMON">COMMON</a></p>
+</div>
+<div id="examples-12" class="section level2">
+<h2>EXAMPLES</h2>
+<pre><code>   DIMENSION V.ARRAY(10)
+   MAT V.ARRAY = &#39;!&#39;
+   V.ARRAY(5) = &#39;?&#39;
+   FOR V.I = 1 TO 10
+      CRT V.ARRAY(V.I):          ;* !!!!?!!!!!
+   NEXT V.I
+
+   DIM V.DIM3(2, 3, 4)
+   MAT V.DIM3 = 1
+   V.DIM3(1,2,1) *= 2
+   CRT &#39;&#39;
+   CRT V.DIM3(1,2,1)             ;* 2
+   CRT V.DIM3(1,2)               ;* still 2
+   CRT V.DIM3(1,20,1)            ;* runtime error ARRAY_SUBS</code></pre>
+</div>
+</div>
+
+
+
+</body></html>

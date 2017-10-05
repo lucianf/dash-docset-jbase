@@ -1,0 +1,358 @@
+<!--?xml version="1.0" encoding="UTF-8"?--><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+  <meta http-equiv="Content-Style-Type" content="text/css"/>
+  <meta name="generator" content="pandoc"/>
+  <title class="function">IOCTL</title>
+  <link rel="stylesheet" type="text/css" href="stylesheet.css"/>
+</head>
+<body>
+<div id="ioctl-function" class="section level1">
+<a class="dashingAutolink" name="autolink-180"></a><a class="dashAnchor" name="//apple_ref/cpp/Function/IOCTL"></a><h1 class="function">IOCTL</h1>
+<p>The jBC language provides an intrinsic function called IOCTL that behaves in a similar manner to the C function ioctl(). Its purpose is to allow commands to be sent to the database driver for a particular file, and then to receive a reply from the database driver.</p>
+<p>As with the C function ioctl, the use of IOCTL is highly dependent upon the database driver it is talking to. Each database driver may choose to provide certain common functionality, or may add its own commands and so on. This is especially true of user-written database drivers.</p>
+<p>First, an example of a source program that opens a file and finds the type of file:</p>
+<pre><code>INCLUDE JBC.h
+OPEN &#34;MD&#34; TO DSCB ELSE STOP 201, &#34;MD&#34;
+status = &#34;&#34;
+IF IOCTL(DSCB, JIOCTL_COMMAND_FILESTATUS, status) THEN
+   PRINT &#34;Type of file = &#34; : DQUOTE(status&lt;1&gt;)
+END ELSE
+   PRINT &#34;IOCTL FAILED !! unknown file type&#34;
+END</code></pre>
+<p>If the ELSE clause is taken, it does not necessarily mean there is an error, it only means that the database driver for file &#34;MD&#34; does not support the command that was requested from it. The file JBC.h is supplied with jBASE in the directory TAFC_HOME sub directory include. If the source is compiled with the jbc or BASIC command, this directory is automatically included in the search path and no special action is needed by the programmer for the &#34;INCLUDE JBC.h&#34; statement.</p>
+<p>The format of the IOCTL function is:</p>
+<pre><code>IOCTL(Filevar, Command, Parameter)</code></pre>
+<p>Where:</p>
+<p><strong>filevar</strong> Is a variable that has had a file opened against it using the OPEN statement. However, if you want to use the default file variable, use -1 in this position.</p>
+<p>For example:</p>
+<pre><code>OPEN &#34;MD&#34; ELSE STOP
+filevar = -1
+IF IOCTL(filevar, JIOCTL_COMMAND_xxx, status)
+...</code></pre>
+<p><strong>command</strong> can be any numeric value (or variable containing a numeric). However, it is up to the database driver to support that particular command number. The remainder of this chapter describes the common IOCTL command numbers supported by the jBASE database drivers provided.</p>
+<p>Status Pass here a jBC variable. The use of this variable depends upon the command parameter, and will be described later for each command supported.</p>
+<p>The return value is 0 for failure, or 1 for success. A value of &#34;-1&#34; generally shows the command has not been recognized.</p>
+<p>The remainder of this section will deal with the IOCTL commands that are supported by the provided jBASE database drivers, and the JBC_COMMAND_GETFILENAME command that is supported for all database drivers.</p>
+<p><em>JBC_COMMAND_GETFILENAME COMMAND</em> Using this command to the IOCTL function, you can determine the exact file name that was used to open the file. This is helpful because jEDI uses Q pointers, F pointers and the JEDIFILEPATH environment variable to actually open the file, and the application can never be totally sure where the resultant file was really opened. Normally of course, this is of no concern to the application.</p>
+<div id="example-108" class="section level2">
+<h2>EXAMPLE</h2>
+<p>Open the file CUSTOMERS and find out the exact path that was used to open the file.</p>
+<pre><code>INCLUDE JBC.h
+OPEN &#34;CUSTOMERS&#34; TO DSCB ELSE STOP 201, &#34;CUSTOMERS&#34;
+filename = &#34;&#34;
+IF IOCTL(DSCB, JBC_COMMAND_GETFILENAME, filename) ELSE
+   CRT &#34;IOCTL failed !!&#34; ; EXIT(2)
+END
+PRINT &#34;Full file path = &#34; : DQUOTE(filename)</code></pre>
+<p>This command is executed by the jBC library code rather than the jEDI library code or the database drivers, so it can be run against a file descriptor for any file type.</p>
+<p><em>JIOCTL_COMMAND_CONVERT COMMAND</em></p>
+<p>Some of the jBC database drivers will perform an automatic conversion of the input and output record when performing reads and writes.</p>
+<p>An example of this is when writing to a directory. In this case, the attribute marks will be converted to new-line characters and a trailing new-line character added. Similarly for reading from a directory the new-line characters will be replaced with attribute marks, and the trailing new-line character will be deleted.</p>
+<p>The above example is what happens for the database driver for directories. It assumes by default that the record being read or written is a text file and that the conversion is necessary. It tries to apply some intelligence to reading files, as text files always have a trailing new-line character. Therefore, if a file is read without a trailing new-line character, the database driver assumes the file must be a binary file rather than a text file, and no conversion takes place.</p>
+<p>This conversion of data works in most cases and usually requires no special intervention from the programmer.</p>
+<p>There are cases however, when this conversion needs to be controlled and interrogated, and the IOCTL function call with the JIOCTL_COMMAND_CONVERT command provides the jBASE database drivers that support this conversion with commands to control it.</p>
+<p>The call to IOCTL, if successful, will only affect file operations that use the same file descriptor. Consider the following code:</p>
+<pre><code>INCLUDE JBC.h
+OPEN &#34;MD&#34; TO FILEVAR1 ELSE ...
+OPEN &#34;MD&#34; TO FILEVAR2 ELSE ...
+IF IOCTL(FILEVAR1, JIOCTL_COMMAND_CONVERT, &#39;RB&#39;)</code></pre>
+<p>In the above example, any future file operations using variable FILEVAR1 will be controlled by the change forced in the IOCTL request. Any file operations using variable FILEVAR2 will not be affected and will use the default file operation.</p>
+<p>Input to the IOCTL is a string of controls delimited by a comma that tell the database driver what to do. The output from the IOCTL can optionally be a string to show the last conversion that the driver performed on the file.</p>
+<p>The descriptions of the available controls that can be passed as input to this IOCTL function are:</p>
+<table>
+<thead>
+<tr class="header">
+<th align="left">Code</th>
+<th align="left">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">RB</td>
+<td align="left">All future reads to be in binary (no conversion)</td>
+</tr>
+<tr class="even">
+<td align="left">RT</td>
+<td align="left">All future reads to be in text format (always do a</td>
+</tr>
+<tr class="odd">
+<td align="left"></td>
+<td align="left">conversion)</td>
+</tr>
+<tr class="even">
+<td align="left">RS</td>
+<td align="left">Return to caller the status of the last read(&#34;B&#34; = binary,</td>
+</tr>
+<tr class="odd">
+<td align="left"></td>
+<td align="left">&#34;T&#34; = text)</td>
+</tr>
+<tr class="even">
+<td align="left">WB</td>
+<td align="left">All future writes to be in binary (no conversion)</td>
+</tr>
+<tr class="odd">
+<td align="left">WT</td>
+<td align="left">All future writes to be in text format (always do a</td>
+</tr>
+<tr class="even">
+<td align="left"></td>
+<td align="left">conversion)</td>
+</tr>
+<tr class="odd">
+<td align="left">WI</td>
+<td align="left">All future writes to decide themselves whether binary or text</td>
+</tr>
+<tr class="even">
+<td align="left">WS</td>
+<td align="left">Return to caller the status of the last write (&#34;B&#34; = binary,</td>
+</tr>
+<tr class="odd">
+<td align="left"></td>
+<td align="left">&#34;T&#34; = text )</td>
+</tr>
+<tr class="even">
+<td align="left">KB</td>
+<td align="left">All future reads/writes have the record key unaltered</td>
+</tr>
+<tr class="odd">
+<td align="left">KT</td>
+<td align="left">All future reads/writes have the record key modified</td>
+</tr>
+<tr class="even">
+<td align="left">KI</td>
+<td align="left">All future reads/writes to decide if to do a conversion</td>
+</tr>
+<tr class="odd">
+<td align="left">KS</td>
+<td align="left">Return to caller the status of the last record key</td>
+</tr>
+<tr class="even">
+<td align="left"></td>
+<td align="left">(&#34;B&#34; = binary, &#34;T&#34; = text )</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div id="example-1-4" class="section level2">
+<h2>EXAMPLE 1</h2>
+<p>The application wants to open a file, and to ensure that all reads and writes to that file are in binary, and that no translation such as new-lines to attribute marks is performed.</p>
+<pre><code>INCLUDE JBC.h
+OPEN &#34;FILE&#34; TO DSCB ELSE STOP 201, &#34;FILE&#34;
+IF IOCTL(DSCB,JIOCTL_COMMAND_CONVERT, &#39;RB,WB&#39;) ELSE
+   CRT &#34;UNABLE TO IOCTL FILE &#39;FILE&#39;&#34; ; EXIT(2)
+END</code></pre>
+</div>
+<div id="example-2-7" class="section level2">
+<h2>EXAMPLE 2</h2>
+<p>Read a record from a file, and find out if the last record read was in text format (were new-lines converted to attribute marks and the trailing new-line deleted), or in binary format (with no conversion at all).</p>
+<pre><code>INCLUDE JBC.h
+OPEN &#34;.&#34; TO DSCB ELSE STOP 201, &#34;.&#34;
+READ rec FROM DSCB, &#34;prog.o&#34; ELSE STOP 202, &#34;prog.o&#34;
+status = &#34;RS&#34;
+IF IOCTL(DSCB, JIOCTL_COMMAND_CONVERT, status) THEN
+   IF status EQ &#34;T&#34; THEN CRT &#34;TEXT&#34; ELSE CRT &#34;BINARY&#34;
+END ELSE
+   CRT &#34;The IOCTL failed !!&#34;
+END</code></pre>
+<p><em>JIOCTL_COMMAND_FILESTATUS COMMAND</em></p>
+<p>The JIOCTL_COMMAND_FILESTATUS command will return an attribute delimited list of the status of the file to the caller.</p>
+<table>
+<thead>
+<tr class="header">
+<th align="left">Attribute</th>
+<th align="left">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">&lt;1&gt;</td>
+<td align="left">File type, as a string</td>
+</tr>
+<tr class="even">
+<td align="left">&lt;2&gt;</td>
+<td align="left">File type, as a string</td>
+</tr>
+<tr class="odd">
+<td align="left">&lt;2&gt;</td>
+<td align="left">FileFlags, as decimal number, show LOG, BACKUP and TRANS</td>
+</tr>
+<tr class="even">
+<td align="left">&lt;3&gt;</td>
+<td align="left">BucketQty, as decimal number, number of buckets in the file</td>
+</tr>
+<tr class="odd">
+<td align="left">&lt;4&gt;</td>
+<td align="left">BucketSize, as decimal number, size of each bucket in bytes</td>
+</tr>
+<tr class="even">
+<td align="left">&lt;5&gt;</td>
+<td align="left">SecSize, as decimal number, size of secondary data space</td>
+</tr>
+<tr class="odd">
+<td align="left">&lt;6&gt;</td>
+<td align="left">Restore Spec, a string showing any restore re-size</td>
+</tr>
+<tr class="even">
+<td align="left"></td>
+<td align="left">specification</td>
+</tr>
+<tr class="odd">
+<td align="left">&lt;7&gt;</td>
+<td align="left">Locking identifiers, separated by multi-values</td>
+</tr>
+<tr class="even">
+<td align="left">&lt;8&gt;</td>
+<td align="left">FileFlags showing LOG, BACKUP and TRANSACTION permissions</td>
+</tr>
+<tr class="odd">
+<td align="left">&lt;8,1&gt;</td>
+<td align="left">Set to non-zero to suppress logging on this file</td>
+</tr>
+<tr class="even">
+<td align="left">&lt;8,2&gt;</td>
+<td align="left">Set to non-zero to suppress transaction boundaries on this</td>
+</tr>
+<tr class="odd">
+<td align="left"></td>
+<td align="left">file</td>
+</tr>
+<tr class="even">
+<td align="left">&lt;8,3&gt;</td>
+<td align="left">Set to no-zero to suppress backup of the file using jbackup</td>
+</tr>
+<tr class="odd">
+<td align="left">&lt;9&gt;</td>
+<td align="left">Hashing algorithm used</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div id="example-1-5" class="section level2">
+<h2>EXAMPLE 1</h2>
+<p>Open a file and see if the file type is a directory.</p>
+<pre><code>INCLUDE JBC.h
+OPEN &#34;..&#34; TO DSCB ELSE STOP 201, &#34;..&#34;
+status = &#34;&#34;
+IF IOCTL(DSCB, JIOCTL_COMMAND_FILESTATUS, status) ELSE
+   CRT &#34;IOCTL failed !!&#34; ; EXIT(2)
+END
+IF status&lt;1&gt; EQ &#34;UD&#34; THEN
+   PRINT &#34;File is a directory&#34;
+END ELSE
+   PRINT &#34;File type is &#34; : DQUOTE(status&lt;1&gt;)
+   PRINT &#34;This is not expected for ..&#34;
+END</code></pre>
+</div>
+<div id="example-2-8" class="section level2">
+<h2>EXAMPLE 2</h2>
+<p>Open a file ready to perform file operations in a transaction against it. Make sure the file has not been removed as a transaction type file by a previous invocation of the command &#34;jchmod -T CUSTOMERS&#34;.</p>
+<pre><code>INCLUDE JBC.h
+OPEN &#34;CUSTOMERS&#34; TO DSCB ELSE STOP 201, &#34;CUSTOMERS&#34;
+IF IOCTL(DSCB, JIOCTL_COMMAND_FILESTATUS, status) ELSE
+   CRT &#34;IOCTL failed !!&#34; ; EXIT(2)
+END
+IF status&lt;8,2&gt; THEN
+   CRT &#34;Error ! File CUSTOMERS is not&#34;
+   CRT &#34;part of transaction boundaries !!&#34;
+   CRT &#39;Use &#34;jchmod +T CUSTOMERS&#34; !!&#39;
+   EXIT(2)
+END</code></pre>
+<p><em>JIOCTL_COMMAND_FINDRECORD COMMAND</em></p>
+<p>This command will find out if a record exists on a file without the need to actually read in the record. This can provide large performance gains in certain circumstances.</p>
+</div>
+<div id="example-109" class="section level2">
+<h2>EXAMPLE</h2>
+<p>Before writing out a control record, make sure it doesn&#39;t already exist. As the control record is quite large, it will provide performance gains to simply test if the output record already exists, rather than reading it in using the READ statement to see if it exists.</p>
+<pre><code>INCLUDE JBC.h
+OPEN &#34;outputfile&#34; TO DSCB ELSE STOP 201, &#34;outputfile&#34;
+* Make up the output record to write out in &#34;output&#34;
+key = &#34;output.out&#34;
+rc = IOCTL(DSCB, JIOCTL_COMMAND_FINDRECORD, key)
+BEGIN CASE
+   CASE rc EQ 0
+      WRITE output ON DSCB,key
+      CRT &#34;Data written to key &#34; : key
+   CASE rc GT 0
+      CRT &#34;No further action, record already exists&#34;
+   CASE 1
+      CRT &#34;IOCTL not supported for file type&#34;
+END CASE</code></pre>
+<p><strong>JIOCTL_COMMAND_FINDRECORD_EXTENDED COMMAND</strong></p>
+<p>This command to the IOCTL function returns the record size and the time and date the record was last updated. If the record does not exist, null is returned. The time/date stamp is returned in UTC format.</p>
+</div>
+<div id="example-110" class="section level2">
+<h2>EXAMPLE</h2>
+<p>Print the time and data of last update for each record in filename.</p>
+<pre><code>INCLUDE JBC.h
+OPEN &#34;filename&#34; TO DSCB ELSE STOP 201, &#34;filename&#34;
+*
+* Select each record in the newly opened file
+*
+SELECT DSCB
+LOOP WHILE READNEXT record.key DO
+*
+* Get the details on the record and look for errors.
+*
+   record.info = record.key
+   IF IOCTL(DSCB, JIOCTL_COMMAND_FINDRECORD_EXTENDED, record.info) ELSE
+      CRT &#34;Error! File driver does not support this&#34;
+      STOP
+   END
+*
+* Extract and convert the returned data
+*
+   record.size = record.info&lt;1&gt;
+   record.utc = record.info&lt;2&gt;
+   record.time = OCONV(record.utc, &#39;U0ff0&#39;)
+   record.date = OCONV(record.utc, &#39;U0ff1&#39;)
+*
+* Print the information.
+*
+   PRINT &#34;Record key &#34; :record.key: &#34; last updated at &#34; :
+   PRINT OCONV(record.time, &#39;MTS&#39;): &#34; &#34; :
+   PRINT OCONV(record.date, &#39;D4&#39;)
+REPEAT</code></pre>
+<p><strong>JIOCTL_COMMAND_HASH_RECORD COMMAND</strong></p>
+<p>For jBASE hashed files such as j3 and j4 each record is pseudo-randomly written to one of the buckets (or groups) of the hashed file. The actual bucket it is written to depends upon two factors:</p>
+<p>The actual record key (or item-id)</p>
+<p>The number of buckets in the file (or modulo)</p>
+<p>This IOCTL command shows which bucket number the record would be found in, given the input record key. The bucket number is in the range 0 to (b-1) where b is the number of buckets in the file specified when the file was created (probably using CREATE-FILE).</p>
+<p>The command only returns the expected bucket number, as is no indication that the record actually exists in the file.</p>
+<p>Two attributes are returned by this command. The first is the hash value that the record key has hashed to, and the second attribute is the bucket number.</p>
+</div>
+<div id="example-111" class="section level2">
+<h2>EXAMPLE</h2>
+<p>Open a file, and find out what bucket number the record &#34;PIPE&amp;SLIPPER&#34; would be found in.</p>
+<pre><code>INCLUDE JBC.h
+OPEN &#34;WEDDING-PRESENTS&#34; TO DSCB ELSE STOP
+key = &#34;PIPE&amp;SLIPPER&#34;
+parm = key
+IF IOCTL(DSCB, JIOCTL_COMMAND_HASH_RECORD, parm) THEN
+  PRINT &#34;key &#34; :key: &#34; would be in bucket &#34; :parm&lt;2&gt;
+END ELSE
+   CRT &#34;IOCTL failed, command not supported&#34;
+END</code></pre>
+<p><strong>JIOCTL_COMMAND_HASH_LOCK COMMAND</strong></p>
+<p>The jEDI locking mechanism for records in jEDI provided database drivers is not strictly a 100% record locking mechanism. Instead, it uses the hashed value of the record key to give a value from 0 to 230-1 to describe the record key. The IOCTL command can be used to determine how a record key would be converted into a hashed value for use by the locking mechanism.</p>
+</div>
+<div id="example-112" class="section level2">
+<h2>EXAMPLE</h2>
+<p>Lock a record in a file and find out what the lock id of the record key is. The example then calls the jRLA locking demon and the display of locks taken should include the lock taken by this program.</p>
+<pre><code>INCLUDE JBC.h
+DEFC getpid()
+OPEN &#34;WEDDING-PRESENTS&#34; TO DSCB ELSE STOP
+key = &#34;PIPE&amp;SLIPPER&#34;
+parm = key
+IF IOCTL(DSCB, JIOCTL_COMMAND_HASH_LOCK, parm) ELSE
+   CRT &#34;IOCTL failed, command not supported&#34;
+   EXIT(2)
+END
+PRINT &#34;The lock ID for the key is &#34; : parm
+PRINT &#34;Our process id is &#34; : getpid()</code></pre>
+</div>
+</div>
+
+
+
+</body></html>

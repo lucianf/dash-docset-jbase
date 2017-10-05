@@ -1,0 +1,30 @@
+<!--?xml version="1.0" encoding="UTF-8"?--><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+  <meta http-equiv="Content-Style-Type" content="text/css"/>
+  <meta name="generator" content="pandoc"/>
+  <title class="function">STRS</title>
+  <link rel="stylesheet" type="text/css" href="stylesheet.css"/>
+</head>
+<body>
+<div id="strs-function" class="section level1">
+<a class="dashingAutolink" name="autolink-325"></a><a class="dashAnchor" name="//apple_ref/cpp/Function/STRS"></a><h1 class="function">STRS</h1>
+<p>STRS function is used to produce a dynamic array containing the specified number of repetitions of each element of dynamic.array.</p>
+<div id="command-syntax-275" class="section level2">
+<h2>COMMAND SYNTAX</h2>
+<pre><code>STRS(dynamic.array, repeat)</code></pre>
+<p><strong>dynamic.array</strong> is an expression that evaluates to the strings to be generated.</p>
+<p><strong>repeat</strong> is an expression that evaluates to the number of times the elements are to be repeated. If it does not evaluate to a value that can be truncated to a positive integer, an empty string is returned for dynamic.array.</p>
+<p>If dynamic.array evaluates to null, it returns null. If any element of dynamic.array is null, null is returned for that element. If repeat evaluates to null, the STRS function fails and the program enters the debugger.</p>
+</div>
+<div id="examples-68" class="section level2">
+<h2>EXAMPLES</h2>
+<pre><code>ABC= &#34;A&#34; :@VM: &#34;B&#34; :@VM: &#34;C&#34;
+PRINT STRS(ABC,3)</code></pre>
+<p>The output of this program is:</p>
+<pre>    AAA]BBB]CCC</pre>
+</div>
+</div>
+
+
+
+</body></html>

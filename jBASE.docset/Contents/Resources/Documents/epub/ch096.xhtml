@@ -1,0 +1,48 @@
+<!--?xml version="1.0" encoding="UTF-8"?--><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+  <meta http-equiv="Content-Style-Type" content="text/css"/>
+  <meta name="generator" content="pandoc"/>
+  <title class="function">CONVERT</title>
+  <link rel="stylesheet" type="text/css" href="stylesheet.css"/>
+</head>
+<body>
+<div id="convert-function" class="section level1">
+<a class="dashingAutolink" name="autolink-95"></a><a class="dashAnchor" name="//apple_ref/cpp/Function/CONVERT"></a><h1 class="function">CONVERT</h1>
+<p>The CONVERT function is the function form of the CONVERT statement. It performs exactly the same function but may also operate on an expression rather than being restricted to variables.</p>
+<div id="command-syntax-60" class="section level2">
+<h2>COMMAND SYNTAX</h2>
+<pre><code>CONVERT(expression1, expression2, expression3)</code></pre>
+</div>
+<div id="syntax-elements-33" class="section level2">
+<h2>SYNTAX ELEMENTS</h2>
+<p><strong>expression1</strong> is the string to which the conversion will apply.</p>
+<p><strong>expression2</strong> is the list of all characters to translate in expression1.</p>
+<p><strong>expression3</strong> is the list of characters that will be converted to.</p>
+<p><em>NOTE:</em> For Prime, Universe and Unidata emulations:</p>
+<p><strong>expression1</strong> is the list of all characters to translate in expression1.</p>
+<p><strong>expression2</strong> is the list of characters that will be converted to.</p>
+<p><strong>expression3</strong> is the string to which the conversion will apply.</p>
+<p>See also: <a href="#CONVERT_(STATEMENT)">CONVERT (STATEMENT)</a></p>
+</div>
+<div id="example-62" class="section level2">
+<h2>EXAMPLE</h2>
+<pre><code>* compile this program under same emulation that you&#39;re testing
+   IF NOT(GETENV(&#39;JBCEMULATE&#39;, jbc_emu)) THEN
+      CRT &#39;Emulation setting not found&#39;
+      STOP
+   END
+   *
+   the_string = &#39;ABCCCDEFCDYZ&#39;
+   IF jbc_emu = &#39;prime&#39; THEN
+      the_result = CONVERT(&#39;CEY&#39;, &#39;+-*&#39;, the_string)
+   END ELSE
+      the_result = CONVERT(the_string, &#39;CEY&#39;, &#39;+-*&#39;)
+   END
+   *
+   CRT jbc_emu, the_result                ;* e.g. prime AB+++D-F+D*Z</code></pre>
+</div>
+</div>
+
+
+
+</body></html>

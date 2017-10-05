@@ -1,0 +1,153 @@
+<!--?xml version="1.0" encoding="UTF-8"?--><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+  <meta http-equiv="Content-Style-Type" content="text/css"/>
+  <meta name="generator" content="pandoc"/>
+  <title class="statement">CALLdotNET</title>
+  <link rel="stylesheet" type="text/css" href="stylesheet.css"/>
+</head>
+<body>
+<div id="calldotnet-statement" class="section level1">
+<a class="dashingAutolink" name="autolink-68"></a><a class="dashAnchor" name="//apple_ref/cpp/Method/CALLdotNET"></a><h1 class="statement">CALLdotNET</h1>
+<p>The CALLdotNET command allows BASIC to call any .NET assembly and is useful when using third party applications.</p>
+<div id="command-syntax-35" class="section level2">
+<h2>COMMAND SYNTAX</h2>
+<pre><code>CALLdotNET NameSpaceAndClassName, methodName, param SETTING ret \
+           [ON ERROR errStatment]</code></pre>
+<p>In order to use CALLdotNET, you need:</p>
+<ul>
+<li>The .NET Framework</li>
+<li>The dotNETWrapper.dll installed somewhere to where your PATH points.</li>
+</ul>
+</div>
+<div id="note-7" class="section level2">
+<h2>NOTE</h2>
+<p>The dotNETWrapper is loaded dynamically at runtime; therefore, a compiled basic application has no dependencies on the .NET Framework. Loading the framework takes between 5 and 7 seconds. However, this only occurs when calling the .NET method for the first time.</p>
+</div>
+<div id="syntax-elements-14" class="section level2">
+<h2>SYNTAX ELEMENTS</h2>
+<p>NameSpaceAndClassName The &#34;full&#34; NameSpace (e.g., myNameSpace.myClass)</p>
+<p>methodName The name of the .NET in this class (e.g., &#34;myMethod&#34;)</p>
+<p>Param Any parameter (eg DynArray)</p>
+</div>
+<div id="example-36" class="section level2">
+<h2>EXAMPLE</h2>
+<p>In C#:</p>
+<pre>    using System;
+    using System.Windows.Forms;
+    namespace myNameSpace
+    {
+        public class Class1
+        {
+            public string sayHello(string str)
+            {
+                return &#34;Thank you, I received : &#34; + str;
+            }
+            public Class1(){}
+        }
+    }</pre>
+<p>In VB.NET:</p>
+<pre>    Namespace myNameSpace
+      Public Class Class1
+          Public Function sayHello(ByVal str As String) As String
+            Dim sAnswer As String
+            sAnswer = InputBox(str)
+            sayHello = sAnswer
+          End Function
+      End Class
+    End Namespace</pre>
+<p>Note: Create the .NET project as a &#39;Class Library&#39;.</p>
+<p>If using the visual studio IDE, this option is on selected when creating a new project:</p>
+<div class="figure">
+<img src="media/file0.png" alt=".Net Project Creation"/>
+<p class="caption">.Net Project Creation</p>
+</div>
+<p>If using .NET SDK (instead of the IDE) to compile class libraries into a &#39;DLL&#39; file, the &#39;csc&#39; (C# Compiler) or &#39;vbc&#39; (Visual Basic .NET compiler) command can be used from the command line:</p>
+<pre>    csc /out:myNameSpace.dll /target:library sourcefile.cs</pre>
+<p>The name of the &#39;.DLL&#39; created must be the same as the &#39;namespace&#39; as used in the class library t locate the &#39;dotNetWrapper.dll&#39; library:</p>
+<p>After creating the library, place it in the same private directory as the application. (i.e. the same directory as the jBC executable that will call the class) This is a requirement of the .NET paradigm and not TAFC. The directory should also be in the PATH environment variable.</p>
+<div class="figure">
+<img src="media/file1.png" alt="DLL Creation"/>
+<p class="caption">DLL Creation</p>
+</div>
+<p><em>To call these methods from Basic</em>:</p>
+<pre><code>CALLdotNET &#39;myNameSpace.Class1&#39;, &#39;mymethod&#39;, p SETTING ret
+CRT ret</code></pre>
+</div>
+<div id="on-error" class="section level2">
+<h2>ON ERROR</h2>
+<p>You can manage any errors, which occur during the call, at the BASIC level by getting the SYSTEM(0) variable.</p>
+<p>This variable can have the following values:</p>
+<table>
+<thead>
+<tr class="header">
+<th align="left">Code</th>
+<th align="left">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">1</td>
+<td align="left">Not a Windows platform</td>
+</tr>
+<tr class="even">
+<td align="left">2</td>
+<td align="left">Cannot load the dotNETWrapper</td>
+</tr>
+<tr class="odd">
+<td align="left">3</td>
+<td align="left">Cannot get assembly</td>
+</tr>
+<tr class="even">
+<td align="left">4</td>
+<td align="left">Cannot get Class</td>
+</tr>
+<tr class="odd">
+<td align="left">5</td>
+<td align="left">Cannot get Method</td>
+</tr>
+<tr class="even">
+<td align="left">6</td>
+<td align="left">Cannot Create Instance</td>
+</tr>
+<tr class="odd">
+<td align="left">7</td>
+<td align="left">Unhandled Error in the .NET library</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div id="example-37" class="section level2">
+<h2>EXAMPLE</h2>
+<p>BASIC code using the ON ERROR would look like this:</p>
+<pre><code>PROGRAM testCALLdotNET
+    ns.className = &#39;&#39;
+    methodName = &#39;&#39;
+    param = &#39;&#39;
+    CRT &#34;Please enter NameSpace.ClassName : &#34;
+    INPUT ns.className
+    CRT &#34;Please enter a Method Name : &#34;
+    INPUT methodName
+    CRT &#34;Please enter a Parameter : &#34;
+    INPUT param
+    CALLdotNET ns.className, methodName, param SETTING ret \
+        ON ERROR GOSUB errHandler
+    CRT &#34;Received back from .NET : &#34; : ret
+    STOP
+*
+errHandler:
+    err = SYSTEM(0)
+    BEGIN CASE
+    CASE err = 2
+       CRT &#34;Cannot find dotNETWrapper.dll&#34;
+    CASE err = 3
+       CRT &#34;Class &#34; : className : &#34;doesn&#39;t exist !&#34;
+    CASE err = 5
+       CRT &#34;Method &#34; : methodName : &#34;doesn&#39;t exist !&#34;
+    END CASE
+    RETURN</code></pre>
+</div>
+</div>
+
+
+
+</body></html>

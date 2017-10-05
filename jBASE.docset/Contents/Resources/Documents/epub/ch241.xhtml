@@ -1,0 +1,386 @@
+<!--?xml version="1.0" encoding="UTF-8"?--><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+  <meta http-equiv="Content-Style-Type" content="text/css"/>
+  <meta name="generator" content="pandoc"/>
+  <title class="function">OCONV</title>
+  <link rel="stylesheet" type="text/css" href="stylesheet.css"/>
+</head>
+<body>
+<div id="oconv-function" class="section level1">
+<a class="dashingAutolink" name="autolink-240"></a><a class="dashAnchor" name="//apple_ref/cpp/Function/OCONV"></a><h1 class="function">OCONV</h1>
+<p>OCONV statement converts internal representations of data to their external form.</p>
+<div id="command-syntax-199" class="section level2">
+<h2>COMMAND SYNTAX</h2>
+<pre><code>OCONV(expression1, expression2)</code></pre>
+</div>
+<div id="syntax-elements-141" class="section level2">
+<h2>SYNTAX ELEMENTS</h2>
+<p><strong>expression1</strong> may evaluate to any data type but must be relevant to the conversion code.</p>
+<p><strong>expression2</strong> should evaluate to a conversion code from the list below. Alternatively, expression2 may evaluate to a user exit known to the jBC language or supplied by the user.</p>
+</div>
+<div id="international-mode-17" class="section level2">
+<h2>INTERNATIONAL MODE</h2>
+<p>Description of date, time, number and currency conversions when used in ICONV and International Mode</p>
+</div>
+<div id="notes-120" class="section level2">
+<h2>NOTES</h2>
+<p>OCONV will return the result of the conversion of expression1 by expression2. Shown below are valid conversion codes:</p>
+<table>
+<thead>
+<tr class="header">
+<th align="left">Conversion</th>
+<th align="left">Action</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">D{n{c}}</td>
+<td align="left">Converts an internal date to an external date format.</td>
+</tr>
+<tr class="even">
+<td align="left"></td>
+<td align="left">The numeric argument n specifies the field width</td>
+</tr>
+<tr class="odd">
+<td align="left"></td>
+<td align="left">allowed for the year and can be 0 to 4 (default 4).</td>
+</tr>
+<tr class="even">
+<td align="left"></td>
+<td align="left">The character &#39;c&#39; causes the date to be return in the</td>
+</tr>
+<tr class="odd">
+<td align="left"></td>
+<td align="left">form ddcmmcyyyy. If it is not specified then the month</td>
+</tr>
+<tr class="even">
+<td align="left"></td>
+<td align="left">name is returned in abbreviated form.</td>
+</tr>
+<tr class="odd">
+<td align="left">DI</td>
+<td align="left">Allows the conversion of an external date to the</td>
+</tr>
+<tr class="even">
+<td align="left"></td>
+<td align="left">internal format even though an output conversion</td>
+</tr>
+<tr class="odd">
+<td align="left"></td>
+<td align="left">is expected.</td>
+</tr>
+<tr class="even">
+<td align="left">DD</td>
+<td align="left">Returns the day in the current month.</td>
+</tr>
+<tr class="odd">
+<td align="left">DM</td>
+<td align="left">Returns the number of the month in the year.</td>
+</tr>
+<tr class="even">
+<td align="left">DMA</td>
+<td align="left">Returns the name of the current month.</td>
+</tr>
+<tr class="odd">
+<td align="left">DJ</td>
+<td align="left">Returns the number of the day in the year (0-366).</td>
+</tr>
+<tr class="even">
+<td align="left">DQ</td>
+<td align="left">Returns the quarter of the year as a number 1 to 4.</td>
+</tr>
+<tr class="odd">
+<td align="left">DW</td>
+<td align="left">Returns the day of the week as a number 1 to 7</td>
+</tr>
+<tr class="even">
+<td align="left"></td>
+<td align="left">(Monday is 1).</td>
+</tr>
+<tr class="odd">
+<td align="left">DWA</td>
+<td align="left">Returns the name of the day of the week.</td>
+</tr>
+<tr class="even">
+<td align="left">DY{n}</td>
+<td align="left">Returns the year in a field of n characters.</td>
+</tr>
+<tr class="odd">
+<td align="left">F</td>
+<td align="left">Given a prospective filename for a command such as</td>
+</tr>
+<tr class="even">
+<td align="left"></td>
+<td align="left">CREATE-FILE this conversion will return a filename</td>
+</tr>
+<tr class="odd">
+<td align="left"></td>
+<td align="left">that is acceptable to the version of UNIX TAFC is</td>
+</tr>
+<tr class="even">
+<td align="left"></td>
+<td align="left">running on.</td>
+</tr>
+<tr class="odd">
+<td align="left">MCA</td>
+<td align="left">Removes all but alphabetic characters from the input</td>
+</tr>
+<tr class="even">
+<td align="left"></td>
+<td align="left">string.</td>
+</tr>
+<tr class="odd">
+<td align="left">MC/A</td>
+<td align="left">Removes all but the NON-alphabetic characters in the</td>
+</tr>
+<tr class="even">
+<td align="left"></td>
+<td align="left">input string.</td>
+</tr>
+<tr class="odd">
+<td align="left">MCN</td>
+<td align="left">Removes all but numeric characters in the input string.</td>
+</tr>
+<tr class="even">
+<td align="left">MC/N</td>
+<td align="left">Removes all but NON numeric characters in the input</td>
+</tr>
+<tr class="odd">
+<td align="left"></td>
+<td align="left">string.</td>
+</tr>
+<tr class="even">
+<td align="left">MCB</td>
+<td align="left">Returns just the alphabetic and numeric characters from</td>
+</tr>
+<tr class="odd">
+<td align="left"></td>
+<td align="left">the input string.</td>
+</tr>
+<tr class="even">
+<td align="left">MC/B</td>
+<td align="left">Removes the alphabetic and numeric characters from</td>
+</tr>
+<tr class="odd">
+<td align="left"></td>
+<td align="left">their input string.</td>
+</tr>
+<tr class="even">
+<td align="left">MCC;s1;s2</td>
+<td align="left">Replaces all occurrences of string s1 with string s2.</td>
+</tr>
+<tr class="odd">
+<td align="left">MCL</td>
+<td align="left">Converts all upper case characters in the string to</td>
+</tr>
+<tr class="even">
+<td align="left"></td>
+<td align="left">lower case characters.</td>
+</tr>
+<tr class="odd">
+<td align="left">MCU</td>
+<td align="left">Converts all lower case characters in the string to</td>
+</tr>
+<tr class="even">
+<td align="left"></td>
+<td align="left">upper case characters.</td>
+</tr>
+<tr class="odd">
+<td align="left">MCT</td>
+<td align="left">Capitalizes each word in the input string; e.g. JIM</td>
+</tr>
+<tr class="even">
+<td align="left"></td>
+<td align="left">converts to Jim.</td>
+</tr>
+<tr class="odd">
+<td align="left">MCP{c}</td>
+<td align="left">Converts all non-printable characters to a period</td>
+</tr>
+<tr class="even">
+<td align="left"></td>
+<td align="left">character &#34;.&#34; in the input string. When supplied use</td>
+</tr>
+<tr class="odd">
+<td align="left"></td>
+<td align="left">the character</td>
+</tr>
+<tr class="even">
+<td align="left"></td>
+<td align="left">&#34;c&#34; in place of the period.</td>
+</tr>
+<tr class="odd">
+<td align="left">MCPN{n}</td>
+<td align="left">In the same manner as the MCP conversion, it replaces</td>
+</tr>
+<tr class="even">
+<td align="left"></td>
+<td align="left">all non-printable characters. The ASCII hexadecimal</td>
+</tr>
+<tr class="odd">
+<td align="left"></td>
+<td align="left">value</td>
+</tr>
+<tr class="even">
+<td align="left"></td>
+<td align="left">follows the replacing character.</td>
+</tr>
+<tr class="odd">
+<td align="left">MCNP{n}</td>
+<td align="left">Performs the opposite conversion to MCPN. The ASCII</td>
+</tr>
+<tr class="even">
+<td align="left"></td>
+<td align="left">hexadecimal value following the tilde character</td>
+</tr>
+<tr class="odd">
+<td align="left"></td>
+<td align="left">converts to its</td>
+</tr>
+<tr class="even">
+<td align="left"></td>
+<td align="left">original binary character value.</td>
+</tr>
+<tr class="odd">
+<td align="left">MCDX</td>
+<td align="left">Converts the decimal value in the input string to its</td>
+</tr>
+<tr class="even">
+<td align="left"></td>
+<td align="left">hexadecimal equivalent.</td>
+</tr>
+<tr class="odd">
+<td align="left">MCXD</td>
+<td align="left">Converts the hexadecimal value in the input string to</td>
+</tr>
+<tr class="even">
+<td align="left"></td>
+<td align="left">its decimal equivalent.</td>
+</tr>
+<tr class="odd">
+<td align="left">Gncx</td>
+<td align="left">Extracts x groups separated by character c skipping n</td>
+</tr>
+<tr class="even">
+<td align="left"></td>
+<td align="left">groups, from the input string.</td>
+</tr>
+<tr class="odd">
+<td align="left">MT{HS}</td>
+<td align="left">Performs time conversions.</td>
+</tr>
+<tr class="even">
+<td align="left">MD</td>
+<td align="left">Converts the supplied integer value to a decimal value.</td>
+</tr>
+<tr class="odd">
+<td align="left">MP</td>
+<td align="left">Converts a packed decimal number to an integer value.</td>
+</tr>
+<tr class="even">
+<td align="left">MX</td>
+<td align="left">Converts ASCII input to hexadecimal characters.</td>
+</tr>
+<tr class="odd">
+<td align="left">T</td>
+<td align="left">Performs file translations given a cross-reference</td>
+</tr>
+<tr class="even">
+<td align="left"></td>
+<td align="left">table in a record in a file.</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div id="examples-49" class="section level2">
+<h2>EXAMPLES</h2>
+<p>Date and time:</p>
+<pre><code>   CRT OCONV(1, &#39;D&#39;)         ;* 01 JAN 1968
+   CRT OCONV( DATE(), &#39;D&#39; )    ;* here and below output for 30 MAY 2013
+   CRT OCONV( DATE(), &#39;D2&#39; )   ;* 30 MAY 13
+   CRT OCONV( DATE(), &#39;D4/&#39; )  ;* 05/30/2013
+   CRT OCONV( DATE(), &#39;DY&#39; )   ;* 2013
+   CRT OCONV( DATE(), &#39;DY2&#39; )  ;* 13
+   CRT OCONV( DATE(), &#39;DQ&#39; )   ;* 2 (quarter)
+   CRT OCONV( DATE(), &#39;DM&#39; )   ;* 5 (month number)
+   CRT OCONV( DATE(), &#39;DMA&#39; )  ;* MAY
+   CRT OCONV( DATE(), &#39;DD&#39; )   ;* 30
+   CRT OCONV( DATE(), &#39;DJ&#39; )   ;* 150 (number of a day in the year)
+   CRT OCONV( DATE(), &#39;DW&#39; )   ;* 4 (day number in a week, starting from Monday)
+   CRT OCONV( DATE(), &#39;DWA&#39; )  ;* THURSDAY
+   CRT OCONV( TIME(), &#39;MT&#39; )   ;* 20:04
+   CRT OCONV( TIME(), &#39;MTS&#39; )  ;* 20:04:08
+   CRT OCONV(1, &#39;MTS&#39;)       ;* 00:00:01
+* difference of 2 dates (in days)
+   CRT ICONV(&#39;20121231&#39;, &#39;D&#39;) - ICONV(&#39;20111231&#39;, &#39;D&#39;)   ;* 366
+* Check if a year is a leap one
+   CRT OCONV( ICONV(&#39;20131231&#39;, &#39;D4&#39;), &#39;DJ&#39; )    ;*  365
+   CRT OCONV( ICONV(&#39;20161231&#39;, &#39;D4&#39;), &#39;DJ&#39; )    ;*  366</code></pre>
+<p>Strings:</p>
+<pre><code>* split a string
+   the_string = &#39;LONG STRING TO BE SPLIT&#39;
+   the_split = FMT(the_string, &#39;10L&#39;)
+   CRT OCONV(the_split, &#39;MCP&#39;)         ;* LONG STRIN.G TO BE SP.LIT
+* hexadecimal output
+   CRT OCONV(the_split, &#39;MX&#39;)
+* Output:
+* 4C4F4E4720535452494EFB4720544F204245205350FB4C495420202020202020
+*
+* Remove non-alphabetic symbols:
+   CRT OCONV(the_split, &#39;MCA&#39;)     ;* LONGSTRINGTOBESPLIT
+* Remove all alphabetic symbols:
+   CRT OCONV( OCONV(the_split, &#39;MC/A&#39;), &#39;MX&#39; )  ;* 20FB202020FB20202020202020
+* Note FB symbols in the output above.. see what&#39;s that
+   CRT OCONV(&#39;FB&#39;, &#39;MCXD&#39;)    ;* 251 a.k.a. @TM
+   CHANGE @TM TO &#39;-&gt;&#39; IN the_split ; CRT the_split ;* LONG STRIN-&gt;G TO BE SP-&gt;LIT
+* Remove non-numeric symbols:
+   CRT OCONV(&#39;another 1 bites the dust&#39;, &#39;MCN&#39;)    ;* 1
+* Remove all numeric symbols:
+   CRT OCONV(&#39;another 1 bites the dust&#39;, &#39;MC/N&#39;)   ;* another  bites the dust
+* formatting
+   CRT SQUOTE( FMT(the_string, &#39;30L&#39;) )    ;* &#39;LONG STRING TO BE SPLIT       &#39;
+   CRT SQUOTE( FMT(the_string, &#39;30R&#39;) )    ;* &#39;       LONG STRING TO BE SPLIT&#39;
+* replace some data
+   CRT OCONV(the_string, &#39;MCC;STRING;DATA&#39;)  ;* LONG DATA TO BE SPLIT
+* change case
+   CRT OCONV(the_string, &#39;MCL&#39;)  ;* long string to be split
+   CRT OCONV(&#39;do it&#39;, &#39;MCU&#39;)     ;* DO IT
+   CRT OCONV(the_string, &#39;MCT&#39;)  ;* Long String To Be Split
+* extract delimited fields: skip 1 space-delimited word, take 3 from that point
+   CRT OCONV(the_string, &#39;G1 3&#39;)  ;* STRING TO BE</code></pre>
+<p>Numbers:</p>
+<pre><code>* amounts
+   amount_fcy = 1234
+   CRT FMT(amount_fcy, &#39;R%7&#39;)   ;*       0001234
+   amount_fcy += 0.56
+   CRT FMT(amount_fcy, &#39;R2*19&#39;)              ;*  ************1234.56
+   CRT SQUOTE( FMT(amount_fcy, &#39;L2,#19&#39;) )     ;*  &#39;1,234.56           &#39;
+   CRT FMT(-amount_fcy, &#39;R2,C&amp;*$#15&#39;)        ;*           $1,234.56CR
+   CRT FMT(amount_fcy,&#39;L0&#39;)                  ;* 1235
+* phone numbers
+   CRT FMT(1234567890, &#39;R((###) ###-###)&#39;)       ;* (234) 567-890
+   CRT FMT(74952223355, &#39;R(+# (#3) #3-#2-#2)&#39;)   ;* +7 (495) 222-33-55
+* FMT() and OCONV() are often interchangeable;
+* though it&#39;s not the case for next 2 lines...
+   CRT DQUOTE( FMT(123456.78, &#39;R2,$#15&#39;) )           ;*  &#34;    $123,456.78&#34;
+   CRT DQUOTE( OCONV(123456.78, &#39;R2,$#15&#39;) )         ;*  Error in Range Test</code></pre>
+<p>User exits:</p>
+<pre><code>   CRT OCONV(&#34;&#34;, &#34;U50BB&#34;)        ;* port number and user name
+   HUSH ON
+   EXECUTE &#39;SELECT .&#39;
+   HUSH OFF
+   CRT OCONV(&#34;&#34;, &#34;U30E0&#34;)        ;* number of items in active SELECT list
+* sleep
+   start_time = TIME()  ;  dummy = OCONV(3, &#34;U307A&#34;)
+   CRT TIME() - start_time        ;* 3
+* reverse a string
+   CRT OCONV(&#39;desrever saw gnirtS&#39;, &#34;U51AA&#34;)
+* remove duplicate consecutive characters
+   CRT OCONV(&#39;hhahhahh&#39;, &#34;U31AC&#34;)        ;* haha</code></pre>
+<p>See also: <a href="#FMT">FMT</a> function.</p>
+</div>
+</div>
+
+
+
+</body></html>

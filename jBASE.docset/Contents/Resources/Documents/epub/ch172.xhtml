@@ -1,0 +1,53 @@
+<!--?xml version="1.0" encoding="UTF-8"?--><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+  <meta http-equiv="Content-Style-Type" content="text/css"/>
+  <meta name="generator" content="pandoc"/>
+  <title class="statement">IN</title>
+  <link rel="stylesheet" type="text/css" href="stylesheet.css"/>
+</head>
+<body>
+<div id="in-statement" class="section level1">
+<a class="dashingAutolink" name="autolink-171"></a><a class="dashAnchor" name="//apple_ref/cpp/Method/IN"></a><h1 class="statement">IN</h1>
+<p>The IN statement allows the program to receive raw data from the input device, which is normally the terminal keyboard, one character at a time.</p>
+<div id="command-syntax-132" class="section level2">
+<h2>COMMAND SYNTAX</h2>
+<pre><code>IN Var { FOR expression THEN | ELSE statements }</code></pre>
+</div>
+<div id="syntax-elements-88" class="section level2">
+<h2>SYNTAX ELEMENTS</h2>
+<p><strong>Var</strong> will be assigned the numeric value (0 - 255 decimal) of the next character received from the input device. The statement will normally wait indefinitely (block) for a character from the keyboard.</p>
+<p>Specifying the FOR clause to the IN statement allows the statement to stop waiting for keyboard after a specified amount of time. The expression should evaluate to a numeric value, which will be taken as the number of deci-seconds (tenths of a second) to wait before abandoning the input.</p>
+<p>The <strong>FOR</strong> clause must have either or both of the THEN or ELSE clauses If a character is received from the input device before the time-out period then Var is assigned its numeric value and the THEN clause is executed (if present). If the input statement times out before a character is received then Var is unaltered and the ELSE clause is executed (if present).</p>
+</div>
+<div id="notes-83" class="section level2">
+<h2>NOTES</h2>
+<p>See also: <a href="#INPUT">INPUT</a>, <a href="#INPUTNULL">INPUTNULL</a>.</p>
+</div>
+<div id="example-102" class="section level2">
+<h2>EXAMPLE</h2>
+<pre><code>   LOOP
+      IN in_key
+      IF in_key EQ 27 THEN ;* ESC seen
+         IN in_key_2 FOR 2 THEN ;* Function Key?
+            IN in_key_3 FOR 2 THEN
+               CRT &#39;&#39;
+               BEGIN CASE
+               CASE in_key_2 EQ 79 AND in_key_3 EQ 80
+                  CRT &#39;F1 detected&#39;
+               CASE in_key_2 EQ 79 AND in_key_3 EQ 81
+                  CRT &#39;F2 detected&#39;
+               END CASE
+            END
+         END ELSE
+            CRT &#39;&#39;
+            CRT &#39;ESC pressed, exiting&#39;
+            STOP
+         END
+      END
+   REPEAT</code></pre>
+</div>
+</div>
+
+
+
+</body></html>

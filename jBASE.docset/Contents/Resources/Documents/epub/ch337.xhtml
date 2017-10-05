@@ -1,0 +1,34 @@
+<!--?xml version="1.0" encoding="UTF-8"?--><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+  <meta http-equiv="Content-Style-Type" content="text/css"/>
+  <meta name="generator" content="pandoc"/>
+  <title class="statement">TIMEOUT</title>
+  <link rel="stylesheet" type="text/css" href="stylesheet.css"/>
+</head>
+<body>
+<div id="timeout-statement" class="section level1">
+<a class="dashingAutolink" name="autolink-336"></a><a class="dashAnchor" name="//apple_ref/cpp/Method/TIMEOUT"></a><h1 class="statement">TIMEOUT</h1>
+<p>If no data is read in the specified time, use the TIMEOUT statement to terminate a <a href="#READSEQ">READSEQ</a> or <a href="#READBLK">READBLK</a> statement.</p>
+<div id="command-syntax-285" class="section level2">
+<h2>COMMAND SYNTAX</h2>
+<pre><code>TIMEOUT file.variable, time</code></pre>
+</div>
+<div id="syntax-elements-217" class="section level2">
+<h2>SYNTAX ELEMENTS</h2>
+<p><strong>file.variable</strong> specifies a file opened for sequential access.</p>
+<p><strong>time</strong> is an expression that evaluates to the number of seconds the program should wait before terminating the <a href="#READSEQ">READSEQ</a> statement.</p>
+<p>TIMEOUT causes subsequent READSEQ and READBLK statements to terminate and execute ELSE statements if the number of seconds specified by time elapses while waiting for data.</p>
+<p>If either file.variable or time evaluates to null, the TIMEOUT statement fails and the program enters the debugger.</p>
+</div>
+<div id="examples-75" class="section level2">
+<h2>EXAMPLES</h2>
+<pre><code>TIMEOUT SLIPPERS, 10
+READBLK Var1 FROM SLIPPERS, 15 THEN PRINT Var1 ELSE
+   PRINT &#34;TIMEOUT OCCURRED&#34;
+END</code></pre>
+</div>
+</div>
+
+
+
+</body></html>

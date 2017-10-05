@@ -1,0 +1,47 @@
+<!--?xml version="1.0" encoding="UTF-8"?--><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+  <meta http-equiv="Content-Style-Type" content="text/css"/>
+  <meta name="generator" content="pandoc"/>
+  <title class="function">FILEINFO</title>
+  <link rel="stylesheet" type="text/css" href="stylesheet.css"/>
+</head>
+<body>
+<div id="fileinfo-function" class="section level1">
+<a class="dashingAutolink" name="autolink-139"></a><a class="dashAnchor" name="//apple_ref/cpp/Function/FILEINFO"></a><h1 class="function">FILEINFO</h1>
+<p>Use the FILEINFO function to return information about the specified file variable.</p>
+<div id="command-syntax-102" class="section level2">
+<h2>COMMAND SYNTAX</h2>
+<pre><code>FILEINFO(file.variable, key)</code></pre>
+<p>If <strong>key</strong> is 0, this function returns 1 if file.variable is a valid file variable, zero otherwise. If <strong>key</strong> is 1, this function returns file status information.</p>
+</div>
+<div id="examples-21" class="section level2">
+<h2>EXAMPLES</h2>
+<pre><code>   IF NOT( GETENV(&#39;JEDIFILENAME_SYSTEM&#39;, FN.SYSTEM) ) THEN ABORT
+   OPEN FN.SYSTEM TO F.SYSTEM ELSE NULL
+   OPEN &#39;SOMENONEXISTENTFILE&#39; TO F.SOMEFILE ELSE NULL
+   CRT FILEINFO(F.SYSTEM, 0)        ;* 1
+   CRT FILEINFO(F.SOMEFILE, 0)      ;* 0
+
+   IF NOT( GETENV(&#39;TAFC_HOME&#39;, tafc_home) ) THEN
+      CRT &#39;TAFC_HOME not defined&#39;
+      STOP
+   END
+   //
+   log_dir = tafc_home : &#39;/tmp&#39;
+   log_file = &#39;jbase_error_trace&#39;
+   //
+   OPENSEQ log_dir, log_file READONLY TO f_log THEN
+      CRT FMT( FILEINFO(f_log, 1), &#39;MCP&#39; )
+   END ELSE
+      CRT &#39;jbase_error_trace not found&#39;
+   END</code></pre>
+<p>Sample output from the second example:</p>
+<pre>    0^0^0^0^100666^107817^1^0^0^70770^24915^24915^34405^16705^25887^16643
+    ^39761^16220^0^C:\home\kzm\v-t24\r11\tafc/tmp\jbase_error_trace^SEQ^0
+    ^0^0^0^0^C:\home\kzm\v-t24\r11\tafc/tmp\jbase_error_trace^0^0^unknown</pre>
+</div>
+</div>
+
+
+
+</body></html>

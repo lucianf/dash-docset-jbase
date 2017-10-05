@@ -1,0 +1,42 @@
+<!--?xml version="1.0" encoding="UTF-8"?--><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+  <meta http-equiv="Content-Style-Type" content="text/css"/>
+  <meta name="generator" content="pandoc"/>
+  <title class="function">BYTELEN</title>
+  <link rel="stylesheet" type="text/css" href="stylesheet.css"/>
+</head>
+<body>
+<div id="bytelen-function" class="section level1">
+<a class="dashingAutolink" name="autolink-53"></a><a class="dashAnchor" name="//apple_ref/cpp/Function/BYTELEN"></a><h1 class="function">BYTELEN</h1>
+<p>The BYTELEN function will return the length of the expression as the number of bytes rather than the number of characters.</p>
+<div id="command-syntax-20" class="section level2">
+<h2>COMMAND SYNTAX</h2>
+<pre><code>BYTELEN(expression)</code></pre>
+</div>
+<div id="syntax-elements-12" class="section level2">
+<h2>SYNTAX ELEMENTS</h2>
+<p>The expression is to be a string. The BYTELEN function will then return the byte count of the expression.</p>
+</div>
+<div id="example-22" class="section level2">
+<h2>EXAMPLE</h2>
+<pre><code>   V.UTF = &#39;ABCDEF&#39; \
+         : CHAR(353) : CHAR(352) : CHAR(269) : CHAR(268) : CHAR(263) \
+         : CHAR(262) : CHAR(382) : CHAR(381) : CHAR(273) : CHAR(272)
+   V.LEN = LEN(V.UTF)  ;  CRT V.LEN  ;* 16
+   CRT BYTELEN(V.UTF)                ;* 26
+*
+* [] takes characters, not bytes, so output is:
+* 41 42 43 44 45 46 C5A1 C5A0 C48D C48C C487 C486 C5BE C5BD C491 C490
+   FOR V.I = 1 TO V.LEN
+      CRT FMT(V.UTF[V.I,1], &#39;MX&#39;) : &#39; &#39; :
+   NEXT V.I</code></pre>
+</div>
+<div id="notes-9" class="section level2">
+<h2>NOTES</h2>
+<p>The BYTELEN function will always return the actual byte count for the expression; irrespective of the International Mode in operation at the time. This compares with the LEN function, which will return a character count. The character count may differ from the byte count when processing in International Mode.</p>
+</div>
+</div>
+
+
+
+</body></html>

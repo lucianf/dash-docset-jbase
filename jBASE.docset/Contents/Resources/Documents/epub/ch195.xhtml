@@ -1,0 +1,27 @@
+<!--?xml version="1.0" encoding="UTF-8"?--><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+  <meta http-equiv="Content-Style-Type" content="text/css"/>
+  <meta name="generator" content="pandoc"/>
+  <title class="function">JQLCOMPILE</title>
+  <link rel="stylesheet" type="text/css" href="stylesheet.css"/>
+</head>
+<body>
+<div id="jqlcompile-function" class="section level1">
+<a class="dashingAutolink" name="autolink-194"></a><a class="dashAnchor" name="//apple_ref/cpp/Function/JQLCOMPILE"></a><h1 class="function">JQLCOMPILE</h1>
+<p>JQLCOMPILE compiles a jQL statement.</p>
+<div id="command-syntax-154" class="section level2">
+<h2>COMMAND SYNTAX</h2>
+<pre><code>JQLCOMPILE(Statement, Command, Options, Messages)</code></pre>
+</div>
+<div id="syntax-elements-106" class="section level2">
+<h2>SYNTAX ELEMENTS</h2>
+<p><strong>Statement</strong> is the variable, which receives the compiled statement. Majority of functions use the compiled statement to execute and work on the result set etc.</p>
+<p><strong>Command</strong> is the actual jQL query that you want to compile (such as SELECT or something similar). Use RETRIEVE to obtain data records as the verb rather than an existing jQL verb. This will ensure that the right options are set internally. In addition, use any word that is not a jQL reserved word as the verb and it will work in the same way as RETRIEVE: implement a PLOT command that passes the entire command line into JQLCOMPILE and the results will be the same as if the first word was replaced with RETRIEVE.</p>
+<p><strong>Option:</strong> You must specify JQLOPT_USE_SELECT to supply a select list to the JQLEXECUTE function; the compile builds a different execution plan if using select lists.</p>
+<p><strong>Messages:</strong> If the statement fails to compile, this dynamic array is in the STOP format, therefore STOP messages can be programmed and printed. Provides a history of compilation for troubleshooting purposes; Returns -1 if there is a problem found in the statement and 0 for no problem.</p>
+</div>
+</div>
+
+
+
+</body></html>

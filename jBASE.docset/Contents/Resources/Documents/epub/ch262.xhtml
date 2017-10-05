@@ -1,0 +1,47 @@
+<!--?xml version="1.0" encoding="UTF-8"?--><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+  <meta http-equiv="Content-Style-Type" content="text/css"/>
+  <meta name="generator" content="pandoc"/>
+  <title class="statement">PRECISION</title>
+  <link rel="stylesheet" type="text/css" href="stylesheet.css"/>
+</head>
+<body>
+<div id="precision-statement" class="section level1">
+<a class="dashingAutolink" name="autolink-261"></a><a class="dashAnchor" name="//apple_ref/cpp/Method/PRECISION"></a><h1 class="statement">PRECISION</h1>
+<p>PRECISION statement informs the number of digits of precision used after the decimal point.</p>
+<div id="command-syntax-219" class="section level2">
+<h2>COMMAND SYNTAX</h2>
+<pre><code>PRECISION integer</code></pre>
+</div>
+<div id="notes-131" class="section level2">
+<h2>NOTES</h2>
+<p>A PRECISION statement can be specified any number of times in a source file. Only the most recently defined precision will be active at any one time.</p>
+<p>Calling programs and external subroutines do not have to be compiled at the same degree of precision, however, any changes to precision in a subroutine will not persist when control returns to the calling program.</p>
+<p>jBASE uses the maximum degree of precision allowed on the host machine in all mathematical calculations to ensure maximum accuracy. It then uses the defined precision to format the number.</p>
+</div>
+<div id="example-149" class="section level2">
+<h2>EXAMPLE</h2>
+<pre><code>    PRECISION 6
+    CRT 2 / 3</code></pre>
+<p>will print the value 0.666666 (note: truncation not rounding!).</p>
+</div>
+<div id="example-2-11" class="section level2">
+<h2>EXAMPLE 2</h2>
+<pre><code>   var_1 = &#39;0.123456789012345678901234567890123456789012345678901234567890&#39;
+   var_2 = &#39;0.1234567890123456789012345678901234567890123456789012345678901&#39;
+   PRECISION 13
+   GOSUB TEST                ;* 1
+   PRECISION 17
+   GOSUB TEST                ;* 0
+   STOP
+TEST:
+   var_3 = (var_1 = var_2)
+   CRT var_3
+   RETURN
+END</code></pre>
+</div>
+</div>
+
+
+
+</body></html>

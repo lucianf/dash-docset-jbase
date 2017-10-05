@@ -1,0 +1,53 @@
+<!--?xml version="1.0" encoding="UTF-8"?--><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+  <meta http-equiv="Content-Style-Type" content="text/css"/>
+  <meta name="generator" content="pandoc"/>
+  <title class="statement">IF</title>
+  <link rel="stylesheet" type="text/css" href="stylesheet.css"/>
+</head>
+<body>
+<div id="if-statement" class="section level1">
+<a class="dashingAutolink" name="autolink-169"></a><a class="dashAnchor" name="//apple_ref/cpp/Method/IF"></a><h1 class="statement">IF</h1>
+<p>Allows other statements to be conditionally executed</p>
+<div id="command-syntax-130" class="section level2">
+<h2>COMMAND SYNTAX</h2>
+<pre><code>IF expression THEN | ELSE statements</code></pre>
+</div>
+<div id="syntax-elements-87" class="section level2">
+<h2>SYNTAX ELEMENTS</h2>
+<p>It evaluates the expression to a value of Boolean TRUE or FALSE. If the expression is TRUE executes then the statements defined by the THEN clause (if present). If the expression is FALSE executes the statements defined by the ELSE clause.</p>
+<p>The THEN and ELSE clauses may take two different forms being single and multiple line statements.</p>
+<p>The simplest form of either clause is of the form:</p>
+<pre><code>IF A THEN CRT A</code></pre>
+<p>Or</p>
+<pre><code>IF A ELSE CRT A</code></pre>
+<p>However, expand the clauses to enclose multiple lines of code using the END keyword as so:</p>
+<pre><code>IF A THEN
+    A = A*6
+    CRT A
+END ELSE
+    A = 76
+    CRT A
+END</code></pre>
+<p>You can combine the single and multi-line versions of either clause to make complex combinations of the command. For reasons of readability it is suggested that where both clauses are present for an IF statement that the same form of each clause is coded.</p>
+</div>
+<div id="notes-82" class="section level2">
+<h2>NOTES</h2>
+<p>IF statements can be nested within either clause to any number of levels.</p>
+</div>
+<div id="example-101" class="section level2">
+<h2>EXAMPLE</h2>
+<pre><code>CRT &#34;Are you sure (Y/N) &#34; :
+INPUT Answer, 1_
+IF OCONV (Answer, &#39;MCU&#39;) = &#34;Y&#34; THEN
+    GOSUB DeleteFiles
+    CRT &#34;Files have been deleted&#34;
+END ELSE
+    CRT &#34;File delete was ignored&#34;
+END</code></pre>
+</div>
+</div>
+
+
+
+</body></html>

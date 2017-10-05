@@ -1,0 +1,35 @@
+<!--?xml version="1.0" encoding="UTF-8"?--><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+  <meta http-equiv="Content-Style-Type" content="text/css"/>
+  <meta name="generator" content="pandoc"/>
+  <title class="function">ISDIGIT</title>
+  <link rel="stylesheet" type="text/css" href="stylesheet.css"/>
+</head>
+<body>
+<div id="isdigit-function" class="section level1">
+<a class="dashingAutolink" name="autolink-184"></a><a class="dashAnchor" name="//apple_ref/cpp/Function/ISDIGIT"></a><h1 class="function">ISDIGIT</h1>
+<p>The ISDIGIT function will check that the expression consists of entirely numeric characters.</p>
+<div id="command-syntax-144" class="section level2">
+<h2>COMMAND SYNTAX</h2>
+<pre><code>ISDIGIT(expression)</code></pre>
+</div>
+<div id="syntax-elements-98" class="section level2">
+<h2>SYNTAX ELEMENTS</h2>
+<p>The expression can return a result of any type. The ISDIGIT function will then return TRUE (1) if the expression consists of entirely numeric characters. The function will return FALSE (0) if the expression contains any characters, which are not numeric.</p>
+</div>
+<div id="international-mode-7" class="section level2">
+<h2>INTERNATIONAL MODE</h2>
+<p>When the ISDIGIT function is used in International Mode the properties of each character is determined according to the Unicode Standard.</p>
+</div>
+<div id="example-115" class="section level2">
+<h2>EXAMPLE</h2>
+<pre><code>   V.VAR = 5
+   CRT ISDIGIT(V.VAR)                 ;* 1
+   V.VAR = -1
+   CRT ISDIGIT(V.VAR)                 ;* 0 (we have minus now)</code></pre>
+</div>
+</div>
+
+
+
+</body></html>

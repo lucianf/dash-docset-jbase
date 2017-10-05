@@ -1,0 +1,251 @@
+<!--?xml version="1.0" encoding="UTF-8"?--><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+  <meta http-equiv="Content-Style-Type" content="text/css"/>
+  <meta name="generator" content="pandoc"/>
+  <title class="function">@ (SCREENCODE)</title>
+  <link rel="stylesheet" type="text/css" href="stylesheet.css"/>
+</head>
+<body>
+<div id="screencode-function" class="section level1">
+<a class="dashingAutolink" name="autolink-32"></a><a class="dashAnchor" name="//apple_ref/cpp/Function/%40%20%28SCREENCODE%29"></a><h1 class="function">@ (SCREENCODE)</h1>
+<p>Use @(SCREENCODE) to output control sequences according to the capabilities of the terminal</p>
+<div id="command-syntax-1" class="section level2">
+<h2>COMMAND SYNTAX</h2>
+<pre><code>@ (ScreenCode)</code></pre>
+</div>
+<div id="syntax-elements-1" class="section level2">
+<h2>SYNTAX ELEMENTS</h2>
+<p>Control sequences for special capabilities of the terminal are achieved by passing a negative number as its argument. ScreenCode is therefore any expression that evaluates to a negative argument.</p>
+</div>
+<div id="notes-1" class="section level2">
+<h2>NOTES</h2>
+<p>The design of TAFC allows you to import code from many older systems. As these systems have traditionally not co-ordinated the development of this function they expect different functionality in many instances. In the following table, you should note that different settings of the JBCEMULATE environment variable would elicit different functionality from this function.</p>
+<table>
+<thead>
+<tr class="header">
+<th align="left">Emulation</th>
+<th align="left">Code</th>
+<th align="left">Function</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">all</td>
+<td align="left">-1</td>
+<td align="left">clear the screen and home the cursor</td>
+</tr>
+<tr class="even">
+<td align="left">all</td>
+<td align="left">-2</td>
+<td align="left">Home the cursor</td>
+</tr>
+<tr class="odd">
+<td align="left">all</td>
+<td align="left">-3</td>
+<td align="left">clear screen from the cursor to the end of the</td>
+</tr>
+<tr class="even">
+<td align="left"></td>
+<td align="left"></td>
+<td align="left">screen</td>
+</tr>
+<tr class="odd">
+<td align="left">all</td>
+<td align="left">-4</td>
+<td align="left">clear screen from cursor to the end of the</td>
+</tr>
+<tr class="even">
+<td align="left"></td>
+<td align="left"></td>
+<td align="left">current screen line</td>
+</tr>
+<tr class="odd">
+<td align="left">ros</td>
+<td align="left">-5</td>
+<td align="left">turn on character blinking</td>
+</tr>
+<tr class="even">
+<td align="left">ros</td>
+<td align="left">-6</td>
+<td align="left">turn off character blinking</td>
+</tr>
+<tr class="odd">
+<td align="left">ros</td>
+<td align="left">-7</td>
+<td align="left">turn on protected field mode</td>
+</tr>
+<tr class="even">
+<td align="left">ros</td>
+<td align="left">-8</td>
+<td align="left">turn off protected field mode</td>
+</tr>
+<tr class="odd">
+<td align="left">all</td>
+<td align="left">-9</td>
+<td align="left">move the cursor one character to the left</td>
+</tr>
+<tr class="even">
+<td align="left">all</td>
+<td align="left">-10</td>
+<td align="left">move the cursor one row up the screen</td>
+</tr>
+<tr class="odd">
+<td align="left">ros</td>
+<td align="left">-11</td>
+<td align="left">turn on the cursor (visible)</td>
+</tr>
+<tr class="even">
+<td align="left">ros</td>
+<td align="left">-11</td>
+<td align="left">enable protect mode</td>
+</tr>
+<tr class="odd">
+<td align="left">ros</td>
+<td align="left">-12</td>
+<td align="left">turn off the cursor (invisible)</td>
+</tr>
+<tr class="even">
+<td align="left">ros</td>
+<td align="left">-12</td>
+<td align="left">disable protect mode</td>
+</tr>
+<tr class="odd">
+<td align="left">ros</td>
+<td align="left">-13</td>
+<td align="left">status line on</td>
+</tr>
+<tr class="even">
+<td align="left">ros</td>
+<td align="left">-13</td>
+<td align="left">turn on reverse video mode</td>
+</tr>
+<tr class="odd">
+<td align="left">ros</td>
+<td align="left">-14</td>
+<td align="left">status line off</td>
+</tr>
+<tr class="even">
+<td align="left">ros</td>
+<td align="left">-14</td>
+<td align="left">turn off reverse video mode</td>
+</tr>
+<tr class="odd">
+<td align="left">ros</td>
+<td align="left">-15</td>
+<td align="left">move cursor forward one character</td>
+</tr>
+<tr class="even">
+<td align="left">ros</td>
+<td align="left">-15</td>
+<td align="left">turn on underline mode</td>
+</tr>
+<tr class="odd">
+<td align="left">ros</td>
+<td align="left">-16</td>
+<td align="left">move cursor one row down the screen</td>
+</tr>
+<tr class="even">
+<td align="left">ros</td>
+<td align="left">-16</td>
+<td align="left">turn off underline mode</td>
+</tr>
+<tr class="odd">
+<td align="left">all</td>
+<td align="left">-17</td>
+<td align="left">turn on the slave (printer) port</td>
+</tr>
+<tr class="even">
+<td align="left">all</td>
+<td align="left">-18</td>
+<td align="left">turn off the slave (printer) port</td>
+</tr>
+<tr class="odd">
+<td align="left">ros</td>
+<td align="left">-19</td>
+<td align="left">dump the screen to the slave port</td>
+</tr>
+<tr class="even">
+<td align="left">ros</td>
+<td align="left">-19</td>
+<td align="left">move the cursor right one character</td>
+</tr>
+<tr class="odd">
+<td align="left">ros</td>
+<td align="left">-20</td>
+<td align="left">move the cursor down one character</td>
+</tr>
+<tr class="even">
+<td align="left">ros</td>
+<td align="left">-311</td>
+<td align="left">turn on the cursor (visible)</td>
+</tr>
+<tr class="odd">
+<td align="left">ros</td>
+<td align="left">-312</td>
+<td align="left">turn off the cursor (invisible)</td>
+</tr>
+<tr class="even">
+<td align="left">ros</td>
+<td align="left">-313</td>
+<td align="left">turn on the status line</td>
+</tr>
+<tr class="odd">
+<td align="left">ros</td>
+<td align="left">-314</td>
+<td align="left">turn off the status line</td>
+</tr>
+</tbody>
+</table>
+<p>If a colour terminal is in use, -33 to -64 will control colours.</p>
+<p>The codes from -128 to -191 control screen attributes. Where Bit 0 is least significant, you may calculate the desired code by setting Bit 7 and Bits 0-5:</p>
+<table>
+<thead>
+<tr class="header">
+<th align="left">Bit Values</th>
+<th align="left">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">Bit 0</td>
+<td align="left">dimmed mode when set to 1</td>
+</tr>
+<tr class="even">
+<td align="left">Bit 1</td>
+<td align="left">flashing mode when set to 1</td>
+</tr>
+<tr class="odd">
+<td align="left">Bit 2</td>
+<td align="left">reverse mode when set to 1</td>
+</tr>
+<tr class="even">
+<td align="left">Bit 3</td>
+<td align="left">blanked mode when set to 1</td>
+</tr>
+<tr class="odd">
+<td align="left">Bit 4</td>
+<td align="left">underline mode when set to 1</td>
+</tr>
+<tr class="even">
+<td align="left">Bit 5</td>
+<td align="left">bold mode when set to 1</td>
+</tr>
+<tr class="odd">
+<td align="left">Bit 7</td>
+<td align="left">always set to 1</td>
+</tr>
+</tbody>
+</table>
+<p>Thus, reverse and flashing mode is -134.</p>
+<p>To turn off all effects use -128.</p>
+</div>
+<div id="example-4" class="section level2">
+<h2>EXAMPLE</h2>
+<pre><code>   CRT @(-1):@(30):@(52):&#39;jBASE Heading&#39;:@(-128):
+   CRT @(5,5):@(-4):&#39;Prompt: &#39;: ; INPUT Answer</code></pre>
+</div>
+</div>
+
+
+
+</body></html>

@@ -1,0 +1,61 @@
+<!--?xml version="1.0" encoding="UTF-8"?--><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+  <meta http-equiv="Content-Style-Type" content="text/css"/>
+  <meta name="generator" content="pandoc"/>
+  <title class="statement">OSBWRITE</title>
+  <link rel="stylesheet" type="text/css" href="stylesheet.css"/>
+</head>
+<body>
+<div id="osbwrite-statement" class="section level1">
+<a class="dashingAutolink" name="autolink-251"></a><a class="dashAnchor" name="//apple_ref/cpp/Method/OSBWRITE"></a><h1 class="statement">OSBWRITE</h1>
+<p>OSBWRITE command writes an expression to a sequential file starting at a specified byte location.</p>
+<div id="command-syntax-210" class="section level2">
+<h2>COMMAND SYNTAX</h2>
+<pre><code>OSBWRITE expr { ON | TO } file.var [ AT byte.expr ] [ NODELAY ]  \
+         [ ON ERROR statements ]</code></pre>
+<p>OSBWRITE immediately writes a file segment out to the UNIX, Windows NT, or Windows 2000 file. There is no necessity to specify a length expression because the number of bytes in expr is already written to the file.</p>
+<p>OSBWRITE converts CHAR (128) back to CHAR(0) when writing a block of characters.</p>
+</div>
+<div id="syntax-elements-150" class="section level2">
+<h2>SYNTAX ELEMENTS</h2>
+<p><strong>expr</strong> specifies the expression to be written in the file.</p>
+<p><strong>ON | TO file.var</strong> specifies the file on which the expression is to be written.</p>
+<p><strong>AT byte.expr</strong> specifies the byte number from where the expression is to be written. For example, if byte.expr is 0, then the expression is written in the beginning of the file.</p>
+<p><strong>NODELAY</strong> forces an immediate write.</p>
+<p><strong>ON ERROR statements</strong> are the statements executed if the OSBWRITE statement fails with fatal error, I/O error, or jBASE cannot find the file. If you do not specify the ON ERROR clause and a fatal error occurs, the program will terminate.</p>
+<p><em>STATUS Function Return Values</em></p>
+<p>After you execute OSBWRITE, the STATUS function returns either 0 or a failure code.</p>
+<table>
+<thead>
+<tr class="header">
+<th align="left">Code</th>
+<th align="left">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">0</td>
+<td align="left">The write was successful.</td>
+</tr>
+<tr class="even">
+<td align="left">1</td>
+<td align="left">The write failed.</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div id="notes-128" class="section level2">
+<h2>NOTES</h2>
+<p>Before you use OSBWRITE, you must open the file by using the OSOPEN or OPENSEQ command.</p>
+<p>jBASE uses the ASCII 0 character [CHAR (0)] as a string-end delimiter. Therefore, ASCII 0 cannot be used in any string variable within jBASE. If jBASE reads a string that contains CHAR(0) characters by using OSBREAD, those characters are converted to CHAR(128).</p>
+</div>
+<div id="example-143" class="section level2">
+<h2>EXAMPLE</h2>
+<p>In the following example, the program statement writes the data in MYPIPE to the opened file starting from the beginning of the file:</p>
+<pre><code>OSBWRITE Data ON MYPIPE AT 0</code></pre>
+</div>
+</div>
+
+
+
+</body></html>

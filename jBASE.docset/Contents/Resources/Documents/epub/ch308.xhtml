@@ -1,0 +1,35 @@
+<!--?xml version="1.0" encoding="UTF-8"?--><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+  <meta http-equiv="Content-Style-Type" content="text/css"/>
+  <meta name="generator" content="pandoc"/>
+  <title class="function">SIN</title>
+  <link rel="stylesheet" type="text/css" href="stylesheet.css"/>
+</head>
+<body>
+<div id="sin-function" class="section level1">
+<a class="dashingAutolink" name="autolink-307"></a><a class="dashAnchor" name="//apple_ref/cpp/Function/SIN"></a><h1 class="function">SIN</h1>
+<p>SIN function returns the mathematical sine value of a numeric expression.</p>
+<div id="command-syntax-260" class="section level2">
+<h2>COMMAND SYNTAX</h2>
+<pre><code>SIN(expression)</code></pre>
+</div>
+<div id="syntax-elements-197" class="section level2">
+<h2>SYNTAX ELEMENTS</h2>
+<p><strong>expression</strong> should evaluate to a numeric value and is interpreted as a number of degrees between 0 and 360.</p>
+</div>
+<div id="notes-166" class="section level2">
+<h2>NOTES</h2>
+<p>The function will calculate the sine of the angle specified by the expression as accurately as the host system will allow. It will then truncate the value according to the PRECISION of the program.</p>
+</div>
+<div id="example-180" class="section level2">
+<h2>EXAMPLE</h2>
+<pre><code>CRT @(-1):
+FOR I = 0 TO 79
+   CRT @(I,12 + INT( SIN(360/80*(I+1))*10)) : &#34;*&#34; :
+NEXT I</code></pre>
+</div>
+</div>
+
+
+
+</body></html>

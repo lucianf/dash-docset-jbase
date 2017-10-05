@@ -1,0 +1,43 @@
+<!--?xml version="1.0" encoding="UTF-8"?--><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+  <meta http-equiv="Content-Style-Type" content="text/css"/>
+  <meta name="generator" content="pandoc"/>
+  <title class="function">LEN</title>
+  <link rel="stylesheet" type="text/css" href="stylesheet.css"/>
+</head>
+<body>
+<div id="len-function" class="section level1">
+<a class="dashingAutolink" name="autolink-202"></a><a class="dashAnchor" name="//apple_ref/cpp/Function/LEN"></a><h1 class="function">LEN</h1>
+<p>LEN function returns the character length of the supplied expression.</p>
+<div id="command-syntax-162" class="section level2">
+<h2>COMMAND SYNTAX</h2>
+<pre><code>LEN(expression)</code></pre>
+</div>
+<div id="syntax-elements-113" class="section level2">
+<h2>SYNTAX ELEMENTS</h2>
+<p><strong>expression</strong> can evaluate to any type and the function will convert it to a string automatically.</p>
+</div>
+<div id="international-mode-12" class="section level2">
+<h2>INTERNATIONAL MODE</h2>
+<p>The LEN function will return the number of characters in the specified expression rather than the number of bytes, in International Mode. If the expression consists of entirely of UTF-8 characters in the ASCII range 0 - 127 then the character length of the expression will equate to the byte length. However, when the expression contains characters outside the ASCII range 0 - 127 then byte length and character length will differ. If the byte is specifically required then use the <a href="#BYTELEN">BYTELEN</a> function in place of the LEN function.</p>
+</div>
+<div id="notes-96" class="section level2">
+<h2>NOTES</h2>
+<p>Do not use programs manipulating byte counts in International Mode.</p>
+</div>
+<div id="example-122" class="section level2">
+<h2>EXAMPLE</h2>
+<pre><code>* Centered string output
+   V.STRING = &#39;I AM IN THE VERY CENTER&#39;   ; V.WIDTH = 50
+   V.LEN = LEN(V.STRING)
+   V.OFF.L = INT((V.WIDTH - V.LEN) / 2)    ;* left offset
+   V.OFF.R = V.WIDTH - V.LEN - V.OFF.L     ;* right offset
+   CRT SQUOTE( STR(&#39; &#39;, V.OFF.L) : V.STRING : STR(&#39; &#39;, V.OFF.R) )</code></pre>
+<p>Output is:</p>
+<pre>    &#39;             I AM IN THE VERY CENTER              &#39;</pre>
+</div>
+</div>
+
+
+
+</body></html>

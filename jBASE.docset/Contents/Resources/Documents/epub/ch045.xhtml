@@ -1,0 +1,50 @@
+<!--?xml version="1.0" encoding="UTF-8"?--><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+  <meta http-equiv="Content-Style-Type" content="text/css"/>
+  <meta name="generator" content="pandoc"/>
+  <title class="function">BITLOAD</title>
+  <link rel="stylesheet" type="text/css" href="stylesheet.css"/>
+</head>
+<body>
+<div id="bitload-function" class="section level1">
+<a class="dashingAutolink" name="autolink-44"></a><a class="dashAnchor" name="//apple_ref/cpp/Function/BITLOAD"></a><h1 class="function">BITLOAD</h1>
+<p>BITLOAD assigns all values in the local bit table, or retrieves all the values.</p>
+<div id="command-syntax-12" class="section level2">
+<h2>COMMAND SYNTAX</h2>
+<pre><code>BITLOAD({ bitstring })</code></pre>
+</div>
+<div id="syntax-elements-9" class="section level2">
+<h2>SYNTAX ELEMENTS</h2>
+<p>bit-string is an ASCII string of characters, which represent a hexadecimal value. It is interpreted as a bit pattern and used to assign values to the table from left to right. Assignment stops at the end of the string or when a non-hexadecimal character is found.</p>
+<p>If the string represents less than 128 bits, the remaining bits in the table are reset to 0 (zero).</p>
+<p>If bit-string is omitted or evaluates to null, an ASCII hex character string is returned, which defines the value of the table. Trailing zeroes in the string are truncated.</p>
+</div>
+<div id="notes-6" class="section level2">
+<h2>NOTES</h2>
+<p>A unique table of 128 bits (numbered 1 to 128) is maintained for each process. Each bit in the table is treated as a two-state flag - the value will always be 0 (zero) or 1.</p>
+</div>
+<div id="example-1-1" class="section level2">
+<h2>EXAMPLE 1</h2>
+<pre><code>VALUE.NEW = &#34;0123456789ABCDEF&#34;
+VALUE.OLD = BITLOAD(X)</code></pre>
+<p>Loads the bit table with the value of ASCII hex string NEW.VALUE After assignment, the contents of the bit table is:</p>
+<pre>    0000 0001 0010 0011
+    0100 0101 0110 0111
+    1000 1001 1010 1011
+    1100 1101 1110 1111
+    0000 0000 0000 0000
+    0000 0000 0000 0000
+    0000 0000 0000 0000
+    0000 0000 0000 0000</pre>
+<p><strong>NOTE:</strong> that all values beyond the 64th bit have been reset to 0 (zero).</p>
+</div>
+<div id="example-2-2" class="section level2">
+<h2>EXAMPLE 2</h2>
+<pre><code>TABLE.VALUE = BITLOAD()</code></pre>
+<p>Loads variable TABLE.VALUE with the hexadecimal values of the bit table</p>
+</div>
+</div>
+
+
+
+</body></html>

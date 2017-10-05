@@ -1,0 +1,29 @@
+<!--?xml version="1.0" encoding="UTF-8"?--><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+  <meta http-equiv="Content-Style-Type" content="text/css"/>
+  <meta name="generator" content="pandoc"/>
+  <title class="function">MODS</title>
+  <link rel="stylesheet" type="text/css" href="stylesheet.css"/>
+</head>
+<body>
+<div id="mods-function" class="section level1">
+<a class="dashingAutolink" name="autolink-227"></a><a class="dashAnchor" name="//apple_ref/cpp/Function/MODS"></a><h1 class="function">MODS</h1>
+<p>MODS function is used to create a dynamic array of the remainder after the integer division of corresponding elements of two dynamic arrays.</p>
+<div id="command-syntax-187" class="section level2">
+<h2>COMMAND SYNTAX</h2>
+<pre><code>MODS(array1, array2)</code></pre>
+<p>The MODS function calculates each element according to the following formula:</p>
+<pre>    XY.element = X ?? (INT(X / Y) * Y)</pre>
+<p>X is an element of array1 and Y is the corresponding element of array2. The resulting element is returned in the corresponding element of a new dynamic array. If an element of one dynamic array has no corresponding element in the other dynamic array, 0 is returned. If an element of array2 is 0, 0 is returned. If either of a corresponding pair of elements is null, null is returned for that element.</p>
+</div>
+<div id="examples-46" class="section level2">
+<h2>EXAMPLES</h2>
+<pre><code>   A = 3 :@VM: 7
+   B = 2: @SM: 7 :@VM: 4
+   PRINT OCONV( MODS(A, B), &#39;MCP&#39; )       ;*  1\0]3</code></pre>
+</div>
+</div>
+
+
+
+</body></html>

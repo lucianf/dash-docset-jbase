@@ -1,0 +1,26 @@
+<!--?xml version="1.0" encoding="UTF-8"?--><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+  <meta http-equiv="Content-Style-Type" content="text/css"/>
+  <meta name="generator" content="pandoc"/>
+  <title class="statement">WRITEXML</title>
+  <link rel="stylesheet" type="text/css" href="stylesheet.css"/>
+</head>
+<body>
+<div id="writexml-statement" class="section level1">
+<a class="dashingAutolink" name="autolink-366"></a><a class="dashAnchor" name="//apple_ref/cpp/Method/WRITEXML"></a><h1 class="statement">WRITEXML</h1>
+<p>Use WRITEXML to write an XML record to a hashed file.</p>
+<div id="command-syntax-311" class="section level2">
+<h2>COMMAND SYNTAX</h2>
+<pre><code>WRITEXML rec ON file,id ELSE statements | ON ERROR statements</code></pre>
+<p>Writes a dynamic array in xml format using a style sheet from the DICT; transforms the XML into a dynamic array before being written to the file.</p>
+<p>The transform takes place using the style sheet in DICT (record @WRITEXML).</p>
+</div>
+<div id="example-206" class="section level2">
+<h2>EXAMPLE</h2>
+<pre><code>WRITEXML rec ON file,id ON ERROR CRT &#34;Broken! &#34; : rec</code></pre>
+</div>
+</div>
+
+
+
+</body></html>

@@ -1,0 +1,67 @@
+<!--?xml version="1.0" encoding="UTF-8"?--><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+  <meta http-equiv="Content-Style-Type" content="text/css"/>
+  <meta name="generator" content="pandoc"/>
+  <title class="function">TIMEDIFF</title>
+  <link rel="stylesheet" type="text/css" href="stylesheet.css"/>
+</head>
+<body>
+<div id="timediff-function" class="section level1">
+<a class="dashingAutolink" name="autolink-335"></a><a class="dashAnchor" name="//apple_ref/cpp/Function/TIMEDIFF"></a><h1 class="function">TIMEDIFF</h1>
+<p>TIMEDIFF returns the interval between two timestamp values as a dynamic array.</p>
+<div id="command-syntax-284" class="section level2">
+<h2>COMMAND SYNTAX</h2>
+<pre><code>TIMEDIFF(Timestamp1, Timestamp2, Mask)</code></pre>
+</div>
+<div id="syntax-elements-216" class="section level2">
+<h2>SYNTAX ELEMENTS</h2>
+<p>The TIMEDIFF function returns the interval between two timestamp values by subtracting the value of Timestamp2 from Timestamp1. The interval is returned as an attribute delimited array of the time difference.</p>
+<p>The Mask is an integer from 0 to 7 and selects one of the following output formats:</p>
+<table>
+<thead>
+<tr class="header">
+<th align="left">Mask</th>
+<th align="left">Array</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">0</td>
+<td align="left">Days<sup>Hours</sup>Minutes<sup>Seconds</sup>Milliseconds (Default)</td>
+</tr>
+<tr class="even">
+<td align="left">1</td>
+<td align="left">Weeks<sup>Days</sup>Hours<sup>Minutes</sup>Seconds^Milliseconds</td>
+</tr>
+<tr class="odd">
+<td align="left">2</td>
+<td align="left">Months<sup>Days</sup>Hours<sup>Minutes</sup>Seconds^Milliseconds</td>
+</tr>
+<tr class="even">
+<td align="left">3</td>
+<td align="left">Months<sup>Weeks</sup>Days<sup>Hours</sup>Minutes<sup>Seconds</sup>Milliseconds</td>
+</tr>
+<tr class="odd">
+<td align="left">4</td>
+<td align="left">Years<sup>Days</sup>Hours<sup>Minutes</sup>Seconds^Milliseconds</td>
+</tr>
+<tr class="even">
+<td align="left">5</td>
+<td align="left">Years<sup>Weeks</sup>Days<sup>Hours</sup>Minutes<sup>Seconds</sup>Milliseconds</td>
+</tr>
+<tr class="odd">
+<td align="left">6</td>
+<td align="left">Years<sup>Months</sup>Days<sup>Hours</sup>Minutes<sup>Seconds</sup>Milliseconds</td>
+</tr>
+<tr class="even">
+<td align="left">7</td>
+<td align="left">Years<sup>Months</sup>Weeks<sup>Days</sup>Hours<sup>Minutes</sup>Seconds^Milliseconds</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+
+
+
+</body></html>

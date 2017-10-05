@@ -1,0 +1,44 @@
+<!--?xml version="1.0" encoding="UTF-8"?--><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+  <meta http-equiv="Content-Style-Type" content="text/css"/>
+  <meta name="generator" content="pandoc"/>
+  <title class="function">FIELD</title>
+  <link rel="stylesheet" type="text/css" href="stylesheet.css"/>
+</head>
+<body>
+<div id="field-function" class="section level1">
+<a class="dashingAutolink" name="autolink-137"></a><a class="dashAnchor" name="//apple_ref/cpp/Function/FIELD"></a><h1 class="function">FIELD</h1>
+<p>The FIELD function returns a multi-character delimited field from within a string.</p>
+<div id="command-syntax-100" class="section level2">
+<h2>COMMAND SYNTAX</h2>
+<pre><code>FIELD(string, delimiter, occurrence{, extractCount})</code></pre>
+</div>
+<div id="syntax-elements-64" class="section level2">
+<h2>SYNTAX ELEMENTS</h2>
+<p><strong>string</strong> specifies the string, from which the field(s) is to be extracted.</p>
+<p><strong>delimiter</strong> specifies the character or characters that delimit the fields within the dynamic array.</p>
+<p><strong>occurrence</strong> should evaluate to an integer of value 1 or higher. It specifies the delimiter used as the starting point for the extraction.</p>
+<p><strong>extractCount</strong> is an integer that specifies the number of fields to extract. If omitted, assumes one.</p>
+</div>
+<div id="notes-64" class="section level2">
+<h2>NOTES</h2>
+<p>If the emulation option, jbase_field, is set then the field delimiter may consist of more than a single character, allowing fields to be delimited by complex codes.</p>
+<p>See also: <a href="#GROUP">GROUP</a></p>
+</div>
+<div id="examples-19" class="section level2">
+<h2>EXAMPLES</h2>
+<pre><code>   V.STRING = &#39;ABC/DEF/QWE/XYZ&#39;
+* One field
+   CRT FIELD(V.STRING, &#39;/&#39;, 2)         ;* DEF
+* Alternate way
+   CRT V.STRING[&#39;/&#39;, 2, 1]             ;* DEF
+* More than one field
+   CRT FIELD(V.STRING, &#39;/&#39;, 2, 2)      ;* DEF/QWE
+   CRT V.STRING[&#39;/&#39;, 2, 3]             ;* DEF/QWE/XYZ
+   CRT DQUOTE( FIELD(V.STRING, &#39;/&#39;, 2, 99) )    ;* take &#34;all the rest after 1st&#34;</code></pre>
+</div>
+</div>
+
+
+
+</body></html>

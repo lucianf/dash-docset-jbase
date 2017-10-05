@@ -1,0 +1,31 @@
+<!--?xml version="1.0" encoding="UTF-8"?--><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+  <meta http-equiv="Content-Style-Type" content="text/css"/>
+  <meta name="generator" content="pandoc"/>
+  <title class="statement">GROUPSTORE</title>
+  <link rel="stylesheet" type="text/css" href="stylesheet.css"/>
+</head>
+<body>
+<div id="groupstore-statement" class="section level1">
+<a class="dashingAutolink" name="autolink-163"></a><a class="dashAnchor" name="//apple_ref/cpp/Method/GROUPSTORE"></a><h1 class="statement">GROUPSTORE</h1>
+<p>Insert the variable contents into dynamic array (or replace an element in it).</p>
+<div id="command-syntax-125" class="section level2">
+<h2>COMMAND SYNTAX</h2>
+<pre><code>GROUPSTORE from.var IN to.var USING start, replace, delimiter</code></pre>
+</div>
+<div id="example-99" class="section level2">
+<h2>EXAMPLE</h2>
+<pre><code>    to.var = &#39;QQQ&#39; :@FM: &#39;WWW&#39; :@FM: &#39;EEE&#39;
+    from.var = &#39;rtz&#39;
+    GROUPSTORE from.var IN to.var USING 2, 0, @FM   ;* start,replace,delim
+    CRT FMT(to.var, &#39;MCP&#39;)                          ;* QQQ^rtz^WWW^EEE
+    GROUPSTORE from.var IN to.var USING 4, 1
+    CRT FMT(to.var, &#39;MCP&#39;)                          ;* QQQ^rtz^WWW^rtz
+    GROUPSTORE from.var IN to.var USING 2, 0, @VM
+    CRT FMT(to.var, &#39;MCP&#39;)                          ;* QQQ^rtz^WWW^rtz]rtz</code></pre>
+</div>
+</div>
+
+
+
+</body></html>

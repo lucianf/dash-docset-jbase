@@ -1,0 +1,37 @@
+<!--?xml version="1.0" encoding="UTF-8"?--><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+  <meta http-equiv="Content-Style-Type" content="text/css"/>
+  <meta name="generator" content="pandoc"/>
+  <title class="statement">PRINTER</title>
+  <link rel="stylesheet" type="text/css" href="stylesheet.css"/>
+</head>
+<body>
+<div id="printer-statement" class="section level1">
+<a class="dashingAutolink" name="autolink-263"></a><a class="dashAnchor" name="//apple_ref/cpp/Method/PRINTER"></a><h1 class="statement">PRINTER</h1>
+<p>PRINTER statement controls the destination of output from the PRINT statement.</p>
+<div id="command-syntax-221" class="section level2">
+<h2>COMMAND SYNTAX</h2>
+<pre><code>PRINTER ON | OFF | CLOSE</code></pre>
+</div>
+<div id="notes-133" class="section level2">
+<h2>NOTES</h2>
+<p><strong>PRINTER ON</strong> redirects all subsequent output from the PRINT statement to the print spooler.</p>
+<p><strong>PRINTER OFF</strong> redirects all subsequent output from the PRINT statement to the terminal device.</p>
+<p><strong>PRINTER CLOSE</strong> will act as PRINTER OFF but in addition closes the currently active spool job created by the active PRINTER ON statement.</p>
+</div>
+<div id="examples-57" class="section level2">
+<h2>EXAMPLES</h2>
+<pre><code>    PRINTER ON             ;* Open a spool job
+    FOR I = 1 TO 60
+       PRINT &#34;Line &#34; : I   ;* Send to printer
+       PRINTER OFF
+       PRINT &#34;+&#34; :         ;* Send to terminal
+       PRINTER ON          ;* Back to printer
+    NEXT I
+    PRINTER CLOSE          ;* Allow spooler to print it</code></pre>
+</div>
+</div>
+
+
+
+</body></html>

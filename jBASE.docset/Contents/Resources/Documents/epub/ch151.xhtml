@@ -1,0 +1,49 @@
+<!--?xml version="1.0" encoding="UTF-8"?--><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+  <meta http-equiv="Content-Style-Type" content="text/css"/>
+  <meta name="generator" content="pandoc"/>
+  <title class="statement">FOR</title>
+  <link rel="stylesheet" type="text/css" href="stylesheet.css"/>
+</head>
+<body>
+<div id="for-statement" class="section level1">
+<a class="dashingAutolink" name="autolink-150"></a><a class="dashAnchor" name="//apple_ref/cpp/Method/FOR"></a><h1 class="statement">FOR</h1>
+<p>The FOR statement allows the construction of looping constructs within the program, which is controlled by a counting variable; this can be terminated early by expressions tested after every iteration.</p>
+<div id="command-syntax-112" class="section level2">
+<h2>COMMAND SYNTAX</h2>
+<pre><code>FOR var=expression1 TO expression2 { STEP expression3 }  \
+   { WHILE | UNTIL expression4 }
+...
+NEXT {var}</code></pre>
+</div>
+<div id="syntax-elements-72" class="section level2">
+<h2>SYNTAX ELEMENTS</h2>
+<p><strong>var</strong> is the counting variable used to control the loop. The first time the loop is entered var is assigned the value of expression1, which must evaluate to a numeric value. After each iteration of the loop, var is automatically incremented by one.</p>
+<p><strong>expression2</strong> must also evaluate to a numeric value as it causes the loop to terminate when the value of var is greater than the value of this expression. expression2 is evaluated at the start of every iteration of the loop and compared with the value of expression1.</p>
+<p>If the STEP expression3 clause is included within the statement, var will automatically be incremented by the value of expression3 after each iteration of the loop. expression3 is evaluated at the start of each iteration.</p>
+<p><strong>expression3</strong> may be negative, in which case the loop will terminate when var is less than expression2. The statement may optionally include either an evaluated WHILE or UNTIL clause (not both), before each iteration of the loop. When the WHILE clause is specified the loop will only continue with the next iteration if expression4 evaluates to Boolean TRUE. When the UNTIL clause is specified the loop will only continue with the next iteration if expression4 evaluates to Boolean FALSE.</p>
+</div>
+<div id="notes-71" class="section level2">
+<h2>NOTES</h2>
+<p>Because expression2 and expression3 must be evaluated upon each iteration of the loop, you should only code complex expressions here if they may change within each iteration. If the values they yield will not change then you should assign the value of these expressions to a variable before coding the loop statement. You can replace expressions 3 and 4 with these variables. This can offer large performance increases where complex expressions are in use.</p>
+<p>See also: <a href="#BREAK">BREAK</a>, <a href="#CONTINUE">CONTINUE</a>.</p>
+</div>
+<div id="example-93" class="section level2">
+<h2>EXAMPLE</h2>
+<pre><code>   V.ARRAY = &#39;&#39;
+   FOR V.I = 1 TO 10
+      V.ARRAY&lt;-1&gt; = &#39;Element #&#39; : V.I
+   NEXT V.I
+   CRT V.ARRAY&lt;6&gt;                          ;* Element #6
+   //
+   FOR V.I = 10 TO 1 STEP -2 WHILE V.I GT 3
+      DEL V.ARRAY&lt;V.I&gt;
+   NEXT V.I
+   CRT V.ARRAY&lt;6&gt;                          ;* Element #9
+   CRT V.ARRAY&lt;3&gt;                          ;* Element #3</code></pre>
+</div>
+</div>
+
+
+
+</body></html>

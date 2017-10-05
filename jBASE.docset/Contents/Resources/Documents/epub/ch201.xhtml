@@ -1,0 +1,41 @@
+<!--?xml version="1.0" encoding="UTF-8"?--><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+  <meta http-equiv="Content-Style-Type" content="text/css"/>
+  <meta name="generator" content="pandoc"/>
+  <title class="function">LATIN1</title>
+  <link rel="stylesheet" type="text/css" href="stylesheet.css"/>
+</head>
+<body>
+<div id="latin1-function" class="section level1">
+<a class="dashingAutolink" name="autolink-200"></a><a class="dashAnchor" name="//apple_ref/cpp/Function/LATIN1"></a><h1 class="function">LATIN1</h1>
+<p>LATIN1 function converts a UTF-8 byte sequence into the binary or latin1 equivalent.</p>
+<div id="command-syntax-160" class="section level2">
+<h2>COMMAND SYNTAX</h2>
+<pre><code>LATIN1(expression)</code></pre>
+</div>
+<div id="syntax-elements-111" class="section level2">
+<h2>SYNTAX ELEMENTS</h2>
+<p>The expression is to be a UTF-8 encoded byte sequence, which is the default format when executing in International Mode.</p>
+</div>
+<div id="example-121" class="section level2">
+<h2>EXAMPLE</h2>
+<pre><code>   utf_line = CHAR( XTD(&#39;C3&#39;) )   \
+         : CHAR( XTD(&#39;9F&#39;) )      \    ;* c3 9f: LATIN SMALL LETTER SHARP S
+         : CHAR( XTD(&#39;C3&#39;) )      \
+         : CHAR( XTD(&#39;9D&#39;) )    ;* c3 9d: LATIN CAPITAL LETTER Y WITH ACUTE
+   lat_line = LATIN1(utf_line)
+   CRT lat_line, SEQ(lat_line[1,1]), SEQ(lat_line[2,1])</code></pre>
+<p>The output of this program is:</p>
+<pre>    &szlig;&Yacute;    223     221</pre>
+</div>
+<div id="note-13" class="section level2">
+<h2>NOTE</h2>
+<p>To run this example the following environment variables are to be set:</p>
+<pre>    JBASE_I18N=1
+    JBASE_CODEPAGE=utf8</pre>
+</div>
+</div>
+
+
+
+</body></html>

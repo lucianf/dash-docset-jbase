@@ -1,0 +1,60 @@
+<!--?xml version="1.0" encoding="UTF-8"?--><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+  <meta http-equiv="Content-Style-Type" content="text/css"/>
+  <meta name="generator" content="pandoc"/>
+  <title class="statement">WRITET</title>
+  <link rel="stylesheet" type="text/css" href="stylesheet.css"/>
+</head>
+<body>
+<div id="writet-statement" class="section level1">
+<a class="dashingAutolink" name="autolink-362"></a><a class="dashAnchor" name="//apple_ref/cpp/Method/WRITET"></a><h1 class="statement">WRITET</h1>
+<p>WRITET statement enables data to be written to a range of tape devices between 0-9.</p>
+<div id="command-syntax-307" class="section level2">
+<h2>COMMAND SYNTAX</h2>
+<pre><code>WRITET variable { ON | TO expression } THEN | ELSE statements</code></pre>
+</div>
+<div id="syntax-elements-235" class="section level2">
+<h2>SYNTAX ELEMENTS</h2>
+<p><strong>variable</strong> is the variable that holds the data for writing to the tape device.</p>
+<p><strong>expression</strong> should evaluate to an integer value in the range 0-9 and specifies from which tape channel to read the data. If the ON clause is not specified the WRITET will assume channel 0.</p>
+<p>If the WRITET fails then the statements associated with any ELSE clause will be executed. SYSTEM(0) will return the reason for the failure as follows:</p>
+<table>
+<thead>
+<tr class="header">
+<th align="left">Code</th>
+<th align="left">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">1</td>
+<td align="left">There is no media attached to the channel.</td>
+</tr>
+<tr class="even">
+<td align="left">2</td>
+<td align="left">End of media found.</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div id="notes-193" class="section level2">
+<h2>NOTES</h2>
+<p>A &#34;tape&#34; does not refer to magnetic tape devices only but any device that has been described to TAFC. Writing device descriptors for TAFC is beyond the scope of this documentation.</p>
+<p>If no tape device has been assigned to the specified channel the TAFC debugger is entered with an appropriate message.</p>
+<p>Where possible the record size is not limited to a single tape block and the entire record will be written blocked to whatever block size has been allocated by the T-ATT command. However, certain devices do not allow TAFC to accomplish this (SCSI tape devices for instance).</p>
+</div>
+<div id="example-202" class="section level2">
+<h2>EXAMPLE</h2>
+<pre><code>LOOP
+   WRITET TapeRec ON 5 ELSE
+      Reason = SYSTEM(0)
+      IF Reason = 2 THEN BREAK ;* done
+      CRT &#34;ERROR&#34;  ;  STOP
+   END
+REPEAT</code></pre>
+</div>
+</div>
+
+
+
+</body></html>

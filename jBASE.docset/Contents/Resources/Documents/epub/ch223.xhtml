@@ -1,0 +1,72 @@
+<!--?xml version="1.0" encoding="UTF-8"?--><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+  <meta http-equiv="Content-Style-Type" content="text/css"/>
+  <meta name="generator" content="pandoc"/>
+  <title class="statement">MATWRITE</title>
+  <link rel="stylesheet" type="text/css" href="stylesheet.css"/>
+</head>
+<body>
+<div id="matwrite-statement" class="section level1">
+<a class="dashingAutolink" name="autolink-222"></a><a class="dashAnchor" name="//apple_ref/cpp/Method/MATWRITE"></a><h1 class="statement">MATWRITE</h1>
+<p>The MATWRITE statement transfers the entire contents of a dimensioned array to a specified record on disc.</p>
+<div id="command-syntax-182" class="section level2">
+<h2>COMMAND SYNTAX</h2>
+<pre><code>MATWRITE array TO | ON {variable,} expression { SETTING setvar }  \
+       { ON ERROR statements }</code></pre>
+</div>
+<div id="syntax-elements-131" class="section level2">
+<h2>SYNTAX ELEMENTS</h2>
+<p><strong>array</strong> should be a previously dimensioned and initialized array. If specified, <strong>variable</strong> should be a previously opened file variable (i.e. the subject of an OPEN statement). If variable is not specified the default file variable is used. <strong>expression</strong> should evaluate to the name of the record in the file.</p>
+<p>If the <strong>SETTING</strong> clause is specified and the write succeeds, setvar will be set to the number of attributes read into the array.</p>
+<p>If the <strong>SETTING</strong> clause is specified and the write fails, setvar will be set to one of the following values:</p>
+</div>
+<div id="incremental-file-errors-4" class="section level2">
+<h2>INCREMENTAL FILE ERRORS</h2>
+<table>
+<thead>
+<tr class="header">
+<th align="left">Code</th>
+<th align="left">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">128</td>
+<td align="left">No such file or directory</td>
+</tr>
+<tr class="even">
+<td align="left">4096</td>
+<td align="left">Network error</td>
+</tr>
+<tr class="odd">
+<td align="left">24576</td>
+<td align="left">Permission denied</td>
+</tr>
+<tr class="even">
+<td align="left">32768</td>
+<td align="left">Physical I/O error or unknown error</td>
+</tr>
+</tbody>
+</table>
+<p>If ON ERROR is specified, the statements following the ON ERROR clause will be executed for any of the above Incremental File Errors except error 128.</p>
+</div>
+<div id="notes-111" class="section level2">
+<h2>NOTES</h2>
+<p>The compiler will check that the variable specified is a dimensioned array before its use in the statement.</p>
+</div>
+<div id="examples-41" class="section level2">
+<h2>EXAMPLES</h2>
+<pre><code>DIM A(8)
+MAT A = 99
+....
+MATWRITE A ON &#34;NewArray&#34; SETTING ErrorCode ON ERROR
+   CRT &#34;Error: &#34; :ErrorCode: &#34; Record could not be written.&#34;
+END
+...
+MATWRITE A ON RecFile, &#34;OldArray&#34;</code></pre>
+</div>
+</div>
+
+
+
+</body></html>

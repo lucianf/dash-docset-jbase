@@ -1,0 +1,42 @@
+<!--?xml version="1.0" encoding="UTF-8"?--><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+  <meta http-equiv="Content-Style-Type" content="text/css"/>
+  <meta name="generator" content="pandoc"/>
+  <title class="function">XTD</title>
+  <link rel="stylesheet" type="text/css" href="stylesheet.css"/>
+</head>
+<body>
+<div id="xtd-function" class="section level1">
+<a class="dashingAutolink" name="autolink-370"></a><a class="dashAnchor" name="//apple_ref/cpp/Function/XTD"></a><h1 class="function">XTD</h1>
+<p>XTD function converts hexadecimal numbers into its decimal equivalent.</p>
+<div id="command-syntax-315" class="section level2">
+<h2>COMMAND SYNTAX</h2>
+<pre><code>XTD(expression)</code></pre>
+</div>
+<div id="syntax-elements-242" class="section level2">
+<h2>SYNTAX ELEMENTS</h2>
+<p><strong>expression</strong> should evaluate to a valid hexadecimal string.</p>
+</div>
+<div id="notes-198" class="section level2">
+<h2>NOTES</h2>
+<p>The conversion process will halt at the first character that is not a valid base 16 character in the set [0-9, A-F or a-f].</p>
+<p>See also: <a href="#DTX">DTX</a>.</p>
+</div>
+<div id="examples-80" class="section level2">
+<h2>EXAMPLES</h2>
+<pre><code>   CRT XTD(&#39;FF&#39;)                                          ;* 255
+   CRT FMT( DTX(13), &#39;R%2&#39; ) : FMT( DTX(10), &#39;R%2&#39; )      ;* 0D0A
+   CRT XTD(&#39;BADBEEF&#39;)  ;*  195935983 (binary: 00001011101011011011111011101111)
+   CRT XTD(&#39;DEADBEEF&#39;) ;* -559038737 (binary: 11011110101011011011111011101111)
+   CRT XTD(&#39;1aGHI&#39;)    ;* 26 - stopped after processing &#34;1a&#34;
+   CRT XTD(&#39;GHI&#39;)      ;* 0</code></pre>
+</div>
+<div id="note-24" class="section level2">
+<h2>NOTE</h2>
+<p>Negative result in line 4 is caused by the first bit of binary result being set.</p>
+</div>
+</div>
+
+
+
+</body></html>

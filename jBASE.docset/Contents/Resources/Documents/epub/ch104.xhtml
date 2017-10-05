@@ -1,0 +1,32 @@
+<!--?xml version="1.0" encoding="UTF-8"?--><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+  <meta http-equiv="Content-Style-Type" content="text/css"/>
+  <meta name="generator" content="pandoc"/>
+  <title class="function">DATE</title>
+  <link rel="stylesheet" type="text/css" href="stylesheet.css"/>
+</head>
+<body>
+<div id="date-function" class="section level1">
+<a class="dashingAutolink" name="autolink-103"></a><a class="dashAnchor" name="//apple_ref/cpp/Function/DATE"></a><h1 class="function">DATE</h1>
+<p>The DATE() function returns the date in internal system form. This date is expressed as the number of days since December 31, 1967.</p>
+<div id="command-syntax-68" class="section level2">
+<h2>COMMAND SYNTAX</h2>
+<pre><code>DATE()</code></pre>
+</div>
+<div id="notes-42" class="section level2">
+<h2>NOTES</h2>
+<p>The system and your own programs should manipulate date fields in internal form. They can then be converted to a readable format of your choice using the <a href="#OCONV">OCONV</a> function and the date conversion codes.</p>
+<p>See also: <a href="#TIMEDATE">TIMEDATE</a></p>
+</div>
+<div id="examples-8" class="section level2">
+<h2>EXAMPLES</h2>
+<pre><code>   curr_date = DATE()
+   CRT curr_date                  ;* number of days (e.g. 16454) since day 1...
+   CRT OCONV(1, &#39;D&#39;)              ;*  ...which is:  01 JAN 1968
+   CRT OCONV(curr_date, &#39;D4/&#39;)    ;* e.g. 01/17/2013</code></pre>
+</div>
+</div>
+
+
+
+</body></html>

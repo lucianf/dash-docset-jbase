@@ -1,0 +1,87 @@
+<!--?xml version="1.0" encoding="UTF-8"?--><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+  <meta http-equiv="Content-Style-Type" content="text/css"/>
+  <meta name="generator" content="pandoc"/>
+  <title class="function">RECORDLOCKED</title>
+  <link rel="stylesheet" type="text/css" href="stylesheet.css"/>
+</head>
+<body>
+<div id="recordlocked-function" class="section level1">
+<a class="dashingAutolink" name="autolink-287"></a><a class="dashAnchor" name="//apple_ref/cpp/Function/RECORDLOCKED"></a><h1 class="function">RECORDLOCKED</h1>
+<p>RECORDLOCKED function is called to ascertain the status of a record lock.</p>
+<div id="command-syntax-241" class="section level2">
+<h2>COMMAND SYNTAX</h2>
+<pre><code>RECORDLOCKED(filevar, recordkey)</code></pre>
+</div>
+<div id="syntax-elements-178" class="section level2">
+<h2>SYNTAX ELEMENTS</h2>
+<p><strong>filevar</strong> is a file variable from a previously executed OPEN statement.</p>
+<p><strong>recordkey</strong> is an expression for the record id that will be checked.</p>
+</div>
+<div id="notes-149" class="section level2">
+<h2>NOTES</h2>
+<p>RECORDLOCKED returns an integer value to indicate the record lock status of the specified record id.</p>
+<table>
+<thead>
+<tr class="header">
+<th align="left">Code</th>
+<th align="left">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">3</td>
+<td align="left">Locked by this process by a FILELOCK</td>
+</tr>
+<tr class="even">
+<td align="left">2</td>
+<td align="left">Locked by this process by a READU</td>
+</tr>
+<tr class="odd">
+<td align="left">1</td>
+<td align="left">Locked by this process by a READL</td>
+</tr>
+<tr class="even">
+<td align="left">0</td>
+<td align="left">Not locked</td>
+</tr>
+<tr class="odd">
+<td align="left">-1</td>
+<td align="left">Locked by another process by a READL</td>
+</tr>
+<tr class="even">
+<td align="left">-2</td>
+<td align="left">Locked by another process by a READU</td>
+</tr>
+<tr class="odd">
+<td align="left">-3</td>
+<td align="left">Locked by another process by a FILELOCK</td>
+</tr>
+</tbody>
+</table>
+<p>If the return value is negative, then the SYSTEM(43) and STATUS function calls can be used to determine the port number of the program that holds the lock. If -1 is returned, more than 1 port could hold the lock and so the port number returned will be the first port number found.</p>
+</div>
+<div id="example-169" class="section level2">
+<h2>EXAMPLE</h2>
+<p>Run this program from one session, wait for &#34;RECORD LOCKED. PRESS ANY KEY TO WRITE&#34; message, then run it in another session:</p>
+<pre><code>   OPEN &#39;F.TEMP&#39; TO F.TEMP ELSE
+      EXECUTE &#39;CREATE-FILE DATA F.TEMP 1 101 TYPE=J4&#39;
+      OPEN &#39;F.TEMP&#39; TO F.TEMP ELSE
+         CRT &#39;OPEN FAILED&#39;
+         STOP
+      END
+   END
+   READU V.REC FROM F.TEMP, &#39;REC1&#39; LOCKED
+      CRT &#39;Lock failure (&#39; : RECORDLOCKED(F.TEMP, &#39;REC1&#39;) : &#39;)&#39;
+      STOP
+   END ELSE NULL
+   PROMPT &#39;RECORD LOCKED. PRESS ANY KEY TO WRITE&#39;
+   INPUT DUMMY
+   V.REC&lt;-1&gt; = &#39;A field&#39;
+   WRITE V.REC TO F.TEMP, &#39;REC1&#39;</code></pre>
+</div>
+</div>
+
+
+
+</body></html>

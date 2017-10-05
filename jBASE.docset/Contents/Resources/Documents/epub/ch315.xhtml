@@ -1,0 +1,33 @@
+<!--?xml version="1.0" encoding="UTF-8"?--><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+  <meta http-equiv="Content-Style-Type" content="text/css"/>
+  <meta name="generator" content="pandoc"/>
+  <title class="function">SPLICE</title>
+  <link rel="stylesheet" type="text/css" href="stylesheet.css"/>
+</head>
+<body>
+<div id="splice-function" class="section level1">
+<a class="dashingAutolink" name="autolink-314"></a><a class="dashAnchor" name="//apple_ref/cpp/Function/SPLICE"></a><h1 class="function">SPLICE</h1>
+<p>SPLICE function is used to create a dynamic array of the element-by-element concatenation of two dynamic arrays, separating concatenated elements by the value of expression.</p>
+<div id="command-syntax-267" class="section level2">
+<h2>COMMAND SYNTAX</h2>
+<pre><code>SPLICE(array1, expression, array2)</code></pre>
+</div>
+<div id="syntax-elements-204" class="section level2">
+<h2>SYNTAX ELEMENTS</h2>
+<p>Each element of array1 is concatenated with expression and with the corresponding element of array2. The result is returned in the corresponding element of a new dynamic array. If an element of one dynamic array has no corresponding element in the other dynamic array, the element is returned properly concatenated with expression. If either element of a corresponding pair is null, null is returned for that element. If expression evaluates to null, null is returned for the entire dynamic array.</p>
+</div>
+<div id="example-182" class="section level2">
+<h2>EXAMPLE</h2>
+<pre><code>A = &#34;A&#34; :@VM: &#34;B&#34; :@SM: &#34;C&#34;
+B = &#34;D&#34; :@SM: &#34;E&#34; :@VM: &#34;F&#34;
+C = &#39;-&#39;
+PRINT SPLICE(A,C,B)</code></pre>
+<p>The output of this program is:</p>
+<pre>    A-D\-E]B-F\C-</pre>
+</div>
+</div>
+
+
+
+</body></html>

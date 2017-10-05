@@ -1,0 +1,37 @@
+<!--?xml version="1.0" encoding="UTF-8"?--><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+  <meta http-equiv="Content-Style-Type" content="text/css"/>
+  <meta name="generator" content="pandoc"/>
+  <title class="function">CALLONEXIT</title>
+  <link rel="stylesheet" type="text/css" href="stylesheet.css"/>
+</head>
+<body>
+<div id="callonexit-function" class="section level1">
+<a class="dashingAutolink" name="autolink-71"></a><a class="dashAnchor" name="//apple_ref/cpp/Function/CALLONEXIT"></a><h1 class="function">CALLONEXIT</h1>
+<p>The CALLONEXIT function call allows you to specify the name of a SUBROUTINE to call when the program terminates.</p>
+<div id="command-syntax-37" class="section level2">
+<h2>COMMAND SYNTAX</h2>
+<pre><code>rc = CALLONEXIT(&#39;ErrorExit&#39;)</code></pre>
+<p>The subroutine definition would look like this</p>
+<pre><code>SUBROUTINE CALLONEXIT(parm1)</code></pre>
+<p>You can add parameters to the error subroutine by adding multi-values to the parameter to CALLONEXIT, which are passed to the called subroutine in the first parameter.</p>
+<p>If you execute CALLONEXIT multiple times with the same subroutine name, it discards other calls.</p>
+<p>If you execute CALLONEXIT multiple times with a different subroutine name, then upon exit multiple subroutines will be called in the order that CALLONEXIT was called.</p>
+</div>
+<div id="examples-2" class="section level2">
+<h2>EXAMPLES</h2>
+<p>For example, consider the simple programs below. The program enters the debugger. If at this point the login session terminates for any reason (the line drops, the program is killed, the user enters &#39;off&#39; at the debugger prompt) , the two specified subroutines (ErrorExit and EndProgram) will still be called just as they would if the program were allowed to terminate normally.</p>
+<pre><code>PROGRAM PROG1
+rc = CALLONEXIT(&#39;ErrorExit&#39;)
+EXECUTE &#34;PROG2&#34;
+
+PROGRAM PROG2
+rc = CALLONEXIT(&#39;EndProgram&#39;)
+DEBUG</code></pre>
+<p>All efforts are made to call the subroutine under all circumstances. However, if a SIGKILL (signal 9) terminates the program, which cannot be trapped, it does not call the subroutine. This is a feature of operating systems, not a limitation. In addition, if the program terminates due to say a memory error, then calling the subroutines depends upon how badly the memory error has corrupted the memory.</p>
+</div>
+</div>
+
+
+
+</body></html>

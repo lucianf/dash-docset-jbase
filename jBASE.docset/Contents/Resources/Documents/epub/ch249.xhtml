@@ -1,0 +1,105 @@
+<!--?xml version="1.0" encoding="UTF-8"?--><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+  <meta http-equiv="Content-Style-Type" content="text/css"/>
+  <meta name="generator" content="pandoc"/>
+  <title class="statement">OPENSER</title>
+  <link rel="stylesheet" type="text/css" href="stylesheet.css"/>
+</head>
+<body>
+<div id="openser-statement" class="section level1">
+<a class="dashingAutolink" name="autolink-248"></a><a class="dashAnchor" name="//apple_ref/cpp/Method/OPENSER"></a><h1 class="statement">OPENSER</h1>
+<p>OPENSER statement is used to handle the Serial IO.</p>
+<p>Serial IO to the COM ports on NT and to device files, achieves this on UNIX by using the sequential file statements. In addition, you can perform certain control operations using the <a href="#IOCTL">IOCTL</a> function.</p>
+<div id="command-syntax-207" class="section level2">
+<h2>COMMAND SYNTAX</h2>
+<pre><code>OPENSER Path,DevInfo | PIPE TO FileVar THEN | ELSE Statements</code></pre>
+</div>
+<div id="syntax-elements-148" class="section level2">
+<h2>SYNTAX ELEMENTS</h2>
+<p><strong>Path</strong> is the pathname of the required device.</p>
+<p><strong>DevInfo</strong> consists of the following:</p>
+<table>
+<thead>
+<tr class="header">
+<th align="left">Baud</th>
+<th align="left"></th>
+<th align="left">baud rate required</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">Flow</td>
+<td align="left">y</td>
+<td align="left">X-ON X-OFF flow control (default)</td>
+</tr>
+<tr class="even">
+<td align="left"></td>
+<td align="left">n</td>
+<td align="left">no flow control</td>
+</tr>
+<tr class="odd">
+<td align="left"></td>
+<td align="left">i</td>
+<td align="left">input flow control</td>
+</tr>
+<tr class="even">
+<td align="left"></td>
+<td align="left">o</td>
+<td align="left">output flow control</td>
+</tr>
+<tr class="odd">
+<td align="left"></td>
+<td align="left"></td>
+<td align="left"></td>
+</tr>
+<tr class="even">
+<td align="left">Parity</td>
+<td align="left">y</td>
+<td align="left">X-ON X-OFF flow control (default)</td>
+</tr>
+<tr class="odd">
+<td align="left"></td>
+<td align="left">n</td>
+<td align="left">no flow control</td>
+</tr>
+<tr class="even">
+<td align="left"></td>
+<td align="left">i</td>
+<td align="left">input flow control</td>
+</tr>
+<tr class="odd">
+<td align="left"></td>
+<td align="left">o</td>
+<td align="left">output flow control</td>
+</tr>
+</tbody>
+</table>
+<p><strong>PIPE</strong> specifies the file is to be opened to a PIPE for reading.</p>
+</div>
+<div id="notes-127" class="section level2">
+<h2>NOTES</h2>
+<p>The PIPE functionality allows a process to open a PIPE, once opened then the process can execute a command via the <a href="#WRITESEQ">WRITESEQ</a>/<a href="#SEND">SEND</a> statement and then received the result back via the <a href="#GET">GET</a>/<a href="#READSEQ">READSEQ</a> statements.</p>
+</div>
+<div id="examples-52" class="section level2">
+<h2>EXAMPLES</h2>
+<pre><code>   FileName = &#34;/dev/pts/1&#34;
+   OPENSER FileName TO File ELSE STOP 201, FileName
+   WRITESEQ &#34;ls -l&#34; TO File ELSE NULL
+   LOOP
+      Terminator = CHAR(10)
+      WaitTime = 4
+      GET Input SETTING Count FROM File UNTIL Terminator RETURNING TermChar \
+            WAITING WaitTime THEN
+         CRT &#34;Get Ok, Input &#34; :Input: &#34; Count &#34; :Count: &#34;TermChar&#34; :TermChar
+      END ELSE
+         CRT &#34;Get Timed out Input &#34; :Input: &#34; Count &#34; : Count: &#34; TermChar&#34; \
+            :TermChar
+      END
+   WHILE Input NE &#34;&#34; DO
+   REPEAT</code></pre>
+</div>
+</div>
+
+
+
+</body></html>

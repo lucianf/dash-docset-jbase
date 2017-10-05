@@ -1,0 +1,27 @@
+<!--?xml version="1.0" encoding="UTF-8"?--><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+  <meta http-equiv="Content-Style-Type" content="text/css"/>
+  <meta name="generator" content="pandoc"/>
+  <title class="variable">@DATA</title>
+  <link rel="stylesheet" type="text/css" href="stylesheet.css"/>
+</head>
+<body>
+<div id="data-variable" class="section level1">
+<a class="dashingAutolink" name="autolink-9"></a><a class="dashAnchor" name="//apple_ref/cpp/Variable/%40DATA"></a><h1 class="variable">@DATA</h1>
+<p>Data statements used in conjunction with INPUT statements are stored in data stack or input queue. This stack is accessible in the @DATA variable:</p>
+<pre><code>   DATA &#39;QWE&#39;
+   DATA &#39;RTY&#39;
+   CRT SYSTEM(14)   ;* number of bytes in data stack (EOL characters included)
+   CRT DQUOTE(@DATA)
+   CRT SYSTEM(14)   ;* after output of @DATA there&#39;s nothing in a queue</code></pre>
+<p>Output of this program:</p>
+<pre>    8
+    &#34;QWE
+    RTY
+    &#34;
+    0</pre>
+</div>
+
+
+
+</body></html>

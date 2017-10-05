@@ -1,0 +1,32 @@
+<!--?xml version="1.0" encoding="UTF-8"?--><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+  <meta http-equiv="Content-Style-Type" content="text/css"/>
+  <meta name="generator" content="pandoc"/>
+  <title class="function">INSERT</title>
+  <link rel="stylesheet" type="text/css" href="stylesheet.css"/>
+</head>
+<body>
+<div id="insert-function" class="section level1">
+<a class="dashingAutolink" name="autolink-178"></a><a class="dashAnchor" name="//apple_ref/cpp/Function/INSERT"></a><h1 class="function">INSERT</h1>
+<p>INSERT is the function form of the INS statement, with preference given to the use of INS.</p>
+<div id="command-syntax-139" class="section level2">
+<h2>COMMAND SYNTAX</h2>
+<pre><code>INSERT(expression1, expression2{, expression3 {, expression4 }}; expression5)</code></pre>
+</div>
+<div id="syntax-elements-94" class="section level2">
+<h2>SYNTAX ELEMENTS</h2>
+<p><strong>expression1</strong> evaluates to a dynamic array in which to insert a new element and will normally be a variable.</p>
+<p><strong>expression2</strong>, <strong>expression3</strong> and <strong>expression4</strong> should evaluate to numeric values and specify the Field, Value and Sub-Value before which the new element will be inserted.</p>
+<p><strong>expression5</strong> evaluates to the new element to be inserted in expression1.</p>
+</div>
+<div id="examples-32" class="section level2">
+<h2>EXAMPLES</h2>
+<pre><code>    B = &#39;Field 1&#39; :@VM: 2 :@VM: 3 :@VM: 5 :@FM: &#39;Field 2&#39;
+    A = INSERT(B, 1, 4; &#39;Field1Value4&#39;)
+    CRT OCONV(A, &#39;MCP&#39;)          ;* Field 1]2]3]Field1Value4]5^Field 2</code></pre>
+</div>
+</div>
+
+
+
+</body></html>

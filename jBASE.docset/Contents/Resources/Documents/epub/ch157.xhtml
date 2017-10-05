@@ -1,0 +1,33 @@
+<!--?xml version="1.0" encoding="UTF-8"?--><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+  <meta http-equiv="Content-Style-Type" content="text/css"/>
+  <meta name="generator" content="pandoc"/>
+  <title class="function">GETENV</title>
+  <link rel="stylesheet" type="text/css" href="stylesheet.css"/>
+</head>
+<body>
+<div id="getenv-function" class="section level1">
+<a class="dashingAutolink" name="autolink-156"></a><a class="dashAnchor" name="//apple_ref/cpp/Function/GETENV"></a><h1 class="function">GETENV</h1>
+<p>All processes have an environment associated with them that contains a number of variables indicating the state of various parameters. The GETENV function allows a jBC program to determine the value of any of the environment variables associated with it.</p>
+<div id="command-syntax-118" class="section level2">
+<h2>COMMAND SYNTAX</h2>
+<pre><code>GETENV(expression, variable)</code></pre>
+</div>
+<div id="syntax-elements-78" class="section level2">
+<h2>SYNTAX ELEMENTS</h2>
+<p>The expression should evaluate to the name of the environment variable whose value is to be returned. The function will then assign the value of the environment variable to variable. The function itself returns a Boolean TRUE or FALSE value indicating the success or failure of the function.</p>
+<p>See: <a href="#PUTENV">PUTENV</a></p>
+</div>
+<div id="example-95" class="section level2">
+<h2>EXAMPLE</h2>
+<pre><code>IF GETENV(&#39;PATH&#39;, ExecPath) THEN
+    CRT &#34;Execution path is &#34; : ExecPath
+END ELSE
+    CRT &#34;Execution path is not set up&#34;
+END</code></pre>
+</div>
+</div>
+
+
+
+</body></html>

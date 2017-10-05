@@ -1,0 +1,31 @@
+<!--?xml version="1.0" encoding="UTF-8"?--><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+  <meta http-equiv="Content-Style-Type" content="text/css"/>
+  <meta name="generator" content="pandoc"/>
+  <title class="function">LENS</title>
+  <link rel="stylesheet" type="text/css" href="stylesheet.css"/>
+</head>
+<body>
+<div id="lens-function" class="section level1">
+<a class="dashingAutolink" name="autolink-204"></a><a class="dashAnchor" name="//apple_ref/cpp/Function/LENS"></a><h1 class="function">LENS</h1>
+<p>LENS function is used to return a dynamic array of the number of bytes in each element of the dynamic.array.</p>
+<div id="command-syntax-164" class="section level2">
+<h2>COMMAND SYNTAX</h2>
+<pre><code>LENS(dynamic.array)</code></pre>
+<p>Each element of dynamic.array must be a string value. The characters in each element of dynamic.array are counted, with the counts returned.</p>
+<p>The LENS function includes all blank spaces, including trailing blanks, in the calculation.</p>
+<p>If dynamic.array evaluates to a null string, it returns zero (0). If any element of dynamic.array is null, returns zero (0) for that element.</p>
+</div>
+<div id="international-mode-13" class="section level2">
+<h2>INTERNATIONAL MODE</h2>
+<p>The LENS function will return the number of characters in the specified expression rather than the number of bytes, in International Mode. If the expression consists of entirely of UTF-8 characters in the ASCII range 0 - 127 then the character length of the expression will equate to the byte length. However, when the expression contains characters outside the ASCII range 0 - 127 then byte length and character length will differ. See <a href="#BYTELEN">BYTELEN</a> function for more information.</p>
+</div>
+<div id="notes-98" class="section level2">
+<h2>NOTES</h2>
+<p>Do not use programs to manipulate byte counts in International Mode.</p>
+</div>
+</div>
+
+
+
+</body></html>

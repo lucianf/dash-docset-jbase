@@ -1,0 +1,28 @@
+<!--?xml version="1.0" encoding="UTF-8"?--><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+  <meta http-equiv="Content-Style-Type" content="text/css"/>
+  <meta name="generator" content="pandoc"/>
+  <title class="statement">HUSH</title>
+  <link rel="stylesheet" type="text/css" href="stylesheet.css"/>
+</head>
+<body>
+<div id="hush-statement" class="section level1">
+<a class="dashingAutolink" name="autolink-166"></a><a class="dashAnchor" name="//apple_ref/cpp/Method/HUSH"></a><h1 class="statement">HUSH</h1>
+<p>Use the HUSH statement to suppress the display of all output normally sent to a terminal during processing. HUSH also suppresses output to a COMO file.</p>
+<p>HUSH acts as a toggle. If it is used without a qualifier, it changes the current state. Do not use this statement to shut off output display unless you are sure the display is unnecessary. When you use HUSH ON, all output is suppressed including error messages and requests for information.</p>
+<div id="command-syntax-127" class="section level2">
+<h2>COMMAND SYNTAX</h2>
+<pre><code>HUSH { ON | OFF | expression }</code></pre>
+</div>
+<div id="example-100" class="section level2">
+<h2>EXAMPLE</h2>
+<pre><code>   CRT &#39;PASSWORD:&#39;:
+   HUSH ON
+   INPUT V.PASSWORD
+   HUSH OFF</code></pre>
+</div>
+</div>
+
+
+
+</body></html>

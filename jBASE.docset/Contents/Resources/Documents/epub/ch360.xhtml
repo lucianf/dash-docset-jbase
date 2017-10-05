@@ -1,0 +1,66 @@
+<!--?xml version="1.0" encoding="UTF-8"?--><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+  <meta http-equiv="Content-Style-Type" content="text/css"/>
+  <meta name="generator" content="pandoc"/>
+  <title class="statement">WRITELIST</title>
+  <link rel="stylesheet" type="text/css" href="stylesheet.css"/>
+</head>
+<body>
+<div id="writelist-statement" class="section level1">
+<a class="dashingAutolink" name="autolink-359"></a><a class="dashAnchor" name="//apple_ref/cpp/Method/WRITELIST"></a><h1 class="statement">WRITELIST</h1>
+<p>WRITELIST allows the program to store a list held in a jBC variable to the global list file.</p>
+<div id="command-syntax-304" class="section level2">
+<h2>COMMAND SYNTAX</h2>
+<pre><code>WRITELIST variable ON | TO expression { SETTING setvar } { ON ERROR statements }</code></pre>
+</div>
+<div id="syntax-elements-233" class="section level2">
+<h2>SYNTAX ELEMENTS</h2>
+<p><strong>variable</strong> is the variable in which the list is held.</p>
+<p><strong>expression</strong> should evaluate to the required list name. If expression is null, it writes the list to the default external list.</p>
+<p>If the SETTING clause is specified and the write fails, it sets setvar to one of the following values:</p>
+</div>
+<div id="incremental-file-errors-16" class="section level2">
+<h2>INCREMENTAL FILE ERRORS</h2>
+<table>
+<thead>
+<tr class="header">
+<th align="left">Code</th>
+<th align="left">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">128</td>
+<td align="left">No such file or directory</td>
+</tr>
+<tr class="even">
+<td align="left">4096</td>
+<td align="left">Network error</td>
+</tr>
+<tr class="odd">
+<td align="left">24576</td>
+<td align="left">Permission denied</td>
+</tr>
+<tr class="even">
+<td align="left">32768</td>
+<td align="left">Physical I/O error or unknown error</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div id="note-23" class="section level2">
+<h2>NOTE</h2>
+<p>See also: <a href="#DELETELIST">DELETELIST</a>, <a href="#READLIST">READLIST</a>, <a href="#FORMLIST">FORMLIST</a></p>
+</div>
+<div id="example-201" class="section level2">
+<h2>EXAMPLE</h2>
+<pre><code>   EXECUTE &#39;SELECT . SAMPLE 5&#39; RTNLIST V.LIST
+   WRITELIST V.LIST TO &#39;SOME-FILES&#39;
+   GETLIST &#39;SOME-FILES&#39; TO V.FILES.L ELSE NULL
+   CRT OCONV( V.FILES.L, &#39;MCP&#39; )  ;* e.g. &amp;COMO&amp;^&amp;COMO&amp;]D^&amp;ED&amp;^&amp;ED&amp;]D^&amp;PH&amp;</code></pre>
+</div>
+</div>
+
+
+
+</body></html>

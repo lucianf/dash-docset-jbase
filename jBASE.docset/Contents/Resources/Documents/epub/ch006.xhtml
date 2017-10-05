@@ -1,0 +1,251 @@
+<!--?xml version="1.0" encoding="UTF-8"?--><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+  <meta http-equiv="Content-Style-Type" content="text/css"/>
+  <meta name="generator" content="pandoc"/>
+  <title class="category">Data Files</title>
+  <link rel="stylesheet" type="text/css" href="stylesheet.css"/>
+</head>
+<body>
+<div id="data-files-category" class="section level1">
+<a class="dashingAutolink" name="autolink-5"></a><a class="dashAnchor" name="//apple_ref/cpp/Category/Data%20Files"></a><h1 class="category">Data Files</h1>
+<div id="introduction-to-jbasetafc-data-files" class="section level2">
+<h2>Introduction to jBASE/TAFC data files</h2>
+<p>The most widely used formats for data files nowadays are &#34;J4&#34; and &#34;JR&#34;. The former has size limitation (up to 2Gb if OS-level limits allow that) and needs resizing on regular basis though when it&#39;s properly sized it&#39;s faster. &#34;JR&#34; - &#34;resilient&#34; - doesn&#39;t have size limitation and doesn&#39;t need resizing.</p>
+<p>The following examples serve as a brief introduction to jBASE data storage. They can be executed in jshell prompt or (except JED - it makes no sense) in a jBC program or subroutine (using EXECUTE/PERFORM).</p>
+</div>
+<div id="createdelete-hashed-file" class="section level2">
+<h2>Create/delete hashed file</h2>
+<p>Create both data and dictionary:</p>
+<pre>    CREATE-FILE F.SAMPLE 101 1
+    &nbsp;
+    [ 417 ] File F.SAMPLE]D created , type = J4
+    [ 417 ] File F.SAMPLE created , type = J4</pre>
+<p>If the file already exists, the error message appears:</p>
+<pre>    [ 413 ] File name DICT F.SAMPLE already exists</pre>
+<p>Delete hashed file (both data and dictionary):</p>
+<pre>    DELETE-FILE F.SAMPLE</pre>
+<p>Create hashed file (data only):</p>
+<pre>    CREATE-FILE DATA F.SAMPLE 101 1
+    &nbsp;
+    [ 417 ] File F.SAMPLE created , type = J4</pre>
+<p>Create hashed file (dictionary only):</p>
+<pre>    CREATE-FILE DICT F.SAMPLE 101 1
+    &nbsp;
+    [ 417 ] File F.SAMPLE]D created , type = J4</pre>
+</div>
+<div id="create-and-list-the-data" class="section level2">
+<h2>Create and list the data</h2>
+<p>Put some data to file:</p>
+<pre>    JED F.SAMPLE REC1
+    &nbsp;
+    0001 Field one
+    0002 Field two
+    0003 Field three</pre>
+<p>Press Esc; then type FI to save the record.</p>
+<p>List file contents:</p>
+<pre>    LIST F.SAMPLE
+    &nbsp;
+    F.SAMPLE......
+    &nbsp;
+    REC1
+    &nbsp;
+    1 Records Listed</pre>
+<p>No dictionary; we see only @ID. Raw output:</p>
+<pre>    CT F.SAMPLE
+    &nbsp;
+    REC1
+    001 Field one
+    002 Field two
+    003 Field three</pre>
+<p>As an alternative, we can use standard correlatives:</p>
+<pre>    LIST F.SAMPLE &lowast;A1 &lowast;A2 &lowast;A3
+    &nbsp;
+    F.SAMPLE......   &lowast;A1...........   &lowast;A2...........   &lowast;A3...........
+    &nbsp;
+    REC1             Field one        Field two         Field three</pre>
+</div>
+<div id="adding-dictionary-items" class="section level2">
+<h2>Adding dictionary items</h2>
+<p>Add a dictionary item to assign the name to a field:</p>
+<pre>    JED DICT F.SAMPLE FLD1
+    &nbsp;
+    0001 D
+    0002 1
+    0003
+    0004 FIELD 1 HEADER
+    0005 10L
+    0006 S
+    0007</pre>
+<p>Use field name in a query:</p>
+<pre>    LIST F.SAMPLE FLD1
+    &nbsp;
+    F.SAMPLE......   FIELD 1 HEADER
+    &nbsp;
+    REC1             Field one
+    &nbsp;
+    1 Records Listed</pre>
+<pre>    LIST F.SAMPLE WITH FLD1 EQ &#39;&#39;
+    &nbsp;
+     No Records Listed</pre>
+<p>In default view we still dont have it:</p>
+<pre>    LIST F.SAMPLE
+    &nbsp;
+    F.SAMPLE......
+    &nbsp;
+    REC1</pre>
+<p>Set the field to be seen by default:</p>
+<pre>    JED DICT F.SAMPLE @
+    &nbsp;
+    0001 PH
+    0002 @ID FLD1</pre>
+<p>See the result:</p>
+<pre>    LIST F.SAMPLE
+    &nbsp;
+    F.SAMPLE......   ID..................   FIELD 1 HEADER
+    &nbsp;
+    REC1             REC1                   Field one</pre>
+</div>
+<div id="change-of-size-and-format-statistics-properties" class="section level2">
+<h2>Change of size and format, statistics, properties</h2>
+<p>See file statistics:</p>
+<pre>    jstat -v F.SAMPLE
+    &nbsp;
+    File C:\r11\bnk\bnk.run\F.SAMPLE
+    Type=J4 , Hash method = 5
+    Created at Tue Nov 20 19:38:25 2012
+    Groups = 101 , Frame size = 4096 bytes , Secondary Record Size = 8192 bytes
+    Restore re-size parameters : (none)
+    File size = 417792 bytes , Inode = 29838 , Device = Id 24915
+    Last Accessed Tue Nov 20 19:50:30 2012 , Last Modified Tue Nov 20 19:50:30 2012
+    Backup = YES , Log = YES , Rollback = YES , Network = NO
+    Record Count = 1 , Record Bytes = 45
+    Bytes/Record = 45 , Bytes/Group = 0
+    Primary file space:   Total Frames = 101 , Total Bytes = 45
+    Secondary file space: Total Frames = 0 , Total Bytes = 0</pre>
+<div id="note-1" class="section level3">
+<h3>NOTE</h3>
+<p>101 - number of groups - was defined when file was created.</p>
+<p>Add more records:</p>
+<pre>    COPY FROM F.SAMPLE REC1,REC2
+    &nbsp;
+    1 records copied</pre>
+<p>Try to resize the file:</p>
+<pre>    jrf -V F.SAMPLE
+    &nbsp;
+    ...
+    Downsizing skipped from modulo 101 to 3.</pre>
+<p>Resize it anyway:</p>
+<pre>    jrf -VD F.SAMPLE
+    &nbsp;
+    ...
+    Downsizing from modulo 101 to 3</pre>
+<p>Change file type to JR:</p>
+<pre>    jrf -H6 F.SAMPLE</pre>
+<p>See statistics now:</p>
+<pre>    jstat -v F.SAMPLE
+    &nbsp;
+    File Type       = JR,        Hash method = 5, Created = Tue Nov 20 19:56:00 2012
+    Frame size      = 4096,        OOG Threshold   = 2048
+    File size       = 8192, Freespace       = 0 frames
+    Internal Modulo = 3/7/11,      External Modulo = 13
+    Inode no.       = 29838,       Device no.      = 24915
+    Accessed        = Tue Nov 20 19:56:13 2012, Modified  = Tue Nov 20 19:56:13 2012
+    Backup  = YES, Log      = YES, Rollback        = YES,  Secure updates  = NO
+    Deallocate pointers : NO       Deallocate frames NO
+    Revision level  = 2
+    Record Bytes    = 82,   Record Count    = 2
+    Bytes/Record    = 41,   Bytes/Group     = 82
+    Data Frames     = 1,    Ptr Frames      = 0
+    OOG Bytes       = 0,    OOG Frames      = 0
+    Sum Squares     = 3362, Std Dev Mean    = 41</pre>
+<p>Turn on secure updates:</p>
+<pre>    jchmod +S F.SAMPLE</pre>
+<p>Check the result:</p>
+<pre>    jstat -v F.SAMPLE
+    &nbsp;
+    ...
+    Backup  = YES, Log      = YES,  Rollback        = YES,  Secure updates  = YES
+    ...</pre>
+<p>Delete a record:</p>
+<pre>    DELETE F.SAMPLE REC2
+    &nbsp;
+    1 record(s) deleted.</pre>
+<p>Add data sections:</p>
+<pre>    CREATE-FILE F.SAMPLE,TWO TYPE=JR
+    &nbsp;
+    [ 417 ] File F.SAMPLE]MTWO created , type = JR</pre>
+<pre>    CREATE-FILE F.SAMPLE,THREE TYPE=JR
+    &nbsp;
+    [ 417 ] File F.SAMPLE]MTHREE created , type = JR</pre>
+<p>Create a record in a section:</p>
+<pre>    JED F.SAMPLE,TWO REC5
+    &nbsp;
+    0001 Section 2/1
+    0002 Section 2/2
+    0003 Section 2/3</pre>
+<p>See that all sections use the same dictionary:</p>
+<pre>    LIST F.SAMPLE,TWO
+    &nbsp;
+    F.SAMPLE,TWO..    ID..................    FIELD 1 HEADER
+    &nbsp;
+    REC5              REC5                    Section 2/1</pre>
+<pre>    LIST F.SAMPLE,THREE
+    &nbsp;
+    F.SAMPLE,THREE    ID..................    FIELD 1 HEADER
+    &nbsp;
+     No Records Listed</pre>
+</div>
+<div id="note-3" class="section level3">
+<h3>NOTE</h3>
+<p>File F.SAMPLE still reports 1 record in it; here&#39;s the difference between having several data sections and a distributed file.</p>
+</div>
+</div>
+<div id="ud-type" class="section level2">
+<h2>UD type</h2>
+<p>Folders are also treated like data files (type UD); flat files in them - like records. This allows, for example, use JED to edit source code. Data can be copied transparently between hashed files and folders. Some examples:</p>
+<p>Create the folder:</p>
+<pre>    CREATE-FILE DATA TEST.BP TYPE=UD
+    &nbsp;
+    [ 417 ] File TEST.BP created , type = UD</pre>
+<p>Create a program:</p>
+<pre>    JED TEST.BP PROG1
+    &nbsp;
+    0001 CRT 2*2</pre>
+<p>Save file. Compile and run it:</p>
+<pre>    BASIC TEST.BP PROG1
+    &nbsp;
+    PROG1
+    BASIC_3.c
+    Source file PROG1 compiled successfully</pre>
+<pre>    CATALOG TEST.BP PROG1
+    &nbsp;
+    PROG1
+    Object PROG1 cataloged successfully</pre>
+<pre>    PROG1
+    &nbsp;
+    4</pre>
+<p>Copy data:</p>
+<pre>    COPY FROM F.SAMPLE TO TEST.BP REC1
+    &nbsp;
+    1 records copied</pre>
+<p>Edit file REC1 in TEST.BP folder with any text editor so it now looks like:</p>
+<pre>    Field one - updated
+    Field two
+    Field three</pre>
+<p>Copy it back to hashed file:</p>
+<pre>    COPY FROM TEST.BP TO F.SAMPLE REC1 OVERWRITING
+    &nbsp;
+    1 records copied</pre>
+<p>See the result:</p>
+<pre>    LIST F.SAMPLE
+    &nbsp;
+    F.SAMPLE......     ID..................   FIELD 1 HEADER
+    &nbsp;
+    REC1               REC1                   Field one - up
+                                              dated</pre>
+</div>
+</div>
+
+
+
+</body></html>

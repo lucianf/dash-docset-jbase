@@ -1,0 +1,63 @@
+<!--?xml version="1.0" encoding="UTF-8"?--><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+  <meta http-equiv="Content-Style-Type" content="text/css"/>
+  <meta name="generator" content="pandoc"/>
+  <title class="category">Guidelines for Writing Source Code</title>
+  <link rel="stylesheet" type="text/css" href="stylesheet.css"/>
+</head>
+<body>
+<div id="guidelines-for-writing-source-code-category" class="section level1">
+<a class="dashingAutolink" name="autolink-2"></a><a class="dashAnchor" name="//apple_ref/cpp/Category/Guidelines%20for%20Writing%20Source%20Code"></a><h1 class="category">Guidelines for Writing Source Code</h1>
+<div id="recommendations-not-rules" class="section level2">
+<h2>Recommendations (not rules)</h2>
+<p><em>Note: some examples in this documentation don&#39;t fully follow these rules - they were taken from other sources or it&#39;s done intentionally to illustrate some language features.</em></p>
+<ul>
+<li><p>All variables are to be in lower case and in the lower_case_and_underscore_naming style.</p></li>
+<li><p>Use only one style of quotes for strings, e.g.: &#34;QWERT&#34; (double quotes, preferable) or &#39;QWERT&#39; (single quotes). Mix them only if it&#39;s really required, e.g.:</p>
+<p>CRT &#39;&#34;Yes Minister&#34;, &#39; : &#34;that&#39;s what I said.&#34;</p></li>
+<li><p>Always use one space after the comma and never before the comma.</p></li>
+<li><p>Never use space after &#39;(&#39; and before &#39;)&#39; (exception is when code is more readable with it).</p></li>
+<li><p>Never put multiple commands on a single line and separate them by &#34;;&#34;, except for short similar statements, like:</p>
+<p>var_1 = 1 ; var_2 = 2 ; var_3 = 3</p></li>
+<li><p>Don&#39;t put trailing &#39;;&#39; at the end of the lines.</p></li>
+<li><p>Never convert ints to boolean implicitly:</p></li>
+</ul>
+<p>Instead of:</p>
+<pre><code>   IF INDEX(...) THEN</code></pre>
+<p>always write:</p>
+<pre><code>   IF INDEX(...) NE 0 THEN</code></pre>
+<p>Same goes for strings. Instead of:</p>
+<pre><code>   var = &#39;ABC&#39;
+   IF var THEN  ;* code continues here</code></pre>
+<p>Use:</p>
+<pre><code>   IF var NE &#39;&#39; THEN  ;* code continues here</code></pre>
+<ul>
+<li><p>Never hardcode program or subroutine name in error messages etc. Use SYSTEM(40) instead.</p></li>
+<li><p>Always supply meaningful error messages with sufficient additional information.</p></li>
+<li><p>Don&#39;t comment what you do; comment why.</p></li>
+<li><p>Don&#39;t mix tabs with spaces, use either former or latter.</p></li>
+<li><p>Don&#39;t use characters with ASCII code above 126 in the source. To form strings with such characters use CHAR() or load them from external file or table.</p></li>
+<li><p>Use CR (ASCII 10) for line ends rather than CR+LF.</p></li>
+<li><p>For statements like INCLUDE, $INSERT use zero indent; for all other code - 3 spaces of initial indent and 3 spaces to indent each FOR...NEXT, LOOP...REPEAT contents etc.</p></li>
+<li><p>Wrap lines that are longer than 80 characters (use a backslash or comma at the end where the latter is applicable). It&#39;s a good idea to move line continuation(s) even more than 3 positions to the right, e.g.:</p>
+<p>current_date = DATE() current_day = OCONV(current_date, &#39;DD&#39;) current_month = OCONV(current_date, &#39;DM&#39;) ansi_date = OCONV(current_date, &#39;DY&#39;) : &#39;-&#39;<br/>
+: FMT(current_month, &#39;R0%2&#39; ) : &#39;-&#39;<br/>
+: FMT(current_day, &#39;R0%2&#39; ) CRT ansi_date ;* e.g. 2013-03-08</p></li>
+<li><p>Use spaces around &#34;=&#34;: not &#34;var=1&#34; but &#34;var = 1&#34;.</p></li>
+<li><p>Use &#34;=&#34; for assignment only; for comparisons use &#34;EQ&#34;.</p></li>
+<li><p>Don&#39;t use IF..ELSE without THEN.</p></li>
+<li><p>Avoid GOTO, RETURN TO as much as possible.</p></li>
+<li><p>Use named COMMON rather than unnamed.</p></li>
+<li><p>Don&#39;t use numeric line labels like:</p>
+<p>001 A = 0 002 A += 1 003 IF A LT 5 THEN GOTO 002 ELSE CRT A</p></li>
+<li><p>Avoid ambiguity with IF...AND...OR, use parentheses. In the following example code lines 2, 3 and 4 are the same (except parentheses); only second IF is true:</p>
+<p>var_1 = 1 ; var_2 = 2 ; var_3 = 3 ; var_4 = 4 IF var_1 EQ 1 OR var_2 EQ 20 AND var_3 EQ 30 OR var_4 EQ 40 THEN CRT 1 IF var_1 EQ 1 OR (var_2 EQ 20 AND var_3 EQ 30 OR var_4 EQ 40) THEN CRT 2 IF (var_1 EQ 1 OR var_2 EQ 20) AND (var_3 EQ 30 OR var_4 EQ 40) THEN CRT 3</p></li>
+<li><p>Use only one method of writing &#34;not equal&#34; (preferably &#34;NE&#34;).</p></li>
+</ul>
+<p>(See the second example in chapter <a href="#Other_notes">&#34;Other notes&#34;</a>.)</p>
+</div>
+</div>
+
+
+
+</body></html>

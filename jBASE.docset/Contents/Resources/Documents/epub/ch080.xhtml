@@ -1,0 +1,36 @@
+<!--?xml version="1.0" encoding="UTF-8"?--><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+  <meta http-equiv="Content-Style-Type" content="text/css"/>
+  <meta name="generator" content="pandoc"/>
+  <title class="function">CHARS</title>
+  <link rel="stylesheet" type="text/css" href="stylesheet.css"/>
+</head>
+<body>
+<div id="chars-function" class="section level1">
+<a class="dashingAutolink" name="autolink-79"></a><a class="dashAnchor" name="//apple_ref/cpp/Function/CHARS"></a><h1 class="function">CHARS</h1>
+<p>The CHARS function accepts a dynamic array of numeric expressions and returns a dynamic array of the corresponding ASCII characters.</p>
+<div id="command-syntax-44" class="section level2">
+<h2>COMMAND SYNTAX</h2>
+<pre><code>CHARS(DynArr)</code></pre>
+</div>
+<div id="syntax-elements-22" class="section level2">
+<h2>SYNTAX ELEMENTS</h2>
+<p>Each element of DynArr must evaluate to a numeric argument in the range 0-255 (can exceed 255 if UTF-8 is used).</p>
+</div>
+<div id="notes-29" class="section level2">
+<h2>NOTES</h2>
+<p>If any of the dynamic array elements are non-numeric, a run-time error will occur.</p>
+<p>See also: <a href="#CHAR">CHAR</a></p>
+</div>
+<div id="example-45" class="section level2">
+<h2>EXAMPLE</h2>
+<pre><code>   V.ARRAY = 59 :@FM: 45 :@FM: 41
+   V.CHARS = CHARS(V.ARRAY)
+   CRT CHANGE(V.CHARS, @FM, &#39;&#39;)</code></pre>
+<p>This code displays: ;-)</p>
+</div>
+</div>
+
+
+
+</body></html>

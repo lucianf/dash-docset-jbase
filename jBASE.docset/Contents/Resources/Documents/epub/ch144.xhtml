@@ -1,0 +1,40 @@
+<!--?xml version="1.0" encoding="UTF-8"?--><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+  <meta http-equiv="Content-Style-Type" content="text/css"/>
+  <meta name="generator" content="pandoc"/>
+  <title class="statement">FINDSTR</title>
+  <link rel="stylesheet" type="text/css" href="stylesheet.css"/>
+</head>
+<body>
+<div id="findstr-statement" class="section level1">
+<a class="dashingAutolink" name="autolink-143"></a><a class="dashAnchor" name="//apple_ref/cpp/Method/FINDSTR"></a><h1 class="statement">FINDSTR</h1>
+<p>The FINDSTR statement locates a string as a substring of a dynamic array element. It is similar in operation to the FIND statement, except that the full match isn&#39;t required.</p>
+<div id="command-syntax-106" class="section level2">
+<h2>COMMAND SYNTAX</h2>
+<pre><code>FINDSTR expression1 IN Var1 {, expression2} SETTING Var2 {,Var3 {, Var4}} \
+        THEN | ELSE statement(s)</code></pre>
+</div>
+<div id="syntax-elements-67" class="section level2">
+<h2>SYNTAX ELEMENTS</h2>
+<p><strong>expression1</strong> evaluates to the string with which to search every element of the dynamic array. <strong>Var1</strong> is the actual dynamic array that will be searched. FINDSTR will normally locate the first occurrence of <strong>expression1</strong> unless <strong>expression2</strong> is specified. If specified then expression2 will cause a specific occurrence of expression1 to be located. The three variables <strong>Var2, Var3, Var4</strong> are used to record the Field, Value and Sub-Value positions in which expression1 was found.</p>
+<p>If expression1 is found as a substring of any element of Var1 then Vars 2, 3 and 4 are set to the position in which it was found and the THEN clause of the statement is executed if it is present. If expression1 is not found within any element of the dynamic array then Vars 2,3 and 4 are undefined and the ELSE clause of the statement is executed.</p>
+</div>
+<div id="notes-67" class="section level2">
+<h2>NOTES</h2>
+<p>The statement may omit either the THEN clause or the ELSE clause but may not omit both. It is valid for the statement to contain both clauses if required.</p>
+</div>
+<div id="example-88" class="section level2">
+<h2>EXAMPLE</h2>
+<pre><code>   V.ARRAY = &#39;ABC&#39;   \
+         :@FM: &#39;DEF&#39; :@VM: &#39;123&#39; :@VM: &#39;XYZ&#39; :@VM: &#39;456&#39; \
+         :@FM: &#39;789&#39; \
+         :@FM: &#39;---&#39; : @SM: &#39;XYZ&#39;
+   V.FLD = 0  ; V.VAL = 0  ;  V.SVAL = 0
+   FINDSTR &#39;XY&#39; IN V.ARRAY SETTING V.FLD, V.VAL ELSE NULL
+   CRT V.FLD, V.VAL            ;*   2       3</code></pre>
+</div>
+</div>
+
+
+
+</body></html>

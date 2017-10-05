@@ -1,0 +1,36 @@
+<!--?xml version="1.0" encoding="UTF-8"?--><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+  <meta http-equiv="Content-Style-Type" content="text/css"/>
+  <meta name="generator" content="pandoc"/>
+  <title class="function">KEYIN</title>
+  <link rel="stylesheet" type="text/css" href="stylesheet.css"/>
+</head>
+<body>
+<div id="keyin-function" class="section level1">
+<a class="dashingAutolink" name="autolink-199"></a><a class="dashAnchor" name="//apple_ref/cpp/Function/KEYIN"></a><h1 class="function">KEYIN</h1>
+<p>KEYIN function is used to read a single character from the input buffer and return it.</p>
+<div id="command-syntax-159" class="section level2">
+<h2>COMMAND SYNTAX</h2>
+<pre><code>KEYIN()</code></pre>
+<p>KEYIN uses raw keyboard input, therefore all special character handling (for example, backspace) is disabled. System special character handling (for example, processing of interrupts) is unchanged.</p>
+</div>
+<div id="example-120" class="section level2">
+<h2>EXAMPLE</h2>
+<p>Output current time and date in the current line on the terminal until user presses q or Q key.</p>
+<pre><code>   V.HOME = @(0)   ;* remember cursor position at the start of the current line
+   LOOP
+      LOOP
+         V.BUFF = SYSTEM(14)    ;* check if there&#39;s anything in keyboard buffer
+         IF V.BUFF NE 0 THEN BREAK
+         CRT V.HOME:TIMEDATE():     ;* e.g. 22:27:08 24 OCT 2012
+         MSLEEP 3000
+      REPEAT
+      V.KEY = UPCASE( KEYIN() )
+      IF V.KEY EQ &#39;Q&#39; THEN BREAK    ;* exit if q or Q was pressed
+   REPEAT</code></pre>
+</div>
+</div>
+
+
+
+</body></html>

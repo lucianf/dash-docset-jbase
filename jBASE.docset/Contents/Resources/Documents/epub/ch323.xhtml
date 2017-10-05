@@ -1,0 +1,179 @@
+<!--?xml version="1.0" encoding="UTF-8"?--><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+  <meta http-equiv="Content-Style-Type" content="text/css"/>
+  <meta name="generator" content="pandoc"/>
+  <title class="statement">STATUS statement</title>
+  <link rel="stylesheet" type="text/css" href="stylesheet.css"/>
+</head>
+<body>
+<div id="status-statement-statement" class="section level1">
+<a class="dashingAutolink" name="autolink-322"></a><a class="dashAnchor" name="//apple_ref/cpp/Method/STATUS%20statement"></a><h1 class="statement">STATUS statement</h1>
+<p>STATUS statement is used to determine the status of an open file. It returns the file status as a dynamic array and assigns it to an array.</p>
+<div id="command-syntax-273" class="section level2">
+<h2>COMMAND SYNTAX</h2>
+<pre><code>STATUS array FROM variable THEN statements ELSE statements | ELSE statements</code></pre>
+</div>
+<div id="syntax-elements-208" class="section level2">
+<h2>SYNTAX ELEMENTS</h2>
+<p>The STATUS statement returns the following values in the following attributes:</p>
+<p><em>STATUS Statement Values</em></p>
+<table>
+<thead>
+<tr class="header">
+<th align="left">Attribute</th>
+<th align="left">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">1</td>
+<td align="left">Current position in the file Offset in bytes from</td>
+</tr>
+<tr class="even">
+<td align="left"></td>
+<td align="left">beginning of file</td>
+</tr>
+<tr class="odd">
+<td align="left">2</td>
+<td align="left">End of file reached 1 if EOF, 0 if not.</td>
+</tr>
+<tr class="even">
+<td align="left">3</td>
+<td align="left">Error accessing file 1 if error, 0 if not.</td>
+</tr>
+<tr class="odd">
+<td align="left">4</td>
+<td align="left">Number of bytes available to read</td>
+</tr>
+<tr class="even">
+<td align="left">5</td>
+<td align="left">File mode Permissions (in octal) 6 File size in</td>
+</tr>
+<tr class="odd">
+<td align="left"></td>
+<td align="left">bytes.</td>
+</tr>
+<tr class="even">
+<td align="left">7</td>
+<td align="left">Number of hard links 0 if no links. Where applicable</td>
+</tr>
+<tr class="odd">
+<td align="left"></td>
+<td align="left">else 0</td>
+</tr>
+<tr class="even">
+<td align="left">8</td>
+<td align="left">O/S User ID. ID based on the user name and domain of</td>
+</tr>
+<tr class="odd">
+<td align="left"></td>
+<td align="left">the user a jBASE pseudo user.</td>
+</tr>
+<tr class="even">
+<td align="left">9</td>
+<td align="left">O/S Group ID.</td>
+</tr>
+<tr class="odd">
+<td align="left">10</td>
+<td align="left">I-node number; Unique ID of file on file system</td>
+</tr>
+<tr class="even">
+<td align="left">11</td>
+<td align="left">Device on which i-node resides Number of device. The</td>
+</tr>
+<tr class="odd">
+<td align="left"></td>
+<td align="left">value is an internally calculated value on Windows</td>
+</tr>
+<tr class="even">
+<td align="left"></td>
+<td align="left">NT.</td>
+</tr>
+<tr class="odd">
+<td align="left">12</td>
+<td align="left">Device for special character or block Number of</td>
+</tr>
+<tr class="even">
+<td align="left"></td>
+<td align="left">device.</td>
+</tr>
+<tr class="odd">
+<td align="left">13</td>
+<td align="left">Time of last access in internal format</td>
+</tr>
+<tr class="even">
+<td align="left">14</td>
+<td align="left">Date of last access in internal format.</td>
+</tr>
+<tr class="odd">
+<td align="left">15</td>
+<td align="left">Time of last modification in internal format</td>
+</tr>
+<tr class="even">
+<td align="left">16</td>
+<td align="left">Date of last modification in internal format.</td>
+</tr>
+<tr class="odd">
+<td align="left">17</td>
+<td align="left">Time and date of last status change in internal</td>
+</tr>
+<tr class="even">
+<td align="left"></td>
+<td align="left">format.</td>
+</tr>
+<tr class="odd">
+<td align="left">18</td>
+<td align="left">Date of last status change in internal format.</td>
+</tr>
+<tr class="even">
+<td align="left">19</td>
+<td align="left">Number of bytes left in output queue (applicable to</td>
+</tr>
+<tr class="odd">
+<td align="left"></td>
+<td align="left">terminals only)</td>
+</tr>
+<tr class="even">
+<td align="left">20</td>
+<td align="left">{ }</td>
+</tr>
+<tr class="odd">
+<td align="left">21</td>
+<td align="left">jBASE File types j3, j4, jPLUS</td>
+</tr>
+<tr class="even">
+<td align="left">22</td>
+<td align="left">jBASE File types j3, j4, jPLUS</td>
+</tr>
+<tr class="odd">
+<td align="left">23</td>
+<td align="left">jBASE File types j3, j4, jPLUS</td>
+</tr>
+<tr class="even">
+<td align="left">24</td>
+<td align="left">Part numbers of part files belonging to a</td>
+</tr>
+<tr class="odd">
+<td align="left"></td>
+<td align="left">distributed file multivalued list</td>
+</tr>
+</tbody>
+</table>
+<p><strong>variable</strong> specifies an open file. If variable evaluates to the null value, the STATUS statement fails and the program terminates with a run-time error message.</p>
+<p>If the STATUS array is assigned to an array, the THEN statements are executed and the ELSE statements are ignored. If no THEN statements are present, program execution continues with the next statement. If the attempt to assign the array fails, the ELSE statements are executed; any THEN statements are ignored.</p>
+</div>
+<div id="example-186" class="section level2">
+<h2>EXAMPLE</h2>
+<pre><code>   IF NOT( GETENV(&#39;JEDIFILENAME_SYSTEM&#39;, FN.SYSTEM) ) THEN ABORT
+   OPEN FN.SYSTEM TO F.SYSTEM ELSE NULL
+   STATUS V.INFO.L FROM F.SYSTEM ELSE ABORT
+   CRT V.INFO.L&lt;5&gt;       ;*  permissions in octal, e.g. 655
+   CRT V.INFO.L&lt;6&gt;       ;*  file size in bytes
+   CRT V.INFO.L&lt;20&gt;      ;*  full path to file
+   CRT V.INFO.L&lt;21&gt;      ;*  file type, e.g. J4, JR, XMLDB2, SEQ</code></pre>
+</div>
+</div>
+
+
+
+</body></html>

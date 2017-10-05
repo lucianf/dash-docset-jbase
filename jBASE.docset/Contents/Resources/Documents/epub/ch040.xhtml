@@ -1,0 +1,35 @@
+<!--?xml version="1.0" encoding="UTF-8"?--><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+  <meta http-equiv="Content-Style-Type" content="text/css"/>
+  <meta name="generator" content="pandoc"/>
+  <title class="function">ASCII</title>
+  <link rel="stylesheet" type="text/css" href="stylesheet.css"/>
+</head>
+<body>
+<div id="ascii-function" class="section level1">
+<a class="dashingAutolink" name="autolink-39"></a><a class="dashAnchor" name="//apple_ref/cpp/Function/ASCII"></a><h1 class="function">ASCII</h1>
+<p>The ASCII function converts all the characters in the expression from the EBCDIC character set to the ASCII character set.</p>
+<div id="command-syntax-8" class="section level2">
+<h2>COMMAND SYNTAX</h2>
+<pre><code>ASCII(expression)</code></pre>
+</div>
+<div id="syntax-elements-5" class="section level2">
+<h2>SYNTAX ELEMENTS</h2>
+<p>The expression may return a data string of any form. The function will then assume that the characters are all members of the EBCDIC character set and translate them using a character map. The original expression is unchanged while the returned result of the function is now the ASCII equivalent.</p>
+</div>
+<div id="example-10" class="section level2">
+<h2>EXAMPLE</h2>
+<p>Create the file test.txt in hex editor containing the following characters (in hex):</p>
+<pre>    C8 85 93 93 96 40 91 C2 C3</pre>
+<p>Run the following program:</p>
+<!--jBC-->
+<pre><code>   OSREAD the_line FROM &#39;test.txt&#39; ELSE NULL
+   CRT ASCII(the_line)</code></pre>
+<p>Output:</p>
+<pre>    Hello jBC</pre>
+</div>
+</div>
+
+
+
+</body></html>

@@ -1,0 +1,50 @@
+<!--?xml version="1.0" encoding="UTF-8"?--><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+  <meta http-equiv="Content-Style-Type" content="text/css"/>
+  <meta name="generator" content="pandoc"/>
+  <title class="statement">MSLEEP</title>
+  <link rel="stylesheet" type="text/css" href="stylesheet.css"/>
+</head>
+<body>
+<div id="msleep-statement" class="section level1">
+<a class="dashingAutolink" name="autolink-228"></a><a class="dashAnchor" name="//apple_ref/cpp/Method/MSLEEP"></a><h1 class="statement">MSLEEP</h1>
+<p>MSLEEP allows the program to pause execution for a specified number of milliseconds.</p>
+<div id="command-syntax-188" class="section level2">
+<h2>COMMAND SYNTAX</h2>
+<pre><code>MSLEEP {milliseconds}</code></pre>
+</div>
+<div id="syntax-elements-136" class="section level2">
+<h2>SYNTAX ELEMENTS</h2>
+<p><strong>milliseconds</strong> must be an integer, which, specifies the number of milliseconds to sleep.</p>
+<p>When there are no parameters assumes a default time of 1 millisecond.</p>
+</div>
+<div id="notes-116" class="section level2">
+<h2>NOTES</h2>
+<p>If a debugger is invoked and execution is continued while a program is sleeping, then the user will be prompted:</p>
+<p>Continue with SLEEP (Y/N) ?</p>
+<p>If &#34;N&#34; is the response, the program will continue at the next statement after the MSLEEP.</p>
+<p>See also: <a href="#SLEEP">SLEEP</a> to sleep for a specified number of seconds or until a specified time.</p>
+</div>
+<div id="examples-47" class="section level2">
+<h2>EXAMPLES</h2>
+<pre><code>   CRT MAKETIMESTAMP( DATE(), TIME(), &#39;&#39; )           ;*  e.g. 1353068005.934
+   MSLEEP(100)      ;* 0.1 sec
+   CRT MAKETIMESTAMP( DATE(), TIME(), &#39;&#39; )           ;*  e.g. 1353068006.044
+   MSLEEP(3000)      ;* 3 sec
+   CRT MAKETIMESTAMP( DATE(), TIME(), &#39;&#39; )           ;*  e.g. 1353068009.039
+   MSLEEP 3000       ;* this syntax also works
+   CRT MAKETIMESTAMP( DATE(), TIME(), &#39;&#39; )           ;*  e.g. 1353068012.035
+* Sleep until the beginning of the next hour
+   time = OCONV( TIME(), &#39;MT&#39; )
+   sleep_until = time[1, 2] + 1
+   IF sleep_until EQ 24 THEN sleep_until = &#39;00&#39;
+   sleep_until := &#39;:00&#39;
+   CRT &#34;I&#39;ll be back at &#34; : sleep_until   ;*  e.g. I&#39;ll be back at 13:00
+   SLEEP sleep_until
+   CRT OCONV( TIME(), &#39;MTS&#39; ), &#39;,&#39;, &#34;I&#39;m back as promised&#34;</code></pre>
+</div>
+</div>
+
+
+
+</body></html>

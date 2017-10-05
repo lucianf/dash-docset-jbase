@@ -1,0 +1,37 @@
+<!--?xml version="1.0" encoding="UTF-8"?--><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+  <meta http-equiv="Content-Style-Type" content="text/css"/>
+  <meta name="generator" content="pandoc"/>
+  <title class="statement">MAT</title>
+  <link rel="stylesheet" type="text/css" href="stylesheet.css"/>
+</head>
+<body>
+<div id="mat-statement" class="section level1">
+<a class="dashingAutolink" name="autolink-215"></a><a class="dashAnchor" name="//apple_ref/cpp/Method/MAT"></a><h1 class="statement">MAT</h1>
+<p>This command is used to assign a single value for every element in a specified array or to assign the entire contents of one array to another.</p>
+<div id="command-syntax-175" class="section level2">
+<h2>COMMAND SYNTAX</h2>
+<pre><code>MAT Array = expression
+
+MAT Array1 = MAT Array2</code></pre>
+</div>
+<div id="syntax-elements-124" class="section level2">
+<h2>SYNTAX ELEMENTS</h2>
+<p><strong>Array</strong>, <strong>Array1</strong> and <strong>Array2</strong> are all pre-dimensioned arrays declared with the DIM statement. <strong>expression</strong> can evaluate to any data type.</p>
+</div>
+<div id="notes-104" class="section level2">
+<h2>NOTES</h2>
+<p>If any element of the array Array2 has not been assigned a value then a runtime error message will occur. This can be avoided by coding the statement MAT Array2 = &#34; after the DIM statement.</p>
+</div>
+<div id="example-130" class="section level2">
+<h2>EXAMPLE</h2>
+<pre><code>   DIM A(45), G(45)
+   MAT G = &#34;Array value&#34;
+   MAT A = MAT G
+   CRT DQUOTE(A(45))                    ;* &#34;Array value&#34;</code></pre>
+</div>
+</div>
+
+
+
+</body></html>

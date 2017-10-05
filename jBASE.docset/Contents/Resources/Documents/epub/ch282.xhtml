@@ -1,0 +1,60 @@
+<!--?xml version="1.0" encoding="UTF-8"?--><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+  <meta http-equiv="Content-Style-Type" content="text/css"/>
+  <meta name="generator" content="pandoc"/>
+  <title class="statement">READT</title>
+  <link rel="stylesheet" type="text/css" href="stylesheet.css"/>
+</head>
+<body>
+<div id="readt-statement" class="section level1">
+<a class="dashingAutolink" name="autolink-281"></a><a class="dashAnchor" name="//apple_ref/cpp/Method/READT"></a><h1 class="statement">READT</h1>
+<p>READT statement is used to read a range of tape devices 0-9.</p>
+<div id="command-syntax-237" class="section level2">
+<h2>COMMAND SYNTAX</h2>
+<pre><code>READT variable { FROM expression } THEN | ELSE statements</code></pre>
+</div>
+<div id="syntax-elements-174" class="section level2">
+<h2>SYNTAX ELEMENTS</h2>
+<p><strong>variable</strong> is the variable that will receive any data read from the tape device.</p>
+<p><strong>expression</strong> should evaluate to an integer value in the range 0-9 and specifies from which tape channel to read data. If the FROM clause is not specified the READT will assume channel 0.</p>
+<p>If the READT fails then the statements associated with any ELSE clause will be executed. SYSTEM (0) will return the reason for the failure as follows:</p>
+<table>
+<thead>
+<tr class="header">
+<th align="left">Code</th>
+<th align="left">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">1</td>
+<td align="left">There is no media attached to the channel.</td>
+</tr>
+<tr class="even">
+<td align="left">2</td>
+<td align="left">An end of file mark was found.</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div id="notes-145" class="section level2">
+<h2>NOTES</h2>
+<p>A &#34;tape&#34; does not only refer to magnetic tape devices, but also any device that has been described to TAFC. Writing device descriptors for jBASE is beyond the scope of this manual.</p>
+<p>If no tape device has been assigned to the specified channel the TAFC debugger is entered with an appropriate message.</p>
+<p>Each instance of the READT statement will read the next record available on the device. The record size is not limited to a single tape block and the entire record will be returned whatever block size has been allocated by the T-ATT command.</p>
+</div>
+<div id="example-164" class="section level2">
+<h2>EXAMPLE</h2>
+<pre><code>LOOP
+      READT TapeRec FROM 5 ELSE
+          Reason = SYSTEM(0)
+          IF Reason = 2 THEN BREAK ;* done
+          CRT &#34;ERROR&#34;  ;  STOP
+      END
+REPEAT</code></pre>
+</div>
+</div>
+
+
+
+</body></html>

@@ -1,0 +1,81 @@
+<!--?xml version="1.0" encoding="UTF-8"?--><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+  <meta http-equiv="Content-Style-Type" content="text/css"/>
+  <meta name="generator" content="pandoc"/>
+  <title class="statement">WEOFSEQ</title>
+  <link rel="stylesheet" type="text/css" href="stylesheet.css"/>
+</head>
+<body>
+<div id="weofseq-statement" class="section level1">
+<a class="dashingAutolink" name="autolink-356"></a><a class="dashAnchor" name="//apple_ref/cpp/Method/WEOFSEQ"></a><h1 class="statement">WEOFSEQ</h1>
+<p>WEOFSEQ truncates a file opened for sequential access.</p>
+<div id="command-syntax-301" class="section level2">
+<h2>COMMAND SYNTAX</h2>
+<pre><code>WEOFSEQ FileVar { THEN | ELSE Statements }</code></pre>
+</div>
+<div id="syntax-elements-230" class="section level2">
+<h2>SYNTAX ELEMENTS</h2>
+<p><strong>FileVar</strong> specifies the file descriptor of the file opened for sequential access.</p>
+<p><strong>Statements</strong> are conditional jBC statements.</p>
+</div>
+<div id="notes-190" class="section level2">
+<h2>NOTES</h2>
+<p>WEOFSEQ forces truncation of the file at the current file pointer; nothing is actually written to the sequential file.</p>
+</div>
+<div id="example-198" class="section level2">
+<h2>EXAMPLE</h2>
+<pre><code>   out_dir = &#39;.&#39;
+   out_file = &#39;report.txt&#39;
+&amp;nbsp;
+   OPENSEQ out_dir, out_file TO f_out THEN
+      CRT &#39;TARGET FILE EXISTS. OVERWRITE[Y/N]&#39;:
+      CLEARINPUT          ;* don&#39;t take anything in advance
+      INPUT reply
+      IF UPCASE(reply) NE &#39;Y&#39; THEN         ;* y or Y
+* exit - user refused to overwrite the file
+         STOP             ;* or RETURN
+      END
+      WEOFSEQ f_out  ;* truncate the file
+   END
+&amp;nbsp;
+* We don&#39;t need to explicitly create a file; as soon as the first
+* WRITESEQ will be issued - file will be created, otherwise it won&#39;t be -
+* &#34;openseq_creates&#34; isn&#39;t set to &#34;true&#34; for Prime emulation.
+&amp;nbsp;
+* Processing loop starts
+   line_no = 0
+   LOOP
+      line_no ++
+&amp;nbsp;
+* Provide a way to exit a loop
+      IF line_no GT 7 THEN BREAK
+&amp;nbsp;
+* Get an output string into variable and...
+      line = &#39;Line &#39; : line_no
+* ...either skip it...
+      IF line_no EQ 3 THEN CONTINUE
+* ...or write it
+      WRITESEQ line TO f_out ELSE
+* Write error - notify user and quit the program
+         CRT &#39;Write error&#39;
+         STOP             ;* or RETURN
+      END
+   REPEAT
+&amp;nbsp;
+* truncate the file at certain position
+   SEEK f_out, -5, 2 ELSE CRT &#39;Seek error&#39;  ;  STOP
+   WEOFSEQ f_out
+   CLOSESEQ f_out</code></pre>
+<p>Contents of file report.txt:</p>
+<pre>    Line 1
+    Line 2
+    Line 4
+    Line 5
+    Line 6
+    Li</pre>
+</div>
+</div>
+
+
+
+</body></html>

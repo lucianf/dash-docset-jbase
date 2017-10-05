@@ -1,0 +1,58 @@
+<!--?xml version="1.0" encoding="UTF-8"?--><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+  <meta http-equiv="Content-Style-Type" content="text/css"/>
+  <meta name="generator" content="pandoc"/>
+  <title class="function">INMAT</title>
+  <link rel="stylesheet" type="text/css" href="stylesheet.css"/>
+</head>
+<body>
+<div id="inmat-function" class="section level1">
+<a class="dashingAutolink" name="autolink-173"></a><a class="dashAnchor" name="//apple_ref/cpp/Function/INMAT"></a><h1 class="function">INMAT</h1>
+<p>The INMAT() function returns the number of dimensioned array elements.</p>
+<div id="command-syntax-134" class="section level2">
+<h2>COMMAND SYNTAX</h2>
+<pre><code>INMAT( {array} )</code></pre>
+<p>DESCRIPTION</p>
+<p>Using the INMAT() function, without the &#39;array&#39; argument, returns the number of dimensioned array elements from the most recent <a href="#MATREAD">MATREAD</a>, <a href="#MATREADU">MATREADU</a>, <a href="#MATREADL">MATREADL</a> or <a href="#MATPARSE">MATPARSE</a> statement. If the number of array elements exceeds the number of elements specified in the corresponding <a href="#DIMENSION">DIMENSION</a> statement, the INMAT() function will return zero.</p>
+<p>Using the INMAT(), function with the &#39;array&#39; argument, returns the current number of elements to the dimensioned &#39;array&#39;.</p>
+</div>
+<div id="notes-85" class="section level2">
+<h2>NOTES</h2>
+<p>In some dialects the INMAT() function is also used to return the modulo of a file after the execution of an OPEN statement, which is inconsistent with its primary purpose and not implemented in jBASE. To achieve this functionality use the <a href="#IOCTL">IOCTL</a> function with the JIOCTL_COMMAND_FILESTATUS command.</p>
+</div>
+<div id="examples-31" class="section level2">
+<h2>EXAMPLES</h2>
+<pre><code>   DIM cust_rec(99)
+   MAT cust_rec = &#39;&#39;
+   CRT INMAT(cust_rec)                  ;* 99
+   DIM cust_rec(299)
+   cust_rec(150) = &#39;Y&#39;
+   CRT INMAT(cust_rec)                  ;* 299
+   CRT INMAT()                          ;* 0
+   *
+   EXECUTE &#39;DELETE-FILE DATA F.TEMP&#39;
+   EXECUTE &#39;CREATE-FILE DATA F.TEMP 1 101 TYPE=J4&#39;
+   OPEN &#39;F.TEMP&#39; TO f_temp ELSE ABORT 201, &#39;F.TEMP&#39;
+   new_rec = &#39;LINE 1&#39; :@FM: &#39;LINE 2&#39; :@FM: &#39;LINE 3&#39;
+   WRITE new_rec TO f_temp, &#39;REC1&#39;
+   *
+   MAT cust_rec = &#39;&#39;
+   MATREAD cust_rec FROM f_temp, &#39;REC1&#39; ELSE
+      CRT &#39;Read error&#39;
+      STOP
+   END
+   CRT INMAT(cust_rec)                  ;* 299 - current size
+   CRT INMAT()                          ;* 3
+   *
+   dyn_array = 1 :@FM: 2 :@VM: 3 :@SM: 4: @FM: 5 :@FM: 6
+   MATPARSE cust_rec FROM dyn_array
+   CRT INMAT()                          ;* 4 (only FMs count)
+   CRT FMT(cust_rec(2), &#39;MCP&#39;)          ;* 2]3\4
+   DIM cust_rec(100,2)
+   CRT FMT( INMAT(cust_rec), &#39;MCP&#39; )      ;* 100]2</code></pre>
+</div>
+</div>
+
+
+
+</body></html>

@@ -1,0 +1,43 @@
+<!--?xml version="1.0" encoding="UTF-8"?--><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+  <meta http-equiv="Content-Style-Type" content="text/css"/>
+  <meta name="generator" content="pandoc"/>
+  <title class="statement">OSBREAD</title>
+  <link rel="stylesheet" type="text/css" href="stylesheet.css"/>
+</head>
+<body>
+<div id="osbread-statement" class="section level1">
+<a class="dashingAutolink" name="autolink-250"></a><a class="dashAnchor" name="//apple_ref/cpp/Method/OSBREAD"></a><h1 class="statement">OSBREAD</h1>
+<p>OSBREAD command reads data from a file starting at a specified byte location for a certain length of bytes, and assigns the data to a variable.</p>
+<div id="command-syntax-209" class="section level2">
+<h2>COMMAND SYNTAX</h2>
+<pre><code>OSBREAD var FROM file.var [ AT byte.expr ] LENGTH length.expr  \
+        [ ON ERROR statements ]</code></pre>
+<p>OSBREAD performs an operating system block read on a UNIX or Windows file.</p>
+</div>
+<div id="syntax-elements-149" class="section level2">
+<h2>SYNTAX ELEMENTS</h2>
+<p><strong>var</strong> specifies a variable to which the data read is assigned.</p>
+<p><strong>FROM file.var</strong> specifies a file from which the data is read.</p>
+<p><strong>AT byte.expr</strong> specifies a location inside the file from where the data reading operation is to start. If byte.expr is 0, the read begins at the beginning of the file.</p>
+<p><strong>LENGTH length.expr</strong> specifies length of data to be read from the file, starting at byte.expr. length.expr cannot be longer than the maximum string length determined by your system configuration.</p>
+<p><strong>ON ERROR statements</strong> are statements executed if a fatal error occurs (if the file is not open, or if the file is a read-only file). If you do not specify the ON ERROR clause, the program will terminate under such fatal error conditions.</p>
+<p><em>STATUS Function Return Values</em> After you execute OSBREAD, the STATUS function returns either 0 or a failure code.</p>
+</div>
+<div id="note-14" class="section level2">
+<h2>NOTE</h2>
+<p>Before you use OSBREAD, you must open the file by using the <a href="#OSOPEN">OSOPEN</a> or <a href="#OPENSEQ">OPENSEQ</a> command.</p>
+<p>jBASE uses the ASCII 0 character [CHAR (0)] as a string-end delimiter. Therefore, ASCII 0 cannot be used in any string variable within jBASE. OSBREAD converts CHAR(0) to CHAR(128) when reading a block of data.</p>
+</div>
+<div id="example-142" class="section level2">
+<h2>EXAMPLE</h2>
+<p>In the following example, the program test.b reads itself and outputs its contents to the screen:</p>
+<pre><code>   OSOPEN &#39;test.b&#39; TO MYFILE ELSE STOP
+   OSBREAD Data FROM MYFILE AT 0 LENGTH 10000
+   CRT Data</code></pre>
+</div>
+</div>
+
+
+
+</body></html>

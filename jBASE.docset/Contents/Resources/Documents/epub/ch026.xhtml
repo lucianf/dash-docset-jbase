@@ -1,0 +1,27 @@
+<!--?xml version="1.0" encoding="UTF-8"?--><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+  <meta http-equiv="Content-Style-Type" content="text/css"/>
+  <meta name="generator" content="pandoc"/>
+  <title class="variable">@SELECTED</title>
+  <link rel="stylesheet" type="text/css" href="stylesheet.css"/>
+</head>
+<body>
+<div id="selected-variable" class="section level1">
+<a class="dashingAutolink" name="autolink-25"></a><a class="dashAnchor" name="//apple_ref/cpp/Variable/%40SELECTED"></a><h1 class="variable">@SELECTED</h1>
+<p>Number of elements from the last select list - Non stacked.</p>
+<div id="example" class="section level2">
+<h2>EXAMPLE</h2>
+<pre><code>   proc_fname = SYSTEM(1027)
+   OPEN proc_fname TO proc_file ELSE STOP 201, &#34;PROC&#34;
+   SELECT proc_file TO proc_list
+   CRT @SELECTED                                 ;* 0 - this is BASIC select
+   EXECUTE &#39;SELECT &#39; : proc_fname : &#39; TO 9&#39;
+   CRT @SELECTED                                 ;* 0 - that&#39;s not default list
+   EXECUTE &#39;SELECT &#39; : proc_fname
+   CRT @SELECTED                                 ;* number of active sessions</code></pre>
+</div>
+</div>
+
+
+
+</body></html>

@@ -1,0 +1,39 @@
+<!--?xml version="1.0" encoding="UTF-8"?--><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+  <meta http-equiv="Content-Style-Type" content="text/css"/>
+  <meta name="generator" content="pandoc"/>
+  <title class="function">ASSIGNED</title>
+  <link rel="stylesheet" type="text/css" href="stylesheet.css"/>
+</head>
+<body>
+<div id="assigned-function" class="section level1">
+<a class="dashingAutolink" name="autolink-40"></a><a class="dashAnchor" name="//apple_ref/cpp/Function/ASSIGNED"></a><h1 class="function">ASSIGNED</h1>
+<p>The ASSIGNED function is used to determine whether a variable has an assigned value or not.</p>
+<div id="command-syntax-9" class="section level2">
+<h2>COMMAND SYNTAX</h2>
+<pre><code>ASSIGNED(variable)</code></pre>
+</div>
+<div id="syntax-elements-6" class="section level2">
+<h2>SYNTAX ELEMENTS</h2>
+<p>ASSIGNED returns 1 if the variable has an assigned value before the execution of this statement. If the variable has no assigned value then the function returns 0.</p>
+</div>
+<div id="notes-3" class="section level2">
+<h2>NOTES</h2>
+<p>Provision of this function is due to its implementation in older versions of the language. You are advised to program in such a way, to avoid using this statement.</p>
+<p>See also: <a href="#UNASSIGNED">UNASSIGNED</a></p>
+</div>
+<div id="example-11" class="section level2">
+<h2>EXAMPLE</h2>
+<pre><code>   COMMON /MY.COMM/ V.VAR1
+   CRT ASSIGNED(V.VAR1)   ;* always 1 if &#34;named_common = zero&#34;
+                          ;* (e.g. for prime emulation)
+   CRT V.VAR1             ;* 0 at the first run, YES at the second
+   CRT ASSIGNED(V.VAR2)   ;* 0
+   V.VAR1 = &#39;YES&#39;
+   V.VAR2 = &#39;NO&#39;</code></pre>
+</div>
+</div>
+
+
+
+</body></html>

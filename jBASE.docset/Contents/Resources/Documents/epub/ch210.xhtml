@@ -1,0 +1,89 @@
+<!--?xml version="1.0" encoding="UTF-8"?--><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+  <meta http-equiv="Content-Style-Type" content="text/css"/>
+  <meta name="generator" content="pandoc"/>
+  <title class="statement">LOCATE</title>
+  <link rel="stylesheet" type="text/css" href="stylesheet.css"/>
+</head>
+<body>
+<div id="locate-statement" class="section level1">
+<a class="dashingAutolink" name="autolink-209"></a><a class="dashAnchor" name="//apple_ref/cpp/Method/LOCATE"></a><h1 class="statement">LOCATE</h1>
+<p>LOCATE statement finds the position of an element within a specified dimension of a dynamic array.</p>
+<div id="command-syntax-169" class="section level2">
+<h2>COMMAND SYNTAX</h2>
+<pre><code>LOCATE expression1 IN expression2{&lt;expression3{,expression4}&gt;},{, expression5} \
+       { BY expression6 } SETTING Var THEN | ELSE statement(s)</code></pre>
+</div>
+<div id="syntax-elements-118" class="section level2">
+<h2>SYNTAX ELEMENTS</h2>
+<p><strong>expression1</strong> evaluates to the string that will be searched in expression2.</p>
+<p><strong>expression2</strong> evaluates to the dynamic array within which expression1 will search for the string.</p>
+<p><strong>expression3</strong> and <strong>expression4</strong> cause a value or subvalue search respectively, when specified.</p>
+<p><strong>expression5</strong> indicates the field, value or subvalue from which the search will begin.</p>
+<p><strong>expression6</strong> causes different searches to arrange the elements in different order, which can considerably improve the performance of some searches. The available string values for expression6 are:</p>
+<table>
+<thead>
+<tr class="header">
+<th align="left">String</th>
+<th align="left">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">AL</td>
+<td align="left">Values are in ascending alphanumeric order</td>
+</tr>
+<tr class="even">
+<td align="left">AR</td>
+<td align="left">Values are in right justified, then ascending order</td>
+</tr>
+<tr class="odd">
+<td align="left">AN</td>
+<td align="left">Values are in ascending numeric order</td>
+</tr>
+<tr class="even">
+<td align="left">DL</td>
+<td align="left">Values are in descending alphanumeric order</td>
+</tr>
+<tr class="odd">
+<td align="left">DR</td>
+<td align="left">Values are in right justified, then descending order</td>
+</tr>
+<tr class="even">
+<td align="left">DN</td>
+<td align="left">Values are in descending numeric order</td>
+</tr>
+</tbody>
+</table>
+<p>Var will be set to the position of the Field, Value or Sub-Value in which expression1 was found if indeed. If it was not found and expression6 was not specified then Var will be set to one position past the end of the searched dimension. If expression6 did specify the order of the elements then Var will be set to the position before which the element should be inserted to retain the specified order.</p>
+<p>The statement must include one or both of the THEN and ELSE clauses. If expression1 is found in an element of the dynamic array, then it executes the statements defined by the THEN clause. If expression1 is not found in an element of the dynamic array, then it executes the statements defined by the ELSE clause.</p>
+</div>
+<div id="international-mode-14" class="section level2">
+<h2>INTERNATIONAL MODE</h2>
+<p>When the LOCATE statement is used in International Mode, the statement will use the currently configured locale to determine the rules by which each string is considered less than or greater than the other will.</p>
+</div>
+<div id="notes-100" class="section level2">
+<h2>NOTES</h2>
+<p>See also: <a href="#FIND">FIND</a>, <a href="#FINDSTR">FINDSTR</a></p>
+</div>
+<div id="example-125" class="section level2">
+<h2>EXAMPLE</h2>
+<p>Using LOCATE to sort an array.</p>
+<pre><code>   V.ARR = &#39;&#39;
+   FOR V.I = 1 TO 1000
+      V.ARR&lt;V.I&gt; = RND(1000)
+   NEXT V.I
+   V.SORTED = &#39;&#39;
+    FOR V.I = 1 TO 1000
+      V.IN = V.ARR&lt;V.I&gt;
+      LOCATE V.IN IN V.SORTED&lt;1&gt; BY &#39;AN&#39; SETTING V.INS.POSN ELSE NULL
+      INS V.IN BEFORE V.SORTED&lt;V.INS.POSN&gt;
+   NEXT V.I
+   CRT MINIMUM(V.ARR), MAXIMUM(V.ARR)  ;* e.g. &#34;0       998&#34;
+   CRT V.SORTED&lt;1&gt;, V.SORTED&lt;1000&gt;     ;* numbers should be the same as above</code></pre>
+</div>
+</div>
+
+
+
+</body></html>

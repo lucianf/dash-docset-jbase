@@ -1,0 +1,95 @@
+<!--?xml version="1.0" encoding="UTF-8"?--><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+  <meta http-equiv="Content-Style-Type" content="text/css"/>
+  <meta name="generator" content="pandoc"/>
+  <title class="statement">READL</title>
+  <link rel="stylesheet" type="text/css" href="stylesheet.css"/>
+</head>
+<body>
+<div id="readl-statement" class="section level1">
+<a class="dashingAutolink" name="autolink-275"></a><a class="dashAnchor" name="//apple_ref/cpp/Method/READL"></a><h1 class="statement">READL</h1>
+<p>READL statement allows a process to read a record from a previously opened file into a variable and takes a read-only shared lock on the record. It respects all records locked with the <a href="#READU">READU</a> statement but allows other processes using READL to share the same lock.</p>
+<div id="command-syntax-233" class="section level2">
+<h2>COMMAND SYNTAX</h2>
+<pre><code>READL variable1 FROM {variable2,} expression { SETTING setvar }  \
+      { ON ERROR statements } \
+      { LOCKED statements } THEN | ELSE statements</code></pre>
+</div>
+<div id="syntax-elements-170" class="section level2">
+<h2>SYNTAX ELEMENTS</h2>
+<p><strong>variable1</strong> is the identifier into which the record will be read.</p>
+<p><strong>variable2</strong>, if specified, should be a jBC variable that has previously been opened to a file using the OPEN statement if variable2 is not specified then the default file is assumed.</p>
+<p>The expression should evaluate to a valid record key for the file.</p>
+<p>If the SETTING clause is specified and the read fails, setvar will be set to one of the following values:</p>
+</div>
+<div id="incremental-file-errors-10" class="section level2">
+<h2>INCREMENTAL FILE ERRORS</h2>
+<table>
+<thead>
+<tr class="header">
+<th align="left">Code</th>
+<th align="left">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">128</td>
+<td align="left">No such file or directory</td>
+</tr>
+<tr class="even">
+<td align="left">4096</td>
+<td align="left">Network error</td>
+</tr>
+<tr class="odd">
+<td align="left">24576</td>
+<td align="left">Permission denied</td>
+</tr>
+<tr class="even">
+<td align="left">32768</td>
+<td align="left">Physical I/O error or unknown error</td>
+</tr>
+</tbody>
+</table>
+<p>If ON ERROR is specified, the statements following the ON ERROR clause will be executed for any of the above Incremental File Errors except error 128.</p>
+</div>
+<div id="notes-141" class="section level2">
+<h2>NOTES</h2>
+<p>READL takes a read-only shared record lock whereas <a href="#READU">READU</a> takes an exclusive lock. This means that any record, which is read using READL, can also be read by another process using a READL. In other words, the lock on the record is &#39;shared&#39; in that no <a href="#READU">READU</a> lock against the same record can be taken.</p>
+<p>Similarly, if <a href="#READU">READU</a> takes a lock then READL will respect that lock. By comparison, <a href="#READU">READU</a> takes an exclusive lock in that the one process retains control over the record.</p>
+<p>The usage of READU is already well documented and understood. The usage of READL allows for an application to present a record to one or more users such that its integrity is ensured, i.e. the user(s) viewing the record can be assured that wysiwyg and that no updates to that record have been made whilst viewing the record.</p>
+<p>While it is permissible to <a href="#WRITE">WRITE</a> a record that has a READL lock, the intent of READL is to permit a &#39;read-only&#39; shared lock and the act of WRITEing this record would not be considered good programming practice.</p>
+<p>READ takes no lock at all and does not respect any lock taken with <a href="#READU">READU</a> or READL. In other words, a READ can be performed at any time and on any record regardless of any existing locks.</p>
+<p>Due to limitations on Windows platforms, the READL statement behaves the same as the READU statement, in other words they both take exclusive locks.</p>
+<p>If the record could not be read because another process already had a <a href="#READU">READU</a> lock on the record then one of two actions is taken. If the LOCKED clause was specified in the statement then the statements dependent on it are executed.</p>
+<p>If no LOCKED clause was specified then the statement blocks (hangs) until the other process releases the lock. The SYSTEM (43) function can be used to determine which port has the lock.</p>
+<p>If the statement fails to read the record then any statements associated with the ELSE clause will be executed. If the statement successfully reads the record then the statements associated with any THEN clause are executed.</p>
+<p>Either or both of THEN and ELSE clauses must be specified with the statement.</p>
+<p>The lock taken by the READL statement will be released by any of the following events however, be aware that the record will not be fully released until all shared locks have been released:</p>
+<p>The same program with <a href="#WRITE">WRITE</a>, <a href="#WRITEV">WRITEV</a> or <a href="#MAXWRITE">MATWRITE</a> statements writes to the record.</p>
+<p>The same program with the DELETE statement deletes the record.</p>
+<p>The record lock is released explicitly using the <a href="#RELEASE">RELEASE</a> statement.</p>
+<p>The program stops normally or abnormally.</p>
+<p>When a file is OPENed to a local file variable in a subroutine then the file is closed when the subroutine RETURNS so all locks taken on that file are released, including locks taken in a calling program. Files that are opened to <a href="#COMMON">COMMON</a> variables are not closed so the locks remain intact.</p>
+</div>
+<div id="example-160" class="section level2">
+<h2>EXAMPLE</h2>
+<pre><code>   OPEN &#39;F.TEMP&#39; TO f_temp ELSE
+      EXECUTE &#39;CREATE-FILE DATA F.TEMP 1 101 TYPE=J4&#39;
+      OPEN &#39;F.TEMP&#39; TO f_temp ELSE
+         CRT &#39;OPEN FAILED&#39;
+         STOP
+      END
+   END
+   rec_id = &#39;REC1&#39;
+   READL record FROM f_temp, rec_id LOCKED
+      CRT &#39;Lock failure&#39;
+      STOP
+   END ELSE NULL
+   CRT RECORDLOCKED(f_temp, rec_id)  ;* 2 under Windows, 1 under Unix</code></pre>
+<p>See also: <a href="#WRITE">WRITE</a>, <a href="#WRITEU">WRITEU</a>, <a href="#MATWRITE">MATWRITE</a>, <a href="#MATWRITEU">MATWRITEU</a>, <a href="#RELEASE">RELEASE</a>, and <a href="#DELETE">DELETE</a></p>
+</div>
+</div>
+
+
+
+</body></html>

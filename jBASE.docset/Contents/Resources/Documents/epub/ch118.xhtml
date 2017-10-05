@@ -1,0 +1,60 @@
+<!--?xml version="1.0" encoding="UTF-8"?--><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+  <meta http-equiv="Content-Style-Type" content="text/css"/>
+  <meta name="generator" content="pandoc"/>
+  <title class="function">DIR</title>
+  <link rel="stylesheet" type="text/css" href="stylesheet.css"/>
+</head>
+<body>
+<div id="dir-function" class="section level1">
+<a class="dashingAutolink" name="autolink-117"></a><a class="dashAnchor" name="//apple_ref/cpp/Function/DIR"></a><h1 class="function">DIR</h1>
+<p>Use the DIR function to return information about a file.</p>
+<div id="command-syntax-80" class="section level2">
+<h2>COMMAND SYNTAX</h2>
+<pre><code>DIR(filename)</code></pre>
+<p>The filename is a string argument representing the path and filename of a file. This function returns a dynamic array with four attributes.</p>
+<table>
+<thead>
+<tr class="header">
+<th align="left">Attribute</th>
+<th align="left">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">1</td>
+<td align="left">File size in bytes</td>
+</tr>
+<tr class="even">
+<td align="left">2</td>
+<td align="left">last modified date (in internal format)</td>
+</tr>
+<tr class="odd">
+<td align="left">3</td>
+<td align="left">last modified time (in internal format)</td>
+</tr>
+<tr class="even">
+<td align="left">4</td>
+<td align="left">D if the filename is a directory, blank if</td>
+</tr>
+<tr class="odd">
+<td align="left"></td>
+<td align="left">the filename is a file.</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div id="example-72" class="section level2">
+<h2>EXAMPLE</h2>
+<pre><code>   IF NOT( GETENV(&#39;TAFC_HOME&#39;, V.HOME) ) THEN
+      CRT &#39;TAFC_HOME not defined&#39;
+      STOP
+   END
+   CRT OCONV( DIR(V.HOME), &#39;MCP&#39; )                  ;* e.g. 0^16214^32712^D
+   CRT OCONV( DIR(V.HOME : &#39;/jbcmessages&#39;), &#39;MCP&#39; ) ;* e.g. 204800^15815^57980</code></pre>
+</div>
+</div>
+
+
+
+</body></html>

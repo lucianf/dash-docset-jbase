@@ -1,0 +1,49 @@
+<!--?xml version="1.0" encoding="UTF-8"?--><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+  <meta http-equiv="Content-Style-Type" content="text/css"/>
+  <meta name="generator" content="pandoc"/>
+  <title class="function">XMLTOXML</title>
+  <link rel="stylesheet" type="text/css" href="stylesheet.css"/>
+</head>
+<body>
+<div id="xmltoxml-function" class="section level1">
+<a class="dashingAutolink" name="autolink-369"></a><a class="dashAnchor" name="//apple_ref/cpp/Function/XMLTOXML"></a><h1 class="function">XMLTOXML</h1>
+<p>XMLTOXML transforms the XML using the XSL.</p>
+<div id="command-syntax-314" class="section level2">
+<h2>COMMAND SYNTAX</h2>
+<pre><code>XMLTOXML(xml,xsl,result)</code></pre>
+</div>
+<div id="syntax-elements-241" class="section level2">
+<h2>SYNTAX ELEMENTS</h2>
+<p>If result=0, newxml will contain a transformed version of xml using xsl.</p>
+<p>If result=1, newxml will hold an error message.</p>
+<p><em>XSL CONTENTS</em></p>
+<pre>    &lt;?xml version=&#34;1.0&#34; ?&gt;
+    &lt;xsl:stylesheet version=&#34;1.0&#34;
+    xmlns:xsl=&#34;http://www.w3.org/1999/XSL/Transform&#34;&gt;
+    &lt;xsl:template match=&#34;person&#34;&gt;
+    &lt;p&gt;&lt;xsl:value-of select=&#34;name&#34; /&gt;&lt;/p&gt;
+    &lt;/xsl:template&gt;
+    &lt;/xsl:stylesheet&gt;</pre>
+<p><em>XML CONTENTS</em></p>
+<pre>    &lt;list&gt;
+    &lt;person&gt;
+        &lt;name&gt;Bob&lt;/name&gt;
+    &lt;/person&gt;
+    &lt;person&gt;
+        &lt;name&gt;Amy&lt;/name&gt;
+    &lt;/person&gt;
+    &lt;/list&gt;</pre>
+</div>
+<div id="example-209" class="section level2">
+<h2>EXAMPLE</h2>
+<pre><code>newxml = XMLTOXML(xml,xsl,rc)
+CRT newxml</code></pre>
+<p><em>SCREEN OUTPUT</em></p>
+<pre>    &lt;p&gt;Bob&lt;/p&gt;&lt;p&gt;Amy&lt;/p&gt;</pre>
+</div>
+</div>
+
+
+
+</body></html>

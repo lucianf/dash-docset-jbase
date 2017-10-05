@@ -1,0 +1,87 @@
+<!--?xml version="1.0" encoding="UTF-8"?--><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+  <meta http-equiv="Content-Style-Type" content="text/css"/>
+  <meta name="generator" content="pandoc"/>
+  <title class="function">REMOVE</title>
+  <link rel="stylesheet" type="text/css" href="stylesheet.css"/>
+</head>
+<body>
+<div id="remove-function" class="section level1">
+<a class="dashingAutolink" name="autolink-290"></a><a class="dashAnchor" name="//apple_ref/cpp/Function/REMOVE"></a><h1 class="function">REMOVE</h1>
+<p>REMOVE will successively extract delimited strings from a dynamic array.</p>
+<div id="command-syntax-244" class="section level2">
+<h2>COMMAND SYNTAX</h2>
+<pre><code>REMOVE variable FROM array SETTING setvar</code></pre>
+</div>
+<div id="syntax-elements-181" class="section level2">
+<h2>SYNTAX ELEMENTS</h2>
+<p><strong>variable</strong> is the variable, which is to receive the extracted string.</p>
+<p><strong>array</strong> is the dynamic array from which the string is to be extracted.</p>
+<p><strong>setvar</strong> is set by the system during the extraction to indicate the type of delimiter found:</p>
+<table>
+<thead>
+<tr class="header">
+<th align="left">Code</th>
+<th align="left">Description</th>
+<th align="left">Notes</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">0</td>
+<td align="left">end of the array</td>
+<td align="left"></td>
+</tr>
+<tr class="even">
+<td align="left">1</td>
+<td align="left">xFF ASCII 255</td>
+<td align="left"></td>
+</tr>
+<tr class="odd">
+<td align="left">2</td>
+<td align="left">xFE ASCII 254</td>
+<td align="left">Field marker</td>
+</tr>
+<tr class="even">
+<td align="left">3</td>
+<td align="left">xFD ASCII 253</td>
+<td align="left">Value marker</td>
+</tr>
+<tr class="odd">
+<td align="left">4</td>
+<td align="left">xFC ASCII 252</td>
+<td align="left">Subvalue marker</td>
+</tr>
+<tr class="even">
+<td align="left">5</td>
+<td align="left">xFB ASCII 251</td>
+<td align="left"></td>
+</tr>
+<tr class="odd">
+<td align="left">6</td>
+<td align="left">xFA ASCII 250</td>
+<td align="left"></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div id="notes-152" class="section level2">
+<h2>NOTES</h2>
+<p>The first time the REMOVE statement is used with a particular array, it will extract the first delimited string it and set the special &#34;remove pointer&#34; to the start of the next string (if any). The next time REMOVE is used on the same array, the pointer will be used to retrieve the next string and so on. The array is not altered.</p>
+<p>The variable named in the SETTING clause is used to record the type of delimiter that was found - so that you can tell whether the REMOVE statement extracted a field, a value or a subvalue for example. Delimiters are defined as characters between xF9 and xFF only. Once the end of the array has been reached, the string variable will not be updated and the SETTING clause will always return 0. You can reset the &#34;remove pointer&#34; by assigning the variable to itself - for example REC = REC.</p>
+</div>
+<div id="example-171" class="section level2">
+<h2>EXAMPLE</h2>
+<pre><code>   REC = &#34;Field 1&#34; :@FM: &#34;Field 2&#34; :@SM: &#34; Sub-value&#34; :@VM: &#34;Value&#34;
+   REMOVE EXSTRING FROM REC SETTING V.STATUS  ; CRT V.STATUS         ;*  2
+   REMOVE EXSTRING FROM REC SETTING V.STATUS  ; CRT V.STATUS         ;*  4
+   REMOVE EXSTRING FROM REC SETTING V.STATUS  ; CRT V.STATUS         ;*  3
+   REMOVE EXSTRING FROM REC SETTING V.STATUS  ; CRT V.STATUS         ;*  0
+   REC = REC                   ;* reset &#34;remove pointer&#34;
+   REMOVE EXSTRING FROM REC SETTING V.STATUS  ; CRT V.STATUS         ;*  2</code></pre>
+</div>
+</div>
+
+
+
+</body></html>

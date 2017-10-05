@@ -1,0 +1,86 @@
+<!--?xml version="1.0" encoding="UTF-8"?--><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+  <meta http-equiv="Content-Style-Type" content="text/css"/>
+  <meta name="generator" content="pandoc"/>
+  <title class="statement">WRITEU</title>
+  <link rel="stylesheet" type="text/css" href="stylesheet.css"/>
+</head>
+<body>
+<div id="writeu-statement" class="section level1">
+<a class="dashingAutolink" name="autolink-363"></a><a class="dashAnchor" name="//apple_ref/cpp/Method/WRITEU"></a><h1 class="statement">WRITEU</h1>
+<p>WRITEU statement allows a program to write a record into a previously opened file. An existing record lock will be preserved.</p>
+<div id="command-syntax-308" class="section level2">
+<h2>COMMAND SYNTAX</h2>
+<pre><code>WRITEU variable1 ON | TO {variable2,} expression { SETTING setvar }  \
+       { ON ERROR statements }</code></pre>
+</div>
+<div id="syntax-elements-236" class="section level2">
+<h2>SYNTAX ELEMENTS</h2>
+<p><strong>variable1</strong> is the identifier holding the record to be written.</p>
+<p><strong>variable2</strong>, if specified, should be a jBC variable that has previously been opened to a file using the OPEN statement. If variable2 is not specified then the default file is assumed.</p>
+<p>The expression should evaluate to a valid record key for the file.</p>
+<p>If the SETTING clause is specified and the write fails, setvar will be set to one of the following values:</p>
+</div>
+<div id="incremental-file-errors-17" class="section level2">
+<h2>INCREMENTAL FILE ERRORS</h2>
+<table>
+<thead>
+<tr class="header">
+<th align="left">Code</th>
+<th align="left">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">128</td>
+<td align="left">No such file or directory</td>
+</tr>
+<tr class="even">
+<td align="left">4096</td>
+<td align="left">Network error</td>
+</tr>
+<tr class="odd">
+<td align="left">24576</td>
+<td align="left">Permission denied</td>
+</tr>
+<tr class="even">
+<td align="left">32768</td>
+<td align="left">Physical I/O error or unknown error</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div id="notes-194" class="section level2">
+<h2>NOTES</h2>
+<p>If the statement fails to write the record then any statements associated with the ON ERROR clause is executed.</p>
+<p>The lock maintained by the <a href="#WRITEU">WRITEU</a> statement will be released by any of the following events:</p>
+<p>The same program with <a href="#WRITE">WRITE</a>, <a href="#WRITEV">WRITEV</a> or <a href="#MATWRITE">MATWRITE</a> statements writes to the record.</p>
+<p>The record lock is released explicitly using the <a href="#RELEASE">RELEASE</a> statement.</p>
+<p>The program stops normally or abnormally.</p>
+<p>See also: <a href="#READU">READU</a>, <a href="#MATREADU">MATREADU</a>, <a href="#RELEASE">RELEASE</a></p>
+</div>
+<div id="example-203" class="section level2">
+<h2>EXAMPLE</h2>
+<pre><code>   OPEN &#39;F.TEMP&#39; TO F.TEMP ELSE
+      EXECUTE &#39;CREATE-FILE DATA F.TEMP 1 101 TYPE=J4&#39;
+      OPEN &#39;F.TEMP&#39; TO F.TEMP ELSE
+         CRT &#39;OPEN FAILED&#39;
+         STOP
+      END
+   END
+   READU V.REC FROM F.TEMP, &#39;REC1&#39; LOCKED
+      CRT &#39;Lock failure&#39;
+      STOP
+   END ELSE NULL
+   V.REC&lt;-1&gt; = &#39;A field&#39;
+   CRT RECORDLOCKED(F.TEMP, &#39;REC1&#39;)  ;* 2 - &#34;Locked by this process by a READU&#34;
+   WRITEU V.REC TO F.TEMP, &#39;REC1&#39;
+   CRT RECORDLOCKED(F.TEMP, &#39;REC1&#39;)  ;* still 2
+   RELEASE F.TEMP, &#39;REC1&#39;
+   CRT RECORDLOCKED(F.TEMP, &#39;REC1&#39;)  ;* 0 - not locked</code></pre>
+</div>
+</div>
+
+
+
+</body></html>

@@ -1,0 +1,37 @@
+<!--?xml version="1.0" encoding="UTF-8"?--><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+  <meta http-equiv="Content-Style-Type" content="text/css"/>
+  <meta name="generator" content="pandoc"/>
+  <title class="function">UNIQUEKEY</title>
+  <link rel="stylesheet" type="text/css" href="stylesheet.css"/>
+</head>
+<body>
+<div id="uniquekey-function" class="section level1">
+<a class="dashingAutolink" name="autolink-349"></a><a class="dashAnchor" name="//apple_ref/cpp/Function/UNIQUEKEY"></a><h1 class="function">UNIQUEKEY</h1>
+<p>UNIQUEKEY returns a unique 36-byte character key.</p>
+<div id="command-syntax-296" class="section level2">
+<h2>COMMAND SYNTAX</h2>
+<pre><code>UNIQUEKEY()</code></pre>
+</div>
+<div id="syntax-elements-225" class="section level2">
+<h2>SYNTAX ELEMENTS</h2>
+<p>The UNIQUEKEY() function will generate a UUID (Universally Unique IDentifier), also known as GUID (Globally Unique IDentifier).</p>
+</div>
+<div id="example-194" class="section level2">
+<h2>EXAMPLE</h2>
+<pre><code>   FOR V.I = 1 TO 5
+      CRT FMT( DOWNCASE( FMT( UNIQUEKEY(), &#39;MX&#39;)),   \
+            &#39;L(########-####-####-############)&#39;)
+   NEXT V.I</code></pre>
+<p>Sample output:</p>
+<pre>    41505741-4141-4445-7935727a6a35
+    41505741-4141-4445-7935727a6a36
+    41505741-4141-4445-7935727a6a37
+    41505741-4141-4445-7935727a6a38
+    41505741-4141-4445-7935727a6a39</pre>
+</div>
+</div>
+
+
+
+</body></html>

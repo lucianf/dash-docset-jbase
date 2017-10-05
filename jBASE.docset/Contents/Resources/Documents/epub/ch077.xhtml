@@ -1,0 +1,54 @@
+<!--?xml version="1.0" encoding="UTF-8"?--><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+  <meta http-equiv="Content-Style-Type" content="text/css"/>
+  <meta name="generator" content="pandoc"/>
+  <title class="statement">CHANGE</title>
+  <link rel="stylesheet" type="text/css" href="stylesheet.css"/>
+</head>
+<body>
+<div id="change-statement" class="section level1">
+<a class="dashingAutolink" name="autolink-76"></a><a class="dashAnchor" name="//apple_ref/cpp/Method/CHANGE"></a><h1 class="statement">CHANGE</h1>
+<p>The CHANGE statement operates on a variable and replaces all occurrences of one string with another.</p>
+<div id="command-syntax-41" class="section level2">
+<h2>COMMAND SYNTAX</h2>
+<pre><code>CHANGE expression1 TO expression2 IN variable</code></pre>
+</div>
+<div id="syntax-elements-19" class="section level2">
+<h2>SYNTAX ELEMENTS</h2>
+<p><strong>expression1</strong> - may evaluate to any result and is the string of characters that will be replaced.</p>
+<p><strong>expression2</strong> - may also evaluate to any result and is the string of characters that will replace</p>
+<p><strong>expression1</strong> - The variable may be any previously assigned variable in the program.</p>
+</div>
+<div id="notes-27" class="section level2">
+<h2>NOTES</h2>
+<p>There is no requirement that strings be of the same length. The jBC language also supports the CHANGE function for compatibility with older systems.</p>
+</div>
+<div id="example-42" class="section level2">
+<h2>EXAMPLE</h2>
+<pre><code>   V.STRING = &#39;ABCDEFCDYZ&#39;
+   CHANGE &#39;C&#39; TO &#39;Q&#39; IN V.STRING
+   CRT V.STRING                 ;* ABQDEFQDYZ
+   CHANGE &#39;QD&#39; TO &#39;nnn&#39; IN V.STRING
+   CRT V.STRING                 ;* ABnnnEFnnnYZ
+* Both types of arrays are OK as well (dynamic ones can be processed in one go)
+   V.ARRAY = V.STRING
+   V.ARRAY&lt;2&gt; = V.STRING
+   CHANGE &#39;nnn&#39; TO &#39;mmm&#39; IN V.ARRAY
+   CRT OCONV(V.ARRAY, &#39;MCP&#39;)    ;* ABmmmEFmmmYZ^ABmmmEFmmmYZ
+   DIM V.DIM.ARR(3)
+   MAT V.DIM.ARR = V.STRING
+   CHANGE &#39;nnn&#39; TO &#39;mmm&#39; IN V.DIM.ARR(2)
+   CRT V.DIM.ARR(2)             ;* ABmmmEFmmmYZ
+* Funny but numbers can also be processed
+   V.NUM = 12345.67
+   CHANGE 3 TO 9 IN V.NUM
+   CRT V.NUM                    ;* 12945.67
+* Compatibility mode
+   V.STRING = CHANGE(V.STRING, &#39;YZ&#39;, &#39;+-&#39;)
+   CRT V.STRING                 ;* ABnnnEFnnn+-</code></pre>
+</div>
+</div>
+
+
+
+</body></html>

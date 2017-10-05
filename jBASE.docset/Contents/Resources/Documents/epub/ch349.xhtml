@@ -1,0 +1,44 @@
+<!--?xml version="1.0" encoding="UTF-8"?--><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+  <meta http-equiv="Content-Style-Type" content="text/css"/>
+  <meta name="generator" content="pandoc"/>
+  <title class="function">UNASSIGNED</title>
+  <link rel="stylesheet" type="text/css" href="stylesheet.css"/>
+</head>
+<body>
+<div id="unassigned-function" class="section level1">
+<a class="dashingAutolink" name="autolink-348"></a><a class="dashAnchor" name="//apple_ref/cpp/Function/UNASSIGNED"></a><h1 class="function">UNASSIGNED</h1>
+<p>UNASSIGNED function allows a program to determine whether a variable has been assigned a value.</p>
+<div id="command-syntax-295" class="section level2">
+<h2>COMMAND SYNTAX</h2>
+<pre><code>UNASSIGNED(variable)</code></pre>
+</div>
+<div id="syntax-elements-224" class="section level2">
+<h2>SYNTAX ELEMENTS</h2>
+<p><strong>variable</strong> is the name of variable used elsewhere in the program.</p>
+</div>
+<div id="notes-187" class="section level2">
+<h2>NOTES</h2>
+<p>The function returns Boolean TRUE if variable has not yet been assigned a value. The function returns Boolean FALSE if variable has already been assigned a value.</p>
+<p>See also: <a href="#ASSIGNED">ASSIGNED</a></p>
+</div>
+<div id="examples-78" class="section level2">
+<h2>EXAMPLES</h2>
+<pre><code>   OPEN &#39;F.TEMP&#39; TO F.TEMP ELSE
+      EXECUTE &#39;CREATE-FILE DATA F.TEMP 1 101 TYPE=J4&#39;
+      OPEN &#39;F.TEMP&#39; TO F.TEMP ELSE ABORT 201, &#39;F.TEMP&#39;
+   END
+   CRT UNASSIGNED(F.TEMP)        ;* 0
+   CLOSE F.TEMP
+   CRT UNASSIGNED(F.TEMP)        ;* 1
+   CRT UNASSIGNED(V.VAR)         ;* 1
+   V.VAR = 5
+   CRT UNASSIGNED(V.VAR)         ;* 0
+   CLEAR
+   CRT UNASSIGNED(V.VAR)         ;* 0 - it was assigned the value 0</code></pre>
+</div>
+</div>
+
+
+
+</body></html>

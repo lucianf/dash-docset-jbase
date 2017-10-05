@@ -1,0 +1,97 @@
+<!--?xml version="1.0" encoding="UTF-8"?--><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+  <meta http-equiv="Content-Style-Type" content="text/css"/>
+  <meta name="generator" content="pandoc"/>
+  <title class="function">MATCHES</title>
+  <link rel="stylesheet" type="text/css" href="stylesheet.css"/>
+</head>
+<body>
+<div id="matches-function" class="section level1">
+<a class="dashingAutolink" name="autolink-217"></a><a class="dashAnchor" name="//apple_ref/cpp/Function/MATCHES"></a><h1 class="function">MATCHES</h1>
+<p>MATCH or MATCHES clause applies pattern matching to an expression.</p>
+<div id="command-syntax-177" class="section level2">
+<h2>COMMAND SYNTAX</h2>
+<pre><code>expression1 MATCHES expression2</code></pre>
+</div>
+<div id="syntax-elements-126" class="section level2">
+<h2>SYNTAX ELEMENTS</h2>
+<p><strong>expression1</strong> may evaluate to any type. <strong>expression2</strong> should evaluate to a valid pattern matching string as described below.</p>
+<p><strong>expression1</strong> is then matched to the pattern supplied and a value of Boolean TRUE is returned if the pattern is matched. A value of Boolean FALSE is returned if the pattern is not matched.</p>
+<p><strong>expression2</strong> can contain any number of patterns to match those separated by value marks. The value mark implies a logical OR of the specified patterns and the match will evaluate to Boolean TRUE if expression1 matches any of the specified patterns.</p>
+</div>
+<div id="international-mode-15" class="section level2">
+<h2>INTERNATIONAL MODE</h2>
+<p>When using the MATCHES statement in International Mode, the statement will use the currently configured locale to determine the properties according to the Unicode Standard for each character in the expression. i.e., is the character alpha or numeric?</p>
+</div>
+<div id="notes-106" class="section level2">
+<h2>NOTES</h2>
+<p>The rule table shown below shows construction of pattern matching strings (n refers to any integer number).</p>
+<table>
+<thead>
+<tr class="header">
+<th align="left">Pattern</th>
+<th align="left">Explanation</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">nN</td>
+<td align="left">Matches a sequence of n digits</td>
+</tr>
+<tr class="even">
+<td align="left">nA</td>
+<td align="left">Matches a sequence of n alpha characters</td>
+</tr>
+<tr class="odd">
+<td align="left">nC</td>
+<td align="left">Matches a sequence of n alpha characters</td>
+</tr>
+<tr class="even">
+<td align="left"></td>
+<td align="left">or digits</td>
+</tr>
+<tr class="odd">
+<td align="left">nX</td>
+<td align="left">Matches a sequence of any characters</td>
+</tr>
+<tr class="even">
+<td align="left">&#34;string&#34;</td>
+<td align="left">Matches the character sequence string exactly</td>
+</tr>
+</tbody>
+</table>
+<p>Applies the pattern to all characters in expression1 and it must match all characters in the expression to evaluate as Boolean TRUE.</p>
+<p>Specify the integer value &#39;n&#39; as &#39;0&#39;. This will cause the pattern to match any number of characters of the specified type.</p>
+</div>
+<div id="examples-36" class="section level2">
+<h2>EXAMPLES</h2>
+<pre><code>* T24 IDs matching
+   transfer_id = &#39;FT130172HQJ4&#39;
+   CRT transfer_id MATCHES &#34;&#39;FT&#39;5N5X&#34;           ;*  1
+   hist_id = &#39;FT130172HQJ4;1&#39;
+   CRT hist_id MATCHES &#34;&#39;FT&#39;5N5X&#34;               ;*  0
+   CRT hist_id MATCHES &#34;&#39;FT&#39;5N5X;1N&#34;            ;*  1
+* date
+   start_date = &#39;2011-10-25&#39;
+   CRT start_date MATCHES &#34;4N&#39;-&#39;2N&#39;-&#39;2N&#34;        ;*  1
+* emulations compatibility
+   cust_name = &#39;JOHN DORY&#39;
+   CRT cust_name MATCH &#34;JOHN...&#34;            ;*  1 under prime, 0 under jbase
+   CRT cust_name MATCH &#34;&#39;JOHN&#39;...&#34;          ;*  1 under prime, 0 under jbase
+   CRT cust_name MATCH &#34;&#39;JOHN&#39;0X&#34;           ;*  1 under both
+   CRT cust_name MATCH &#34;&#39;John&#39;...&#34;          ;*  0 under both
+* &#34;C&#34; - alphanumeric - isn&#39;t supported at all under prime
+   CRT &#39;2HQJ4&#39; MATCHES &#34;5C&#34;                 ;* 1 under jbase emulation
+* numbers
+   CRT 9.99 MATCHES &#34;0N&#39;.&#39;2N&#34;               ;* 1
+   CRT &#39;.99&#39; MATCHES &#34;0N&#39;.&#39;2N&#34;              ;* 1
+* avoid messing up data with patterns (example for prime):
+   cust_address = &#39;3RD FLOOR, 17A ELM STREET&#39;
+   CRT cust_address MATCH &#34;...17A...&#34;   ;* 0 - 17A means 17 alpha characters
+   CRT cust_address MATCH &#34;...&#39;17A&#39;...&#34; ;* 1 - here &#39;17A&#39; is a string to search</code></pre>
+</div>
+</div>
+
+
+
+</body></html>

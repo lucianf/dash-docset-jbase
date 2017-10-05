@@ -1,0 +1,40 @@
+<!--?xml version="1.0" encoding="UTF-8"?--><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+  <meta http-equiv="Content-Style-Type" content="text/css"/>
+  <meta name="generator" content="pandoc"/>
+  <title class="function">SORT</title>
+  <link rel="stylesheet" type="text/css" href="stylesheet.css"/>
+</head>
+<body>
+<div id="sort-function" class="section level1">
+<a class="dashingAutolink" name="autolink-310"></a><a class="dashAnchor" name="//apple_ref/cpp/Function/SORT"></a><h1 class="function">SORT</h1>
+<p>The SORT function sorts all elements of a dynamic array in ascending left-justified order.</p>
+<div id="command-syntax-263" class="section level2">
+<h2>COMMAND SYNTAX</h2>
+<pre><code>SORT(expression)</code></pre>
+</div>
+<div id="syntax-elements-200" class="section level2">
+<h2>SYNTAX ELEMENTS</h2>
+<p><strong>expression</strong> may evaluate to any data type but will only be useful if it evaluates to a dynamic array.</p>
+</div>
+<div id="notes-169" class="section level2">
+<h2>NOTES</h2>
+<p>The dynamic array can contain any number and combination of system delimiters.</p>
+<p>The SORT function will return an attribute-delimited array of the sorted elements.</p>
+<p>All system delimiters in expression will be converted to an attribute mark &#39;0xFE&#39; in the sorted result. For example, the following code</p>
+<pre><code>MyArray = &#39;GEORGE&#39;:@VM:&#39;FRED&#39;:@AM:&#39;JOHN&#39;:@SM:&#39;ANDY&#39;
+CRT OCONV( SORT(MyArray), &#39;MCP&#39;)</code></pre>
+<p>will display:</p>
+<pre>    ANDY^FRED^GEORGE^JOHN</pre>
+<p>MyArray remains unchanged.</p>
+<p>The SORT is achieved by the quick sort algorithm, which sorts in situ and is very fast.</p>
+</div>
+<div id="international-mode-23" class="section level2">
+<h2>INTERNATIONAL MODE</h2>
+<p>When using the SORT function in International Mode, the function will use the currently configured locale to determine the rules by which each string is considered less than or greater than the other for sort purposes.</p>
+</div>
+</div>
+
+
+
+</body></html>

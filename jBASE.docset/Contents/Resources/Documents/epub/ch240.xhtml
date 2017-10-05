@@ -1,0 +1,40 @@
+<!--?xml version="1.0" encoding="UTF-8"?--><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+  <meta http-equiv="Content-Style-Type" content="text/css"/>
+  <meta name="generator" content="pandoc"/>
+  <title class="statement">OBJEXCALLBACK</title>
+  <link rel="stylesheet" type="text/css" href="stylesheet.css"/>
+</head>
+<body>
+<div id="objexcallback-statement" class="section level1">
+<a class="dashingAutolink" name="autolink-239"></a><a class="dashAnchor" name="//apple_ref/cpp/Method/OBJEXCALLBACK"></a><h1 class="statement">OBJEXCALLBACK</h1>
+<p>jBASE OBjEX provides the facility to call a subroutine from a front-end program written in a tool that supports OLE, such as Delphi or Visual Basic. The OBJEXCALLBACK statement allows communication between the subroutine and the calling OBjEX program.</p>
+<div id="command-syntax-198" class="section level2">
+<h2>COMMAND SYNTAX</h2>
+<pre><code>OBJEXCALLBACK expression1, expression2 THEN | ELSE statements</code></pre>
+</div>
+<div id="syntax-elements-140" class="section level2">
+<h2>SYNTAX ELEMENTS</h2>
+<p><strong>expression1</strong> and <strong>expression2</strong> can contain any data. They are returned to the OBjEX program where they are defined as variants.</p>
+<p>If the subroutine containing the OBJEXCALLBACK statement is not called from an OBjEX program (using the Call Method) then the ELSE clause will be taken.</p>
+</div>
+<div id="notes-119" class="section level2">
+<h2>NOTES</h2>
+<p>The OBJEXCALLBACK statement is designed to allow jBC subroutines to temporarily return to the calling environment to handle exception conditions or prompt for additional information. After servicing this event, the code should return control to the jBC program to ensure that the proper clean up operations are eventually made. The two parameters can be used to pass data between the jBC and OBjEX environments in both directions. They are defined as Variants in the OBjEX environment and as normal variables in the jBC environment.</p>
+<p>See the OBjEX documentation for more information.</p>
+</div>
+<div id="example-137" class="section level2">
+<h2>EXAMPLE</h2>
+<pre><code>param1 = &#34;SomeActionCode&#34;
+param2 = ProblemItem
+OBJEXCALLBACK param1, param2 THEN
+* this routine was called from ObjEX
+END ELSE
+* this routine was not called from ObjEX
+END</code></pre>
+</div>
+</div>
+
+
+
+</body></html>

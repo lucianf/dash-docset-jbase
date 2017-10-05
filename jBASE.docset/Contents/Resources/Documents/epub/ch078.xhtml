@@ -1,0 +1,39 @@
+<!--?xml version="1.0" encoding="UTF-8"?--><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+  <meta http-equiv="Content-Style-Type" content="text/css"/>
+  <meta name="generator" content="pandoc"/>
+  <title class="function">CHANGETIMESTAMP</title>
+  <link rel="stylesheet" type="text/css" href="stylesheet.css"/>
+</head>
+<body>
+<div id="changetimestamp-function" class="section level1">
+<a class="dashingAutolink" name="autolink-77"></a><a class="dashAnchor" name="//apple_ref/cpp/Function/CHANGETIMESTAMP"></a><h1 class="function">CHANGETIMESTAMP</h1>
+<p>Use CHANGETIMESTAMP to adjust existing timestamp to return new timestamp value.</p>
+<div id="command-syntax-42" class="section level2">
+<h2>COMMAND SYNTAX</h2>
+<pre><code>CHANGETIMESTAMP(Timestamp, Array)</code></pre>
+</div>
+<div id="syntax-elements-20" class="section level2">
+<h2>SYNTAX ELEMENTS</h2>
+<p>The CHANGETIMESTAMP function generates a new timestamp by adjusting an existing timestamp value using the elements specified in the dynamic array.</p>
+<p>The format of the adjustment array is as follows:</p>
+<pre>    Years^Months^Weeks^Days^Hours^Minutes^Seconds^Milliseconds</pre>
+</div>
+<div id="example-43" class="section level2">
+<h2>EXAMPLE</h2>
+<pre><code>   curr_time = MAKETIMESTAMP(DATE(), TIME(), &#39;&#39;)
+   CRT curr_time                                    ;*   e.g. 1358247401.205
+* Years^Months^Weeks^Days^Hours^Minutes^Seconds^Milliseconds
+* Add 100 milliseconds
+   adj_array = &#39;&#39;
+   adj_array&lt;8&gt; = 100
+   CRT CHANGETIMESTAMP(curr_time, adj_array) ;* 1358247401.305 for example above
+   adj_array&lt;8&gt; = &#39;&#39;
+   adj_array&lt;1&gt; = 100   ;* 100 years
+   CRT CHANGETIMESTAMP(curr_time, adj_array)   ;* 4513921001.205</code></pre>
+</div>
+</div>
+
+
+
+</body></html>

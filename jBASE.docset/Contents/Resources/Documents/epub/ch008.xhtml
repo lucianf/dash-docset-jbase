@@ -1,0 +1,44 @@
+<!--?xml version="1.0" encoding="UTF-8"?--><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+  <meta http-equiv="Content-Style-Type" content="text/css"/>
+  <meta name="generator" content="pandoc"/>
+  <title class="variable">@CALLSTACK</title>
+  <link rel="stylesheet" type="text/css" href="stylesheet.css"/>
+</head>
+<body>
+<div id="callstack-variable" class="section level1">
+<a class="dashingAutolink" name="autolink-7"></a><a class="dashAnchor" name="//apple_ref/cpp/Variable/%40CALLSTACK"></a><h1 class="variable">@CALLSTACK</h1>
+<p>Intended to return current call stack information; isn&#39;t yet implemented. SYSTEM(1029) could be used to obtain call stack information, e.g:</p>
+<p>Main program (test.b):</p>
+<!--jBC-->
+<pre><code>   GOSUB SECTION1
+   STOP
+   *-------------
+SECTION1:
+   GOSUB SECTION2
+   RETURN
+   *-------------
+SECTION2:
+   CRT OCONV( SYSTEM(1029), &#39;MCP&#39; )
+   CALL TEST.SUB
+   RETURN
+END</code></pre>
+<p>Subroutine:</p>
+<!--jBC-->
+<pre><code>   SUBROUTINE TEST.SUB
+*
+   GOSUB SECTION3
+   RETURN
+   *-------------
+SECTION3:
+   CRT OCONV( SYSTEM(1029), &#39;MCP&#39; )
+   RETURN
+END</code></pre>
+<p>Output:</p>
+<pre>    1\2\6\test.b]1\1\1\test.b
+    2\1\3\TEST.SUB]1\3\12\test.b]1\2\6\test.b]1\1\1\test.b</pre>
+</div>
+
+
+
+</body></html>

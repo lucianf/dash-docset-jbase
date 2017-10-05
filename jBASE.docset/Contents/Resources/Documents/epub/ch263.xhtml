@@ -1,0 +1,37 @@
+<!--?xml version="1.0" encoding="UTF-8"?--><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+  <meta http-equiv="Content-Style-Type" content="text/css"/>
+  <meta name="generator" content="pandoc"/>
+  <title class="statement">PRINT</title>
+  <link rel="stylesheet" type="text/css" href="stylesheet.css"/>
+</head>
+<body>
+<div id="print-statement" class="section level1">
+<a class="dashingAutolink" name="autolink-262"></a><a class="dashAnchor" name="//apple_ref/cpp/Method/PRINT"></a><h1 class="statement">PRINT</h1>
+<p>PRINT statement sends data directly to the current output device like terminal or printer.</p>
+<div id="command-syntax-220" class="section level2">
+<h2>COMMAND SYNTAX</h2>
+<pre><code>PRINT expression {, expression...} {:}</code></pre>
+</div>
+<div id="syntax-elements-159" class="section level2">
+<h2>SYNTAX ELEMENTS</h2>
+<p>An <strong>expression</strong> can evaluate to any data type. The PRINT statement will convert the result to a string type for printing. Expressions separated by commas will be sent to the output device separated by a tab character.</p>
+<p>The PRINT statement will append a newline sequence to the final expression unless it is terminated with a colon &#34;:&#34; character.</p>
+</div>
+<div id="notes-132" class="section level2">
+<h2>NOTES</h2>
+<p>As the expression can be any valid expression, it may have output formatting applied to it.</p>
+<p>If a PRINTER ON statement is currently active then output will be sent to the currently assigned printer form queue.</p>
+<p>See also: SP-ASSIGN command and <a href="#CRT">CRT</a>.</p>
+</div>
+<div id="examples-56" class="section level2">
+<h2>EXAMPLES</h2>
+<pre><code>   A = 3
+   PRINT DQUOTE(A &#39;R#5&#39;)            ;*  &#34;    3&#34;
+   PRINT @(8,20) : &#34;Patrick&#34; :</code></pre>
+</div>
+</div>
+
+
+
+</body></html>

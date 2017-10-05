@@ -1,0 +1,35 @@
+<!--?xml version="1.0" encoding="UTF-8"?--><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+  <meta http-equiv="Content-Style-Type" content="text/css"/>
+  <meta name="generator" content="pandoc"/>
+  <title class="statement">OUT</title>
+  <link rel="stylesheet" type="text/css" href="stylesheet.css"/>
+</head>
+<body>
+<div id="out-statement" class="section level1">
+<a class="dashingAutolink" name="autolink-257"></a><a class="dashAnchor" name="//apple_ref/cpp/Method/OUT"></a><h1 class="statement">OUT</h1>
+<p>OUT statement is used to send raw characters to the current output device (normally the terminal).</p>
+<div id="command-syntax-216" class="section level2">
+<h2>COMMAND SYNTAX</h2>
+<pre><code>OUT expression</code></pre>
+</div>
+<div id="syntax-elements-156" class="section level2">
+<h2>SYNTAX ELEMENTS</h2>
+<p><strong>expression</strong> should evaluate to a numeric integer in the range 0 to 255, being the entire range of ASCII characters.</p>
+</div>
+<div id="notes-130" class="section level2">
+<h2>NOTES</h2>
+<p>The numeric expression is first converted to the raw ASCII character specified and then sent directly to the output advice.</p>
+</div>
+<div id="examples-54" class="section level2">
+<h2>EXAMPLES</h2>
+<pre><code>EQUATE BELL TO OUT 7
+BELL ;* Sound terminal bell
+FOR I = 32 TO 127 ; OUT I ; NEXT I ;* Printable chars
+BELL</code></pre>
+</div>
+</div>
+
+
+
+</body></html>

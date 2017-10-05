@@ -1,0 +1,34 @@
+<!--?xml version="1.0" encoding="UTF-8"?--><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+  <meta http-equiv="Content-Style-Type" content="text/css"/>
+  <meta name="generator" content="pandoc"/>
+  <title class="statement">CONTINUE</title>
+  <link rel="stylesheet" type="text/css" href="stylesheet.css"/>
+</head>
+<body>
+<div id="continue-statement" class="section level1">
+<a class="dashingAutolink" name="autolink-94"></a><a class="dashAnchor" name="//apple_ref/cpp/Method/CONTINUE"></a><h1 class="statement">CONTINUE</h1>
+<p>The CONTINUE statement is the complimentary statement to the BREAK statement without arguments.</p>
+<div id="command-syntax-59" class="section level2">
+<h2>COMMAND SYNTAX</h2>
+<pre><code>CONTINUE</code></pre>
+<p>Use the statement within a loop to skip the remaining code in the current iteration and proceed directly on to the next iteration.</p>
+</div>
+<div id="notes-36" class="section level2">
+<h2>NOTES</h2>
+<p>See also: <a href="#BREAK">BREAK</a>, <a href="#EXIT">EXIT</a> The compiler will issue a warning message and ignore the statement if it is found outside an iterative loop such as FOR...NEXT, LOOP...REPEAT.</p>
+</div>
+<div id="example-61" class="section level2">
+<h2>EXAMPLE</h2>
+<pre><code>   num_array = &#39;&#39;
+   FOR i = 1 TO 10
+      IF i EQ 3 THEN CONTINUE
+      num_array&lt;-1&gt; = i
+   NEXT i
+   CRT FMT(num_array, &#39;MCP&#39;)    ;* 1^2^4^5^6^7^8^9^10</code></pre>
+</div>
+</div>
+
+
+
+</body></html>

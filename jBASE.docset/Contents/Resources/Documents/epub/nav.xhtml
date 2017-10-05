@@ -1,0 +1,1130 @@
+<!--?xml version="1.0" encoding="UTF-8"?--><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+  <meta http-equiv="Content-Style-Type" content="text/css"/>
+  <meta name="generator" content="pandoc"/>
+  <title></title>
+  <link rel="stylesheet" type="text/css" href="stylesheet.css"/>
+</head>
+<body>
+<div id="toc">
+  <a class="dashingAutolink" name="autolink-371"></a><a class="dashAnchor" name="//apple_ref/cpp/Category/Functions%20and%20Statements"></a><h1 id="toc-title">Functions and Statements</h1>
+  <ol class="toc">
+    <li id="toc-li-1">
+      <a href="ch001.xhtml#jbcjbase-features-category" class="category">jBC/jBASE Features</a>
+    </li>
+    <li id="toc-li-2">
+      <a href="ch002.xhtml#syntax-features-category" class="category">Syntax Features</a>
+    </li>
+    <li id="toc-li-3">
+      <a href="ch003.xhtml#guidelines-for-writing-source-code-category" class="category">Guidelines for Writing Source Code</a>
+    </li>
+    <li id="toc-li-4">
+      <a href="ch004.xhtml#environment-variables-category" class="category">Environment Variables</a>
+    </li>
+    <li id="toc-li-5">
+      <a href="ch005.xhtml#compilation-category" class="category">Compilation</a>
+    </li>
+    <li id="toc-li-6">
+      <a href="ch006.xhtml#data-files-category" class="category">Data Files</a>
+    </li>
+    <li id="toc-li-7">
+      <a href="ch007.xhtml#am-fm-vm-sm-tm-variable" class="variable">@AM (@FM), @VM, @SM, @TM</a>
+    </li>
+    <li id="toc-li-8">
+      <a href="ch008.xhtml#callstack-variable" class="variable">@CALLSTACK</a>
+    </li>
+    <li id="toc-li-9">
+      <a href="ch009.xhtml#codepage-variable" class="variable">@CODEPAGE</a>
+    </li>
+    <li id="toc-li-10">
+      <a href="ch010.xhtml#data-variable" class="variable">@DATA</a>
+    </li>
+    <li id="toc-li-11">
+      <a href="ch011.xhtml#date-variable" class="variable">@DATE</a>
+    </li>
+    <li id="toc-li-12">
+      <a href="ch012.xhtml#day-variable" class="variable">@DAY</a>
+    </li>
+    <li id="toc-li-13">
+      <a href="ch013.xhtml#eof-variable" class="variable">@EOF</a>
+    </li>
+    <li id="toc-li-14">
+      <a href="ch014.xhtml#filename-variable" class="variable">@FILENAME</a>
+    </li>
+    <li id="toc-li-15">
+      <a href="ch015.xhtml#footer.break-variable" class="variable">@FOOTER.BREAK</a>
+    </li>
+    <li id="toc-li-16">
+      <a href="ch016.xhtml#header.break-variable" class="variable">@HEADER.BREAK</a>
+    </li>
+    <li id="toc-li-17">
+      <a href="ch017.xhtml#id-variable" class="variable">@ID</a>
+    </li>
+    <li id="toc-li-18">
+      <a href="ch018.xhtml#level-variable" class="variable">@LEVEL</a>
+    </li>
+    <li id="toc-li-19">
+      <a href="ch019.xhtml#locale-variable" class="variable">@LOCALE</a>
+    </li>
+    <li id="toc-li-20">
+      <a href="ch020.xhtml#lptrhigh-variable" class="variable">@LPTRHIGH</a>
+    </li>
+    <li id="toc-li-21">
+      <a href="ch021.xhtml#month-variable" class="variable">@MONTH</a>
+    </li>
+    <li id="toc-li-22">
+      <a href="ch022.xhtml#parasentence-variable" class="variable">@PARASENTENCE</a>
+    </li>
+    <li id="toc-li-23">
+      <a href="ch023.xhtml#path-variable" class="variable">@PATH</a>
+    </li>
+    <li id="toc-li-24">
+      <a href="ch024.xhtml#pid-variable" class="variable">@PID</a>
+    </li>
+    <li id="toc-li-25">
+      <a href="ch025.xhtml#record-variable" class="variable">@RECORD</a>
+    </li>
+    <li id="toc-li-26">
+      <a href="ch026.xhtml#selected-variable" class="variable">@SELECTED</a>
+    </li>
+    <li id="toc-li-27">
+      <a href="ch027.xhtml#termtype-variable" class="variable">@TERMTYPE</a>
+    </li>
+    <li id="toc-li-28">
+      <a href="ch028.xhtml#time-variable" class="variable">@TIME</a>
+    </li>
+    <li id="toc-li-29">
+      <a href="ch029.xhtml#timezone-variable" class="variable">@TIMEZONE</a>
+    </li>
+    <li id="toc-li-30">
+      <a href="ch030.xhtml#tty-variable" class="variable">@TTY</a>
+    </li>
+    <li id="toc-li-31">
+      <a href="ch031.xhtml#uid-variable" class="variable">@UID</a>
+    </li>
+    <li id="toc-li-32">
+      <a href="ch032.xhtml#user.root-user.thread-and-userstats-variable" class="variable">@USER.ROOT, @USER.THREAD and @USERSTATS</a>
+    </li>
+    <li id="toc-li-33">
+      <a href="ch033.xhtml#screencode-function" class="function">@ (SCREENCODE)</a>
+    </li>
+    <li id="toc-li-34">
+      <a href="ch034.xhtml#abort-statement" class="statement">ABORT</a>
+    </li>
+    <li id="toc-li-35">
+      <a href="ch035.xhtml#abs-function" class="function">ABS</a>
+    </li>
+    <li id="toc-li-36">
+      <a href="ch036.xhtml#abss-function" class="function">ABSS</a>
+    </li>
+    <li id="toc-li-37">
+      <a href="ch037.xhtml#adds-function" class="function">ADDS</a>
+    </li>
+    <li id="toc-li-38">
+      <a href="ch038.xhtml#alpha-function" class="function">ALPHA</a>
+    </li>
+    <li id="toc-li-39">
+      <a href="ch039.xhtml#ands-function" class="function">ANDS</a>
+    </li>
+    <li id="toc-li-40">
+      <a href="ch040.xhtml#ascii-function" class="function">ASCII</a>
+    </li>
+    <li id="toc-li-41">
+      <a href="ch041.xhtml#assigned-function" class="function">ASSIGNED</a>
+    </li>
+    <li id="toc-li-42">
+      <a href="ch042.xhtml#bitand-function" class="function">BITAND</a>
+    </li>
+    <li id="toc-li-43">
+      <a href="ch043.xhtml#bitchange-function" class="function">BITCHANGE</a>
+    </li>
+    <li id="toc-li-44">
+      <a href="ch044.xhtml#bitcheck-function" class="function">BITCHECK</a>
+    </li>
+    <li id="toc-li-45">
+      <a href="ch045.xhtml#bitload-function" class="function">BITLOAD</a>
+    </li>
+    <li id="toc-li-46">
+      <a href="ch046.xhtml#bitnot-function" class="function">BITNOT</a>
+    </li>
+    <li id="toc-li-47">
+      <a href="ch047.xhtml#bitor-function" class="function">BITOR</a>
+    </li>
+    <li id="toc-li-48">
+      <a href="ch048.xhtml#bitreset-function" class="function">BITRESET</a>
+    </li>
+    <li id="toc-li-49">
+      <a href="ch049.xhtml#bitset-function" class="function">BITSET</a>
+    </li>
+    <li id="toc-li-50">
+      <a href="ch050.xhtml#bittest-function" class="function">BITTEST</a>
+    </li>
+    <li id="toc-li-51">
+      <a href="ch051.xhtml#bitxor-function" class="function">BITXOR</a>
+    </li>
+    <li id="toc-li-52">
+      <a href="ch052.xhtml#break-statement" class="statement">BREAK</a>
+    </li>
+    <li id="toc-li-53">
+      <a href="ch053.xhtml#break-onoff-statement" class="statement">BREAK ON/OFF</a>
+    </li>
+    <li id="toc-li-54">
+      <a href="ch054.xhtml#bytelen-function" class="function">BYTELEN</a>
+    </li>
+    <li id="toc-li-55">
+      <a href="ch055.xhtml#cachebucketlist-function" class="function">CacheBucketList</a>
+    </li>
+    <li id="toc-li-56">
+      <a href="ch056.xhtml#cacheclear-function" class="function">CacheClear</a>
+    </li>
+    <li id="toc-li-57">
+      <a href="ch057.xhtml#cacheclearall-function" class="function">CacheClearAll</a>
+    </li>
+    <li id="toc-li-58">
+      <a href="ch058.xhtml#cacheclearstats-function" class="function">CacheClearStats</a>
+    </li>
+    <li id="toc-li-59">
+      <a href="ch059.xhtml#cachedelete-function" class="function">CacheDelete</a>
+    </li>
+    <li id="toc-li-60">
+      <a href="ch060.xhtml#cacheexists-function" class="function">CacheExists</a>
+    </li>
+    <li id="toc-li-61">
+      <a href="ch061.xhtml#cacheget-function" class="function">CacheGet</a>
+    </li>
+    <li id="toc-li-62">
+      <a href="ch062.xhtml#cachegetoption-function" class="function">CacheGetOption</a>
+    </li>
+    <li id="toc-li-63">
+      <a href="ch063.xhtml#cachekeylist-function" class="function">CacheKeyList</a>
+    </li>
+    <li id="toc-li-64">
+      <a href="ch064.xhtml#cacheput-function" class="function">CachePut</a>
+    </li>
+    <li id="toc-li-65">
+      <a href="ch065.xhtml#cachesetoption-function" class="function">CacheSetOption</a>
+    </li>
+    <li id="toc-li-66">
+      <a href="ch066.xhtml#cachestats-function" class="function">CacheStats</a>
+    </li>
+    <li id="toc-li-67">
+      <a href="ch067.xhtml#call-statement" class="statement">CALL</a>
+    </li>
+    <li id="toc-li-68">
+      <a href="ch068.xhtml#callc-statement" class="statement">CALLC</a>
+    </li>
+    <li id="toc-li-69">
+      <a href="ch069.xhtml#calldotnet-statement" class="statement">CALLdotNET</a>
+    </li>
+    <li id="toc-li-70">
+      <a href="ch070.xhtml#callj-statement" class="statement">CALLJ</a>
+    </li>
+    <li id="toc-li-71">
+      <a href="ch071.xhtml#calljee-function" class="function">CALLJEE</a>
+    </li>
+    <li id="toc-li-72">
+      <a href="ch072.xhtml#callonexit-function" class="function">CALLONEXIT</a>
+    </li>
+    <li id="toc-li-73">
+      <a href="ch073.xhtml#case-statement" class="statement">CASE</a>
+    </li>
+    <li id="toc-li-74">
+      <a href="ch074.xhtml#catalog-statement" class="statement">CATALOG</a>
+    </li>
+    <li id="toc-li-75">
+      <a href="ch075.xhtml#cats-function" class="function">CATS</a>
+    </li>
+    <li id="toc-li-76">
+      <a href="ch076.xhtml#chain-statement" class="statement">CHAIN</a>
+    </li>
+    <li id="toc-li-77">
+      <a href="ch077.xhtml#change-statement" class="statement">CHANGE</a>
+    </li>
+    <li id="toc-li-78">
+      <a href="ch078.xhtml#changetimestamp-function" class="function">CHANGETIMESTAMP</a>
+    </li>
+    <li id="toc-li-79">
+      <a href="ch079.xhtml#char-function" class="function">CHAR</a>
+    </li>
+    <li id="toc-li-80">
+      <a href="ch080.xhtml#chars-function" class="function">CHARS</a>
+    </li>
+    <li id="toc-li-81">
+      <a href="ch081.xhtml#chdir-function" class="function">CHDIR</a>
+    </li>
+    <li id="toc-li-82">
+      <a href="ch082.xhtml#checksum-function" class="function">CHECKSUM</a>
+    </li>
+    <li id="toc-li-83">
+      <a href="ch083.xhtml#clear-statement" class="statement">CLEAR</a>
+    </li>
+    <li id="toc-li-84">
+      <a href="ch084.xhtml#clearcommon-statement" class="statement">CLEARCOMMON</a>
+    </li>
+    <li id="toc-li-85">
+      <a href="ch085.xhtml#cleardata-statement" class="statement">CLEARDATA</a>
+    </li>
+    <li id="toc-li-86">
+      <a href="ch086.xhtml#clearfile-statement" class="statement">CLEARFILE</a>
+    </li>
+    <li id="toc-li-87">
+      <a href="ch087.xhtml#clearinput-statement" class="statement">CLEARINPUT</a>
+    </li>
+    <li id="toc-li-88">
+      <a href="ch088.xhtml#clearselect-statement" class="statement">CLEARSELECT</a>
+    </li>
+    <li id="toc-li-89">
+      <a href="ch089.xhtml#close-statement" class="statement">CLOSE</a>
+    </li>
+    <li id="toc-li-90">
+      <a href="ch090.xhtml#closeseq-statement" class="statement">CLOSESEQ</a>
+    </li>
+    <li id="toc-li-91">
+      <a href="ch091.xhtml#col1-and-col2-function" class="function">COL1 and COL2</a>
+    </li>
+    <li id="toc-li-92">
+      <a href="ch092.xhtml#collectdata-statement" class="statement">COLLECTDATA</a>
+    </li>
+    <li id="toc-li-93">
+      <a href="ch093.xhtml#common-statement" class="statement">COMMON</a>
+    </li>
+    <li id="toc-li-94">
+      <a href="ch094.xhtml#compare-function" class="function">COMPARE</a>
+    </li>
+    <li id="toc-li-95">
+      <a href="ch095.xhtml#continue-statement" class="statement">CONTINUE</a>
+    </li>
+    <li id="toc-li-96">
+      <a href="ch096.xhtml#convert-function" class="function">CONVERT</a>
+    </li>
+    <li id="toc-li-97">
+      <a href="ch097.xhtml#convert-statement-statement" class="statement">CONVERT (STATEMENT)</a>
+    </li>
+    <li id="toc-li-98">
+      <a href="ch098.xhtml#cos-function" class="function">COS</a>
+    </li>
+    <li id="toc-li-99">
+      <a href="ch099.xhtml#count-function" class="function">COUNT</a>
+    </li>
+    <li id="toc-li-100">
+      <a href="ch100.xhtml#counts-function" class="function">COUNTS</a>
+    </li>
+    <li id="toc-li-101">
+      <a href="ch101.xhtml#create-statement" class="statement">CREATE</a>
+    </li>
+    <li id="toc-li-102">
+      <a href="ch102.xhtml#crt-statement" class="statement">CRT</a>
+    </li>
+    <li id="toc-li-103">
+      <a href="ch103.xhtml#data-statement" class="statement">DATA</a>
+    </li>
+    <li id="toc-li-104">
+      <a href="ch104.xhtml#date-function" class="function">DATE</a>
+    </li>
+    <li id="toc-li-105">
+      <a href="ch105.xhtml#dcount-function" class="function">DCOUNT</a>
+    </li>
+    <li id="toc-li-106">
+      <a href="ch106.xhtml#debug-statement" class="statement">DEBUG</a>
+    </li>
+    <li id="toc-li-107">
+      <a href="ch107.xhtml#decatalog-and-delete-catalog-statement" class="statement">DECATALOG and DELETE-CATALOG</a>
+    </li>
+    <li id="toc-li-108">
+      <a href="ch108.xhtml#decrypt-function" class="function">DECRYPT</a>
+    </li>
+    <li id="toc-li-109">
+      <a href="ch109.xhtml#defc-statement" class="statement">DEFC</a>
+    </li>
+    <li id="toc-li-110">
+      <a href="ch110.xhtml#defce-statement" class="statement">DEFCE</a>
+    </li>
+    <li id="toc-li-111">
+      <a href="ch111.xhtml#deffun-statement" class="statement">DEFFUN</a>
+    </li>
+    <li id="toc-li-112">
+      <a href="ch112.xhtml#del-statement" class="statement">DEL</a>
+    </li>
+    <li id="toc-li-113">
+      <a href="ch113.xhtml#delete-statement" class="statement">DELETE</a>
+    </li>
+    <li id="toc-li-114">
+      <a href="ch114.xhtml#deletelist-statement" class="statement">DELETELIST</a>
+    </li>
+    <li id="toc-li-115">
+      <a href="ch115.xhtml#deleteseq-statement" class="statement">DELETESEQ</a>
+    </li>
+    <li id="toc-li-116">
+      <a href="ch116.xhtml#deleteu-statement" class="statement">DELETEU</a>
+    </li>
+    <li id="toc-li-117">
+      <a href="ch117.xhtml#dimension-statement" class="statement">DIMENSION</a>
+    </li>
+    <li id="toc-li-118">
+      <a href="ch118.xhtml#dir-function" class="function">DIR</a>
+    </li>
+    <li id="toc-li-119">
+      <a href="ch119.xhtml#div-function" class="function">DIV</a>
+    </li>
+    <li id="toc-li-120">
+      <a href="ch120.xhtml#divs-function" class="function">DIVS</a>
+    </li>
+    <li id="toc-li-121">
+      <a href="ch121.xhtml#downcase-function" class="function">DOWNCASE</a>
+    </li>
+    <li id="toc-li-122">
+      <a href="ch122.xhtml#dround-function" class="function">DROUND</a>
+    </li>
+    <li id="toc-li-123">
+      <a href="ch123.xhtml#dtx-function" class="function">DTX</a>
+    </li>
+    <li id="toc-li-124">
+      <a href="ch124.xhtml#dyntoxml-function" class="function">DYNTOXML</a>
+    </li>
+    <li id="toc-li-125">
+      <a href="ch125.xhtml#ebcdic-function" class="function">EBCDIC</a>
+    </li>
+    <li id="toc-li-126">
+      <a href="ch126.xhtml#echo-statement" class="statement">ECHO</a>
+    </li>
+    <li id="toc-li-127">
+      <a href="ch127.xhtml#encrypt-function" class="function">ENCRYPT</a>
+    </li>
+    <li id="toc-li-128">
+      <a href="ch128.xhtml#enter-statement" class="statement">ENTER</a>
+    </li>
+    <li id="toc-li-129">
+      <a href="ch129.xhtml#eqs-function" class="function">EQS</a>
+    </li>
+    <li id="toc-li-130">
+      <a href="ch130.xhtml#equate-statement" class="statement">EQUATE</a>
+    </li>
+    <li id="toc-li-131">
+      <a href="ch131.xhtml#ereplace-function" class="function">EREPLACE</a>
+    </li>
+    <li id="toc-li-132">
+      <a href="ch132.xhtml#execute-statement" class="statement">EXECUTE</a>
+    </li>
+    <li id="toc-li-133">
+      <a href="ch133.xhtml#exit-statement" class="statement">EXIT</a>
+    </li>
+    <li id="toc-li-134">
+      <a href="ch134.xhtml#exp-function" class="function">EXP</a>
+    </li>
+    <li id="toc-li-135">
+      <a href="ch135.xhtml#extract-function" class="function">EXTRACT</a>
+    </li>
+    <li id="toc-li-136">
+      <a href="ch136.xhtml#fadd-function" class="function">FADD</a>
+    </li>
+    <li id="toc-li-137">
+      <a href="ch137.xhtml#fdiv-function" class="function">FDIV</a>
+    </li>
+    <li id="toc-li-138">
+      <a href="ch138.xhtml#field-function" class="function">FIELD</a>
+    </li>
+    <li id="toc-li-139">
+      <a href="ch139.xhtml#fields-function" class="function">FIELDS</a>
+    </li>
+    <li id="toc-li-140">
+      <a href="ch140.xhtml#fileinfo-function" class="function">FILEINFO</a>
+    </li>
+    <li id="toc-li-141">
+      <a href="ch141.xhtml#filelock-statement" class="statement">FILELOCK</a>
+    </li>
+    <li id="toc-li-142">
+      <a href="ch142.xhtml#fileunlock-statement" class="statement">FILEUNLOCK</a>
+    </li>
+    <li id="toc-li-143">
+      <a href="ch143.xhtml#find-statement" class="statement">FIND</a>
+    </li>
+    <li id="toc-li-144">
+      <a href="ch144.xhtml#findstr-statement" class="statement">FINDSTR</a>
+    </li>
+    <li id="toc-li-145">
+      <a href="ch145.xhtml#formlist-statement" class="statement">FORMLIST</a>
+    </li>
+    <li id="toc-li-146">
+      <a href="ch146.xhtml#flush-statement" class="statement">FLUSH</a>
+    </li>
+    <li id="toc-li-147">
+      <a href="ch147.xhtml#fmt-function" class="function">FMT</a>
+    </li>
+    <li id="toc-li-148">
+      <a href="ch148.xhtml#fmts-function" class="function">FMTS</a>
+    </li>
+    <li id="toc-li-149">
+      <a href="ch149.xhtml#fold-function" class="function">FOLD</a>
+    </li>
+    <li id="toc-li-150">
+      <a href="ch150.xhtml#footing-statement" class="statement">FOOTING</a>
+    </li>
+    <li id="toc-li-151">
+      <a href="ch151.xhtml#for-statement" class="statement">FOR</a>
+    </li>
+    <li id="toc-li-152">
+      <a href="ch152.xhtml#fsub-function" class="function">FSUB</a>
+    </li>
+    <li id="toc-li-153">
+      <a href="ch153.xhtml#function-statement" class="statement">FUNCTION</a>
+    </li>
+    <li id="toc-li-154">
+      <a href="ch154.xhtml#ges-function" class="function">GES</a>
+    </li>
+    <li id="toc-li-155">
+      <a href="ch155.xhtml#get-statement" class="statement">GET</a>
+    </li>
+    <li id="toc-li-156">
+      <a href="ch156.xhtml#getcwd-function" class="function">GETCWD</a>
+    </li>
+    <li id="toc-li-157">
+      <a href="ch157.xhtml#getenv-function" class="function">GETENV</a>
+    </li>
+    <li id="toc-li-158">
+      <a href="ch158.xhtml#getlist-statement" class="statement">GETLIST</a>
+    </li>
+    <li id="toc-li-159">
+      <a href="ch159.xhtml#getusergroup-function" class="function">GETUSERGROUP</a>
+    </li>
+    <li id="toc-li-160">
+      <a href="ch160.xhtml#getx-statement" class="statement">GETX</a>
+    </li>
+    <li id="toc-li-161">
+      <a href="ch161.xhtml#gosub-statement" class="statement">GOSUB</a>
+    </li>
+    <li id="toc-li-162">
+      <a href="ch162.xhtml#goto-statement" class="statement">GOTO</a>
+    </li>
+    <li id="toc-li-163">
+      <a href="ch163.xhtml#group-function" class="function">GROUP</a>
+    </li>
+    <li id="toc-li-164">
+      <a href="ch164.xhtml#groupstore-statement" class="statement">GROUPSTORE</a>
+    </li>
+    <li id="toc-li-165">
+      <a href="ch165.xhtml#heading-statement" class="statement">HEADING</a>
+    </li>
+    <li id="toc-li-166">
+      <a href="ch166.xhtml#headinge-and-headingn-statement" class="statement">HEADINGE and HEADINGN</a>
+    </li>
+    <li id="toc-li-167">
+      <a href="ch167.xhtml#hush-statement" class="statement">HUSH</a>
+    </li>
+    <li id="toc-li-168">
+      <a href="ch168.xhtml#iconv-function" class="function">ICONV</a>
+    </li>
+    <li id="toc-li-169">
+      <a href="ch169.xhtml#iconvs-function" class="function">ICONVS</a>
+    </li>
+    <li id="toc-li-170">
+      <a href="ch170.xhtml#if-statement" class="statement">IF</a>
+    </li>
+    <li id="toc-li-171">
+      <a href="ch171.xhtml#ifs-function" class="function">IFS</a>
+    </li>
+    <li id="toc-li-172">
+      <a href="ch172.xhtml#in-statement" class="statement">IN</a>
+    </li>
+    <li id="toc-li-173">
+      <a href="ch173.xhtml#index-function" class="function">INDEX</a>
+    </li>
+    <li id="toc-li-174">
+      <a href="ch174.xhtml#inmat-function" class="function">INMAT</a>
+    </li>
+    <li id="toc-li-175">
+      <a href="ch175.xhtml#input-statement" class="statement">INPUT</a>
+    </li>
+    <li id="toc-li-176">
+      <a href="ch176.xhtml#inputclear-statement" class="statement">INPUTCLEAR</a>
+    </li>
+    <li id="toc-li-177">
+      <a href="ch177.xhtml#inputnull-statement" class="statement">INPUTNULL</a>
+    </li>
+    <li id="toc-li-178">
+      <a href="ch178.xhtml#ins-statement" class="statement">INS</a>
+    </li>
+    <li id="toc-li-179">
+      <a href="ch179.xhtml#insert-function" class="function">INSERT</a>
+    </li>
+    <li id="toc-li-180">
+      <a href="ch180.xhtml#int-function" class="function">INT</a>
+    </li>
+    <li id="toc-li-181">
+      <a href="ch181.xhtml#ioctl-function" class="function">IOCTL</a>
+    </li>
+    <li id="toc-li-182">
+      <a href="ch182.xhtml#isalpha-function" class="function">ISALPHA</a>
+    </li>
+    <li id="toc-li-183">
+      <a href="ch183.xhtml#isalnum-function" class="function">ISALNUM</a>
+    </li>
+    <li id="toc-li-184">
+      <a href="ch184.xhtml#iscntrl-function" class="function">ISCNTRL</a>
+    </li>
+    <li id="toc-li-185">
+      <a href="ch185.xhtml#isdigit-function" class="function">ISDIGIT</a>
+    </li>
+    <li id="toc-li-186">
+      <a href="ch186.xhtml#islower-function" class="function">ISLOWER</a>
+    </li>
+    <li id="toc-li-187">
+      <a href="ch187.xhtml#isprint-function" class="function">ISPRINT</a>
+    </li>
+    <li id="toc-li-188">
+      <a href="ch188.xhtml#isspace-function" class="function">ISSPACE</a>
+    </li>
+    <li id="toc-li-189">
+      <a href="ch189.xhtml#isupper-function" class="function">ISUPPER</a>
+    </li>
+    <li id="toc-li-190">
+      <a href="ch190.xhtml#itype-function" class="function">ITYPE</a>
+    </li>
+    <li id="toc-li-191">
+      <a href="ch191.xhtml#jbasecoredump-function" class="function">JBASECOREDUMP</a>
+    </li>
+    <li id="toc-li-192">
+      <a href="ch192.xhtml#jbasesubroutineexist-function" class="function">JBASESubroutineExist</a>
+    </li>
+    <li id="toc-li-193">
+      <a href="ch193.xhtml#jbasethreadcreate-function" class="function">JBASETHREADCreate</a>
+    </li>
+    <li id="toc-li-194">
+      <a href="ch194.xhtml#jbasethreadstatus-function" class="function">JBASETHREADStatus</a>
+    </li>
+    <li id="toc-li-195">
+      <a href="ch195.xhtml#jqlcompile-function" class="function">JQLCOMPILE</a>
+    </li>
+    <li id="toc-li-196">
+      <a href="ch196.xhtml#jqlexecute-function" class="function">JQLEXECUTE</a>
+    </li>
+    <li id="toc-li-197">
+      <a href="ch197.xhtml#jqlfetch-function" class="function">JQLFETCH</a>
+    </li>
+    <li id="toc-li-198">
+      <a href="ch198.xhtml#jqlgetproperty-function" class="function">JQLGETPROPERTY</a>
+    </li>
+    <li id="toc-li-199">
+      <a href="ch199.xhtml#jqlputproperty-function" class="function">JQLPUTPROPERTY</a>
+    </li>
+    <li id="toc-li-200">
+      <a href="ch200.xhtml#keyin-function" class="function">KEYIN</a>
+    </li>
+    <li id="toc-li-201">
+      <a href="ch201.xhtml#latin1-function" class="function">LATIN1</a>
+    </li>
+    <li id="toc-li-202">
+      <a href="ch202.xhtml#left-function" class="function">LEFT</a>
+    </li>
+    <li id="toc-li-203">
+      <a href="ch203.xhtml#len-function" class="function">LEN</a>
+    </li>
+    <li id="toc-li-204">
+      <a href="ch204.xhtml#lendp-function" class="function">LENDP</a>
+    </li>
+    <li id="toc-li-205">
+      <a href="ch205.xhtml#lens-function" class="function">LENS</a>
+    </li>
+    <li id="toc-li-206">
+      <a href="ch206.xhtml#les-function" class="function">LES</a>
+    </li>
+    <li id="toc-li-207">
+      <a href="ch207.xhtml#ln-function" class="function">LN</a>
+    </li>
+    <li id="toc-li-208">
+      <a href="ch208.xhtml#localdate-function" class="function">LOCALDATE</a>
+    </li>
+    <li id="toc-li-209">
+      <a href="ch209.xhtml#localtime-function" class="function">LOCALTIME</a>
+    </li>
+    <li id="toc-li-210">
+      <a href="ch210.xhtml#locate-statement" class="statement">LOCATE</a>
+    </li>
+    <li id="toc-li-211">
+      <a href="ch211.xhtml#lock-statement" class="statement">LOCK</a>
+    </li>
+    <li id="toc-li-212">
+      <a href="ch212.xhtml#logger-function" class="function">Logger</a>
+    </li>
+    <li id="toc-li-213">
+      <a href="ch213.xhtml#loop-statement" class="statement">LOOP</a>
+    </li>
+    <li id="toc-li-214">
+      <a href="ch214.xhtml#lower-function" class="function">LOWER</a>
+    </li>
+    <li id="toc-li-215">
+      <a href="ch215.xhtml#maketimestamp-function" class="function">MAKETIMESTAMP</a>
+    </li>
+    <li id="toc-li-216">
+      <a href="ch216.xhtml#mat-statement" class="statement">MAT</a>
+    </li>
+    <li id="toc-li-217">
+      <a href="ch217.xhtml#matbuild-statement" class="statement">MATBUILD</a>
+    </li>
+    <li id="toc-li-218">
+      <a href="ch218.xhtml#matches-function" class="function">MATCHES</a>
+    </li>
+    <li id="toc-li-219">
+      <a href="ch219.xhtml#matchfield-function" class="function">MATCHFIELD</a>
+    </li>
+    <li id="toc-li-220">
+      <a href="ch220.xhtml#matparse-statement" class="statement">MATPARSE</a>
+    </li>
+    <li id="toc-li-221">
+      <a href="ch221.xhtml#matread-statement" class="statement">MATREAD</a>
+    </li>
+    <li id="toc-li-222">
+      <a href="ch222.xhtml#matreadu-statement" class="statement">MATREADU</a>
+    </li>
+    <li id="toc-li-223">
+      <a href="ch223.xhtml#matwrite-statement" class="statement">MATWRITE</a>
+    </li>
+    <li id="toc-li-224">
+      <a href="ch224.xhtml#matwriteu-statement" class="statement">MATWRITEU</a>
+    </li>
+    <li id="toc-li-225">
+      <a href="ch225.xhtml#maximum-function" class="function">MAXIMUM</a>
+    </li>
+    <li id="toc-li-226">
+      <a href="ch226.xhtml#minimum-function" class="function">MINIMUM</a>
+    </li>
+    <li id="toc-li-227">
+      <a href="ch227.xhtml#mod-function" class="function">MOD</a>
+    </li>
+    <li id="toc-li-228">
+      <a href="ch228.xhtml#mods-function" class="function">MODS</a>
+    </li>
+    <li id="toc-li-229">
+      <a href="ch229.xhtml#msleep-statement" class="statement">MSLEEP</a>
+    </li>
+    <li id="toc-li-230">
+      <a href="ch230.xhtml#muls-function" class="function">MULS</a>
+    </li>
+    <li id="toc-li-231">
+      <a href="ch231.xhtml#negs-function" class="function">NEGS</a>
+    </li>
+    <li id="toc-li-232">
+      <a href="ch232.xhtml#nes-function" class="function">NES</a>
+    </li>
+    <li id="toc-li-233">
+      <a href="ch233.xhtml#next-statement" class="statement">NEXT</a>
+    </li>
+    <li id="toc-li-234">
+      <a href="ch234.xhtml#nobuf-statement" class="statement">NOBUF</a>
+    </li>
+    <li id="toc-li-235">
+      <a href="ch235.xhtml#not-function" class="function">NOT</a>
+    </li>
+    <li id="toc-li-236">
+      <a href="ch236.xhtml#nots-function" class="function">NOTS</a>
+    </li>
+    <li id="toc-li-237">
+      <a href="ch237.xhtml#null-statement" class="statement">NULL</a>
+    </li>
+    <li id="toc-li-238">
+      <a href="ch238.xhtml#num-function" class="function">NUM</a>
+    </li>
+    <li id="toc-li-239">
+      <a href="ch239.xhtml#nums-function" class="function">NUMS</a>
+    </li>
+    <li id="toc-li-240">
+      <a href="ch240.xhtml#objexcallback-statement" class="statement">OBJEXCALLBACK</a>
+    </li>
+    <li id="toc-li-241">
+      <a href="ch241.xhtml#oconv-function" class="function">OCONV</a>
+    </li>
+    <li id="toc-li-242">
+      <a href="ch242.xhtml#oconvs-function" class="function">OCONVS</a>
+    </li>
+    <li id="toc-li-243">
+      <a href="ch243.xhtml#ongoto-statement" class="statement">ONGOTO</a>
+    </li>
+    <li id="toc-li-244">
+      <a href="ch244.xhtml#open-statement" class="statement">OPEN</a>
+    </li>
+    <li id="toc-li-245">
+      <a href="ch245.xhtml#opendev-statement" class="statement">OPENDEV</a>
+    </li>
+    <li id="toc-li-246">
+      <a href="ch246.xhtml#openindex-statement" class="statement">OPENINDEX</a>
+    </li>
+    <li id="toc-li-247">
+      <a href="ch247.xhtml#openpath-statement" class="statement">OPENPATH</a>
+    </li>
+    <li id="toc-li-248">
+      <a href="ch248.xhtml#openseq-statement" class="statement">OPENSEQ</a>
+    </li>
+    <li id="toc-li-249">
+      <a href="ch249.xhtml#openser-statement" class="statement">OPENSER</a>
+    </li>
+    <li id="toc-li-250">
+      <a href="ch250.xhtml#ors-function" class="function">ORS</a>
+    </li>
+    <li id="toc-li-251">
+      <a href="ch251.xhtml#osbread-statement" class="statement">OSBREAD</a>
+    </li>
+    <li id="toc-li-252">
+      <a href="ch252.xhtml#osbwrite-statement" class="statement">OSBWRITE</a>
+    </li>
+    <li id="toc-li-253">
+      <a href="ch253.xhtml#osclose-statement" class="statement">OSCLOSE</a>
+    </li>
+    <li id="toc-li-254">
+      <a href="ch254.xhtml#osdelete-statement" class="statement">OSDELETE</a>
+    </li>
+    <li id="toc-li-255">
+      <a href="ch255.xhtml#osopen-statement" class="statement">OSOPEN</a>
+    </li>
+    <li id="toc-li-256">
+      <a href="ch256.xhtml#osread-statement" class="statement">OSREAD</a>
+    </li>
+    <li id="toc-li-257">
+      <a href="ch257.xhtml#oswrite-statement" class="statement">OSWRITE</a>
+    </li>
+    <li id="toc-li-258">
+      <a href="ch258.xhtml#out-statement" class="statement">OUT</a>
+    </li>
+    <li id="toc-li-259">
+      <a href="ch259.xhtml#page-statement" class="statement">PAGE</a>
+    </li>
+    <li id="toc-li-260">
+      <a href="ch260.xhtml#pause-statement" class="statement">PAUSE</a>
+    </li>
+    <li id="toc-li-261">
+      <a href="ch261.xhtml#perform-statement" class="statement">PERFORM</a>
+    </li>
+    <li id="toc-li-262">
+      <a href="ch262.xhtml#precision-statement" class="statement">PRECISION</a>
+    </li>
+    <li id="toc-li-263">
+      <a href="ch263.xhtml#print-statement" class="statement">PRINT</a>
+    </li>
+    <li id="toc-li-264">
+      <a href="ch264.xhtml#printer-statement" class="statement">PRINTER</a>
+    </li>
+    <li id="toc-li-265">
+      <a href="ch265.xhtml#printerr-statement" class="statement">PRINTERR</a>
+    </li>
+    <li id="toc-li-266">
+      <a href="ch266.xhtml#procread-statement" class="statement">PROCREAD</a>
+    </li>
+    <li id="toc-li-267">
+      <a href="ch267.xhtml#procwrite-statement" class="statement">PROCWRITE</a>
+    </li>
+    <li id="toc-li-268">
+      <a href="ch268.xhtml#program-statement" class="statement">PROGRAM</a>
+    </li>
+    <li id="toc-li-269">
+      <a href="ch269.xhtml#prompt-statement" class="statement">PROMPT</a>
+    </li>
+    <li id="toc-li-270">
+      <a href="ch270.xhtml#putenv-function" class="function">PUTENV</a>
+    </li>
+    <li id="toc-li-271">
+      <a href="ch271.xhtml#pwr-function" class="function">PWR</a>
+    </li>
+    <li id="toc-li-272">
+      <a href="ch272.xhtml#quote-dquote-squote-function" class="function">QUOTE / DQUOTE / SQUOTE</a>
+    </li>
+    <li id="toc-li-273">
+      <a href="ch273.xhtml#raise-function" class="function">RAISE</a>
+    </li>
+    <li id="toc-li-274">
+      <a href="ch274.xhtml#read-statement" class="statement">READ</a>
+    </li>
+    <li id="toc-li-275">
+      <a href="ch275.xhtml#readblk-statement" class="statement">READBLK</a>
+    </li>
+    <li id="toc-li-276">
+      <a href="ch276.xhtml#readl-statement" class="statement">READL</a>
+    </li>
+    <li id="toc-li-277">
+      <a href="ch277.xhtml#readlist-statement" class="statement">READLIST</a>
+    </li>
+    <li id="toc-li-278">
+      <a href="ch278.xhtml#readnext-statement" class="statement">READNEXT</a>
+    </li>
+    <li id="toc-li-279">
+      <a href="ch279.xhtml#readprev-statement" class="statement">READPREV</a>
+    </li>
+    <li id="toc-li-280">
+      <a href="ch280.xhtml#readselect-statement" class="statement">READSELECT</a>
+    </li>
+    <li id="toc-li-281">
+      <a href="ch281.xhtml#readseq-statement" class="statement">READSEQ</a>
+    </li>
+    <li id="toc-li-282">
+      <a href="ch282.xhtml#readt-statement" class="statement">READT</a>
+    </li>
+    <li id="toc-li-283">
+      <a href="ch283.xhtml#readu-statement" class="statement">READU</a>
+    </li>
+    <li id="toc-li-284">
+      <a href="ch284.xhtml#readv-statement" class="statement">READV</a>
+    </li>
+    <li id="toc-li-285">
+      <a href="ch285.xhtml#readvl-statement" class="statement">READVL</a>
+    </li>
+    <li id="toc-li-286">
+      <a href="ch286.xhtml#readvu-statement" class="statement">READVU</a>
+    </li>
+    <li id="toc-li-287">
+      <a href="ch287.xhtml#readxml-statement" class="statement">READXML</a>
+    </li>
+    <li id="toc-li-288">
+      <a href="ch288.xhtml#recordlocked-function" class="function">RECORDLOCKED</a>
+    </li>
+    <li id="toc-li-289">
+      <a href="ch289.xhtml#regexp-function" class="function">REGEXP</a>
+    </li>
+    <li id="toc-li-290">
+      <a href="ch290.xhtml#release-statement" class="statement">RELEASE</a>
+    </li>
+    <li id="toc-li-291">
+      <a href="ch291.xhtml#remove-function" class="function">REMOVE</a>
+    </li>
+    <li id="toc-li-292">
+      <a href="ch292.xhtml#replace-function" class="function">REPLACE</a>
+    </li>
+    <li id="toc-li-293">
+      <a href="ch293.xhtml#return-statement" class="statement">RETURN</a>
+    </li>
+    <li id="toc-li-294">
+      <a href="ch294.xhtml#rewind-statement" class="statement">REWIND</a>
+    </li>
+    <li id="toc-li-295">
+      <a href="ch295.xhtml#right-function" class="function">RIGHT</a>
+    </li>
+    <li id="toc-li-296">
+      <a href="ch296.xhtml#rnd-function" class="function">RND</a>
+    </li>
+    <li id="toc-li-297">
+      <a href="ch297.xhtml#rqm-statement" class="statement">RQM</a>
+    </li>
+    <li id="toc-li-298">
+      <a href="ch298.xhtml#rtndata-statement" class="statement">RTNDATA</a>
+    </li>
+    <li id="toc-li-299">
+      <a href="ch299.xhtml#sadd-function" class="function">SADD</a>
+    </li>
+    <li id="toc-li-300">
+      <a href="ch300.xhtml#sdiv-function" class="function">SDIV</a>
+    </li>
+    <li id="toc-li-301">
+      <a href="ch301.xhtml#seek-statement" class="statement">SEEK</a>
+    </li>
+    <li id="toc-li-302">
+      <a href="ch302.xhtml#select-statement" class="statement">SELECT</a>
+    </li>
+    <li id="toc-li-303">
+      <a href="ch303.xhtml#send-statement" class="statement">SEND</a>
+    </li>
+    <li id="toc-li-304">
+      <a href="ch304.xhtml#sendx-statement" class="statement">SENDX</a>
+    </li>
+    <li id="toc-li-305">
+      <a href="ch305.xhtml#sentence-function" class="function">SENTENCE</a>
+    </li>
+    <li id="toc-li-306">
+      <a href="ch306.xhtml#seq-function" class="function">SEQ</a>
+    </li>
+    <li id="toc-li-307">
+      <a href="ch307.xhtml#seqs-function" class="function">SEQS</a>
+    </li>
+    <li id="toc-li-308">
+      <a href="ch308.xhtml#sin-function" class="function">SIN</a>
+    </li>
+    <li id="toc-li-309">
+      <a href="ch309.xhtml#sleep-statement" class="statement">SLEEP</a>
+    </li>
+    <li id="toc-li-310">
+      <a href="ch310.xhtml#smul-function" class="function">SMUL</a>
+    </li>
+    <li id="toc-li-311">
+      <a href="ch311.xhtml#sort-function" class="function">SORT</a>
+    </li>
+    <li id="toc-li-312">
+      <a href="ch312.xhtml#soundex-function" class="function">SOUNDEX</a>
+    </li>
+    <li id="toc-li-313">
+      <a href="ch313.xhtml#space-function" class="function">SPACE</a>
+    </li>
+    <li id="toc-li-314">
+      <a href="ch314.xhtml#spaces-function" class="function">SPACES</a>
+    </li>
+    <li id="toc-li-315">
+      <a href="ch315.xhtml#splice-function" class="function">SPLICE</a>
+    </li>
+    <li id="toc-li-316">
+      <a href="ch316.xhtml#spooler-function" class="function">SPOOLER</a>
+    </li>
+    <li id="toc-li-317">
+      <a href="ch317.xhtml#sqrt-function" class="function">SQRT</a>
+    </li>
+    <li id="toc-li-318">
+      <a href="ch318.xhtml#sselect-statement" class="statement">SSELECT</a>
+    </li>
+    <li id="toc-li-319">
+      <a href="ch319.xhtml#sselectn-statement" class="statement">SSELECTN</a>
+    </li>
+    <li id="toc-li-320">
+      <a href="ch320.xhtml#sselectv-statement" class="statement">SSELECTV</a>
+    </li>
+    <li id="toc-li-321">
+      <a href="ch321.xhtml#ssub-function" class="function">SSUB</a>
+    </li>
+    <li id="toc-li-322">
+      <a href="ch322.xhtml#status-function" class="function">STATUS</a>
+    </li>
+    <li id="toc-li-323">
+      <a href="ch323.xhtml#status-statement-statement" class="statement">STATUS statement</a>
+    </li>
+    <li id="toc-li-324">
+      <a href="ch324.xhtml#stop-function" class="function">STOP</a>
+    </li>
+    <li id="toc-li-325">
+      <a href="ch325.xhtml#str-function" class="function">STR</a>
+    </li>
+    <li id="toc-li-326">
+      <a href="ch326.xhtml#strs-function" class="function">STRS</a>
+    </li>
+    <li id="toc-li-327">
+      <a href="ch327.xhtml#subroutine-statement" class="statement">SUBROUTINE</a>
+    </li>
+    <li id="toc-li-328">
+      <a href="ch328.xhtml#subs-function" class="function">SUBS</a>
+    </li>
+    <li id="toc-li-329">
+      <a href="ch329.xhtml#substrings-function" class="function">SUBSTRINGS</a>
+    </li>
+    <li id="toc-li-330">
+      <a href="ch330.xhtml#sum-function" class="function">SUM</a>
+    </li>
+    <li id="toc-li-331">
+      <a href="ch331.xhtml#swap-function" class="function">SWAP</a>
+    </li>
+    <li id="toc-li-332">
+      <a href="ch332.xhtml#system-functions-function" class="function">System Functions</a>
+    </li>
+    <li id="toc-li-333">
+      <a href="ch333.xhtml#tan-function" class="function">TAN</a>
+    </li>
+    <li id="toc-li-334">
+      <a href="ch334.xhtml#time-function" class="function">TIME</a>
+    </li>
+    <li id="toc-li-335">
+      <a href="ch335.xhtml#timedate-function" class="function">TIMEDATE</a>
+    </li>
+    <li id="toc-li-336">
+      <a href="ch336.xhtml#timediff-function" class="function">TIMEDIFF</a>
+    </li>
+    <li id="toc-li-337">
+      <a href="ch337.xhtml#timeout-statement" class="statement">TIMEOUT</a>
+    </li>
+    <li id="toc-li-338">
+      <a href="ch338.xhtml#timestamp-function" class="function">TIMESTAMP</a>
+    </li>
+    <li id="toc-li-339">
+      <a href="ch339.xhtml#trans-function" class="function">TRANS</a>
+    </li>
+    <li id="toc-li-340">
+      <a href="ch340.xhtml#transabort-statement" class="statement">TRANSABORT</a>
+    </li>
+    <li id="toc-li-341">
+      <a href="ch341.xhtml#transend-statement" class="statement">TRANSEND</a>
+    </li>
+    <li id="toc-li-342">
+      <a href="ch342.xhtml#transquery-function" class="function">TRANSQUERY</a>
+    </li>
+    <li id="toc-li-343">
+      <a href="ch343.xhtml#transtart-statement" class="statement">TRANSTART</a>
+    </li>
+    <li id="toc-li-344">
+      <a href="ch344.xhtml#trim-function" class="function">TRIM</a>
+    </li>
+    <li id="toc-li-345">
+      <a href="ch345.xhtml#trimb-function" class="function">TRIMB</a>
+    </li>
+    <li id="toc-li-346">
+      <a href="ch346.xhtml#trimbs-function" class="function">TRIMBS</a>
+    </li>
+    <li id="toc-li-347">
+      <a href="ch347.xhtml#trimf-function" class="function">TRIMF</a>
+    </li>
+    <li id="toc-li-348">
+      <a href="ch348.xhtml#trimfs-function" class="function">TRIMFS</a>
+    </li>
+    <li id="toc-li-349">
+      <a href="ch349.xhtml#unassigned-function" class="function">UNASSIGNED</a>
+    </li>
+    <li id="toc-li-350">
+      <a href="ch350.xhtml#uniquekey-function" class="function">UNIQUEKEY</a>
+    </li>
+    <li id="toc-li-351">
+      <a href="ch351.xhtml#unlock-statement" class="statement">UNLOCK</a>
+    </li>
+    <li id="toc-li-352">
+      <a href="ch352.xhtml#udtexecute-statement" class="statement">UDTEXECUTE</a>
+    </li>
+    <li id="toc-li-353">
+      <a href="ch353.xhtml#upcase-function" class="function">UPCASE</a>
+    </li>
+    <li id="toc-li-354">
+      <a href="ch354.xhtml#utf8-function" class="function">UTF8</a>
+    </li>
+    <li id="toc-li-355">
+      <a href="ch355.xhtml#wake-statement" class="statement">WAKE</a>
+    </li>
+    <li id="toc-li-356">
+      <a href="ch356.xhtml#weof-statement" class="statement">WEOF</a>
+    </li>
+    <li id="toc-li-357">
+      <a href="ch357.xhtml#weofseq-statement" class="statement">WEOFSEQ</a>
+    </li>
+    <li id="toc-li-358">
+      <a href="ch358.xhtml#write-statement" class="statement">WRITE</a>
+    </li>
+    <li id="toc-li-359">
+      <a href="ch359.xhtml#writeblk-statement" class="statement">WRITEBLK</a>
+    </li>
+    <li id="toc-li-360">
+      <a href="ch360.xhtml#writelist-statement" class="statement">WRITELIST</a>
+    </li>
+    <li id="toc-li-361">
+      <a href="ch361.xhtml#writeseq-statement" class="statement">WRITESEQ</a>
+    </li>
+    <li id="toc-li-362">
+      <a href="ch362.xhtml#writeseqf-statement" class="statement">WRITESEQF</a>
+    </li>
+    <li id="toc-li-363">
+      <a href="ch363.xhtml#writet-statement" class="statement">WRITET</a>
+    </li>
+    <li id="toc-li-364">
+      <a href="ch364.xhtml#writeu-statement" class="statement">WRITEU</a>
+    </li>
+    <li id="toc-li-365">
+      <a href="ch365.xhtml#writev-statement" class="statement">WRITEV</a>
+    </li>
+    <li id="toc-li-366">
+      <a href="ch366.xhtml#writevu-statement" class="statement">WRITEVU</a>
+    </li>
+    <li id="toc-li-367">
+      <a href="ch367.xhtml#writexml-statement" class="statement">WRITEXML</a>
+    </li>
+    <li id="toc-li-368">
+      <a href="ch368.xhtml#xlate-function" class="function">XLATE</a>
+    </li>
+    <li id="toc-li-369">
+      <a href="ch369.xhtml#xmltodyn-function" class="function">XMLTODYN</a>
+    </li>
+    <li id="toc-li-370">
+      <a href="ch370.xhtml#xmltoxml-function" class="function">XMLTOXML</a>
+    </li>
+    <li id="toc-li-371">
+      <a href="ch371.xhtml#xtd-function" class="function">XTD</a>
+    </li>
+  </ol>
+</div>
+
+
+
+</body></html>

@@ -1,0 +1,32 @@
+<!--?xml version="1.0" encoding="UTF-8"?--><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+  <meta http-equiv="Content-Style-Type" content="text/css"/>
+  <meta name="generator" content="pandoc"/>
+  <title class="function">LOCALDATE</title>
+  <link rel="stylesheet" type="text/css" href="stylesheet.css"/>
+</head>
+<body>
+<div id="localdate-function" class="section level1">
+<a class="dashingAutolink" name="autolink-207"></a><a class="dashAnchor" name="//apple_ref/cpp/Function/LOCALDATE"></a><h1 class="function">LOCALDATE</h1>
+<p>LOCALDATE returns an internal date using the specified Timestamp and TimeZone combination.</p>
+<div id="command-syntax-167" class="section level2">
+<h2>COMMAND SYNTAX</h2>
+<pre><code>LOCALDATE(Timestamp, TimeZone)</code></pre>
+</div>
+<div id="syntax-elements-116" class="section level2">
+<h2>SYNTAX ELEMENTS</h2>
+<p>The LOCALDATE function uses the specified timestamp and adjusts the value by the specified time zone to return the date value in internal date format.</p>
+</div>
+<div id="example-124" class="section level2">
+<h2>EXAMPLE</h2>
+<!--jBC-->
+<pre><code>start_time = MAKETIMESTAMP(DATE(), TIME(), &#39;&#39;)
+time_shift = 100  ;  time_shift&lt;8&gt; = &#39;&#39;    ;* add 100 years to current date
+end_time = CHANGETIMESTAMP(start_time, time_shift)
+CRT OCONV(LOCALDATE(end_time, &#39;&#39;), &#39;D&#39;)               ;* e.g. 20 JUN 2113</code></pre>
+</div>
+</div>
+
+
+
+</body></html>

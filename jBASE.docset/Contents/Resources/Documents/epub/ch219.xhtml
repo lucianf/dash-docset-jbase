@@ -1,0 +1,49 @@
+<!--?xml version="1.0" encoding="UTF-8"?--><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+  <meta http-equiv="Content-Style-Type" content="text/css"/>
+  <meta name="generator" content="pandoc"/>
+  <title class="function">MATCHFIELD</title>
+  <link rel="stylesheet" type="text/css" href="stylesheet.css"/>
+</head>
+<body>
+<div id="matchfield-function" class="section level1">
+<a class="dashingAutolink" name="autolink-218"></a><a class="dashAnchor" name="//apple_ref/cpp/Function/MATCHFIELD"></a><h1 class="function">MATCHFIELD</h1>
+<p>This function is used to check a string against a match pattern.</p>
+<div id="command-syntax-178" class="section level2">
+<h2>COMMAND SYNTAX</h2>
+<pre><code>MATCHFIELD(string, pattern, field)</code></pre>
+</div>
+<div id="syntax-elements-127" class="section level2">
+<h2>SYNTAX ELEMENTS</h2>
+<p><strong>field</strong> is an expression that evaluates to the portion of the match string to be returned.</p>
+<p>If string matches pattern, the MATCHFIELD function returns the portion of string that matches the specified field in pattern. If string does not match pattern, or if string or pattern evaluates to the null value, the MATCHFIELD function returns an empty string. If field evaluates to the null value, the MATCHFIELD function fails and the program terminates with a run-time error.</p>
+<p><strong>pattern</strong> must contain specifiers to cover all characters contained in string. For example, the following statement returns an empty string because not all parts of string are specified in the pattern:</p>
+<pre><code>MATCHFIELD(&#39;XYZ123AB&#39;, &#39;3X3N&#39;, 1)</code></pre>
+<p>To achieve a positive pattern match on the string above, use the following statement:</p>
+<pre><code>MATCHFIELD(&#39;XYZ123AB&#39;, &#39;3X3N0X&#39;, 1)</code></pre>
+<p>This statement returns a value of &#34;XYZ&#34;.</p>
+</div>
+<div id="notes-107" class="section level2">
+<h2>NOTES</h2>
+<p>See also: <a href="#MATCHES">MATCHES</a> operator for information about pattern matching.</p>
+</div>
+<div id="examples-37" class="section level2">
+<h2>EXAMPLES</h2>
+<pre><code>    Q = MATCHFIELD(&#39;AA123BBB9&#39;, &#39;2A0N3A0N&#39;, 3)
+    PRINT &#39;Q=&#39;, Q                               ;*  Q=     BBB
+    ADDR = &#39;20 GREEN ST. NATICK, MA.,01234&#39;
+    ZIP = MATCHFIELD(ADDR, &#39;0N0X5N&#39;, 3)
+    PRINT &#39;ZIP=&#39; , ZIP                          ;*  ZIP=   01234
+    UNV = &#39;PART12345 BLUE AU&#39;
+    COL = MATCHFIELD(UNV, &#39;10X4A3X&#39;, 2)
+    PRINT &#39;COL= &#39;, COL                          ;*  COL=   BLUE
+    XYZ = MATCHFIELD(&#39;ABCDE1234&#39;, &#39;2N3A4N&#39;, 1)
+    PRINT &#39;XYZ= &#39;, XYZ                          ;*  XYZ=
+    ABC = MATCHFIELD(&#39;1234AB&#39;, &#39;4N1A&#39;, 2)
+    PRINT &#39;ABC= &#39;, ABC                          ;*  ABC=</code></pre>
+</div>
+</div>
+
+
+
+</body></html>

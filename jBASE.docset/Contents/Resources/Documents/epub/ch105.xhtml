@@ -1,0 +1,42 @@
+<!--?xml version="1.0" encoding="UTF-8"?--><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+  <meta http-equiv="Content-Style-Type" content="text/css"/>
+  <meta name="generator" content="pandoc"/>
+  <title class="function">DCOUNT</title>
+  <link rel="stylesheet" type="text/css" href="stylesheet.css"/>
+</head>
+<body>
+<div id="dcount-function" class="section level1">
+<a class="dashingAutolink" name="autolink-104"></a><a class="dashAnchor" name="//apple_ref/cpp/Function/DCOUNT"></a><h1 class="function">DCOUNT</h1>
+<p>The DCOUNT() function counts the number of field elements in a string that are separated by a specified delimiter.</p>
+<div id="command-syntax-69" class="section level2">
+<h2>COMMAND SYNTAX</h2>
+<pre><code>DCOUNT(expression1, expression2)</code></pre>
+</div>
+<div id="syntax-elements-39" class="section level2">
+<h2>SYNTAX ELEMENTS</h2>
+<p><strong>expression1</strong> evaluates to a string in which fields are to be counted.</p>
+<p><strong>expression2</strong> evaluates to the delimiter string used to count the fields.</p>
+</div>
+<div id="notes-43" class="section level2">
+<h2>NOTES</h2>
+<p>The delimiter string may consist of more than one character.</p>
+<p>If expression1 is a NULL string, the function returns a value of zero.</p>
+<p>The delimiter string may consist of any character, including system delimiters such as field marks or value marks.</p>
+<p>See also: <a href="#COUNT">COUNT</a></p>
+</div>
+<div id="examples-9" class="section level2">
+<h2>EXAMPLES</h2>
+<pre><code>   search_string = &#34;A:B:C:D&#34;
+   CRT DCOUNT(search_string, &#39;:&#39;)             ;* 4
+   CRT COUNT(search_string, &#39;:&#39;)              ;* 3 - COUNT returned
+                                              ;* number of &#34;:&#34; symbols
+   CHANGE &#39;:&#39; TO &#39;-&gt;&#39; IN search_string
+   CRT search_string                          ;* A-&gt;B-&gt;C-&gt;D
+   CRT DCOUNT(search_string, &#39;-&gt;&#39;)            ;* 4</code></pre>
+</div>
+</div>
+
+
+
+</body></html>

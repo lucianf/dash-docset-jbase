@@ -1,0 +1,82 @@
+<!--?xml version="1.0" encoding="UTF-8"?--><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+  <meta http-equiv="Content-Style-Type" content="text/css"/>
+  <meta name="generator" content="pandoc"/>
+  <title class="function">JQLPUTPROPERTY</title>
+  <link rel="stylesheet" type="text/css" href="stylesheet.css"/>
+</head>
+<body>
+<div id="jqlputproperty-function" class="section level1">
+<a class="dashingAutolink" name="autolink-198"></a><a class="dashAnchor" name="//apple_ref/cpp/Function/JQLPUTPROPERTY"></a><h1 class="function">JQLPUTPROPERTY</h1>
+<p>JQLPUTPROPERTY sets a property in a compiled jQL statement.</p>
+<div id="command-syntax-158" class="section level2">
+<h2>COMMAND SYNTAX</h2>
+<pre><code>JQLPUTPROPERTY(PropertyValue, Statement, Column, PropertyName)</code></pre>
+</div>
+<div id="syntax-elements-110" class="section level2">
+<h2>SYNTAX ELEMENTS</h2>
+<p><strong>PropertyValue</strong> specifies the value to be set for the specified property, such as one or &#34;BLAH&#34;.</p>
+<p><strong>Statement</strong> is the result of a valid JQLCOMPILE() function.</p>
+<p><strong>Column</strong> holds 0 for a general property of the statement, or a column number if the property is set for a specific column.</p>
+<p><strong>PropertyName</strong> are EQUATED values defined by INCLUDEing the file JQLINTERFACE.h. There are lots of these and someone is going to have to document each one.</p>
+<p>This function returns -1 if it locates a problem in the statement and 0 for no problem.</p>
+</div>
+<div id="notes-94" class="section level2">
+<h2>NOTES</h2>
+<p>Some properties may require JQLEXECUTE()first.</p>
+<p>Properties are valid after the compile; this is the main reason for separating the compile and execute into two functions. After compiling, it is possible to examine the properties and set properties before executing.</p>
+<div id="sample-program-illustrating-the-usage-of-compiled-jql-statement" class="section level3">
+<h3>Sample program illustrating the usage of compiled jQL statement:</h3>
+<pre><code>INCLUDE jQLProperties.h
+   //
+   IF NOT( GETENV(&#39;TAFC_HOME&#39;, V.HOME) ) THEN
+      CRT &#39;TAFC_HOME not defined&#39;
+      STOP
+   END
+   //
+   V.QUERY = &#39;LIST ONLY &#39; : V.HOME : &#39;/jbcmessages&#39;
+   V.STMT = &#39;&#39;
+   //
+   V.DUMMY = JQLCOMPILE(V.STMT, V.QUERY, 0, V.MSG)
+   //
+   V.SEL.VAR = &#39;&#39;
+   V.RET = JQLEXECUTE(V.STMT, V.SEL.VAR)
+   IF V.RET NE 0 THEN CRT &#39;JQLEXECUTE RETURNED&#39;, V.RET  ; STOP
+   //
+   LOOP
+      GOSUB FETCH.NEXT
+   UNTIL V.FETCH NE 1
+   REPEAT
+   //
+   STOP
+   //
+FETCH.NEXT:
+   //
+   V.FETCH = JQLFETCH(V.STMT, V.CTRL, V.DATA)
+   IF V.FETCH NE 1 THEN RETURN
+   V.RET = JQLGETPROPERTY(PropertyValue, V.STMT, 0, \
+     STMT_PROPERTY_EXECUTE_COUNT)
+   CRT &#39;ID #&#39; : PropertyValue : &#39;:&#39; , V.DATA&lt;1&gt;
+   //
+   RETURN
+END</code></pre>
+<p>Output:</p>
+<pre>    @ID #1: INV_FILE_TYPE
+    @ID #2: DEVICE_QUIT
+    @ID #3: RTN_NOGOSUB
+    @ID #4: ARRAY_ILLEGAL_SIZE
+    @ID #5: DIFF_COMMON
+    @ID #6: QLNOVERB
+    @ID #7: QLPARAMERR
+    ...
+    @ID #487:   417
+    @ID #488:   80044228
+    @ID #489:   80044233
+    @ID #490:   80045024</pre>
+</div>
+</div>
+</div>
+
+
+
+</body></html>

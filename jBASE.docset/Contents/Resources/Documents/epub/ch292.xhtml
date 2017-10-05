@@ -1,0 +1,39 @@
+<!--?xml version="1.0" encoding="UTF-8"?--><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+  <meta http-equiv="Content-Style-Type" content="text/css"/>
+  <meta name="generator" content="pandoc"/>
+  <title class="function">REPLACE</title>
+  <link rel="stylesheet" type="text/css" href="stylesheet.css"/>
+</head>
+<body>
+<div id="replace-function" class="section level1">
+<a class="dashingAutolink" name="autolink-291"></a><a class="dashAnchor" name="//apple_ref/cpp/Function/REPLACE"></a><h1 class="function">REPLACE</h1>
+<p>REPLACE is an obsolete way to assign to dynamic arrays via a function.</p>
+<div id="command-syntax-245" class="section level2">
+<h2>COMMAND SYNTAX</h2>
+<pre><code>REPLACE(var, expression1{, expression2{, expression3}}; expression4)</code></pre>
+</div>
+<div id="syntax-elements-182" class="section level2">
+<h2>SYNTAX ELEMENTS</h2>
+<p><strong>var</strong> is the dynamic array that the REPLACE function will use to assign new values; remains unchanged.</p>
+<p><strong>expression1</strong> specifies into which field assignment will be made and should evaluate to a numeric.</p>
+<p><strong>expression2</strong> specifies into which value assignment is to be done and should evaluate to a numeric.</p>
+<p><strong>expression3</strong> specifies into which sub-value assignment is to be done and should evaluate to a numeric.</p>
+<p><strong>expression4</strong> can evaluate to any data type and is the actual data that will be assigned to the array.</p>
+</div>
+<div id="notes-153" class="section level2">
+<h2>NOTES</h2>
+<p>The function returns a copy of var with the specified replacement carried out. This value may be assigned to the original var in which case the jBC compiler will optimize the assignment.</p>
+</div>
+<div id="example-172" class="section level2">
+<h2>EXAMPLE</h2>
+<pre><code>   X = &#34;jBASE&#34; :@VM: &#34;is&#34; :@VM: &#34;great&#34; :@FM: &#39;!&#39;
+   Y = REPLACE(X, 1, 2; &#39;is really&#39;)
+   CRT FMT(X, &#39;MCP&#39;)                    ;*  jBASE]is]great^!
+   CRT FMT(Y, &#39;MCP&#39;)                    ;*  jBASE]is really]great^!</code></pre>
+</div>
+</div>
+
+
+
+</body></html>

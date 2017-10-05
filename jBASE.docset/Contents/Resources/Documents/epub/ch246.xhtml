@@ -1,0 +1,65 @@
+<!--?xml version="1.0" encoding="UTF-8"?--><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+  <meta http-equiv="Content-Style-Type" content="text/css"/>
+  <meta name="generator" content="pandoc"/>
+  <title class="statement">OPENINDEX</title>
+  <link rel="stylesheet" type="text/css" href="stylesheet.css"/>
+</head>
+<body>
+<div id="openindex-statement" class="section level1">
+<a class="dashingAutolink" name="autolink-245"></a><a class="dashAnchor" name="//apple_ref/cpp/Method/OPENINDEX"></a><h1 class="statement">OPENINDEX</h1>
+<p>OPENINDEX statement is used to open a particular index definition for a particular file. This index file variable can later be used with the SELECT statement.</p>
+<div id="command-syntax-204" class="section level2">
+<h2>COMMAND SYNTAX</h2>
+<pre><code>OPENINDEX filename,indexname TO indexvar { SETTING setvar } THEN  \
+  | ELSE statements</code></pre>
+</div>
+<div id="syntax-elements-145" class="section level2">
+<h2>SYNTAX ELEMENTS</h2>
+<p><strong>filename</strong> should correspond to a valid file which has at least one index.</p>
+<p><strong>indexname</strong> should correspond to an index created for the filename.</p>
+<p><strong>indexvar</strong> is the variable that holds the descriptor for the index.</p>
+<p>If the <strong>OPEN</strong> statement fails then it will execute any statements associated with an ELSE clause. If the <strong>OPEN</strong> is successful then it will execute any statements associated with a THEN clause. Note that the syntax requires either one or both of the THEN and ELSE clauses.</p>
+<p>If the <strong>SETTING</strong> clause is specified and the OPEN fails, setvar will be set to one of the following values:</p>
+</div>
+<div id="incremental-file-errors-7" class="section level2">
+<h2>INCREMENTAL FILE ERRORS</h2>
+<table>
+<thead>
+<tr class="header">
+<th align="left">Code</th>
+<th align="left">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">128</td>
+<td align="left">No such file or directory</td>
+</tr>
+<tr class="even">
+<td align="left">4096</td>
+<td align="left">Network error</td>
+</tr>
+<tr class="odd">
+<td align="left">24576</td>
+<td align="left">Permission denied</td>
+</tr>
+<tr class="even">
+<td align="left">32768</td>
+<td align="left">Physical I/O error or unknown error</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div id="examples-50" class="section level2">
+<h2>EXAMPLES</h2>
+<pre><code>OPENINDEX &#34;CUSTOMER&#34;,&#34;IXLASTNAME&#34; TO custlastname.ix SETTING errval ELSE
+  CRT &#34;OPENINDEX failed for file CUSTOMER, index IXLASTNAME&#34;
+  ABORT
+END</code></pre>
+</div>
+</div>
+
+
+
+</body></html>

@@ -1,0 +1,51 @@
+<!--?xml version="1.0" encoding="UTF-8"?--><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+  <meta http-equiv="Content-Style-Type" content="text/css"/>
+  <meta name="generator" content="pandoc"/>
+  <title class="statement">OSDELETE</title>
+  <link rel="stylesheet" type="text/css" href="stylesheet.css"/>
+</head>
+<body>
+<div id="osdelete-statement" class="section level1">
+<a class="dashingAutolink" name="autolink-253"></a><a class="dashAnchor" name="//apple_ref/cpp/Method/OSDELETE"></a><h1 class="statement">OSDELETE</h1>
+<p>OSDELETE command deletes a NT or UNIX file.</p>
+<div id="command-syntax-212" class="section level2">
+<h2>COMMAND SYNTAX</h2>
+<pre><code>OSDELETE filename [ ON ERROR statements ]</code></pre>
+</div>
+<div id="syntax-elements-152" class="section level2">
+<h2>SYNTAX ELEMENTS</h2>
+<p><strong>filename</strong> specifies the file to be deleted. Filename must include the file path. If you do not specify a path, jBASE searches the current directory.</p>
+<p><strong>ON ERROR statements</strong> specifies the statements to execute if the OSDELETE statement fails with fatal error, I/O error, or jBASE cannot find the file.</p>
+<p>If you do not specify the ON ERROR clause and a fatal error occurs, the program will terminate.</p>
+<p><em>STATUS Function Return Values</em></p>
+<p>After you execute OSDELETE, the STATUS function returns either 0 or a failure code.</p>
+<table>
+<thead>
+<tr class="header">
+<th align="left">Code</th>
+<th align="left">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">0</td>
+<td align="left">Deletes the file successfully.</td>
+</tr>
+<tr class="even">
+<td align="left">1</td>
+<td align="left">Fails to delete the file.</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div id="examples-53" class="section level2">
+<h2>EXAMPLES</h2>
+<p>In the following example, the program statement deletes the file &#39;MYPIPE&#39; in the current directory:</p>
+<pre><code>OSDELETE &#34;MYPIPE&#34;</code></pre>
+</div>
+</div>
+
+
+
+</body></html>

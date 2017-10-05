@@ -1,0 +1,42 @@
+<!--?xml version="1.0" encoding="UTF-8"?--><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+  <meta http-equiv="Content-Style-Type" content="text/css"/>
+  <meta name="generator" content="pandoc"/>
+  <title class="function">ICONV</title>
+  <link rel="stylesheet" type="text/css" href="stylesheet.css"/>
+</head>
+<body>
+<div id="iconv-function" class="section level1">
+<a class="dashingAutolink" name="autolink-167"></a><a class="dashAnchor" name="//apple_ref/cpp/Function/ICONV"></a><h1 class="function">ICONV</h1>
+<p>The ICONV function converts data in external form such as dates to their internal form.</p>
+<div id="command-syntax-128" class="section level2">
+<h2>COMMAND SYNTAX</h2>
+<pre><code>ICONV(expression1, expression2)</code></pre>
+</div>
+<div id="syntax-elements-85" class="section level2">
+<h2>SYNTAX ELEMENTS</h2>
+<p><strong>expression1</strong> evaluates to the data upon which the conversion is to be performed.</p>
+<p><strong>expression2</strong> should evaluate to the conversion code that is to be performed against the data.</p>
+</div>
+<div id="notes-81" class="section level2">
+<h2>NOTES</h2>
+<p>If the conversion code used assumes a numeric value and a non-numeric value is passed then the original value in expression1 is returned unless the emulation option iconv_nonnumeric_return_null is set.</p>
+</div>
+<div id="examples-30" class="section level2">
+<h2>EXAMPLES</h2>
+<pre><code>* see internal date representation
+   CRT ICONV(&#39;20121231&#39;, &#39;D&#39;)                            ;* 16437
+* calculate difference between dates
+   CRT ICONV(&#39;20121231&#39;, &#39;D&#39;) - ICONV(&#39;20111231&#39;, &#39;D&#39;)   ;* 366
+* check if a year is a leap one
+   CRT OCONV( ICONV(&#39;20111231&#39;, &#39;D4&#39;), &#39;DJ&#39; )    ;*  365
+   CRT OCONV( ICONV(&#39;20121231&#39;, &#39;D4&#39;), &#39;DJ&#39; )    ;*  366
+
+   CRT ICONV(&#39;00:01:02&#39;, &#39;MTS&#39;)        ;* 62
+   CRT ICONV(&#39;4020412042&#39;, &#39;MX&#39;)       ;* @ A B</code></pre>
+</div>
+</div>
+
+
+
+</body></html>

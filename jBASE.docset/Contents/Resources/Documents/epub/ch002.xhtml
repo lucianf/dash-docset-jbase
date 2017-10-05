@@ -1,0 +1,321 @@
+<!--?xml version="1.0" encoding="UTF-8"?--><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+  <meta http-equiv="Content-Style-Type" content="text/css"/>
+  <meta name="generator" content="pandoc"/>
+  <title class="category">Syntax Features</title>
+  <link rel="stylesheet" type="text/css" href="stylesheet.css"/>
+</head>
+<body>
+<div id="syntax-features-category" class="section level1">
+<a class="dashingAutolink" name="autolink-1"></a><a class="dashAnchor" name="//apple_ref/cpp/Category/Syntax%20Features"></a><h1 class="category">Syntax Features</h1>
+<div id="note" class="section level2">
+<h2>Note</h2>
+<p>In examples presented here and below deleting and creation of temporary file called F.TEMP is often used, so if you have such file with something valuable in it in your current directory, backup it first.</p>
+</div>
+<div id="note-2" class="section level2">
+<h2>Note 2</h2>
+<p>OCONV() or FMT() with second parameter &#39;MCP&#39; is often used; its only purpose is to convert FM, VM and SM delimiters to a printable form, e.g.:</p>
+<pre><code>   V.ARRAY = 1 :@FM: 2 :@VM: 3 :@FM: 4 :@SM: 5
+   CRT FMT(V.ARRAY, &#39;MCP&#39;)                ;*   1^2]3^4\5</code></pre>
+<p>Where possible, the output is shown in a comment (as it is in the example above).</p>
+</div>
+<div id="variables-visibility-and-lifetime" class="section level2">
+<h2>Variables visibility and lifetime</h2>
+<p>Variable is visible throughout the program or its subroutine (i.e. in the bounds of particular source code file). To share a variable between different programs/subroutines pass them as parameters in <a href="#CALL">CALL</a> statement or use a named or unnamed <a href="#COMMON">COMMON</a>.</p>
+<p>All variables (except ones in COMMON areas) are reset (i.e. become unassigned) upon program end.</p>
+<p>See also: <a href="#SUBROUTINE">SUBROUTINE</a>, <a href="#ASSIGNED">ASSIGNED</a>, <a href="#UNASSIGNED">UNASSIGNED</a>.</p>
+</div>
+<div id="to-wrap-a-long-line" class="section level2">
+<h2>To wrap a long line</h2>
+<p>Use a backslash:</p>
+<pre><code>   V.LINE = &#39;The report for the year &#39; :@FM: V.YEAR : &#39;, prepared at &#39; \
+        : TIMEDATE()</code></pre>
+<p>Or - if line ends with a comma - that&#39;s not necessary:</p>
+<pre><code>   V.STAT = IOCTL(F.TEST.FILE,
+         JIOCTL_COMMAND_FINDRECORD_EXTENDED, V.NAME)</code></pre>
+</div>
+<div id="several-statements-on-the-same-line" class="section level2">
+<h2>Several statements on the same line</h2>
+<p>Use semicolon to delimit several statements on the same line; don&#39;t forget about code readability. You can combine statements with comments (though as soon as you have a comment, the following statements turn to comments as well):</p>
+<!--jBC-->
+<pre><code>V.VAR = 1  ;  V.VAR++  ;  CRT V.VAR
+V.VAR-- ;* comment starts here so no &#34;1&#34; in the output ; CRT V.VAR
+V.VAR-- ; CRT V.VAR  ;* 0 will be displayed</code></pre>
+<p>Conditional statements are also supported (though code readability suffers in the following example):</p>
+<!--jBC-->
+<pre><code>var_1 = 1 ; var_2 = 2 ; IF var_1 + var_2 EQ 3 THEN
+   CRT var_1, &#39;+&#39;, var_2, &#39;= 3&#39;
+END</code></pre>
+</div>
+<div id="comments" class="section level2">
+<h2>Comments</h2>
+<p>Comments can be defined in different ways:</p>
+<pre><code>* This is a comment
+! And this is a comment
+REM This is also a comment
+// Even this is a comment
+   CRT &#39;1&#39;    ;* this is a comment sharing the same line with some code
+   CRT &#39;2&#39;    // yet another way to define a comment
+   CRT &#39;3&#39;</code></pre>
+</div>
+<div id="string-variables" class="section level2">
+<h2>String variables</h2>
+<p>Strings can be delimited with single quotes, double quotes or backslashes:</p>
+<pre><code>   CRT &#39;QWERTZ&#39;    ;* this is a string
+   CRT &#34;QWERTZ&#34;    ;* this is also a string
+   CRT &#39;QWE&#34;RTZ&#39;   ;* and even this is a string
+   CRT \QWERTZ\    ;* still this is a string
+   * and here a backslash means line continuation
+   CRT &#39;QWE&#39;  \
+      : &#39;RTZ&#39;</code></pre>
+<p>To concatenate strings (you could see it in one of examples above), use a colon:</p>
+<pre><code>   a_line = &#39;QWE&#39; : &#39;RT&#39;
+   CRT a_line                               ;*  QWERT
+   * unary concatenation
+   a_line := &#39;Y&#39;
+   CRT a_line                               ;*  QWERTY</code></pre>
+<p>String can be concatenated with a number without explicit conversion:</p>
+<pre><code>   a_line = &#39;QWERTY&#39;
+   a_line := 123
+   CRT a_line                               ;*  QWERTY123</code></pre>
+<p>To extract a substring from a string use square brackets:</p>
+<pre><code>   a_line = &#39;QWERTY&#39;
+   CRT a_line[1,2]                          ;*  QW
+   CRT a_line[2]                            ;*  TY
+   CRT a_line[-4,2]                         ;*  ER</code></pre>
+<p>It&#39;s possible to reassign parts of a string using that notation:</p>
+<pre><code>   a_string = &#39;ABC&#39;
+   a_string[2,1] = &#39;Q&#39;
+   CRT a_string                             ;* AQC
+   a_string[2,1] = &#39;WER&#39;
+   CRT a_string                             ;* AWERC</code></pre>
+<p>Strings comparison is done from left to right:</p>
+<pre><code>   a_string = &#39;ABC&#39;
+   char_a = &#39;A&#39;
+   char_b = &#39;B&#39;
+   CRT a_string GT char_a       ;* 1
+   CRT a_string GT char_b       ;* 0</code></pre>
+<p>Other common string operations:</p>
+<pre><code>   a_line = &#39;QWERTY&#39;
+   * add quotes around a string
+   CRT SQUOTE(a_line[4,999])                ;*  &#39;RTY&#39;
+   CRT QUOTE(a_line)                        ;*  &#34;QWERTY&#34;
+   * change case
+   CRT DOWNCASE(a_line)                     ;*  qwerty
+   CRT UPCASE(&#39;do it now!&#39;)                 ;*  DO IT NOW!
+   * get length of a string
+   CRT LEN(a_line)                          ;*  6
+   * get length of i18n string - number of characters and number of bytes
+   a_line := CHAR(353)
+   CRT LEN(a_line)                          ;*  7
+   CRT BYTELEN(a_line)                      ;*  8
+   * repeat string several times
+   CRT STR(&#39;QWE&#39;, 5)                        ;*  QWEQWEQWEQWEQWE
+   * dynamic array is also a string
+   dyn_array = &#39;qwe&#39; : @FM : &#34;rty&#34; : @VM : \xYZ\
+   CRT LEN(dyn_array)                       ;*  11
+   CRT FMT( UPCASE(dyn_array), &#39;MCP&#39; )      ;*  QWE^RTY]XYZ
+   * pad a string
+   a_string = &#39;AWERC&#39;
+   CRT &#39;/&#39; : FMT(a_string, &#39;25R&#39;) : &#39;/&#39;     ;* /                    AWERC/
+   * get ASCII value of a character
+   CRT SEQ(a_string[1,1])                   ;* 65 (ASCII code of &#34;A&#34;)</code></pre>
+</div>
+<div id="numeric-variables" class="section level2">
+<h2>Numeric variables</h2>
+<pre><code>   V.VAR = 5            ;   CRT V.VAR           ;* 5
+   CRT ISDIGIT(V.VAR)                           ;* 1
+   V.VAR = V.VAR + 1    ;   CRT V.VAR           ;* 6
+   V.VAR ++             ;   CRT V.VAR           ;* 7
+   V.VAR += 1           ;   CRT V.VAR           ;* 8
+   V.VAR -= 1           ;   CRT V.VAR           ;* 7
+   V.VAR =- 1           ;   CRT V.VAR           ;* -1... easy to make a mistake
+   CRT ISDIGIT(V.VAR)                           ;* 0 (we have minus now)
+   CLEAR
+   CRT V.VAR                                    ;* 0
+   V.VAR2 = V.VAR++     ; CRT V.VAR2            ;* 0 - old value of V.VAR
+   V.VAR3 = ++V.VAR     ; CRT V.VAR3            ;* 2 - value of V.VAR (1) + 1
+* other operators
+   CRT 2 * 3                                    ;* 6
+   CRT 2 ** 10                                  ;* power of 2 (1024)
+   CRT 2 ^ 10                                   ;* same as above
+   CRT 7 / 2                                    ;* 3.5
+   CRT SQRT(144)                                ;* 12
+* precedence is quite expected
+   CRT 7 / 2 + 3                                ;* 6.5
+   CRT 7 / (2 + 3)                              ;* 1.4
+* Dot, plus, minus are considered non-numeric - in all emulations
+* dot_not_numeric = true:
+   CRT ISDIGIT(-1)                         ;* 0
+   CRT ISDIGIT(1.234)                      ;* 0</code></pre>
+</div>
+<div id="boolean-variables" class="section level2">
+<h2>Boolean variables</h2>
+<p>Boolean variables as such don&#39;t exist in jBC; the result of a statement like IF (VAR) THEN... depends on that variable contents:</p>
+<!--jBC-->
+<pre><code>   IF NOT(unassigned_var) THEN CRT &#39;Unassigned var is false&#39;
+   true_var = 1  ;  false_var = 0
+   IF true_var THEN CRT &#39;1 is true&#39;
+   IF NOT(false_var) THEN CRT &#39;0 is false&#39;
+   a_string = &#39;YES&#39;
+   IF a_string THEN CRT &#39;Non-empty string is true&#39;
+   IF NOT(&#39;0.00&#39;) THEN CRT &#39;0.00 is false&#39;
+   IF NOT(&#39;-0.00&#39;) THEN CRT &#39;&#34;-0.00&#34; is still false - treated as numeric&#39;
+* and this test depends on PRECISION
+   PRECISION 9
+   IF NOT(&#39;0.00000000000001&#39;) THEN CRT &#39;0.00000000000001 is false&#39;  \
+         ELSE CRT &#39;0.00000000000001 is true&#39;
+   PRECISION 17
+   IF NOT(&#39;0.00000000000001&#39;) THEN CRT &#39;0.00000000000001 is false&#39; \
+         ELSE CRT &#39;0.00000000000001 is true with PRECISION 17&#39;
+   *------------------------------------------------------------------------
+ANOTHER.METHOD:
+*
+  CRT @TRUE
+  CRT @FALSE</code></pre>
+<p>Compiler warning:</p>
+<pre>    Warning: Variable unassigned_var is never assigned!</pre>
+<p>Runtime:</p>
+<pre>    Non-numeric value -- ZERO USED ,
+    Variable &#39;unassigned_var&#39; , Line 1 , Source test.b
+    Unassigned var is false
+    1 is true
+    0 is false
+    Non-empty string is true
+    0.00 is false
+    &#34;-0.00&#34; is still false - treated as numeric
+    0.00000000000001 is false
+    0.00000000000001 is true with PRECISION 17
+    1
+    0</pre>
+</div>
+<div id="dynamic-arrays" class="section level2">
+<h2>Dynamic arrays</h2>
+<p>To assign or extract a field/value/subvalue from a dynamic array, use string concatenation method (<strong>:</strong>) or angle brackets:</p>
+<pre><code>   V.ARRAY = 1 :@FM: 2 :@FM: 3 :@FM: 4 :@VM: 5 :@VM: 6 :@SM: 7
+   CRT V.ARRAY&lt;2&gt;               ;* 2
+   CRT V.ARRAY&lt;4,3,1&gt;           ;* 6
+   V.ARRAY&lt;2&gt; += 1
+   CRT V.ARRAY&lt;2&gt;               ;* 3
+   V.ARRAY&lt;-1&gt; = 10             ;* adds an element to the end
+* Nesting is allowed:
+   V.CNT = 1 :@FM: 3 :@FM: 5
+   V.ARRAY&lt;V.CNT&lt;2&gt;&gt; = 77
+   CRT FMT(V.ARRAY, &#39;MCP&#39;)      ;* 1^3^77^4]5]6\7^10</code></pre>
+<p>Note that array elements are numbered starting from 1 rather that 0.</p>
+</div>
+<div id="dimensioned-arrays" class="section level2">
+<h2>Dimensioned arrays</h2>
+<p>Dimensioned arrays use parentheses:</p>
+<pre><code>   DIM V.VALUES(30000)            ;* size it
+   MAT V.VALUES = 0               ;* assign 0 to all elements
+   V.X = SYSTEM(2) - 15  ; V.Y = SYSTEM(3) - 5
+   DIM V.SCREEN(V.X, V.Y)         ;* can be 2-dimensional
+   V.SCREEN(1, 1) = 123           ;* here goes assignment</code></pre>
+</div>
+<div id="other-notes" class="section level2">
+<h2>Other notes</h2>
+<p>&#34;=&#34; character can be used both for assignment and for a comparison, though it&#39;s possible to use &#34;EQ&#34; in the latter case:</p>
+<pre><code>   V.STRING = &#39;ABC&#39;
+   IF V.STRING = &#39;ABC&#39; THEN CRT &#39;YES&#39;
+   IF V.STRING EQ &#39;ABC&#39; THEN CRT &#39;YES AGAIN&#39;</code></pre>
+<p>&#34;Non-equal&#34; can either be &#34;#&#34;, &#34;!&#34;, &#34;&lt;&gt;&#34; or &#34;NE&#34;:</p>
+<pre><code>   a_string = &#39;ABC&#39;
+   IF a_string #  &#39;A&#39; THEN CRT &#39;Not an &#34;A&#34;&#39;
+   IF a_string NE &#39;B&#39; THEN CRT &#39;Not a &#34;B&#34;&#39;
+   IF a_string ! &#39;C&#39; THEN CRT &#39;Not even a &#34;C&#34;&#39;
+   IF a_string &lt;&gt; &#39;D&#39; THEN CRT &#39;Surprisingly, but neither a &#34;D&#34;&#39;</code></pre>
+<p>IF...ELSE construct can be used without THEN:</p>
+<pre><code>   V.STRING = &#39;ABC&#39;
+   IF V.STRING NE &#39;ABC&#39; ELSE CRT &#39;YES&#39;</code></pre>
+<div id="differences-between-emulations" class="section level3">
+<h3>Differences between emulations</h3>
+<p>For T24 emulation should always be <strong>prime</strong>, however for porting the code it&#39;s crucial to understand the differences.</p>
+<p>See several examples below.</p>
+<p>The following code will run successfully under <strong>prime</strong> emulation and will fail under <strong>ros</strong>:</p>
+<pre><code>   ret_code = GETENV(&#39;JBCEMULATE&#39;, jbc_emu)   ;   CRT jbc_emu
+   dyn_array = 3 :@AM: 7
+   dyn_array += 4
+   CRT FMT(dyn_array, &#39;MCP&#39;)</code></pre>
+<p>Runtime:</p>
+<pre>    prime
+    7^7</pre>
+<pre>    ros
+    Non-numeric value -- ZERO USED ,
+    Variable &#39;dyn_array&#39; , Line     3 , Source test.b
+    Trap from an error message, error message name = NON_NUMERIC</pre>
+<p><em>Setting in Config_EMULATE: </em><strong>no_value_maths = false|true</strong></p>
+<p>Next program outputs <em>&lt;&gt;</em> under <strong>prime</strong> and <em>&lt;0&gt;</em> under <strong>seq</strong> emulation. In the latter case there will be zero-sized file <em>report.txt</em> after program termination. So if, for example, nothing was written to a report under <strong>prime</strong> emulation (or, in fact, any other except <strong>seq</strong>), there will be no output file left after that.</p>
+<p>Source code:</p>
+<pre><code>   dir_name = &#39;.&#39;
+   file_name = &#39;report.txt&#39;
+   DELETESEQ dir_name, file_name ELSE NULL
+   *
+   OPENSEQ dir_name, file_name TO f_report THEN NULL
+   CRT &#39;&lt;&#39; : DIR(file_name)&lt;1&gt; : &#39;&gt;&#39;</code></pre>
+<p><em>Setting in Config_EMULATE: </em><strong>openseq_creates = false|true</strong></p>
+<p>The following program outputs <em>1</em> under <strong>prime</strong> emulation and <em>0</em> under <strong>r83</strong>, thus showing that common variables can be assigned or unassigned upon declaration of COMMON area:</p>
+<pre><code>   COMMON /MY.COMM/ var_1, var_2
+   *
+   CRT ASSIGNED(var_1)</code></pre>
+<p><em>Setting in Config_EMULATE: </em><strong>named_common = unassigned|null|zero</strong></p>
+<p>The next program outputs <em>A<sup>1</sup>2<sup>3</sup>4^5</em> under <strong>seq</strong> or <strong>r83</strong> emulations; under others (that do add additional delimiter even if one exists at the end of an array in question) the output will be: <em>A<sup><sup>1</sup>2</sup>3<sup>4</sup>5</em>.</p>
+<p>Source code:</p>
+<pre><code>   dyn_array = &#39;A&#39; : @FM
+   FOR i = 1 TO 5
+      dyn_array&lt;-1&gt; = i
+   NEXT i
+   CRT OCONV(dyn_array, &#39;MCP&#39;)</code></pre>
+<p><em>Setting in Config_EMULATE: </em><strong>no_extra_delimiter = false|true</strong></p>
+<p>The following <em>READV</em> example outputs <em>REC1</em> (i.e. record key) when is run under <strong>jbase</strong> emulation and <em>3</em> (i.e. fields count) under, e.g., <strong>ap</strong> or <strong>r83</strong>:</p>
+<pre><code>   OPEN &#39;F.TEMP&#39; TO f_temp THEN
+      ret_error = &#39;&#39;
+      CLEARFILE f_temp SETTING ret_error
+      IF ret_error NE &#39;&#39; THEN
+         CRT &#39;ERROR &#39; : ret_error
+         STOP
+      END
+   END ELSE
+      EXECUTE &#39;CREATE-FILE DATA F.TEMP 1 101 TYPE=J4&#39;
+      OPEN &#39;F.TEMP&#39; TO f_temp ELSE ABORT 201, &#39;F.TEMP&#39;
+   END
+   *
+   out_record = &#39;LINE 1&#39; :@FM: &#39;LINE 2&#39; :@FM: &#39;LINE 3&#39;
+   WRITE out_record TO f_temp, &#39;REC1&#39;
+   *
+   READV in_record FROM f_temp, &#39;REC1&#39;, 0 ELSE
+      CRT &#39;Read error&#39;
+      STOP
+   END
+   *
+   CRT in_record</code></pre>
+<p><em>Setting in Config_EMULATE: </em><strong>readv0 = key|dcount|binary</strong></p>
+<p>Some settings are effective at runtime, others apply during compilation. For example, the following program compiles successfully under <strong>prime</strong> emulation and runs successfully after that under all emulations. However, it&#39;s not possible to compile it under, say, <strong>jbase</strong> emulation. Reason of error - redimensioning of an array.</p>
+<p>Code:</p>
+<pre><code>   DIMENSION dyn_array(10)
+   MAT dyn_array = &#39;!&#39;
+   dyn_array(5) = &#39;?&#39;
+   FOR i = 1 TO 10
+      CRT dyn_array(i):          ;* !!!!?!!!!!
+   NEXT i
+   DIM dyn_array(15)
+   dyn_array(15) = &#39;...&#39;
+   CRT dyn_array(15)</code></pre>
+<p>Compilation under <strong>jbase</strong> emulation:</p>
+<pre>    [error 1        (32)] &#34;test.b&#34;, 7 (offset 18)  near &#34;)&#34;:
+    Array dyn_array has already been DIMensioned
+    &nbsp;
+    1 error was found</pre>
+<p><em>Setting in Config_EMULATE: </em><strong>resize_array = false|true</strong></p>
+<p>Another example:</p>
+<!--jBC-->
+<pre><code>* number of seconds past midnight
+   CRT SYSTEM(12)   ;* e.g. 30938703.4097 under prime, 309387 under ros</code></pre>
+<p>For more settings see <em>Config_EMULATE</em> and <em>Config_EMULATE.txt</em> files in your TAFC/config folder.</p>
+</div>
+</div>
+</div>
+
+
+
+</body></html>

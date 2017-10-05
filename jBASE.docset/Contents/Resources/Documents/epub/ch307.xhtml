@@ -1,0 +1,39 @@
+<!--?xml version="1.0" encoding="UTF-8"?--><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+  <meta http-equiv="Content-Style-Type" content="text/css"/>
+  <meta name="generator" content="pandoc"/>
+  <title class="function">SEQS</title>
+  <link rel="stylesheet" type="text/css" href="stylesheet.css"/>
+</head>
+<body>
+<div id="seqs-function" class="section level1">
+<a class="dashingAutolink" name="autolink-306"></a><a class="dashAnchor" name="//apple_ref/cpp/Function/SEQS"></a><h1 class="function">SEQS</h1>
+<p>SEQS function is used to convert a dynamic array of ASCII characters to their numeric string equivalents.</p>
+<div id="command-syntax-259" class="section level2">
+<h2>COMMAND SYNTAX</h2>
+<pre><code>SEQS(dynamic.array)</code></pre>
+</div>
+<div id="syntax-elements-196" class="section level2">
+<h2>SYNTAX ELEMENTS</h2>
+<p><strong>dynamic.array</strong> specifies the ASCII characters to be converted. If dynamic.array evaluates to null, it returns null. If any element of dynamic.array is null, it returns null for that element.</p>
+<p>If you use the subroutine syntax, the resulting dynamic array is returned as return.array.</p>
+<p>By using the SEQS function to convert a character outside its range results in a run-time message, and the return of an empty string.</p>
+</div>
+<div id="international-mode-22" class="section level2">
+<h2>INTERNATIONAL MODE</h2>
+<p>The SEQS function will return numeric values beyond 255 for UTF-8 byte sequences representing any Unicode values above 0x000000ff.</p>
+</div>
+<div id="example-179" class="section level2">
+<h2>EXAMPLE</h2>
+<pre><code>G = &#39;T&#39; :@VM: &#34;G&#34;
+A = SEQS(G)
+PRINT A
+PRINT SEQS(&#39;G&#39;)</code></pre>
+<p>The output of this program is:</p>
+<pre>    84]71 71</pre>
+</div>
+</div>
+
+
+
+</body></html>

@@ -1,0 +1,52 @@
+<!--?xml version="1.0" encoding="UTF-8"?--><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+  <meta http-equiv="Content-Style-Type" content="text/css"/>
+  <meta name="generator" content="pandoc"/>
+  <title class="statement">PAUSE</title>
+  <link rel="stylesheet" type="text/css" href="stylesheet.css"/>
+</head>
+<body>
+<div id="pause-statement" class="section level1">
+<a class="dashingAutolink" name="autolink-259"></a><a class="dashAnchor" name="//apple_ref/cpp/Method/PAUSE"></a><h1 class="statement">PAUSE</h1>
+<p>PAUSE statement allows processing to be suspended until an external event triggered by a <a href="#WAKE">WAKE</a> statement from another process or a timeout occurs.</p>
+<div id="command-syntax-218" class="section level2">
+<h2>COMMAND SYNTAX</h2>
+<pre><code>PAUSE {expression}</code></pre>
+</div>
+<div id="syntax-elements-158" class="section level2">
+<h2>SYNTAX ELEMENTS</h2>
+<p><strong>expression</strong> may evaluate to a timeout value, which is the maximum number of seconds to suspend the process. If the expression is omitted then the PAUSE statement will cause the process to suspend until woken by the <a href="#WAKE">WAKE</a> statement.</p>
+<p>If a timeout value is specified and the suspended process is not woken by the <a href="#WAKE">WAKE</a> statement then the process will continue once the timeout period has expired.</p>
+<p>If a <a href="#WAKE">WAKE</a> statement is executed before a PAUSE statement, then the PAUSE will be ignored and processing will continue until a subsequent PAUSE statement.</p>
+</div>
+<div id="example-148" class="section level2">
+<h2>EXAMPLE</h2>
+<p>Pausing program:</p>
+<pre><code>   @USER.ROOT = &#39;Sleeping beauty&#39;
+   start_time = TIME()
+   CRT &#39;Pausing...&#39;
+   PAUSE 20
+   IF TIME() - start_time LT 20 THEN CRT &#34;Who&#39;s there?&#34;
+   ELSE CRT &#39;Resuming...&#39;</code></pre>
+<p>Waking program:</p>
+<pre><code>INCLUDE JBC.h
+   OPEN SYSTEM(1027) TO PROC ELSE STOP 201, SYSTEM(1027)
+   SELECT PROC
+   *
+   LOOP WHILE READNEXT key DO
+      READ rec FROM PROC, key THEN
+         IF rec&lt;USER_PROC_USER_ROOT&gt; EQ &#39;Sleeping beauty&#39; THEN
+            CRT &#39;Found...&#39; :
+            WAKE rec&lt;USER_PROC_PORT_NUMBER&gt;
+            CRT &#39;and awoken&#39;
+            STOP
+         END
+      END
+   REPEAT
+   CRT &#39;Nobody sleeps&#39;</code></pre>
+</div>
+</div>
+
+
+
+</body></html>

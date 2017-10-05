@@ -1,0 +1,42 @@
+<!--?xml version="1.0" encoding="UTF-8"?--><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+  <meta http-equiv="Content-Style-Type" content="text/css"/>
+  <meta name="generator" content="pandoc"/>
+  <title class="function">UTF8</title>
+  <link rel="stylesheet" type="text/css" href="stylesheet.css"/>
+</head>
+<body>
+<div id="utf8-function" class="section level1">
+<a class="dashingAutolink" name="autolink-353"></a><a class="dashAnchor" name="//apple_ref/cpp/Function/UTF8"></a><h1 class="function">UTF8</h1>
+<p>UTF8 function converts a latin1 or binary string into the UTF-8 equivalent byte sequence.</p>
+<div id="command-syntax-298" class="section level2">
+<h2>COMMAND SYNTAX</h2>
+<pre><code>UTF8(expression)</code></pre>
+</div>
+<div id="syntax-elements-227" class="section level2">
+<h2>SYNTAX ELEMENTS</h2>
+<p>The expression is expected to be a binary/latin1 code page string, which is converted into a UTF-8 encoded byte sequence.</p>
+</div>
+<div id="example-196" class="section level2">
+<h2>EXAMPLE</h2>
+<pre><code>   lat_line = CHAR(198) : CHAR(189) : CHAR(191)
+   utf_line = UTF8(lat_line)
+   FOR i = 1 TO 6 STEP 2
+      CRT DTX( SEQ(utf_line[i,1]) ), DTX( SEQ(utf_line[i+1,1]) )
+   NEXT i</code></pre>
+<p>The output of this program is:</p>
+<pre>    C3 86 (latin capital letter ae)
+    C2 BD (vulgar fraction one half)
+    C2 BF (inverted question mark)</pre>
+</div>
+<div id="note-21" class="section level2">
+<h2>NOTE</h2>
+<p>To run this example the following environment variables are to be set:</p>
+<pre>    JBASE_I18N=1
+    JBASE_CODEPAGE=utf8</pre>
+</div>
+</div>
+
+
+
+</body></html>

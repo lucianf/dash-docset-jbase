@@ -1,0 +1,51 @@
+<!--?xml version="1.0" encoding="UTF-8"?--><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+  <meta http-equiv="Content-Style-Type" content="text/css"/>
+  <meta name="generator" content="pandoc"/>
+  <title class="statement">OSCLOSE</title>
+  <link rel="stylesheet" type="text/css" href="stylesheet.css"/>
+</head>
+<body>
+<div id="osclose-statement" class="section level1">
+<a class="dashingAutolink" name="autolink-252"></a><a class="dashAnchor" name="//apple_ref/cpp/Method/OSCLOSE"></a><h1 class="statement">OSCLOSE</h1>
+<p>OSCLOSE command closes a sequential file that you have opened with the OSOPEN or OPENSEQ command.</p>
+<div id="command-syntax-211" class="section level2">
+<h2>COMMAND SYNTAX</h2>
+<pre><code>OSCLOSE file.var [ ON ERROR statements ]</code></pre>
+</div>
+<div id="syntax-elements-151" class="section level2">
+<h2>SYNTAX ELEMENTS</h2>
+<p><strong>file.var</strong> specifies the file to close.</p>
+<p><strong>ON ERROR statements</strong> specifies statements executed when the OSCLOSE statement fails with fatal error, I/O error, or JBASE cannot find the file.</p>
+<p>If you do not specify the ON ERROR clause and a fatal error occurs, the program will enter the debugger.</p>
+<p><em>STATUS Function Return Values</em></p>
+<p>After you execute OSCLOSE, the STATUS function returns either 0 or a failure code.</p>
+<table>
+<thead>
+<tr class="header">
+<th align="left">Code</th>
+<th align="left">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">0</td>
+<td align="left">Closes the file successfully.</td>
+</tr>
+<tr class="even">
+<td align="left">1</td>
+<td align="left">Fails to write the file.</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div id="example-144" class="section level2">
+<h2>EXAMPLE</h2>
+<p>In the following example, the program statement closes the file opened to MYPIPE file variable.</p>
+<pre><code>OSCLOSE MYPIPE</code></pre>
+</div>
+</div>
+
+
+
+</body></html>

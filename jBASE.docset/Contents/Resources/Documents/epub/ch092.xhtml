@@ -1,0 +1,42 @@
+<!--?xml version="1.0" encoding="UTF-8"?--><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+  <meta http-equiv="Content-Style-Type" content="text/css"/>
+  <meta name="generator" content="pandoc"/>
+  <title class="statement">COLLECTDATA</title>
+  <link rel="stylesheet" type="text/css" href="stylesheet.css"/>
+</head>
+<body>
+<div id="collectdata-statement" class="section level1">
+<a class="dashingAutolink" name="autolink-91"></a><a class="dashAnchor" name="//apple_ref/cpp/Method/COLLECTDATA"></a><h1 class="statement">COLLECTDATA</h1>
+<p>Use the COLLECTDATA statement to retrieve data passed from the PASSDATA clause of an EXECUTE statement.</p>
+<div id="command-syntax-56" class="section level2">
+<h2>COMMAND SYNTAX</h2>
+<pre><code>COLLECTDATA variable</code></pre>
+</div>
+<div id="syntax-elements-30" class="section level2">
+<h2>SYNTAX ELEMENTS</h2>
+<p><strong>variable</strong> is the name of the variable, which is to store the retrieved data.</p>
+</div>
+<div id="notes-34" class="section level2">
+<h2>NOTES</h2>
+<p>Use the COLLECTDATA statement in any program, which is EXECUTEd (or PERFORMed) by another program where the calling program uses a PASSDATA clause. The EXECUTEd program uses a COLLECTDATA statement to retrieve the passed data.</p>
+<p>If a PASSDATA clause is not in effect, variable will be assigned a value of null.</p>
+</div>
+<div id="example-56" class="section level2">
+<h2>EXAMPLE</h2>
+<p>Program test.b:</p>
+<pre><code>   EXECUTE &#39;./test2&#39; PASSDATA SYSTEM(40)</code></pre>
+<p>Program test2.b:</p>
+<pre><code>   COLLECTDATA the_parent
+   CRT &#39;Executed from &#39; : the_parent</code></pre>
+<p>Program test2 executed by itself outputs &#34;Executed from &#34;; execution of program test will output &#34;Executed from test&#34;.</p>
+</div>
+<div id="note-8" class="section level2">
+<h2>NOTE</h2>
+<p>Compile both programs without &#34;-E&#34; switch so shared libraries will be created, otherwise the data wouldn&#39;t be passed between programs.</p>
+</div>
+</div>
+
+
+
+</body></html>

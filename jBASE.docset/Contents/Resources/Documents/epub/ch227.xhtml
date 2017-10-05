@@ -1,0 +1,35 @@
+<!--?xml version="1.0" encoding="UTF-8"?--><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+  <meta http-equiv="Content-Style-Type" content="text/css"/>
+  <meta name="generator" content="pandoc"/>
+  <title class="function">MOD</title>
+  <link rel="stylesheet" type="text/css" href="stylesheet.css"/>
+</head>
+<body>
+<div id="mod-function" class="section level1">
+<a class="dashingAutolink" name="autolink-226"></a><a class="dashAnchor" name="//apple_ref/cpp/Function/MOD"></a><h1 class="function">MOD</h1>
+<p>MOD function returns the arithmetic modulo of two numeric expressions.</p>
+<div id="command-syntax-186" class="section level2">
+<h2>COMMAND SYNTAX</h2>
+<pre><code>MOD(expression1, expression2)</code></pre>
+</div>
+<div id="syntax-elements-135" class="section level2">
+<h2>SYNTAX ELEMENTS</h2>
+<p>Both <strong>expression1</strong> and <strong>expression2</strong> should evaluate to numeric expressions or else runtime error will occur.</p>
+</div>
+<div id="notes-115" class="section level2">
+<h2>NOTES</h2>
+<p>The remainder of expression1 divided by expression2 calculates the modulo. If expression2 evaluates to 0, then the value of expression1 is returned.</p>
+</div>
+<div id="examples-45" class="section level2">
+<h2>EXAMPLES</h2>
+<pre><code>FOR I = 1 TO 10000
+   IF MOD(I, 1000) = 0 THEN CRT &#34;+&#34; :
+NEXT I</code></pre>
+<p>displays a &#34;+&#34; on the screen every 1000 iterations.</p>
+</div>
+</div>
+
+
+
+</body></html>

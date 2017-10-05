@@ -1,0 +1,51 @@
+<!--?xml version="1.0" encoding="UTF-8"?--><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+  <meta http-equiv="Content-Style-Type" content="text/css"/>
+  <meta name="generator" content="pandoc"/>
+  <title class="function">PUTENV</title>
+  <link rel="stylesheet" type="text/css" href="stylesheet.css"/>
+</head>
+<body>
+<div id="putenv-function" class="section level1">
+<a class="dashingAutolink" name="autolink-269"></a><a class="dashAnchor" name="//apple_ref/cpp/Function/PUTENV"></a><h1 class="function">PUTENV</h1>
+<p>PUTENV is used to set environment variables for the current process.</p>
+<div id="command-syntax-227" class="section level2">
+<h2>COMMAND SYNTAX</h2>
+<pre><code>PUTENV(expression)</code></pre>
+</div>
+<div id="syntax-elements-165" class="section level2">
+<h2>SYNTAX ELEMENTS</h2>
+<p><strong>expression</strong> should evaluate to a string of the form:</p>
+<p>EnvVarName=value</p>
+<p>where</p>
+<p>EnvVarName is the name of a valid environment variable and value is any string that makes sense to the variable being set.</p>
+<p>If PUTENV function succeeds it returns a Boolean TRUE value, if it fails it will return a Boolean FALSE value.</p>
+</div>
+<div id="notes-138" class="section level2">
+<h2>NOTES</h2>
+<p>PUTENV only sets environment variables for the current process and processes spawned (say by EXECUTE) by this process. These variables are known as export only variables.</p>
+<p>See also: <a href="#GETENV">GETENV</a></p>
+</div>
+<div id="example-155" class="section level2">
+<h2>EXAMPLE</h2>
+<pre><code>   V.ENV = &#39;JBASE_ERRMSG_ZERO_USED&#39;
+   IF NOT( PUTENV(V.ENV : &#39;=35&#39;) ) THEN
+      CRT &#39;PUTENV failed&#39;
+      STOP
+   END
+   CRT &#39;See the impact of JBASE_ERRMSG_ZERO_USED&#39;
+   CRT &#39;=35&#39;
+   CRT V.VAR     ;* variable not assigned; nothing is being output
+   IF NOT( PUTENV(V.ENV : &#39;=0&#39;) ) THEN
+      CRT &#39;PUTENV failed&#39;
+      STOP
+   END
+   CRT &#39;=0&#39;
+   CRT V.VAR     ;* Invalid or uninitialised variable --  NULL USED ,
+                 ;* Var (UNKNOWN) , Line    17 , Source test.b</code></pre>
+</div>
+</div>
+
+
+
+</body></html>

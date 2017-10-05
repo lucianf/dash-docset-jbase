@@ -1,0 +1,54 @@
+<!--?xml version="1.0" encoding="UTF-8"?--><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+  <meta http-equiv="Content-Style-Type" content="text/css"/>
+  <meta name="generator" content="pandoc"/>
+  <title class="statement">WEOF</title>
+  <link rel="stylesheet" type="text/css" href="stylesheet.css"/>
+</head>
+<body>
+<div id="weof-statement" class="section level1">
+<a class="dashingAutolink" name="autolink-355"></a><a class="dashAnchor" name="//apple_ref/cpp/Method/WEOF"></a><h1 class="statement">WEOF</h1>
+<p>WEOF statement allows the program to write an EOF mark on an attached tape device.</p>
+<div id="command-syntax-300" class="section level2">
+<h2>COMMAND SYNTAX</h2>
+<pre><code>WEOF { ON expression }</code></pre>
+</div>
+<div id="syntax-elements-229" class="section level2">
+<h2>SYNTAX ELEMENTS</h2>
+<p><strong>expression</strong> specifies the device channel to use. It should evaluate to a numeric integer argument in the range 0-9, the default value is zero.</p>
+</div>
+<div id="notes-189" class="section level2">
+<h2>NOTES</h2>
+<p>If the WEOF fails it then executes the statements associated with any ELSE clause. SYSTEM(0) will return the reason for the failure as follows:</p>
+<table>
+<thead>
+<tr class="header">
+<th align="left">Code</th>
+<th align="left">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">1</td>
+<td align="left">There is no media attached to the channel.</td>
+</tr>
+<tr class="even">
+<td align="left">2</td>
+<td align="left">End of media found.</td>
+</tr>
+</tbody>
+</table>
+<p>A &#34;tape&#34; does not refer to magnetic tape devices only but to any device described previously to TAFC.</p>
+<p>If the specified channel has no assigned tape device, it enters the TAFC debugger with an appropriate message.</p>
+</div>
+<div id="example-197" class="section level2">
+<h2>EXAMPLE</h2>
+<pre><code>WEOF ON 5 ELSE
+    CRT &#34;No tape device exists for channel 5&#34;
+END</code></pre>
+</div>
+</div>
+
+
+
+</body></html>

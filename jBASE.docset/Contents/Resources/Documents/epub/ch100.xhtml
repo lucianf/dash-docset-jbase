@@ -1,0 +1,31 @@
+<!--?xml version="1.0" encoding="UTF-8"?--><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+  <meta http-equiv="Content-Style-Type" content="text/css"/>
+  <meta name="generator" content="pandoc"/>
+  <title class="function">COUNTS</title>
+  <link rel="stylesheet" type="text/css" href="stylesheet.css"/>
+</head>
+<body>
+<div id="counts-function" class="section level1">
+<a class="dashingAutolink" name="autolink-99"></a><a class="dashAnchor" name="//apple_ref/cpp/Function/COUNTS"></a><h1 class="function">COUNTS</h1>
+<p>Use the COUNTS function to count the number of times a substring is repeated in each element of a dynamic array. The result is a new dynamic array whose elements are the counts corresponding to the elements in the dynamic array.</p>
+<div id="command-syntax-64" class="section level2">
+<h2>COMMAND SYNTAX</h2>
+<pre><code>COUNTS(dynamic.array, substring)</code></pre>
+<p><strong>dynamic.array</strong> specifies the dynamic array whose elements are to be searched.</p>
+<p><strong>substring</strong> is an expression that evaluates to the substring to be counted. substring can be a character string, a constant, or a variable. Each character in an element is matched to substring only once. Therefore, when substring is longer than one character and a match is found, the search continues with the character following the matched substring. No part of the matched element is recounted toward another match. If substring does not appear in an element, a 0 value is returned. If substring is an empty string, the number of characters in the element is returned. If substring is null, the COUNTS function fails and the program terminates with a run-time error message. If any element in dynamic.array is null, null is returned.</p>
+</div>
+<div id="example-64" class="section level2">
+<h2>EXAMPLE</h2>
+<pre><code>ARRAY= &#34;A&#34; :@VM: &#34;AA&#34; :@SM: &#34;AAAAA&#34;
+PRINT COUNTS(ARRAY, &#39;A&#39;)
+PRINT COUNTS(ARRAY, &#39;AA&#39;)</code></pre>
+<p>The output of this program is:</p>
+<pre>    1]2\5
+    0]1\2</pre>
+</div>
+</div>
+
+
+
+</body></html>

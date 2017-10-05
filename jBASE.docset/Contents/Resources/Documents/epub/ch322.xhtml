@@ -1,0 +1,50 @@
+<!--?xml version="1.0" encoding="UTF-8"?--><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+  <meta http-equiv="Content-Style-Type" content="text/css"/>
+  <meta name="generator" content="pandoc"/>
+  <title class="function">STATUS</title>
+  <link rel="stylesheet" type="text/css" href="stylesheet.css"/>
+</head>
+<body>
+<div id="status-function" class="section level1">
+<a class="dashingAutolink" name="autolink-321"></a><a class="dashAnchor" name="//apple_ref/cpp/Function/STATUS"></a><h1 class="function">STATUS</h1>
+<p>STATUS function after an OPENPATH statement to find the cause of a file open failure (that is, for an tatement in which the ELSE clause is used). The following values can be returned if the statement is unsuccessful:</p>
+<p>For File access commands</p>
+<p><a href="#READ">READ</a>, <a href="#WRITE">WRITE</a>, <a href="#OPEN">OPEN</a></p>
+<p><em>Previous Operation</em></p>
+<p>Value = 0 if successful</p>
+<p>Value = Operating System error code if previous command failed</p>
+<p>13 - permission denied on UNIX systems</p>
+<p><em>OCONV Conversions</em></p>
+<p>0 = successful</p>
+<p>1 = invalid conversion requested</p>
+<p>3 = conversion of possible invalid date</p>
+<div id="command-syntax-272" class="section level2">
+<h2>COMMAND SYNTAX</h2>
+<pre><code>STATUS()</code></pre>
+</div>
+<div id="description-6" class="section level2">
+<h2>DESCRIPTION</h2>
+<p>Arguments are required for the STATUS function.</p>
+<p>Values of STATUS after <a href="#CLOSE">CLOSE</a>, <a href="#DELETE">DELETE</a>, <a href="#MATREAD">MATREAD</a>, <a href="#MATWRITE">MATWRITE</a>, <a href="#OPEN">OPEN</a>, <a href="#READ">READ</a> and <a href="#WRITE">WRITE</a></p>
+<p><em>After a <a href="#DELETE">DELETE</a> statement:</em> After a DELETE statement with an ON ERROR clause, the value returned is the error number.</p>
+<p>Returns 0 if successful else returns ERROR number</p>
+<p><em>After an <a href="#OPEN">OPEN</a>, <a href="#OPENPATH">OPENPATH</a>, or <a href="#OPENSEQ">OPENSEQ</a> statement:</em> The file type is returned if the file is opened successfully. If the file is not opened successfully, the following values may return:</p>
+<p><em>After a <a href="#READ">READ</a> statement:</em> If the file is a distributed file, the STATUS function returns the following:</p>
+<p><em>After a <a href="#READL">READL</a>, <a href="#READU">READU</a>, <a href="#READVL">READVL</a>, or <a href="#READVU">READVU</a> statement:</em> If the statement includes the LOCKED clause, the returned value is the terminal number, as returned by the WHO command, of the user who set the lock.</p>
+<p><em>After a <a href="#READSEQ">READSEQ</a> statement:</em></p>
+<p><em>After a <a href="#READT">READT</a>, <a href="#REWIND">REWIND</a>, <a href="#WEOF">WEOF</a>, or <a href="#WRITET">WRITET</a> statement:</em> The returned value is hardware-dependent (that is, it varies according to the characteristics of the specific tape drive unit). Consult the documentation that accompanied your tape drive unit for information about interpreting the values returned by the STATUS function.</p>
+</div>
+<div id="example-185" class="section level2">
+<h2>EXAMPLE</h2>
+<pre><code>   DELETE not_valid_filevar, &#39;REC5&#39; SETTING ret_code ON ERROR
+      CRT &#39;REC5 - DELETE ERROR&#39;
+   END
+   CRT STATUS()           ;*  -1
+   CRT ret_code           ;*  32768</code></pre>
+</div>
+</div>
+
+
+
+</body></html>

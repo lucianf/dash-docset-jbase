@@ -1,0 +1,29 @@
+<!--?xml version="1.0" encoding="UTF-8"?--><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+  <meta http-equiv="Content-Style-Type" content="text/css"/>
+  <meta name="generator" content="pandoc"/>
+  <title class="function">ANDS</title>
+  <link rel="stylesheet" type="text/css" href="stylesheet.css"/>
+</head>
+<body>
+<div id="ands-function" class="section level1">
+<a class="dashingAutolink" name="autolink-38"></a><a class="dashAnchor" name="//apple_ref/cpp/Function/ANDS"></a><h1 class="function">ANDS</h1>
+<p>Use the ANDS function to create a dynamic array of the logical AND of corresponding elements of two dynamic arrays.</p>
+<p>Each element of the new dynamic array is the logical AND of the corresponding elements of array1 and array2. If an element of one dynamic array has no corresponding element in the other dynamic array, it returns a false (0) for that element.</p>
+<p>If both corresponding elements of array1 and array2 are null, it returns null for those elements. If one element is the null value and the other is zero or an empty string, it returns false for those elements.</p>
+<div id="command-syntax-7" class="section level2">
+<h2>COMMAND SYNTAX</h2>
+<pre><code>ANDS(array1, array2)</code></pre>
+</div>
+<div id="example-9" class="section level2">
+<h2>EXAMPLE</h2>
+<!--jBC-->
+<pre><code>    A = 1 :@SM: 4 :@VM: 4 :@SM: 1
+    B = 1 :@SM: 1 - 1 :@VM: 2
+    PRINT OCONV( ANDS(A, B), &#39;MCP&#39; )    ;*  1\0]1\0</code></pre>
+</div>
+</div>
+
+
+
+</body></html>

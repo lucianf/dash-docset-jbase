@@ -1,0 +1,36 @@
+<!--?xml version="1.0" encoding="UTF-8"?--><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+  <meta http-equiv="Content-Style-Type" content="text/css"/>
+  <meta name="generator" content="pandoc"/>
+  <title class="function">SUBS</title>
+  <link rel="stylesheet" type="text/css" href="stylesheet.css"/>
+</head>
+<body>
+<div id="subs-function" class="section level1">
+<a class="dashingAutolink" name="autolink-327"></a><a class="dashAnchor" name="//apple_ref/cpp/Function/SUBS"></a><h1 class="function">SUBS</h1>
+<p>SUBS function returns a dynamic array, the content of which is derived by subtracting each element of the second dynamic array argument from the corresponding element of the first dynamic array argument.</p>
+<div id="command-syntax-277" class="section level2">
+<h2>COMMAND SYNTAX</h2>
+<pre><code>SUBS(DynArr1, DynArr2)</code></pre>
+</div>
+<div id="syntax-elements-211" class="section level2">
+<h2>SYNTAX ELEMENTS</h2>
+<p><strong>DynArr1</strong> and <strong>DynArr2</strong> represent dynamic arrays.</p>
+</div>
+<div id="notes-175" class="section level2">
+<h2>NOTES</h2>
+<p>Null elements of argument arrays are treated as zero. Otherwise, a non-numeric element in an argument array will cause a run-time error.</p>
+</div>
+<div id="example-188" class="section level2">
+<h2>EXAMPLE</h2>
+<pre><code>X = 1 : @VM : @VM : 5 : @VM : 8 : @SM : 27 : @VM : 4
+Y = 1 : @VM : 5 : @VM : 8 : @VM : 70: @VM : 19
+S = SUBS(X, Y)</code></pre>
+<p>The variable S is assigned the value:</p>
+<pre><code>0 : @VM : -5 : @VM : -3 : @VM : -62 : @SM : 27 : @VM : -15</code></pre>
+</div>
+</div>
+
+
+
+</body></html>

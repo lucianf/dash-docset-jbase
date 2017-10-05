@@ -1,0 +1,75 @@
+<!--?xml version="1.0" encoding="UTF-8"?--><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+  <meta http-equiv="Content-Style-Type" content="text/css"/>
+  <meta name="generator" content="pandoc"/>
+  <title class="function">OCONVS</title>
+  <link rel="stylesheet" type="text/css" href="stylesheet.css"/>
+</head>
+<body>
+<div id="oconvs-function" class="section level1">
+<a class="dashingAutolink" name="autolink-241"></a><a class="dashAnchor" name="//apple_ref/cpp/Function/OCONVS"></a><h1 class="function">OCONVS</h1>
+<p>OCONVS function converts the elements of dynamic.array to a specified format for external output.</p>
+<div id="command-syntax-200" class="section level2">
+<h2>COMMAND SYNTAX</h2>
+<pre><code>OCONVS(dynamic.array, conversion)</code></pre>
+<p>Converts the elements to the external output format specified by conversion and returns it in a dynamic array.</p>
+<p><strong>conversion</strong> must evaluate to one or more conversion codes separated by value marks (ASCII 253).</p>
+<p>If multiple codes are used, they are applied from left to right as follows: the left-most conversion code is applied to the element, the next conversion code to the right is then applied to the result of the first conversion, and so on.</p>
+<p>If dynamic.array evaluates to null, it returns null. If any element of dynamic.array is null, it returns null for that element. If conversion evaluates to null, the OCONVS function fails and the program terminates with a run-time error message.</p>
+<p>The STATUS function reflects the result of the conversion:</p>
+<table>
+<thead>
+<tr class="header">
+<th align="left">Code</th>
+<th align="left">Status</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">0</td>
+<td align="left">The conversion is successful.</td>
+</tr>
+<tr class="even">
+<td align="left">1</td>
+<td align="left">Passes an invalid element to the OCONVS function; the</td>
+</tr>
+<tr class="odd">
+<td align="left"></td>
+<td align="left">original element</td>
+</tr>
+<tr class="even">
+<td align="left"></td>
+<td align="left">is returned. If the invalid element is null, it returns</td>
+</tr>
+<tr class="odd">
+<td align="left"></td>
+<td align="left">null for that element.</td>
+</tr>
+<tr class="even">
+<td align="left"></td>
+<td align="left">unless dynamic.array is null, in which case it returns</td>
+</tr>
+<tr class="odd">
+<td align="left"></td>
+<td align="left">null.</td>
+</tr>
+<tr class="even">
+<td align="left">2</td>
+<td align="left">The conversion code is invalid.</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div id="notes-121" class="section level2">
+<h2>NOTES</h2>
+<p>For information about converting elements in a dynamic array to an internal format, see also: <a href="#ICONVS">ICONVS</a> function.</p>
+</div>
+<div id="international-mode-18" class="section level2">
+<h2>INTERNATIONAL MODE</h2>
+<p>Description of date, time, number and currency conversions when used in ICONV and International Mode.</p>
+</div>
+</div>
+
+
+
+</body></html>

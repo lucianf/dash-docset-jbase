@@ -1,0 +1,108 @@
+<!--?xml version="1.0" encoding="UTF-8"?--><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+  <meta http-equiv="Content-Style-Type" content="text/css"/>
+  <meta name="generator" content="pandoc"/>
+  <title class="function">FIELDS</title>
+  <link rel="stylesheet" type="text/css" href="stylesheet.css"/>
+</head>
+<body>
+<div id="fields-function" class="section level1">
+<a class="dashingAutolink" name="autolink-138"></a><a class="dashAnchor" name="//apple_ref/cpp/Function/FIELDS"></a><h1 class="function">FIELDS</h1>
+<p>The FIELDS function is an extension of the FIELD function. It returns a dynamic array of multi-character delimited fields from a dynamic array of strings.</p>
+<div id="command-syntax-101" class="section level2">
+<h2>COMMAND SYNTAX</h2>
+<pre><code>FIELDS(DynArr, Delimiter, Occurrence{, ExtractCount})</code></pre>
+</div>
+<div id="syntax-elements-65" class="section level2">
+<h2>SYNTAX ELEMENTS</h2>
+<p><strong>DynArr</strong> should evaluate to a dynamic array.</p>
+<p><strong>Delimiter</strong> specifies the character or characters that delimit the fields within the dynamic array.</p>
+<p><strong>Occurrence</strong> should evaluate to an integer of value 1 or higher. It specifies the delimiter used as the starting point for the extraction.</p>
+<p><strong>ExtractCount</strong> is an integer that specifies the number of fields to extract. If omitted, assumes one.</p>
+</div>
+<div id="notes-65" class="section level2">
+<h2>NOTES</h2>
+<p>If the emulation option, jbase_field, is set then the field delimiter may consist of more than a single character, allowing fields to be delimited by complex codes.</p>
+</div>
+<div id="examples-20" class="section level2">
+<h2>EXAMPLES</h2>
+<p>The following program shows how each element of a dynamic array can be changed with the FIELDS function.</p>
+<pre><code>t = &#34;&#34;
+t&lt;1&gt; = &#34;a:b:c:d:e:f&#34;
+t&lt;2&gt; = &#34;aa:bb:cc:dd:ee:ff&#34; : @VM: &#34;1:2:3:4&#34; : @SM: &#34;:W:X:Y:Z&#34;
+t&lt;3&gt; = &#34;aaa:bbb:ccc:ddd:eee:fff&#34; :@VM:@SM
+t&lt;4&gt; = &#34;aaaa:bbbb:cccc:dddd:eeee:ffff&#34;
+r1 = FIELDS(t,&#39;:&#39;,2)
+r2 = FIELDS(t,&#39;:&#39;,2,3)
+r3 = FIELDS(t,&#39;bb&#39;,1,1)</code></pre>
+<p>The above program creates three dynamic arrays.</p>
+<p>V - represents a value mark.</p>
+<p>s - represents a sub-value mark.</p>
+<table>
+<thead>
+<tr class="header">
+<th align="left">Array</th>
+<th align="left">Contents</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">r1</td>
+<td align="left">&lt;1&gt;b</td>
+</tr>
+<tr class="even">
+<td align="left"></td>
+<td align="left">&lt;2&gt;bb v 2 s W</td>
+</tr>
+<tr class="odd">
+<td align="left"></td>
+<td align="left">&lt;3&gt;bbb</td>
+</tr>
+<tr class="even">
+<td align="left"></td>
+<td align="left">&lt;4&gt;bbbb</td>
+</tr>
+<tr class="odd">
+<td align="left"></td>
+<td align="left"></td>
+</tr>
+<tr class="even">
+<td align="left">r2</td>
+<td align="left">&lt;1&gt;b:c:d</td>
+</tr>
+<tr class="odd">
+<td align="left"></td>
+<td align="left">&lt;2&gt;bb:cc:dd v 2:3:4 s W:X:Y&lt;3&gt;bbb:ccc:ddd v s</td>
+</tr>
+<tr class="even">
+<td align="left"></td>
+<td align="left">&lt;4&gt;bbbb:cccc:dddd</td>
+</tr>
+<tr class="odd">
+<td align="left"></td>
+<td align="left"></td>
+</tr>
+<tr class="even">
+<td align="left">r3</td>
+<td align="left">&lt;1&gt;a:b:c:d:e:f</td>
+</tr>
+<tr class="odd">
+<td align="left"></td>
+<td align="left">&lt;2&gt;aa: v 1:2:3:4 s W:X:Y:Z</td>
+</tr>
+<tr class="even">
+<td align="left"></td>
+<td align="left">&lt;3&gt;aaa: v s</td>
+</tr>
+<tr class="odd">
+<td align="left"></td>
+<td align="left">&lt;4&gt;aaaa:</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+
+
+
+</body></html>

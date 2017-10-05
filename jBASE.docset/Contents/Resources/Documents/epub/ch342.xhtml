@@ -1,0 +1,25 @@
+<!--?xml version="1.0" encoding="UTF-8"?--><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+  <meta http-equiv="Content-Style-Type" content="text/css"/>
+  <meta name="generator" content="pandoc"/>
+  <title class="function">TRANSQUERY</title>
+  <link rel="stylesheet" type="text/css" href="stylesheet.css"/>
+</head>
+<body>
+<div id="transquery-function" class="section level1">
+<a class="dashingAutolink" name="autolink-341"></a><a class="dashAnchor" name="//apple_ref/cpp/Function/TRANSQUERY"></a><h1 class="function">TRANSQUERY</h1>
+<p>TRANSQUERY function is used to detect whether or not a transaction is active on the current process.</p>
+<div id="command-syntax-290" class="section level2">
+<h2>COMMAND SYNTAX</h2>
+<pre><code>TRANSQUERY()</code></pre>
+</div>
+<div id="notes-184" class="section level2">
+<h2>NOTES</h2>
+<p>TRANSQUERY will return 1 (true) if the process is within a transaction boundary, and 0 (false) if it is not. In other words, TRANSQUERY will return true if the <a href="#TRANSTART">TRANSTART</a> statement has been issued but a <a href="#TRANSEND">TRANSEND</a> or <a href="#TRANSABORT">TRANSABORT</a> statement has not yet been processed.</p>
+<p>By default, all hashed files are marked for inclusion in a transaction however this can be modified by the jchmod utility.</p>
+</div>
+</div>
+
+
+
+</body></html>

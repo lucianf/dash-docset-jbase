@@ -1,0 +1,42 @@
+<!--?xml version="1.0" encoding="UTF-8"?--><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+  <meta http-equiv="Content-Style-Type" content="text/css"/>
+  <meta name="generator" content="pandoc"/>
+  <title class="statement">CREATE</title>
+  <link rel="stylesheet" type="text/css" href="stylesheet.css"/>
+</head>
+<body>
+<div id="create-statement" class="section level1">
+<a class="dashingAutolink" name="autolink-100"></a><a class="dashAnchor" name="//apple_ref/cpp/Method/CREATE"></a><h1 class="statement">CREATE</h1>
+<p>Use the CREATE statement after an <a href="#OPENSEQ">OPENSEQ</a> statement to create a record in a jBASE directory file or to create a UNIX or DOS file. CREATE creates the record or file if the <a href="#OPENSEQ">OPENSEQ</a> statement fails.</p>
+<p>An <a href="#OPENSEQ">OPENSEQ</a> statement for the specified file.variable must be executed before the CREATE statement to associate the pathname or record ID of the file to be created with the file.variable. If file.variable is null, the CREATE statement fails and the program enters the debugger.</p>
+<p>Use the CREATE statement when <a href="#OPENSEQ">OPENSEQ</a> cannot find a record or file to open and the next operation is to be a <a href="#READSEQ">READSEQ</a> or <a href="#READBLK">READBLK</a>. If the first file operation is a <a href="#WRITESEQ">WRITESEQ</a>,it creates the record or file if it does not exist.</p>
+<p>If the record or file is created, it executes the THEN statements; if no record or file is created, it executes the ELSE statements.</p>
+<div id="command-syntax-65" class="section level2">
+<h2>COMMAND SYNTAX</h2>
+<pre><code>CREATE file.variable { THEN statements [ ELSE statements ] | ELSE statements }</code></pre>
+</div>
+<div id="example-65" class="section level2">
+<h2>EXAMPLE</h2>
+<p>In the following example, RECORD does not yet exist. When <a href="#OPENSEQ">OPENSEQ</a> fails to open RECORD to the file variable FILE, the CREATE statement creates RECORD in the type 1 file DIRFILE and opens it to the file variable FILE.</p>
+<pre><code>INCLUDE JBC.h
+   out_dir = &#39;.&#39;  ;  out_file = &#39;report.txt&#39;
+   OPENSEQ out_dir, out_file TO f_out THEN
+      WEOFSEQ f_out
+   END ELSE
+      CREATE f_out ELSE CRT &#39;File create error&#39;  ;  STOP
+      CRT &#39;File created&#39;
+   END
+   WRITESEQ &#39;ABCDEFabcdef&#39; TO f_out ELSE
+      CRT &#39;Write error&#39;
+      STOP
+   END
+   CLOSESEQ f_out
+   OSREAD the_content FROM out_dir : DIR_DELIM_CH : out_file ELSE NULL
+   CRT the_content        ;* ABCDEFabcdef</code></pre>
+</div>
+</div>
+
+
+
+</body></html>

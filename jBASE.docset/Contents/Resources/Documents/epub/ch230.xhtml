@@ -1,0 +1,27 @@
+<!--?xml version="1.0" encoding="UTF-8"?--><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+  <meta http-equiv="Content-Style-Type" content="text/css"/>
+  <meta name="generator" content="pandoc"/>
+  <title class="function">MULS</title>
+  <link rel="stylesheet" type="text/css" href="stylesheet.css"/>
+</head>
+<body>
+<div id="muls-function" class="section level1">
+<a class="dashingAutolink" name="autolink-229"></a><a class="dashAnchor" name="//apple_ref/cpp/Function/MULS"></a><h1 class="function">MULS</h1>
+<p>MULS function is used to create a dynamic array of the element-by-element multiplication of two dynamic arrays.</p>
+<div id="command-syntax-189" class="section level2">
+<h2>COMMAND SYNTAX</h2>
+<pre><code>MULS(array1, array2)</code></pre>
+<p>Each element of <strong>array1</strong> is multiplied by the corresponding element of <strong>array2</strong> with the result being returned in the corresponding element of a new dynamic array. If an element of one dynamic array has no corresponding element in the other dynamic array, 0 is returned. If either of a corresponding pair of elements is null, null is returned for that element.</p>
+</div>
+<div id="example-132" class="section level2">
+<h2>EXAMPLE</h2>
+<pre><code>   A = 1 :@VM: 2 :@VM: 3 :@SM: 4
+   B = 4 :@VM: 5 :@VM: 6 :@VM: 9
+   PRINT OCONV( MULS(A, B), &#39;MCP&#39; )       ;*  4]10]18\0]0</code></pre>
+</div>
+</div>
+
+
+
+</body></html>

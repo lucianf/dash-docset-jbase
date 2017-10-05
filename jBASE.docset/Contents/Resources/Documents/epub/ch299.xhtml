@@ -1,0 +1,37 @@
+<!--?xml version="1.0" encoding="UTF-8"?--><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+  <meta http-equiv="Content-Style-Type" content="text/css"/>
+  <meta name="generator" content="pandoc"/>
+  <title class="function">SADD</title>
+  <link rel="stylesheet" type="text/css" href="stylesheet.css"/>
+</head>
+<body>
+<div id="sadd-function" class="section level1">
+<a class="dashingAutolink" name="autolink-298"></a><a class="dashAnchor" name="//apple_ref/cpp/Function/SADD"></a><h1 class="function">SADD</h1>
+<p>SADD function performs string addition of two base 10-string numbers.</p>
+<div id="command-syntax-251" class="section level2">
+<h2>COMMAND SYNTAX</h2>
+<pre><code>SADD(expr1, expr2)</code></pre>
+</div>
+<div id="syntax-elements-188" class="section level2">
+<h2>SYNTAX ELEMENTS</h2>
+<p><strong>expr1</strong> and <strong>expr2</strong> are strings consisting of numeric characters, optionally including a decimal part.</p>
+</div>
+<div id="notes-159" class="section level2">
+<h2>NOTES</h2>
+<p>The SADD function can be used with numbers that may exceed a valid range with standard arithmetic operators. The <a href="#PRECISION">PRECISION</a> declaration has no effect on the value returned by SADD.</p>
+</div>
+<div id="example-175" class="section level2">
+<h2>EXAMPLE</h2>
+<pre><code>A = 4000000000000000000000000000000
+B = 7
+CRT SADD(A,B)</code></pre>
+<p>Displays 4000000000000000000000000000007 to the screen</p>
+<pre><code>CRT SADD(4.33333333333333333,1.8)</code></pre>
+<p>Displays 6.13333333333333333 to the screen</p>
+</div>
+</div>
+
+
+
+</body></html>

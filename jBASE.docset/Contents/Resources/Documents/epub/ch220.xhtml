@@ -1,0 +1,78 @@
+<!--?xml version="1.0" encoding="UTF-8"?--><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+  <meta http-equiv="Content-Style-Type" content="text/css"/>
+  <meta name="generator" content="pandoc"/>
+  <title class="statement">MATPARSE</title>
+  <link rel="stylesheet" type="text/css" href="stylesheet.css"/>
+</head>
+<body>
+<div id="matparse-statement" class="section level1">
+<a class="dashingAutolink" name="autolink-219"></a><a class="dashAnchor" name="//apple_ref/cpp/Method/MATPARSE"></a><h1 class="statement">MATPARSE</h1>
+<p>MATPARSE statement is used to assign the elements of a matrix from the elements of a dynamic array.</p>
+<div id="command-syntax-179" class="section level2">
+<h2>COMMAND SYNTAX</h2>
+<pre><code>MATPARSE array{, expression1{, expression2}} FROM variable1  \
+        { USING expression3} SETTING variable2</code></pre>
+</div>
+<div id="syntax-elements-128" class="section level2">
+<h2>SYNTAX ELEMENTS</h2>
+<p><strong>array</strong> is a previously dimensioned matrix, which will be assigned from each element of the dynamic array. variable1 is the jBC variable from which the matrix array will be stored.</p>
+<p><strong>expression1</strong> and <strong>expression2</strong> should evaluate to numeric integers. <strong>expression1</strong> specifies which element of the array the assignment will start with; <strong>expression2</strong> specifies which element of the array the assignment will end with (inclusive).</p>
+<p>By default, the dynamic array assumes the use of a field mark to separate each array element. By specifying <strong>expression3</strong>, the separator character can be changed. If <strong>expression3</strong> evaluates to more than a single character, only the first character of the string is used.</p>
+<p>As assignment will stop when the contents of the dynamic array have been exhausted, it can be useful to determine the number of matrix elements that were actually assigned to. If the SETTING clause is specified then <strong>variable2</strong> will be set to the number of elements of the array that were assigned to.</p>
+</div>
+<div id="notes-108" class="section level2">
+<h2>NOTES</h2>
+<p>When specifying starting and ending positions with multi-dimensional arrays, it is necessary to expand the matrix into its total number of variables to calculate the correct element number.</p>
+<p>See the information about dimensioned arrays earlier in this section for detailed instructions on calculating element numbers.</p>
+</div>
+<div id="examples-38" class="section level2">
+<h2>EXAMPLES</h2>
+<pre><code>   DIM dim_array(100)
+   dyn_array = &#39;&#39;   ;     delim_array = &#39;&#39;
+   FOR i = 1 TO 100
+      dyn_array&lt;-1&gt; = i
+      delim_array := i*2 : &#39;-&#39;
+   NEXT i
+* Full copy
+   MATPARSE dim_array FROM dyn_array
+   CRT dim_array(1)                 ;* 1
+   CRT dim_array(100)               ;* 100
+* Using different array delimiter
+   MAT dim_array = &#39;Default&#39;
+   MATPARSE dim_array FROM delim_array USING &#39;-&#39;
+   CRT dim_array(1)                 ;* 2
+   CRT dim_array(100)               ;* 200
+* Partial copy
+   MAT dim_array = &#39;Default&#39;
+   MATPARSE dim_array, 3, 7 FROM dyn_array
+   CRT dim_array(1)                 ;* Default
+   CRT dim_array(3)                 ;* 1
+   CRT dim_array(5)                 ;* 3
+   CRT dim_array(100)               ;* Default
+* &#34;Over-copy&#34;
+   FOR i = 101 TO 103               ;* add 3 elements to dynamic array
+      dyn_array&lt;-1&gt; = i
+   NEXT i
+   MAT dim_array = &#39;Default&#39;
+   MATPARSE dim_array FROM dyn_array
+   CRT dim_array(1)                 ;* 1
+   CRT dim_array(100)               ;* 100
+   the_extra = dim_array(0)           ;* all excess elements are here
+   CHANGE @FM TO &#39;&gt;&gt;&gt;&#39; IN the_extra
+   CRT the_extra                        ;* 101&gt;&gt;&gt;102&gt;&gt;&gt;103
+* 2-dimensioned array population: &#34;left-to-right&#34;:
+   DIM two_dim_array(100,2)
+   MATPARSE two_dim_array FROM dyn_array
+   CRT two_dim_array(1,1)                 ;* 1
+   CRT two_dim_array(1,2)                 ;* 2
+   CRT two_dim_array(2,1)                 ;* 3
+   CRT two_dim_array(2,2)                 ;* 4
+   CRT two_dim_array(50,2)                ;* 100
+   CRT DQUOTE(two_dim_array(100,1))       ;* &#34;&#34;</code></pre>
+</div>
+</div>
+
+
+
+</body></html>

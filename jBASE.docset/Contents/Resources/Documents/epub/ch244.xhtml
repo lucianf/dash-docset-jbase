@@ -1,0 +1,84 @@
+<!--?xml version="1.0" encoding="UTF-8"?--><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+  <meta http-equiv="Content-Style-Type" content="text/css"/>
+  <meta name="generator" content="pandoc"/>
+  <title class="statement">OPEN</title>
+  <link rel="stylesheet" type="text/css" href="stylesheet.css"/>
+</head>
+<body>
+<div id="open-statement" class="section level1">
+<a class="dashingAutolink" name="autolink-243"></a><a class="dashAnchor" name="//apple_ref/cpp/Method/OPEN"></a><h1 class="statement">OPEN</h1>
+<p>OPEN statement is used to open a file or device to a descriptor variable within jBC.</p>
+<div id="command-syntax-202" class="section level2">
+<h2>COMMAND SYNTAX</h2>
+<pre><code>OPEN {expression1,}expression2 TO {variable} { SETTING setvar } \
+     THEN | ELSE statements</code></pre>
+</div>
+<div id="syntax-elements-143" class="section level2">
+<h2>SYNTAX ELEMENTS</h2>
+<p>The combination of <strong>expression1</strong> and <strong>expression2</strong> should evaluate to a valid file name of a file type that already installed on the jBASE system. If the file has a dictionary section to be opened by the statement then specify by the literal string &#34;DICT&#34; being specified in expression1. If specified, the variable will be used to hold the descriptor for the file. It should then be to access the file using READ and WRITE. If no file descriptor variable is supplied, then the file will be opened to the default file descriptor.</p>
+<p>Specific data sections of a multi level file may be specified by separating the section name from the file name by a &#34;,&#34; char in expression2.</p>
+<p>If the OPEN statement fails, it will execute any statements associated with an ELSE clause. If the OPEN is successful, it will execute any statements associated with a THEN clause. Note that the syntax requires either one or both of the THEN and ELSE clauses.</p>
+<p>If specifying the SETTING clause and the open fails, setvar will be set to one of the following values:</p>
+</div>
+<div id="incremental-file-errors-6" class="section level2">
+<h2>INCREMENTAL FILE ERRORS</h2>
+<table>
+<thead>
+<tr class="header">
+<th align="left">Code</th>
+<th align="left">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">128</td>
+<td align="left">No such file or directory</td>
+</tr>
+<tr class="even">
+<td align="left">4096</td>
+<td align="left">Network error</td>
+</tr>
+<tr class="odd">
+<td align="left">24576</td>
+<td align="left">Permission denied</td>
+</tr>
+<tr class="even">
+<td align="left">32768</td>
+<td align="left">Physical I/O error or unknown error</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div id="notes-123" class="section level2">
+<h2>NOTES</h2>
+<p>The OPEN statement uses the environment variable JEDIFILEPATH to search for the named file. If there is no defined named file, it will search the current working directory followed by the home directory of the current process. The file that is the subject of the OPEN statement can be of any type known to the jBASE system. Its type will be determined and correctly opened transparently to the application, which need not be aware of the file type.</p>
+<p>A jBC program can open an unlimited amount of files (up the limit set by OS settings).</p>
+</div>
+<div id="example-139" class="section level2">
+<h2>EXAMPLE</h2>
+<pre><code>   EXECUTE &#39;DELETE-FILE DATA F.TEMP&#39;
+   EXECUTE &#39;CREATE-FILE DATA F.TEMP 1 101 TYPE=J4&#39;
+   OPEN &#39;F.TEMP&#39; TO F.TEMP ELSE ABORT 201, &#39;F.TEMP&#39;
+   V.REC.INIT = &#39;LINE 1&#39; :@FM: &#39;LINE 2&#39; :@FM: &#39;LINE 3&#39;
+   WRITE V.REC.INIT TO F.TEMP, &#39;REC1&#39;
+   CLOSE F.TEMP</code></pre>
+</div>
+<div id="example-2-9" class="section level2">
+<h2>EXAMPLE 2</h2>
+<p>Get list of current processes and output port number and PID for each:</p>
+<pre><code>   OPEN SYSTEM(1027) TO PROC ELSE STOP 201, &#34;PROC&#34;
+   SELECT PROC TO SEL
+   LOOP
+   WHILE READNEXT key FROM SEL DO
+      READ PROCESSRECORD FROM PROC, key ELSE CRT &#34;Read Error&#34;  ;  STOP
+      V.PORTNO = PROCESSRECORD&lt;1&gt;
+      V.PID = PROCESSRECORD&lt;4&gt;
+      PRINT FMT(V.PORTNO, &#39;2R&#39;) : &#39;|&#39; : FMT(V.PID, &#39;8R&#39;)
+   REPEAT</code></pre>
+</div>
+</div>
+
+
+
+</body></html>

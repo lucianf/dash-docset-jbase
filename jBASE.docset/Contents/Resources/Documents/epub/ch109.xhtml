@@ -1,0 +1,60 @@
+<!--?xml version="1.0" encoding="UTF-8"?--><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+  <meta http-equiv="Content-Style-Type" content="text/css"/>
+  <meta name="generator" content="pandoc"/>
+  <title class="statement">DEFC</title>
+  <link rel="stylesheet" type="text/css" href="stylesheet.css"/>
+</head>
+<body>
+<div id="defc-statement" class="section level1">
+<a class="dashingAutolink" name="autolink-108"></a><a class="dashAnchor" name="//apple_ref/cpp/Method/DEFC"></a><h1 class="statement">DEFC</h1>
+<p>Use the DEFC statement to declare an external C function to the jBC compiler, define its arguments, and return types. The DEFC statement assumes that the C functions will need to manipulate jBC variables and hence will also require the thread data pointer. As such, all C functions require recoding to include the data pointer as an argument to the C function. The location of the data pointer argument depends upon the function return type.</p>
+<div id="command-syntax-73" class="section level2">
+<h2>COMMAND SYNTAX</h2>
+<pre><code>DEFC {FuncType} FuncName ({ArgType {, ArgType ...}})</code></pre>
+</div>
+<div id="syntax-elements-41" class="section level2">
+<h2>SYNTAX ELEMENTS</h2>
+<p>FuncType and ArgType are selected from one of INT, FLOAT or VAR. FuncType specifies the type of result that the function will return. Assumes INT if FuncType is omitted. The optional list of ArgTypes specifies the argument types that the C function will expect. The compiler must know this in advance, as it will automatically perform type conversions on these arguments.</p>
+</div>
+<div id="example-67" class="section level2">
+<h2>EXAMPLE</h2>
+<pre>    #include &lt;jsystem.h&gt;
+    #include &lt;assert.h&gt;
+    //
+    #ifdef DPSTRUCT_DEF
+    #define JBASEDP       DPSTRUCT &lowast;dp,
+    #else
+    #define JBASEDP
+    #endif
+    //
+    VAR &lowast;MyString(VAR &lowast;Result, JBASEDP  VAR &lowast;VarPtr)
+    {
+        char &lowast;Ptr;
+        assert(dp != NULL);
+        Ptr = (char &lowast;) CONV_SFB(VarPtr);
+        printf(&#34;MyString: %s - %d\n&#34;, Ptr, strlen(Ptr) );
+        STORE_VBI(Result, strlen(Ptr) );
+        return(Result);
+    }
+    //
+    INT32 MyCalc(INT32 Value1, INT32 Value2)
+    {
+        INT32  Result;
+        Result =  (Value1 / Value2);
+        printf(&#34;MyCalc: %d\n&#34;, Result);
+        return(Result);
+    }</pre>
+</div>
+<div id="notes-46" class="section level2">
+<h2>NOTES</h2>
+<p>Compile a DEFC for each C function before making any reference to it else the compiler will not recognize the function name.</p>
+<p>The function is called in the same manner, as it would be in a C program, which means it can be used as if it was an intrinsic function it as a standalone function call causes the compiler to generate code that ignores any returned values.</p>
+<p>When passing jBC variables to a C function, you must utilize the predefined macros to access the various data types it contains. C functions are particularly useful for increasing the performance of tight loops that perform specific functions. The jBC compiler must cater for any eventuality within a loop (such as the controlling variable changing from integer to floating point). A dedicated C function can ignore such events, if they are guaranteed not to happen.</p>
+<p>The jBC programmer may freely ignore the type of argument used when invoking the C function, as the jBC compiler will automatically perform type conversion.</p>
+</div>
+</div>
+
+
+
+</body></html>

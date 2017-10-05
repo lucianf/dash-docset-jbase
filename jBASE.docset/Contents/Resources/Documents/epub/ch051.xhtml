@@ -1,0 +1,35 @@
+<!--?xml version="1.0" encoding="UTF-8"?--><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+  <meta http-equiv="Content-Style-Type" content="text/css"/>
+  <meta name="generator" content="pandoc"/>
+  <title class="function">BITXOR</title>
+  <link rel="stylesheet" type="text/css" href="stylesheet.css"/>
+</head>
+<body>
+<div id="bitxor-function" class="section level1">
+<a class="dashingAutolink" name="autolink-50"></a><a class="dashAnchor" name="//apple_ref/cpp/Function/BITXOR"></a><h1 class="function">BITXOR</h1>
+<p>Use the BITXOR function to perform the bitwise XOR comparison of two integers specified by numeric expressions. The bitwise XOR operation compares two integers bit by bit. It returns a bit 1 if only one of the two bits is 1; else, it returns a bit 0.</p>
+<div id="command-syntax-18" class="section level2">
+<h2>COMMAND SYNTAX</h2>
+<pre><code>BITXOR(expression1, expression2)</code></pre>
+</div>
+<div id="description-3" class="section level2">
+<h2>DESCRIPTION</h2>
+<p>If either expression1 or expression2 evaluates to the null value, null is returned.</p>
+<p>Non integer values are truncated before the operation is performed.</p>
+<p>The BITXOR operation is performed on a 32-bit twos-complement word.</p>
+<p><strong>NOTE:</strong> Differences in hardware architecture can make the use of the high-order bit nonportable.</p>
+</div>
+<div id="example-18" class="section level2">
+<h2>EXAMPLE</h2>
+<pre><code>   PRINT BITXOR(6,12)
+* Binary value of 6 = 0110
+* Binary value of 12 = 1100</code></pre>
+<p>This results in 1010, and the following output is displayed:</p>
+<pre>    10</pre>
+</div>
+</div>
+
+
+
+</body></html>

@@ -1,0 +1,42 @@
+<!--?xml version="1.0" encoding="UTF-8"?--><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+  <meta http-equiv="Content-Style-Type" content="text/css"/>
+  <meta name="generator" content="pandoc"/>
+  <title class="function">RIGHT</title>
+  <link rel="stylesheet" type="text/css" href="stylesheet.css"/>
+</head>
+<body>
+<div id="right-function" class="section level1">
+<a class="dashingAutolink" name="autolink-294"></a><a class="dashAnchor" name="//apple_ref/cpp/Function/RIGHT"></a><h1 class="function">RIGHT</h1>
+<p>RIGHT function returns a sub-string composed of the last n characters of a specified string.</p>
+<div id="command-syntax-248" class="section level2">
+<h2>COMMAND SYNTAX</h2>
+<pre><code>RIGHT(expression, length)</code></pre>
+</div>
+<div id="syntax-elements-185" class="section level2">
+<h2>SYNTAX ELEMENTS</h2>
+<p><strong>expression</strong> evaluates to the string from, which the sub string is extracted.</p>
+<p><strong>length</strong> is the number of characters that are extracted. If length is less than 1, RIGHT () returns null.</p>
+</div>
+<div id="notes-156" class="section level2">
+<h2>NOTES</h2>
+<p>The RIGHT () function is equivalent to sub-string extraction for the last n characters, i.e. expression[n]</p>
+<p>See also: <a href="#LEFT">LEFT</a></p>
+</div>
+<div id="example-173" class="section level2">
+<h2>EXAMPLE</h2>
+<pre><code>S = &#34;The world is my lobster&#34;
+
+CRT DQUOTE( RIGHT(S,7))
+CRT DQUOTE( RIGHT(S,99) )
+CRT DQUOTE( RIGHT(S,0) )</code></pre>
+<p>This code displays:</p>
+<pre>    &#34;lobster&#34;
+    &#34;The world is my lobster&#34;
+    &#34;&#34;</pre>
+</div>
+</div>
+
+
+
+</body></html>

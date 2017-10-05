@@ -1,0 +1,26 @@
+<!--?xml version="1.0" encoding="UTF-8"?--><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+  <meta http-equiv="Content-Style-Type" content="text/css"/>
+  <meta name="generator" content="pandoc"/>
+  <title class="function">ADDS</title>
+  <link rel="stylesheet" type="text/css" href="stylesheet.css"/>
+</head>
+<body>
+<div id="adds-function" class="section level1">
+<a class="dashingAutolink" name="autolink-36"></a><a class="dashAnchor" name="//apple_ref/cpp/Function/ADDS"></a><h1 class="function">ADDS</h1>
+<p>Use ADDS function to create a dynamic array of the element-by-element addition of two dynamic arrays. Added to each element of array1 is the corresponding element of array2, which returns the result in the corresponding element of a new dynamic array. If an element of one array has no corresponding element in the other array, it returns the existing element. If an element of one array is the null value, it returns null for the sum of the corresponding elements.</p>
+<div id="command-syntax-5" class="section level2">
+<h2>COMMAND SYNTAX</h2>
+<pre><code>ADDS(array1, array2)</code></pre>
+</div>
+<div id="example-7" class="section level2">
+<h2>EXAMPLE</h2>
+<pre><code>   Array1 = 2 :@VM: 4 :@VM: 6 :@SM: 10
+   Array2 = 1 :@VM: 2: @VM: 3 :@VM: 4
+   PRINT OCONV( ADDS(Array1, Array2), &#39;MCP&#39; )   ;*  3]6]9\10]4</code></pre>
+</div>
+</div>
+
+
+
+</body></html>

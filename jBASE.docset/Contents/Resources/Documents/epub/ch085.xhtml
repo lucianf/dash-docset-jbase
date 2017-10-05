@@ -1,0 +1,35 @@
+<!--?xml version="1.0" encoding="UTF-8"?--><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+  <meta http-equiv="Content-Style-Type" content="text/css"/>
+  <meta name="generator" content="pandoc"/>
+  <title class="statement">CLEARDATA</title>
+  <link rel="stylesheet" type="text/css" href="stylesheet.css"/>
+</head>
+<body>
+<div id="cleardata-statement" class="section level1">
+<a class="dashingAutolink" name="autolink-84"></a><a class="dashAnchor" name="//apple_ref/cpp/Method/CLEARDATA"></a><h1 class="statement">CLEARDATA</h1>
+<p>The CLEARDATA statement clears data stacked by the DATA statement.</p>
+<div id="command-syntax-49" class="section level2">
+<h2>COMMAND SYNTAX</h2>
+<pre><code>CLEARDATA</code></pre>
+</div>
+<div id="syntax-elements-25" class="section level2">
+<h2>SYNTAX ELEMENTS</h2>
+<p>None</p>
+</div>
+<div id="example-50" class="section level2">
+<h2>EXAMPLE</h2>
+<!--jBC-->
+<pre><code>* SYSTEM(14) returns the number of characters available in input buffer
+   CRT SYSTEM(14)        ;*  0
+   DATA &#39;123&#39;
+   DATA &#39;456&#39;
+   CRT SYSTEM(14)        ;*  8 (including 2 line end characters)
+   CLEARDATA
+   CRT SYSTEM(14)        ;*  0</code></pre>
+</div>
+</div>
+
+
+
+</body></html>

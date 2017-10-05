@@ -1,0 +1,75 @@
+<!--?xml version="1.0" encoding="UTF-8"?--><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+  <meta http-equiv="Content-Style-Type" content="text/css"/>
+  <meta name="generator" content="pandoc"/>
+  <title class="category">Compilation</title>
+  <link rel="stylesheet" type="text/css" href="stylesheet.css"/>
+</head>
+<body>
+<div id="compilation-category" class="section level1">
+<a class="dashingAutolink" name="autolink-4"></a><a class="dashAnchor" name="//apple_ref/cpp/Category/Compilation"></a><h1 class="category">Compilation</h1>
+<div id="introduction-to-basic...catalog-and-jcompile" class="section level2">
+<h2>Introduction to BASIC...CATALOG and jcompile</h2>
+<pre>    BASIC MY.BP TEST.SUB
+    &nbsp;
+    TEST.SUB
+    BASIC_1.c
+    Source file TEST.SUB compiled successfully</pre>
+<pre>    CATALOG MY.BP TEST.SUB
+    &nbsp;
+    TEST.SUB
+    Object TEST.SUB cataloged successfully
+    Library $HOME\lib\lib0.dll rebuild okay</pre>
+<pre>    jcompile test.b
+    &nbsp;
+    Warning: Variable DIV.AMT2 is never assigned!
+    test.c</pre>
+<p>Compilation results in appearance of an object and executable files (sample for Windows):</p>
+<pre>    test.obj
+    test.dll
+    test.exe</pre>
+<p><strong>See program information</strong>:</p>
+<pre>    jshow -c test
+    &nbsp;
+    Executable:          C:\r11\BATfiles\test.dll
+                         jBC main() version 11.0 Thu Dec 06 23:35:34 2012
+                         jBC main() source file unknown
+    Executable (DUP!!):  C:\r11\BATfiles\test.exe
+                         jBC main() version 11.0 Thu Dec 06 23:35:34 2012
+                         jBC main() source file unknown</pre>
+<p>If the code is recompiled very often then it might happen that the older version of executable code still resides in shared memory and the result of changes wouldn&#39;t be seen immediately. In this case &#34;-E&#34; option of jcompile can be used to build executable only and not the shared library, e.g.:</p>
+<pre>    jcompile -E test.b</pre>
+<p>And then test.dll isn&#39;t created. The final compilation is of course to be done without &#34;-E&#34; option. Also - without shared library CHAIN statement might work not as expected and persistence of COMMON areas won&#39;t be supported.</p>
+<p><strong>See commands</strong> used by compiler:</p>
+<pre>    jcompile -v test.b
+    &nbsp;
+    cl /nologo /DWIN32 /MD /W2 /GR /EHa -c -IC:\TAFC\include -DJBC_OPTLEVEL2 test.c
+    ...
+    cl /nologo /DWIN32 /MD /W3 /GR /EHa /GF /Zi /F5000000 -D_LARGEFILE_SOURCE ...</pre>
+<p><strong>Conditional compilation</strong>:</p>
+<pre><code>   V.VAR = 1
+   CRT &#39;Version &#39;:
+#ifdef VER1
+   CRT V.VAR:
+#else
+   CRT V.VAR + 1:
+#endif
+   CRT &#39; finished&#39;</code></pre>
+<pre>    jcompile -DVER1 test.b
+    test.c
+    &nbsp;
+    test
+    Version 1 finished</pre>
+<pre>    jcompile test.b
+    test.c
+    &nbsp;
+    test
+    Version 2 finished</pre>
+<p><strong>To look at C code</strong> rather than to create executables &#34;-S&#34; option can be used (files test.c and test.j will be created for test.b source).</p>
+<p>Full information about jcompile options - &#34;jcompile -H&#34;.</p>
+</div>
+</div>
+
+
+
+</body></html>

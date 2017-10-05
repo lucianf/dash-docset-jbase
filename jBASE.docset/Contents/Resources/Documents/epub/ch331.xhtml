@@ -1,0 +1,38 @@
+<!--?xml version="1.0" encoding="UTF-8"?--><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+  <meta http-equiv="Content-Style-Type" content="text/css"/>
+  <meta name="generator" content="pandoc"/>
+  <title class="function">SWAP</title>
+  <link rel="stylesheet" type="text/css" href="stylesheet.css"/>
+</head>
+<body>
+<div id="swap-function" class="section level1">
+<a class="dashingAutolink" name="autolink-330"></a><a class="dashAnchor" name="//apple_ref/cpp/Function/SWAP"></a><h1 class="function">SWAP</h1>
+<p>SWAP function operates on a variable and replaces all occurrences of one string with another</p>
+<div id="command-syntax-280" class="section level2">
+<h2>COMMAND SYNTAX</h2>
+<pre><code>SWAP(variable, expression1, expression2)</code></pre>
+</div>
+<div id="syntax-elements-214" class="section level2">
+<h2>SYNTAX ELEMENTS</h2>
+<p><strong>expression1</strong> may evaluate to any result and is the string of characters that will be replaced.</p>
+<p><strong>expression2</strong> may also evaluate to any result and is the string of characters that will replace expression1. The variable may be any previously assigned variable in the program.</p>
+</div>
+<div id="notes-177" class="section level2">
+<h2>NOTES</h2>
+<p>Either string can be of any length and is not required to be the same length. This function is provided for compatibility with older systems.</p>
+<p>See also: <a href="#CHANGE">CHANGE</a> function.</p>
+</div>
+<div id="example-189" class="section level2">
+<h2>EXAMPLE</h2>
+<pre><code>String1 = &#34;Jim&#34;
+String2 = &#34;James&#34;
+Variable = &#34;Pick up the tab Jim&#34;
+CRT SWAP(Variable, String1, String2)
+CRT SWAP(Variable, &#39;tab&#39;, &#39;check&#39;)</code></pre>
+</div>
+</div>
+
+
+
+</body></html>

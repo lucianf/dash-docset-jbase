@@ -1,0 +1,43 @@
+<!--?xml version="1.0" encoding="UTF-8"?--><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+  <meta http-equiv="Content-Style-Type" content="text/css"/>
+  <meta name="generator" content="pandoc"/>
+  <title class="statement">CLEARSELECT</title>
+  <link rel="stylesheet" type="text/css" href="stylesheet.css"/>
+</head>
+<body>
+<div id="clearselect-statement" class="section level1">
+<a class="dashingAutolink" name="autolink-87"></a><a class="dashAnchor" name="//apple_ref/cpp/Method/CLEARSELECT"></a><h1 class="statement">CLEARSELECT</h1>
+<p>Use the CLEARSELECT statement to clear active select lists.</p>
+<div id="command-syntax-52" class="section level2">
+<h2>COMMAND SYNTAX</h2>
+<pre><code>CLEARSELECT { ListName | ListNumber }</code></pre>
+</div>
+<div id="syntax-elements-27" class="section level2">
+<h2>SYNTAX ELEMENTS</h2>
+<p>ListName must evaluate to a jBC list variable. ListNumber is one of the numbered lists in the range 0 to 11. If neither ListName nor ListNumber are specified then it clears the default list (0).</p>
+</div>
+<div id="example-53" class="section level2">
+<h2>EXAMPLE</h2>
+<pre><code>A = &#34;good&#34; : @AM : &#34;bad&#34; : @AM : &#34;ugly&#34;
+B = &#34;night&#34; : @AM : &#34;day&#34;
+SELECT A TO 3
+SELECT B TO blist
+adone = 0 ; bdone = 0
+//
+LOOP
+ READNEXT Ael FROM 3 ELSE adone = 1
+   READNEXT Bel FROM blist ELSE bdone = 1
+UNTIL adone AND bdone DO
+   CRT Ael, Bel
+   CLEARSELECT 3
+   CLEARSELECT blist
+REPEAT</code></pre>
+<p>This program displays:</p>
+<pre>    good night</pre>
+</div>
+</div>
+
+
+
+</body></html>

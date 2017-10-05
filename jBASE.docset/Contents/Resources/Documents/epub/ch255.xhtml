@@ -1,0 +1,38 @@
+<!--?xml version="1.0" encoding="UTF-8"?--><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+  <meta http-equiv="Content-Style-Type" content="text/css"/>
+  <meta name="generator" content="pandoc"/>
+  <title class="statement">OSOPEN</title>
+  <link rel="stylesheet" type="text/css" href="stylesheet.css"/>
+</head>
+<body>
+<div id="osopen-statement" class="section level1">
+<a class="dashingAutolink" name="autolink-254"></a><a class="dashAnchor" name="//apple_ref/cpp/Method/OSOPEN"></a><h1 class="statement">OSOPEN</h1>
+<p>OSOPEN command opens a sequential file that does not use CHAR (10) as the line delimiter.</p>
+<div id="command-syntax-213" class="section level2">
+<h2>COMMAND SYNTAX</h2>
+<pre><code>OSOPEN filename TO file.var [ ON ERROR statements ] { THEN | ELSE } statements</code></pre>
+<p>Read/write access mode is the default. Override this access mode by using READONLY and WRITEONLY.</p>
+</div>
+<div id="syntax-elements-153" class="section level2">
+<h2>SYNTAX ELEMENTS</h2>
+<p><strong>filename</strong> specifies the file to be opened. Filename must include the entire path name unless the file resides in the current directory.</p>
+<p><strong>TO file.var</strong> specifies a variable to contain a pointer to the file.</p>
+<p><strong>ON ERROR</strong> statements are statements executed when the OSOPEN statement fails with fatal error, I/O error, or JBASE cannot find the file. If you do not specify the ON ERROR clause and a fatal error occurs, the program will enter the debugger.</p>
+<p><strong>THEN</strong> statements executes if the read is successful.</p>
+<p><strong>ELSE</strong> statements executes if the read is not successful or the record (or ID) does not exist.</p>
+</div>
+<div id="notes-129" class="section level2">
+<h2>NOTES</h2>
+<p>After opening a sequential file with <a href="#OSOPEN">OSOPEN</a>, use <a href="#OSBREAD">OSBREAD</a> to read a block of data from the file, or <a href="#OSBWRITE">OSBWRITE</a> to write a block of data to the file. You also can use <a href="#READSEQ">READSEQ</a> to read a record from the file, or <a href="#WRITESEQ">WRITESEQ</a> or <a href="#WRITESEQF">WRITESEQF</a> to write a record to the file, if the file is not a named pipe. (<a href="#READSEQ">READSEQ</a>, <a href="#WRITESEQ">WRITESEQ</a>, <a href="#WRITESEQF">WRITESEQF</a> are line-oriented commands that use CHAR (10) as the line delimiter.)</p>
+</div>
+<div id="example-145" class="section level2">
+<h2>EXAMPLE</h2>
+<p>In the following example, the program statement opens the file &#39;MYSLIPPERS&#39; as SLIPPERS.</p>
+<pre><code>OSOPEN &#39;MYSLIPPERS&#39; TO SLIPPERS ELSE STOP</code></pre>
+</div>
+</div>
+
+
+
+</body></html>

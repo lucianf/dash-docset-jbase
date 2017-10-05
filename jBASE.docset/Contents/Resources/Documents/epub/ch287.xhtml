@@ -1,0 +1,34 @@
+<!--?xml version="1.0" encoding="UTF-8"?--><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+  <meta http-equiv="Content-Style-Type" content="text/css"/>
+  <meta name="generator" content="pandoc"/>
+  <title class="statement">READXML</title>
+  <link rel="stylesheet" type="text/css" href="stylesheet.css"/>
+</head>
+<body>
+<div id="readxml-statement" class="section level1">
+<a class="dashingAutolink" name="autolink-286"></a><a class="dashAnchor" name="//apple_ref/cpp/Method/READXML"></a><h1 class="statement">READXML</h1>
+<p>READXML rec FROM file, id ELSE STOP 202,id</p>
+<p>Reads a record from a file using the style sheet held in DICT-&gt;@READXML to transform the data into xml format</p>
+<div id="example-168" class="section level2">
+<h2>EXAMPLE</h2>
+<pre><code>   READ rec FROM file,id THEN
+      CRT rec
+   END
+   READXML xml FROM file,id THEN
+      CRT xml
+   END</code></pre>
+<p>Screen output:</p>
+<pre>    CLIVE^PIPENSLIPPERS^999 LETSBE AVENUE
+    ...
+    &lt;?xml version=&#34;1.0&#34; encoding=&#34;UTF-8&#34;?&gt;
+    &lt;mycustomer&gt;
+    &lt;firstname&gt;CLIVE&lt;/firstname&gt;
+    &lt;lastname&gt;PIPENSLIPPERS&lt;/lastname&gt;
+    &lt;address&gt;999 LETSBE AVENUE&lt;/address&gt;</pre>
+</div>
+</div>
+
+
+
+</body></html>
